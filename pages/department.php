@@ -30,6 +30,40 @@
     unset($_SESSION["message"]);
   }
 
+  // Delete Department Ask Display --------------------------------------------------------------------------
+
+  if(isset($_SESSION["delete_id_dept"])){
+
+    $dept_id = $_SESSION["delete_id_dept"];
+    $_SESSION["delete_dept"] = $dept_id;
+
+    global $db_conn;
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        var popup = document.getElementById('popupFormDelete');
+        popup.style.display = 'block';
+
+    }); </script>";
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        var department_dashboard = document.getElementById('department_dashboard');
+        department_dashboard.style.display = 'block';
+
+    }); </script>";
+
+    unset($_SESSION["delete_id_dept"]);
+  }
+
+
+
+
+
+
+
+
+
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
@@ -55,13 +89,50 @@
       exit;
 
     }
-  
-  
-  
+
+    // Delete Department Ask --------------------------------------------------------------------------
+
+    if(isset($_POST["delete_department"])){
+
+      $_SESSION["delete_id_dept"] = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      header("Refresh: .3; url = department.php");
+      exit;
+
+    }
+
+    // Delete Account Confirm --------------------------------------------------------------------------
+
+    if(isset($_POST["delete_data"])){
+
+      $dept_id = $_SESSION["delete_dept"];
+
+      $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Account deleted successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to delete account.";
+      }
+      
+      unset($_SESSION["delete_dept"]);
+      
+      header("Refresh: .3; url = department.php");
+      exit;
+
   }
 
 
 
+
+
+
+
+
+  
+  }
 
 ?>
 <!-- Begin Page Content -->
@@ -178,6 +249,48 @@
   </div>
 </div> 
 
+
+
+<div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+
+        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup2"></button>
+      </div>
+      <div class="modal-body">
+
+        <h2>Delete this permanently?</h2>
+
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+
+          <input type="submit" name="delete_data" value="Confirm" class="submit">
+          <a href="#" onclick="closePopup2()" class="close_popup" style="text-decoration: none;">Cancel</a>
+          
+        </form>
+
+      </div>
+      
+    </div>
+  </div>
+</div> 
+
+<!-- Popup Form for Delete
+<div class="popup" id="popupFormDelete" style="display: block;">
+  <div class="popup-content">
+
+      <h2>Delete this permanently?</h2>
+
+      <form action="admin.php" method="post">
+
+        <input type="submit" name="delete_data" value="Confirm" class="submit">
+        <a href="#" onclick="closePopup2()" class="close_popup" style="text-decoration: none;">Cancel</a>
+        
+      </form>
+  </div>
+</div> -->
+
 <!-- /.container-fluid -->
 
 <?php 
@@ -213,7 +326,7 @@
                 <td>' . $dept_code . '</td>
                 <td>' . $status_word . '</td>
                 <td>
-                    <form action="admin.php" method="post" class="form_table">
+                    <form action="department.php" method="post" class="form_table">
                       <input type="hidden" name="id_department" value=' . $dept_id . '>
 
                         <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
@@ -246,6 +359,10 @@
       document.getElementById('popup').style.display = 'none';
     });
 
+    document.getElementById('close_popup2').addEventListener('click', function () {
+      document.getElementById('popupFormDelete').style.display = 'none';
+    });
+
     const btn_add_department = document.getElementById('btn_add_department');
     const department_dashboard = document.getElementById('department_dashboard');
     const add_department = document.getElementById('add_department');
@@ -261,10 +378,14 @@
       add_department.style.display = 'none';
     });
 
-
-
+    
 
 
   });
+  const popup2 = document.getElementById("popupFormDelete");
+
+  function closePopup2() {
+    popup2.style.display = "none";
+  }
 
 </script>
