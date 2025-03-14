@@ -58,7 +58,7 @@
         </div>
       </div>
   </div>
-
+<!-- 
   <div id="add_department" class="add_department" style="display: none;">
       
       
@@ -68,7 +68,7 @@
           <input type="text" name="dept_name" id="dept_name" placeholder="Production 1" required><br><br>
 
           <label for="dept_code">Department Code <span style="color: red;">*</span></label>
-          <input type="text" name="dept_code" id="dept_code" placeholder="101" required ><br><br> <!-- auto increment start in 101 -->
+          <input type="text" name="dept_code" id="dept_code" placeholder="101" required ><br><br> 
 
           <label for="status">Status <span style="color: red;">*</span></label>
           <select name="status" id="status" required>
@@ -81,7 +81,7 @@
           <input type="submit" name="add_department" value="Add Department" class="submit">
           <input type="reset" name="reset" value="Cancel" id="cancel_department">
       </form>
-  </div>
+  </div> -->
 
 </div>
 <!-- /.container-fluid -->
