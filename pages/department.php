@@ -171,7 +171,7 @@
       </div>
       <div class="modal-body">
 
-        <h2 id="display_message"></h2>
+        <h5 id="display_message">asdasda</h5>
 
       </div>
       
