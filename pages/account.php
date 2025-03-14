@@ -5,7 +5,7 @@
   <div id="department_dashboard" class="department_dashboard" style="display: none;">
 
     <div class="card shadow mb-4">
-      <div class="card-header py-3.5">
+      <div class="card-header py-3.5 pt-4">
           <h2 class="float-left">Department List</h2>
           <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Department</button>
           <div class="clearfix"></div>
@@ -34,7 +34,7 @@
 <div id="add_account" class="add_account" style="display: block;">
 
   <div class="card shadow mb-4">
-    <div class="card-header py-3.5">
+    <div class="card-header py-3.5 pt-4">
       <h2 class="float-left">Add Account</h2>
       <div class="clearfix"></div>
     </div>
