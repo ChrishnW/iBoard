@@ -1,4 +1,70 @@
-<?php include '../include/header.php'; ?>
+<?php include '../include/header.php'; 
+
+  session_start();
+
+// Display Message ----------------------------------------------------------------------------
+
+  if(isset($_SESSION["message"])){
+
+    $message = $_SESSION["message"];
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+    
+      document.getElementById('display_message').innerHTML = '$message'; 
+
+      const popup = document.getElementById('popupForm');
+      popup.style.display = 'block';
+      
+    }); </script>";
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+      var manage_department = document.getElementById('manage_department');
+      manage_department.style.display = 'block';
+
+    }); </script>";
+
+    unset($_SESSION["message"]);
+  }
+
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  
+    
+    // Add Department ---------------------------------------------------------------------------
+
+    if(isset($_POST["add_department"])){
+
+      $dept_name = filter_input(INPUT_POST, "dept_name", FILTER_SANITIZE_SPECIAL_CHARS);
+      $dept_code = filter_input(INPUT_POST, "dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
+      $status = filter_input(INPUT_POST, "status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      global $db_conn;
+
+      $sql_command = "INSERT INTO tbl_department (dept_name, dept_code, status) VALUES ('$dept_name', '$dept_code', '$status')";
+      $result = mysqli_query($db_conn, $sql_command);
+
+      // if($result){
+      //     $_SESSION["message"] = "Department added successfully.";
+      //     $_SESSION["add_code"] = "1";
+      // }
+      // else{
+      //     $_SESSION["message"] = "Failed to add department.";
+      // }
+
+      header("Refresh: .3; url = admin.php");
+      exit;
+
+    }
+  
+  
+  
+  }
+
+
+
+
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -76,7 +142,7 @@
         </div>
 
         <div class="d-flex justify-content-left">
-          <button type="submit" name="add_department" class="btn btn-primary pr-3">Add Department</button>
+          <button type="submit" name="add_department_submit" class="btn btn-primary pr-3">Add Department</button>
           <button type="reset" name="reset" class="btn btn-secondary ml-2">Cancel</button>
         </div>
       </form>
