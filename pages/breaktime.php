@@ -16,9 +16,15 @@
           <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead class="bg-primary text-white">
               <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Department</th>
+                <th>Breaktime Code</th>
+                <th>Breaktime Start (AM)</th>
+                <th>Breaktime End (AM)</th>
+                <th>Breaktime Start (Lunch)</th>
+                <th>Breaktime End (Lunch)</th>
+                <th>Breaktime Start (PM)</th>
+                <th>Breaktime End (PM)</th>
+                <th>Breaktime Start (OT)</th>
+                <th>Breaktime End (OT)</th>
                 <th>Status</th>
                 <th></th>
               </tr>
