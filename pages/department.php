@@ -112,7 +112,7 @@
 
 <!-- ADD DEPARTMENT -->
 
-<div id="add_department" class="add_department" style="display: block;">
+<div id="add_department" class="add_department" style="display: none;">
   
   <div class="card shadow mb-4">
 
