@@ -1,0 +1,8 @@
+{
+    "require": {
+        "snapappointments/bootstrap-select": "^1.13",
+        "components/jquery": "^3.7",
+        "phpoffice/phpspreadsheet": "^3.9",
+        "mpdf/mpdf": "^8.2"
+    }
+}
