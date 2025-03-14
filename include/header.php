@@ -36,7 +36,19 @@
       <li class="nav-item">
         <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Manage Depatment</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="index.php">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Manage Account</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="index.php">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Manage Breaktime</span></a>
       </li>
 
       <hr class="sidebar-divider">
