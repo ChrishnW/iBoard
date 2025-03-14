@@ -126,11 +126,6 @@
 
 
 
-
-
-
-
-
   
   }
 
@@ -139,92 +134,104 @@
 <div class="container-fluid">
 
 
-<div id="department_dashboard" class="department_dashboard" style="display: block;">
-    
-  <div class="card shadow mb-4">
-
-    <div class="card-header py-3.5 pt-4">
-
-      <h2 class="float-left">Department List</h2>
-      <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Department</button>
+  <div id="department_dashboard" class="department_dashboard" style="display: none;">
       
-      <div class="clearfix"></div>
+    <div class="card shadow mb-4">
+
+      <div class="card-header py-3.5 pt-4">
+
+        <h2 class="float-left">Department List</h2>
+        <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Department</button>
+        
+        <div class="clearfix"></div>
+
+      </div>
+        
+      <div class="card-body">
+
+        <div class="table-responsive">
+
+          <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            
+            <thead class="bg-primary text-white">
+
+              <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th></th>                
+              </tr>
+
+            </thead>
+
+          </table>
+          
+        </div>
+
+      </div>
 
     </div>
-      
-    <div class="card-body">
+    
+  </div> 
 
-      <div class="table-responsive">
 
-        <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
-          
-          <thead class="bg-primary text-white">
+  <!-- ADD DEPARTMENT -->
 
-            <tr>
-              <th>ID</th>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th></th>                
-            </tr>
+  <div id="add_department" class="add_department" style="display: none;">
+    
+    <div class="card shadow mb-4">
 
-          </thead>
+      <div class="card-header py-3.5 pt-4">
+        <h2 class="float-left">Add Department</h2>        
+      </div>
 
-        </table>
+      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
         
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
+          <div class="mb-3">
+            <label for="dept_name" class="form-label">Department Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="dept_name" id="dept_name" placeholder="Production 1" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="dept_code" class="form-label">Code <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="dept_code" id="dept_code" placeholder="101" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+            <select class="form-control" name="status" id="status" required>
+              <option value="" hidden></option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-left">
+            <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
+            <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
+          </div>
+
+        </form>
+
       </div>
 
     </div>
 
-  </div>
-  
-</div> 
+  </div> 
 
+  <div id="edit_department" class="edit_department" style="display: block;">
+    <h2>Edit Department</h2>
 
-<!-- ADD DEPARTMENT -->
-
-<div id="add_department" class="add_department" style="display: none;">
-  
-  <div class="card shadow mb-4">
-
-    <div class="card-header py-3.5 pt-4">
-      <h2 class="float-left">Add Department</h2>        
-    </div>
-
-    <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-      
-      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
-        <div class="mb-3">
-          <label for="dept_name" class="form-label">Department Name <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="dept_name" id="dept_name" placeholder="Production 1" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="dept_code" class="form-label">Code <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="dept_code" id="dept_code" placeholder="101" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-          <select class="form-control" name="status" id="status" required>
-            <option value="" hidden></option>
-            <option value="1">Active</option>
-            <option value="0">Inactive</option>
-          </select>
-        </div>
-
-        <div class="d-flex justify-content-left">
-          <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
-          <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
-        </div>
-
-      </form>
-
-    </div>
+    <form action="admin.php" method="post" id="edit_department_form">
+        
+        <br><br>
+        <input type="submit" name="edit_department_submit" value="Save" class="submit"> 
+        <input type="reset" name="reset" value="Cancel" id="cancel_edit_department">
+    </form>
 
   </div>
-
-</div> 
 
 
 </div>
@@ -248,7 +255,6 @@
     </div>
   </div>
 </div> 
-
 
 
 <div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
@@ -276,22 +282,6 @@
   </div>
 </div> 
 
-<!-- Popup Form for Delete
-<div class="popup" id="popupFormDelete" style="display: block;">
-  <div class="popup-content">
-
-      <h2>Delete this permanently?</h2>
-
-      <form action="admin.php" method="post">
-
-        <input type="submit" name="delete_data" value="Confirm" class="submit">
-        <a href="#" onclick="closePopup2()" class="close_popup" style="text-decoration: none;">Cancel</a>
-        
-      </form>
-  </div>
-</div> -->
-
-<!-- /.container-fluid -->
 
 <?php 
   
