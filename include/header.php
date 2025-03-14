@@ -34,19 +34,19 @@
       <hr class="sidebar-divider my-0">
 
       <li class="nav-item">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="../pages/department.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Manage Depatment</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="../pages/account.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Manage Account</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="index.php">
+        <a class="nav-link" href="../pages/breaktime.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Manage Breaktime</span></a>
       </li>
