@@ -6,45 +6,41 @@
   <div id="department_dashboard" class="department_dashboard" style="display: block;">
       
 
+
       <div class="card shadow mb-4">
         <div class="card-header py-3.5">
             <h2 class="float-left">Department List</h2>
             <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Department</button>
             <div class="clearfix"></div>
         </div>
-      </div>
-
-      <div class="card-body">
+        
+        <div class="card-body">
 
         <div class="table-responsive">
 
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
             
-            <thead style="background-color: blue; color: white;">
+            <thead class="bg-primary text-white">
               <tr>
                 <th>ID</th>
                 <th>Code</th>
                 <th>Name</th>
                 <th>Status</th>
                 <th></th>
+                <th></th>
+                
               </tr>
             </thead>
-
-            <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>button</td>
-              </tr>
-            </tbody>
 
           </table>
           
         </div>
       </div>
-  </div>
+
+      </div>
+
+
+  </div> 
 <!-- 
   <div id="add_department" class="add_department" style="display: none;">
       
@@ -106,12 +102,13 @@
                 <td>' . $status_word . '</td>
                 <td>
                     <form action="admin.php" method="post" class="form_table">
-                        <input type="hidden" name="id_department" value=' . $dept_id . '>
+                      <input type="hidden" name="id_department" value=' . $dept_id . '>
 
-                        <input type="submit" id="edit_depatment" class="edit" value="Edit" name="edit_department">
-                        <input type="submit" id="delete_department" class="delete" value="Delete" name="delete_department">
+                      <input type="submit" id="edit_depatment" class="edit" value="Edit" name="edit_department">
+                      <input type="submit" id="delete_department" class="delete" value="Delete" name="delete_department">
 
                     </form>
+                    
                 </td>
             </tr>`;
             
