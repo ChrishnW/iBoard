@@ -45,7 +45,7 @@
 </div> 
 
 
-
+<!-- ADD DEPARTMENT -->
 
 <div id="add_department" class="add_department" style="display: block;">
   
@@ -81,10 +81,7 @@
         </div>
       </form>
     </div>
-   
   </div>
-  
-
 </div> 
 
 
