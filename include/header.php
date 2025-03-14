@@ -41,13 +41,13 @@
 
       <li class="nav-item">
         <a class="nav-link" href="../pages/account.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fa fa-user" aria-hidden="true"></i>
           <span>Manage Account</span></a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="../pages/breaktime.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fa fa-coffee" aria-hidden="true"></i>
           <span>Manage Breaktime</span></a>
       </li>
 
