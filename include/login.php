@@ -15,7 +15,7 @@ if (isset($_POST['login'])) :
       session_start();
       $_SESSION['SESS_USERNAME']    = $username;
       $_SESSION['SESS_PASSWORD']    = $password;
-      session_write_close();
+      session_write_close();    
       echo "Success";
     } else {
       echo "Incorrect password.";
