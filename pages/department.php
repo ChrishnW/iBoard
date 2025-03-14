@@ -27,18 +27,10 @@
                 <th>Name</th>
                 <th>Status</th>
                 <th></th>
+                <th></th>
+                
               </tr>
             </thead>
-
-            <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>button</td>
-              </tr>
-            </tbody>
 
           </table>
           
@@ -47,7 +39,8 @@
 
       </div>
 
-  </div>
+
+  </div> 
 <!-- 
   <div id="add_department" class="add_department" style="display: none;">
       
