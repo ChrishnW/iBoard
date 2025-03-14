@@ -161,12 +161,13 @@
 
 <!-- Pop up Modal -->
 
-<div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+<div class="modal" tabindex="-1" id="popup" style="display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
+
+        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
       </div>
       <div class="modal-body">
 
