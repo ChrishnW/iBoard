@@ -15,7 +15,7 @@
 
       <!-- <button id="btn_add_department">Add Department</button> -->
       
-      <div class="table">
+      <!-- <div class="table">
           <table id="department_table">
               <tr>
                   <th>ID</th>
@@ -26,11 +26,35 @@
               </tr>
           </table>
           
+      </div> -->
+
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h2>Department List</h2>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Position</th>
+                      <th>Office</th>
+                      <th>Age</th>
+                      <th>Start date</th>
+                      <th>Salary</th>
+                  </tr>
+              </thead>
+          </table>
+        </div>
       </div>
   </div>
 
   <div id="add_department" class="add_department" style="display: none;">
-      <h2>Add Department</h2>
+      
+      
 
       <form action="admin.php" method="post">
           <label for="dept_name">Department Name <span style="color: red;">*</span></label>
