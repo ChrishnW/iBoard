@@ -22,12 +22,12 @@
   <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Modals -->
+<!-- Modals 
 <?php include 'modal.php'; ?>
-
-<!-- Bootstrap core JavaScript-->
+-->
+<!-- Bootstrap core JavaScript
 <?php include 'script.php'; ?>
-
+-->
 </body>
 
 </html>
