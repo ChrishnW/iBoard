@@ -8,45 +8,52 @@
 
   <div id="department_dashboard" class="department_dashboard" style="display: block;">
       
-  <h2>Department List</h2>
+  <!-- <h2>Department List</h2>
   <hr>
-  <br>
-      <button id="btn_add_department" type="button" class="btn btn-primary mb-4">Add Department</button>
-
-      <!-- <button id="btn_add_department">Add Department</button> -->
+  <br> 
+  <button id="btn_add_department">Add Department</button> 
       
-      <!-- <div class="table">
-          <table id="department_table">
-              <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Code</th>
-                  <th>Status</th>
-                  <th></th>
-              </tr>
-          </table>
-          
-      </div> -->
+  <div class="table">
+    <table id="department_table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </table>
+  </div> -->
 
       <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h2>Department List</h2>
+        <div class="card-header py-3.5">
+            <h2 class="float-left">Department List</h2>
+            <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Department</button>
+            <div class="clearfix"></div>
         </div>
       </div>
 
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                  <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                  </tr>
-              </thead>
+          <thead style="background-color: blue; color: white;">
+          <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>button</td>
+          </tr>
+          </tbody>
           </table>
         </div>
       </div>
