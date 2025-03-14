@@ -6,7 +6,7 @@ if (isset($_POST['login'])) :
   $password = $_POST['password'];
 
   // Check in users table
-  $query = "SELECT * FROM account WHERE username = '$username'";
+  $query = "SELECT * FROM tbl_accounts WHERE username = '$username'";
   $result = mysqli_query($conn, $query);
 
   if (mysqli_num_rows($result) > 0) {
@@ -15,8 +15,6 @@ if (isset($_POST['login'])) :
       session_start();
       $_SESSION['SESS_USERNAME']    = $username;
       $_SESSION['SESS_PASSWORD']    = $password;
-      $_SESSION['SESS_FULLNAME']    = $user['fullname'];
-      $_SESSION['SESS_LEVEL']       = $user['level'];
       session_write_close();
       echo "Success";
     } else {
