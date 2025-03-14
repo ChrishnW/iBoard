@@ -17,5 +17,4 @@ date_default_timezone_set('Asia/Manila');
 // Retrieve session ariables
 $username = $_SESSION['SESS_USERNAME'];
 $password = $_SESSION['SESS_PASSWORD'];
-$fullname = $_SESSION['SESS_FULLNAME'];
-$syslevel = $_SESSION['SESS_LEVEL'];
+
