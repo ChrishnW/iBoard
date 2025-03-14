@@ -84,39 +84,39 @@
   if(mysqli_num_rows($result) > 0){
       while($department = mysqli_fetch_assoc($result)){
 
-          $dept_id = $department["id"];
-          $dept_name = $department["dept_name"];
-          $dept_code = $department["dept_code"];
-          $status = $department["status"];
-          $status_word = "";
+        $dept_id = $department["id"];
+        $dept_name = $department["dept_name"];
+        $dept_code = $department["dept_code"];
+        $status = $department["status"];
+        $status_word = "";
 
-          if($status == "1"){
-              $status_word = "Active";
-          }
-          else{
-              $status_word = "Inactive";
-          }
+        if($status == "1"){
+            $status_word = "Active";
+        }
+        else{
+            $status_word = "Inactive";
+        }
 
-          echo '<script> document.addEventListener("DOMContentLoaded", function () {
-              const table = `
-              <tr>
-                  <td>' . $dept_id . '</td>
-                  <td>' . $dept_name . '</td>
-                  <td>' . $dept_code . '</td>
-                  <td>' . $status_word . '</td>
-                  <td>
-                      <form action="admin.php" method="post" class="form_table">
-                          <input type="hidden" name="id_department" value=' . $dept_id . '>
+        echo '<script> document.addEventListener("DOMContentLoaded", function () {
+            const table = `
+            <tr>
+                <td>' . $dept_id . '</td>
+                <td>' . $dept_name . '</td>
+                <td>' . $dept_code . '</td>
+                <td>' . $status_word . '</td>
+                <td>
+                    <form action="admin.php" method="post" class="form_table">
+                        <input type="hidden" name="id_department" value=' . $dept_id . '>
 
-                          <input type="submit" id="edit_depatment" class="edit" value="Edit" name="edit_department">
-                          <input type="submit" id="delete_department" class="delete" value="Delete" name="delete_department">
+                        <input type="submit" id="edit_depatment" class="edit" value="Edit" name="edit_department">
+                        <input type="submit" id="delete_department" class="delete" value="Delete" name="delete_department">
 
-                      </form>
-                  </td>
-              </tr>`;
-              
-              document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
-          });</script>';
+                    </form>
+                </td>
+            </tr>`;
+            
+            document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
+        });</script>';
 
       }
   }
