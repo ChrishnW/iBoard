@@ -2,30 +2,30 @@
 
   session_start();
 
-// Display Message ----------------------------------------------------------------------------
+  // Display Message ----------------------------------------------------------------------------
 
-  if(isset($_SESSION["message"])){
+  // if(isset($_SESSION["message"])){
 
-    $message = $_SESSION["message"];
+  //   $message = $_SESSION["message"];
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+  //   echo "<script> document.addEventListener('DOMContentLoaded', function () {
     
-      document.getElementById('display_message').innerHTML = '$message'; 
+  //     document.getElementById('display_message').innerHTML = '$message'; 
 
-      const popup = document.getElementById('popupForm');
-      popup.style.display = 'block';
+  //     const popup = document.getElementById('popupForm');
+  //     popup.style.display = 'block';
       
-    }); </script>";
+  //   }); </script>";
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+  //   echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
-      var manage_department = document.getElementById('manage_department');
-      manage_department.style.display = 'block';
+  //     var manage_department = document.getElementById('manage_department');
+  //     manage_department.style.display = 'block';
 
-    }); </script>";
+  //   }); </script>";
 
-    unset($_SESSION["message"]);
-  }
+  //   unset($_SESSION["message"]);
+  // }
 
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,10 +39,8 @@
       $dept_code = filter_input(INPUT_POST, "dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $status = filter_input(INPUT_POST, "status", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      global $db_conn;
-
       $sql_command = "INSERT INTO tbl_department (dept_name, dept_code, status) VALUES ('$dept_name', '$dept_code', '$status')";
-      $result = mysqli_query($db_conn, $sql_command);
+      $result = mysqli_query($conn, $sql_command);
 
       // if($result){
       //     $_SESSION["message"] = "Department added successfully.";
