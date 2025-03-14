@@ -1,6 +1,6 @@
 <?php include '../include/header.php'; 
 
-  session_start();
+  // session_start();
 
   // Display Message ----------------------------------------------------------------------------
 
