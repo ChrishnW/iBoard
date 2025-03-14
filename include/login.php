@@ -2,8 +2,8 @@
 include 'connect.php';
 
 if (isset($_POST['login'])) :
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+  $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
   // Check in users table
   $query = "SELECT * FROM tbl_accounts WHERE username = '$username'";
