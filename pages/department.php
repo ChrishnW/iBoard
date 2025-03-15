@@ -304,32 +304,41 @@
   </div> 
 
   <div id="edit_department" class="edit_department" style="display: block;">
-    <h2>Edit Department</h2>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3.5 pt-4">
+      <h2 class="float-left">Edit Department</h2>
+      <div class="clearfix"></div>
+    </div>
 
-    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form">
+    <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
+      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
+        <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="$dept_id" >
 
-  
-      <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="$dept_id">
+        <div class="mb-3">
+          <label for="edit_dept_name" class="form-label">Department Name <span style="color: red;">*</span></label>
+          <input type="text" name="edit_dept_name" id="edit_dept_name" required value="$dept_name" class="form-control">
+        </div>
 
-      <label for="edit_dept_name">Department Name <span style="color: red;">*</span></label>
-      <input type="text" name="edit_dept_name" id="edit_dept_name" required value="$dept_name"><br><br>
+        <div class="mb-3">
+          <label for="edit_dept_code" class="form-label">Department Code <span style="color: red;">*</span></label>
+          <input type="text" name="edit_dept_code" id="edit_dept_code" required value="$dept_code" class="form-control">
+        </div>
 
-      <label for="edit_dept_code">Department Code <span style="color: red;">*</span></label>
-      <input type="text" name="edit_dept_code" id="edit_dept_code" required value="$dept_code"><br><br>
+        <div class="mb-3">
+          <label for="edit_status">Status <span style="color: red;">*</span></label>
+          <select name="edit_status" id="edit_status" class="form-control" required >
+              <option value="$status"hidden>$status_word</option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+          </select> 
+        </div>
 
-      <label for="edit_status">Status <span style="color: red;">*</span></label>
-      <select name="edit_status" id="edit_status" required >
-          <option value="$status"hidden>$status_word</option>
-          <option value="1">Active</option>
-          <option value="0">Inactive</option>
-      </select>
-      
-      <br><br>
-      <input type="submit" name="edit_department_submit" value="Save" class="submit"> 
-      <input type="reset" name="reset" value="Cancel" id="cancel_edit_department">
-
-    </form>
-
+        <div class="d-flex justify-content-left">
+          <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
+          <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
+        </div>
+      </form>
+    </div>
   </div>
 
 
