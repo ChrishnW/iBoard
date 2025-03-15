@@ -374,13 +374,12 @@
       </div>
       <div class="modal-body">
 
-        <h2>Delete this permanently?</h2>
+        <h2 class="h5 pb-3">Delete this permanently?</h2>
 
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
 
-          <input type="submit" name="delete_data" value="Confirm" class="submit">
-          <a href="#" onclick="closePopup2()" class="close_popup" style="text-decoration: none;">Cancel</a>
-          
+            <input type="submit" name="delete_data" value="Confirm" class="submit btn btn-danger pr-3">
+            <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
         </form>
 
       </div>
