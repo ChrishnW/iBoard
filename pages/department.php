@@ -97,20 +97,26 @@
 
         const table = `
         <tr>
-          <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\">
+          <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\" >
 
-          <label for=\"edit_dept_name\">Department Name <span style=\"color: red;\">*</span></label>
-          <input type=\"text\" name=\"edit_dept_name\" id=\"edit_dept_name\" required value=\"$dept_name\"><br><br>
+          <div class=\"mb-3\">
+            <label for=\"edit_dept_name\" class=\"form-label\">Department Name <span style=\"color: red;\">*</span></label>
+            <input type=\"text\" name=\"edit_dept_name\" id=\"edit_dept_name\" required value=\"$dept_name\" class=\"form-control\">
+          </div>
 
-          <label for=\"edit_dept_code\">Department Code <span style=\"color: red;\">*</span></label>
-          <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" required value=\"$dept_code\"><br><br>
+          <div class=\"mb-3\">
+            <label for=\"edit_dept_code\" class=\"form-label\">Department Code <span style=\"color: red;\">*</span></label>
+            <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" required value=\"$dept_code\" class=\"form-control\">
+          </div>
 
-          <label for=\"edit_status\">Status <span style=\"color: red;\">*</span></label>
-          <select name=\"edit_status\" id=\"edit_status\" required >
-              <option value=\"$status\"hidden>$status_word</option>
-              <option value=\"1\">Active</option>
-              <option value=\"0\">Inactive</option>
-          </select>
+          <div class=\"mb-3\">
+            <label for=\"edit_status\">Status <span style=\"color: red;\">*</span></label>
+            <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required >
+                <option value=\"$status\"hidden>$status_word</option>
+                <option value=\"1\">Active</option>
+                <option value=\"0\">Inactive</option>
+            </select> 
+          </div>
           
           </td>
         </tr>`;
@@ -216,7 +222,7 @@
 <div class="container-fluid">
 
 
-  <div id="department_dashboard" class="department_dashboard" style="display: none;">
+  <div id="department_dashboard" class="department_dashboard" style="display: block;">
       
     <div class="card shadow mb-4">
 
@@ -303,42 +309,35 @@
 
   </div> 
 
-  <div id="edit_department" class="edit_department" style="display: block;">
-  <div class="card shadow mb-4">
-    <div class="card-header py-3.5 pt-4">
-      <h2 class="float-left">Edit Department</h2>
-      <div class="clearfix"></div>
+  <div id="edit_department" class="edit_department" style="display: none;">
+
+    <div class="card shadow mb-4">
+      
+      <div class="card-header py-3.5 pt-4">
+
+        <h2 class="float-left">Edit Department</h2>
+        <div class="clearfix"></div>
+
+      </div>
+
+      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
+        
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
+          
+
+          <div class="d-flex justify-content-left">
+
+            <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
+            <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
+          
+          </div>
+
+        </form>
+
+      </div>
+
     </div>
 
-    <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
-        <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="$dept_id" >
-
-        <div class="mb-3">
-          <label for="edit_dept_name" class="form-label">Department Name <span style="color: red;">*</span></label>
-          <input type="text" name="edit_dept_name" id="edit_dept_name" required value="$dept_name" class="form-control">
-        </div>
-
-        <div class="mb-3">
-          <label for="edit_dept_code" class="form-label">Department Code <span style="color: red;">*</span></label>
-          <input type="text" name="edit_dept_code" id="edit_dept_code" required value="$dept_code" class="form-control">
-        </div>
-
-        <div class="mb-3">
-          <label for="edit_status">Status <span style="color: red;">*</span></label>
-          <select name="edit_status" id="edit_status" class="form-control" required >
-              <option value="$status"hidden>$status_word</option>
-              <option value="1">Active</option>
-              <option value="0">Inactive</option>
-          </select> 
-        </div>
-
-        <div class="d-flex justify-content-left">
-          <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
-          <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
-        </div>
-      </form>
-    </div>
   </div>
 
 
@@ -466,6 +465,14 @@
     const add_department = document.getElementById('add_department');
     const cancel_department = document.getElementById('cancel_department');
 
+    const cancel_edit_department = document.getElementById('cancel_edit_department');
+    const edit_department = document.getElementById('edit_department');
+
+    cancel_edit_department.addEventListener('click', function () {
+      edit_department.style.display = 'none';
+      department_dashboard.style.display = 'block';
+    });
+
     btn_add_department.addEventListener('click', function () {
       department_dashboard.style.display = 'none';
       add_department.style.display = 'block';
@@ -475,6 +482,8 @@
       department_dashboard.style.display = 'block';
       add_department.style.display = 'none';
     });
+
+    
 
     
 
