@@ -121,34 +121,60 @@
   </div>
 </div>
 
-<div id="edit_account" class="edit_account" style="display: block;">
-  <h2>Edit Account</h2>
+<!-- Edit Account -->
+<div class="container-fluid">
 
-  <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_account_form">
 
-    <input type="hidden" name="edit_acc_id" id="edit_acc_id" value="$acc_id">
+  <div id="edit_account" class="edit_dashboard" style="display: block;">
+      
+    <div class="card shadow mb-4">
 
-    <label for="edit_acc_name">Username <span style="color: red;">*</span></label>
-    <input type="text" name="edit_acc_name" id="edit_acc_name" required value="$username"><br><br>
+      <div class="card-header py-3.5 pt-4">
 
-    <label for="edit_acc_code">Department <span style="color: red;">*</span></label>
-    <select name="edit_acc_code" id="edit_acc_code" required >
-        <option value="$dept_code"hidden>$dept_name</option>
-    </select>
+        <h2 class="float-left">Edit Account</h2>
+        
+        <div class="clearfix"></div>
 
-    <label for="edit_status_acc">Status <span style="color: red;">*</span></label>
-    <select name="edit_status_acc" id="edit_status_acc" required >
-        <option value="$status"hidden>$status_word</option>
-        <option value="1">Active</option>
-        <option value="0">Inactive</option>
-    </select>
+      </div>
 
-    <br><br>
-    <input type="submit" name="edit_account_submit" value="Save" class="submit"> 
-    <input type="reset" name="reset" value="Cancel" id="cancel_edit_account">
 
-  </form>
 
+
+      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
+      <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
+        <div class="mb-3">
+          <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
+          <input type="text" name="acc_name" id="acc_name" class="form-control" placeholder="SDRB" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="acc_password" class="form-label">Password <span style="color: red;">*</span></label>
+          <input type="password" name="acc_password" id="acc_password" class="form-control" placeholder="*******" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="acc_department_code" class="form-label">Code <span style="color: red;">*</span></label>
+          <select name="acc_department_code" id="acc_department_avail" class="form-control" required>
+            <option value="" hidden></option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="acc_status" class="form-label">Status <span style="color: red;">*</span></label>
+          <select name="acc_status" id="acc_status" class="form-control" required>
+            <option value="" hidden></option>
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+          </select>
+        </div>
+
+        <div class="d-flex justify-content-left">
+          <input type="submit" name="add_account" value="Save" class="btn btn-primary pr-3">
+          <input type="reset" name="reset" value="Cancel" id="cancel_account"  class="btn btn-secondary ml-2">
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 
