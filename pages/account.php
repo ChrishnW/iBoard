@@ -47,7 +47,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div id="department_dashboard" class="department_dashboard" style="display: block;">
+  <div id="department_dashboard" class="department_dashboard" style="display: none;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
@@ -119,6 +119,36 @@
       </form>
     </div>
   </div>
+</div>
+
+<div id="edit_account" class="edit_account" style="display: block;">
+  <h2>Edit Account</h2>
+
+  <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_account_form">
+
+    <input type="hidden" name="edit_acc_id" id="edit_acc_id" value="$acc_id">
+
+    <label for="edit_acc_name">Username <span style="color: red;">*</span></label>
+    <input type="text" name="edit_acc_name" id="edit_acc_name" required value="$username"><br><br>
+
+    <label for="edit_acc_code">Department <span style="color: red;">*</span></label>
+    <select name="edit_acc_code" id="edit_acc_code" required >
+        <option value="$dept_code"hidden>$dept_name</option>
+    </select>
+
+    <label for="edit_status_acc">Status <span style="color: red;">*</span></label>
+    <select name="edit_status_acc" id="edit_status_acc" required >
+        <option value="$status"hidden>$status_word</option>
+        <option value="1">Active</option>
+        <option value="0">Inactive</option>
+    </select>
+
+    <br><br>
+    <input type="submit" name="edit_account_submit" value="Save" class="submit"> 
+    <input type="reset" name="reset" value="Cancel" id="cancel_edit_account">
+
+  </form>
+
 </div>
 
 
