@@ -2,7 +2,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div id="department_dashboard" class="department_dashboard" style="display: none;">
+  <div id="department_dashboard" class="department_dashboard" style="display: block;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
@@ -31,7 +31,7 @@
 
 <!-- ADD ACCOUNT -->
 
-<div id="add_account" class="add_account" style="display: block;">
+<div id="add_account" class="add_account" style="display: none;">
 
   <div class="card shadow mb-4">
     <div class="card-header py-3.5 pt-4">
@@ -79,4 +79,26 @@
 
 </div>
 <!-- /.container-fluid -->
-<?php include '../include/footer.php'; ?>
+<?php include '../include/footer.php'; 
+
+
+
+?>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const btn_add_department = document.getElementById('btn_add_department');
+    const department_dashboard = document.getElementById('department_dashboard');
+    const add_account = document.getElementById('add_account');
+
+    btn_add_department.addEventListener("click", function(){
+      department_dashboard.style.display = 'none';
+      add_account.style.display = 'block';
+    });
+    
+
+  });
+
+</script>
