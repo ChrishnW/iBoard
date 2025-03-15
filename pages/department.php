@@ -309,6 +309,8 @@
 
   </div> 
 
+  <!-- Edit DEPARTMENT -->
+
   <div id="edit_department" class="edit_department" style="display: none;">
 
     <div class="card shadow mb-4">
@@ -355,7 +357,7 @@
       </div>
       <div class="modal-body">
 
-        <h5 id="display_message">asdasda</h5>
+        <h5 id="display_message"></h5>
 
       </div>
       
