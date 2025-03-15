@@ -344,9 +344,7 @@
       document.getElementById('popup').style.display = 'none';
     });
 
-    document.getElementById('close_popup2').addEventListener('click', function () {
-      document.getElementById('popupFormDelete').style.display = 'none';
-    });
+ 
 
     const btn_add_account = document.getElementById('btn_add_account');
     const account_dashboard = document.getElementById('account_dashboard');
