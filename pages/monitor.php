@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container py-3">
+    <div>
         <div class="d-flex align-items-center">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 50px;">
             <span class="h4 font-weight-bold mb-0">SDRP LINE</span>
@@ -45,6 +45,14 @@
                             <th class="align-text-top">BALANCE</th>
                         </tr>
                     </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>100</td>
+                            <td>7</td>
+                            <td>0</td>
+                            <td class="h5 font-weight-bold mb-2 text-danger">-7</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
