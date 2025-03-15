@@ -485,9 +485,6 @@
 
     
 
-    
-
-
   });
   const popup2 = document.getElementById("popupFormDelete");
 
