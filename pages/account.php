@@ -40,6 +40,73 @@
     }
   }
 
+  // Display Message ----------------------------------------------------------------------------
+
+  if(isset($_SESSION["message"])){
+
+    $message = $_SESSION["message"];
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+  
+      document.getElementById('display_message').innerHTML = '$message'; 
+
+      const popup = document.getElementById('popupForm');
+      popup.style.display = 'block';
+
+        
+    }); </script>";
+
+    
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+      var department_dashboard = document.getElementById('manage_account');
+      manage_account.style.display = 'block';
+
+    }); </script>";
+
+
+    unset($_SESSION["message"]);
+  }
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  
+  
+    // Add Account ------------------------------------------------------------------------------
+
+    if(isset($_POST["add_account"])){
+
+      $acc_name = filter_input(INPUT_POST, "acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_password = filter_input(INPUT_POST, "acc_password", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_department_code = filter_input(INPUT_POST, "acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $hashed_password = password_hash($acc_password, PASSWORD_DEFAULT);
+
+      $sql_command = "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_name', '$hashed_password', '$acc_access', '$acc_department_code', '$acc_status')";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+          $_SESSION["message"] = "Account added successfully.";
+      }
+      else{
+          $_SESSION["message"] = "Failed to add account.";
+      }
+
+      header("Refresh: .3; url = account.php");
+      exit;
+
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  }
+
 
 ?>
 
@@ -47,7 +114,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div id="department_dashboard" class="department_dashboard" style="display: none;">
+  <div id="department_dashboard" class="department_dashboard" style="display: block;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
@@ -125,7 +192,7 @@
 <div class="container-fluid">
 
 
-  <div id="edit_account" class="edit_dashboard" style="display: block;">
+  <div id="edit_account" class="edit_dashboard" style="display: none;">
       
     <div class="card shadow mb-4">
 
@@ -136,9 +203,6 @@
         <div class="clearfix"></div>
 
       </div>
-
-
-
 
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
       <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
