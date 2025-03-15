@@ -56,6 +56,75 @@
     unset($_SESSION["delete_id_dept"]);
   }
 
+  // Edit Department Display --------------------------------------------------------------------------
+
+  if(isset($_SESSION["dept_id"])){
+
+    $dept_id = $_SESSION["dept_id"];
+
+    $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+      $department = mysqli_fetch_assoc($result);
+
+      $dept_name = $department["dept_name"];
+      $dept_code = $department["dept_code"];
+      $status = $department["status"];
+      $status_word = "";
+
+      if($status == "1"){
+          $status_word = "Active";
+      }
+      else{
+          $status_word = "Inactive";
+      }
+
+      echo '<script> document.addEventListener("DOMContentLoaded", function () {
+
+        var department_dashboard = document.getElementById("department_dashboard");
+        department_dashboard.style.display = "none";
+
+        var add_department = document.getElementById("add_department");
+        add_department.style.display = "none";
+
+        var edit_department = document.getElementById("edit_department");
+        edit_department.style.display = "block";
+
+      }); </script>';
+
+      echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        const table = `
+        <tr>
+          <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\">
+
+          <label for=\"edit_dept_name\">Department Name <span style=\"color: red;\">*</span></label>
+          <input type=\"text\" name=\"edit_dept_name\" id=\"edit_dept_name\" required value=\"$dept_name\"><br><br>
+
+          <label for=\"edit_dept_code\">Department Code <span style=\"color: red;\">*</span></label>
+          <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" required value=\"$dept_code\"><br><br>
+
+          <label for=\"edit_status\">Status <span style=\"color: red;\">*</span></label>
+          <select name=\"edit_status\" id=\"edit_status\" required >
+              <option value=\"$status\"hidden>$status_word</option>
+              <option value=\"1\">Active</option>
+              <option value=\"0\">Inactive</option>
+          </select>
+          
+          </td>
+        </tr>`;
+        
+        document.querySelector(\"#edit_department_form\").insertAdjacentHTML(\"afterBegin\", table);
+
+      }); </script>";
+
+        
+    }
+
+    unset($_SESSION["dept_id"]);
+  }
+
 
 
 
@@ -105,22 +174,35 @@
 
     if(isset($_POST["delete_data"])){
 
-      $dept_id = $_SESSION["delete_dept"];
+    $dept_id = $_SESSION["delete_dept"];
 
-      $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
-      $result = mysqli_query($conn, $sql_command);
+    $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
+    $result = mysqli_query($conn, $sql_command);
 
-      if($result){
-        $_SESSION["message"] = "Account deleted successfully.";
-      }
-      else{
-        $_SESSION["message"] = "Failed to delete account.";
-      }
-      
-      unset($_SESSION["delete_dept"]);
-      
-      header("Refresh: .3; url = department.php");
-      exit;
+    if($result){
+      $_SESSION["message"] = "Account deleted successfully.";
+    }
+    else{
+      $_SESSION["message"] = "Failed to delete account.";
+    }
+    
+    unset($_SESSION["delete_dept"]);
+    
+    header("Refresh: .3; url = department.php");
+    exit;
+
+  }
+
+  // Edit Department --------------------------------------------------------------------------
+
+  if(isset($_POST["edit_department"])){
+
+    $dept_id = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $_SESSION["dept_id"] = $dept_id;
+
+    header("Refresh: .3; url = department.php");
+    exit;
 
   }
 
@@ -134,7 +216,7 @@
 <div class="container-fluid">
 
 
-  <div id="department_dashboard" class="department_dashboard" style="display: none;">
+  <div id="department_dashboard" class="department_dashboard" style="display: block;">
       
     <div class="card shadow mb-4">
 
@@ -221,10 +303,10 @@
 
   </div> 
 
-  <div id="edit_department" class="edit_department" style="display: block;">
+  <div id="edit_department" class="edit_department" style="display: none;">
     <h2>Edit Department</h2>
 
-    <form action="admin.php" method="post" id="edit_department_form">
+    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form">
         
         <br><br>
         <input type="submit" name="edit_department_submit" value="Save" class="submit"> 
