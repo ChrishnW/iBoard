@@ -216,7 +216,7 @@
 <div class="container-fluid">
 
 
-  <div id="department_dashboard" class="department_dashboard" style="display: block;">
+  <div id="department_dashboard" class="department_dashboard" style="display: none;">
       
     <div class="card shadow mb-4">
 
@@ -303,14 +303,31 @@
 
   </div> 
 
-  <div id="edit_department" class="edit_department" style="display: none;">
+  <div id="edit_department" class="edit_department" style="display: block;">
     <h2>Edit Department</h2>
 
     <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form">
-        
-        <br><br>
-        <input type="submit" name="edit_department_submit" value="Save" class="submit"> 
-        <input type="reset" name="reset" value="Cancel" id="cancel_edit_department">
+
+  
+      <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="$dept_id">
+
+      <label for="edit_dept_name">Department Name <span style="color: red;">*</span></label>
+      <input type="text" name="edit_dept_name" id="edit_dept_name" required value="$dept_name"><br><br>
+
+      <label for="edit_dept_code">Department Code <span style="color: red;">*</span></label>
+      <input type="text" name="edit_dept_code" id="edit_dept_code" required value="$dept_code"><br><br>
+
+      <label for="edit_status">Status <span style="color: red;">*</span></label>
+      <select name="edit_status" id="edit_status" required >
+          <option value="$status"hidden>$status_word</option>
+          <option value="1">Active</option>
+          <option value="0">Inactive</option>
+      </select>
+      
+      <br><br>
+      <input type="submit" name="edit_department_submit" value="Save" class="submit"> 
+      <input type="reset" name="reset" value="Cancel" id="cancel_edit_department">
+
     </form>
 
   </div>
