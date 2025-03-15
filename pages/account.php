@@ -40,6 +40,30 @@
     }
   }
 
+  function getAllDepartment_edit(){
+
+    global $conn;
+
+    $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+      while($department = mysqli_fetch_assoc($result)){
+
+        $dept_name = $department["dept_name"];
+        $dept_code = $department["dept_code"];
+
+        echo '<script> document.addEventListener("DOMContentLoaded", function () {
+            const table = `
+            <option value="' . $dept_code . '">' . $dept_name . '</option>`;
+            
+            document.querySelector("#edit_acc_department_avail").insertAdjacentHTML("beforeend", table);
+        });</script>';
+
+      }
+    }
+  }
+
   // Display Message ----------------------------------------------------------------------------
 
   if(isset($_SESSION["message"])){
@@ -90,6 +114,88 @@
 
     unset($_SESSION["delete_id_acc"]);
 
+  }
+
+
+
+  // Edit Account Dsisplay --------------------------------------------------------------------------
+
+  if(isset($_SESSION["acc_id"])){
+
+    $acc_id = $_SESSION["acc_id"];
+
+    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id'";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+        $account = mysqli_fetch_assoc($result);
+
+        $username = $account["username"];
+        $access = $account["access"];
+        $dept_code = $account["dept_code"];
+        $status = $account["status"];
+        $status_word = "";
+
+        if($status == "1"){
+          $status_word = "Active";
+        }
+        else{
+          $status_word = "Inactive";
+        }
+
+        $dept_name = getDepartmentName_string($dept_code);
+
+        echo '<script> document.addEventListener("DOMContentLoaded", function () {
+
+          var account_dashboard = document.getElementById("account_dashboard");
+          account_dashboard.style.display = "none";
+
+          var add_account = document.getElementById("add_account");
+          add_account.style.display = "none";
+
+          var edit_account = document.getElementById("edit_account");
+          edit_account.style.display = "block";
+
+        }); </script>';
+
+        echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        const table = `
+        <tr>
+          <input type=\"hidden\" name=\"edit_acc_id\" id=\"edit_acc_id\" value=\"$acc_id\">
+
+          <div class=\"mb-3\">
+          <label for=\"edit_acc_name\" class=\"form-label\">Username <span style=\"color: red;\">*</span></label>
+          <input type=\"text\" name=\"edit_acc_name\" id=\"edit_acc_name\" class=\"form-control\" required value=\"$username\">
+          </div>
+
+          <div class=\"mb-3\">
+            <label for=\"edit_acc_department_code\" class=\"form-label\">Code <span style=\"color: red;\">*</span></label>
+            <select name=\"edit_acc_department_code\" id=\"edit_acc_department_avail\" class=\"form-control\" required>
+              <option value=\"$dept_code\" hidden>$dept_name</option>
+            </select>
+          </div>
+
+          <div class=\"mb-3\">
+            <label for=\"edit_acc_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
+            <select name=\"edit_acc_status\" id=\"edit_acc_status\" class=\"form-control\" required>
+              <option value=\"$status\"hidden>$status_word</option>
+              <option value=\"1\">Active</option>
+              <option value=\"0\">Inactive</option>
+          </div>
+          
+          </td>
+        </tr>`;
+        
+        document.querySelector(\"#edit_account_form\").insertAdjacentHTML(\"afterBegin\", table);
+
+      }); </script>";
+
+      getAllDepartment_edit();
+      
+    }
+
+    unset($_SESSION["acc_id"]);
   }
 
 
@@ -166,8 +272,43 @@
 
   }
 
+  // Edit Account --------------------------------------------------------------------------
+
+  if(isset($_POST["edit_account"])){
+
+    $acc_id = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $_SESSION["acc_id"] = $acc_id;
+
+    header("Refresh: .3; url = account.php");
+    exit;
+
+  }
 
 
+  // Edit Account Submit --------------------------------------------------------------------------
+
+  if(isset($_POST["edit_add_account"])){
+
+    $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
+    $username = filter_input(INPUT_POST, "edit_acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
+    $dept_code = filter_input(INPUT_POST, "edit_acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
+    $status = filter_input(INPUT_POST, "edit_acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $sql_command = "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'";
+    $result = mysqli_query($conn, $sql_command);
+
+    if($result){
+      $_SESSION["message"] = "Account updated successfully.";
+    }
+    else{
+      $_SESSION["message"] = "Failed to update account.";
+    }
+
+    header("Refresh: .3; url = account.php");
+    exit;
+
+  }
 
 
 ?>
@@ -254,7 +395,6 @@
 <!-- Edit Account -->
 <div class="container-fluid">
 
-
   <div id="edit_account" class="edit_dashboard" style="display: none;">
       
     <div class="card shadow mb-4">
@@ -268,40 +408,23 @@
       </div>
 
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-      <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
-        <div class="mb-3">
-          <label for="edit_acc_name" class="form-label">Username <span style="color: red;">*</span></label>
-          <input type="text" name="edit_acc_name" id="edit_acc_name" class="form-control" placeholder="SDRB" required>
-        </div>
+        
+        <form action="account.php" method="post" style="width: 100%; max-width: 600px;" id="edit_account_form">
+          
 
-        <div class="mb-3">
-          <label for="edit_acc_password" class="form-label">Password <span style="color: red;">*</span></label>
-          <input type="password" name="edit_acc_password" id="edit_acc_password" class="form-control" placeholder="*******" required>
-        </div>
+          <div class="d-flex justify-content-left">
+            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
+            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2">
+          </div>
 
-        <div class="mb-3">
-          <label for="edit_acc_department_code" class="form-label">Code <span style="color: red;">*</span></label>
-          <select name="edit_acc_department_code" id="edit_acc_department_avail" class="form-control" required>
-            <option value="" hidden></option>
-          </select>
-        </div>
+        </form>
 
-        <div class="mb-3">
-          <label for="edit_acc_status" class="form-label">Status <span style="color: red;">*</span></label>
-          <select name="edit_acc_status" id="edit_acc_status" class="form-control" required>
-            <option value="" hidden></option>
-            <option value="1">Active</option>
-            <option value="0">Inactive</option>
-          </select>
-        </div>
+      </div>
 
-        <div class="d-flex justify-content-left">
-          <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
-          <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2">
-        </div>
-      </form>
     </div>
+
   </div>
+
 </div>
 
 
@@ -444,6 +567,9 @@
     const add_account = document.getElementById('add_account');
     const cancel_account = document.getElementById('cancel_account');
 
+    const edit_cancel_account = document.getElementById('edit_cancel_account');
+    const edit_account = document.getElementById('edit_account');
+
     btn_add_account.addEventListener("click", function(){
       account_dashboard.style.display = 'none';
       add_account.style.display = 'block';
@@ -454,6 +580,17 @@
       add_account.style.display = 'none';
     });
 
+    edit_cancel_account.addEventListener("click", function(){
+      account_dashboard.style.display = 'block';
+      edit_account.style.display = 'none';
+    });
+
+
+
+
+
+
+
   });
 
   const popup2 = document.getElementById("popupFormDelete");
@@ -461,5 +598,7 @@
   function closePopup2() {
     popup2.style.display = "none";
   }
+
+  
 
 </script>
