@@ -2,12 +2,12 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div id="department_dashboard" class="department_dashboard" style="display: none;">
+  <div id="breaktime_dashboard" class="breaktime_dashboard" style="display: block;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
-          <h2 class="float-left">Department List</h2>
-          <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Department</button>
+          <h2 class="float-left">Breaktime List</h2>
+          <button id="btn_add_breaktime" type="button" class="btn btn-primary float-right">Add Breaktime</button>
           <div class="clearfix"></div>
       </div>
         
