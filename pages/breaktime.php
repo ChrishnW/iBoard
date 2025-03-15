@@ -14,19 +14,19 @@
 
       $code = filter_input(INPUT_POST, "break_code", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_am = "";
-      $end_am = "";
+      $start_am = filter_input(INPUT_POST, "break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_am = filter_input(INPUT_POST, "break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);;
 
-      $start_lunch = "";
-      $end_lunch = "";
+      $start_lunch = filter_input(INPUT_POST, "break_start_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_lunch = filter_input(INPUT_POST, "break_end_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
 
-      $start_lunch = "";
-      $end_lunch = "";
+      $start_pm = filter_input(INPUT_POST, "break_start_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_pm = filter_input(INPUT_POST, "break_end_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
 
-      $start_pm = "";
-      $end_pm = "";
+      $start_ot = filter_input(INPUT_POST, "break_start_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_ot = filter_input(INPUT_POST, "break_end_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
 
-      $status = "";
+      $status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);;
 
 
     }
