@@ -160,8 +160,8 @@
                     <form action="account.php" method="post" class="form_table">
                         <input type="hidden" name="id_account" value=' . $acc_id . '>
 
-                        <input type="submit" id="edit_account" class="edit" value="Edit" name="edit_account">
-                        <input type="submit" id="delete_account" class="delete" value="Delete" name="delete_account">
+                        <input type="submit" id="edit_account" class="edit btn btn-primary" value="Edit" name="edit_account">
+                        <input type="submit" id="delete_account" class="delete btn btn-danger" value="Delete" name="delete_account">
 
                     </form>
                 </td>
