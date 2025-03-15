@@ -349,7 +349,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title"></h5>
 
         <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
       </div>
@@ -368,7 +368,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title"></h5>
 
         <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup2"></button>
       </div>
