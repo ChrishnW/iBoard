@@ -104,7 +104,7 @@
 
                   <div class="col-md-6">
                     <label for="break_end_ot">Breaktime End (OT)</label>
-                    <input type="time" class="form-control" name="break_end_ot" id="break_end_ot" placeholder="00:00" required>
+                    <input type="time" class="form-control" name="break_end_ot" id="break_end_ot" placeholder="00:00" required>                  
                   </div>
                 </div>
               </div>
