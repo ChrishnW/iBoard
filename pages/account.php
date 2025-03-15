@@ -52,7 +52,6 @@
 
       const popup = document.getElementById('popupForm');
       popup.style.display = 'block';
-
         
     }); </script>";
 
@@ -60,7 +59,7 @@
     echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
       var department_dashboard = document.getElementById('manage_account');
-      manage_account.style.display = 'block';
+      department_dashboard.style.display = 'block';
 
     }); </script>";
 
@@ -114,12 +113,12 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div id="department_dashboard" class="department_dashboard" style="display: block;">
+  <div id="account_dashboard" class="account_dashboard" style="display: block;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
           <h2 class="float-left">Account List</h2>
-          <button id="btn_add_department" type="button" class="btn btn-primary float-right">Add Account</button>
+          <button id="btn_add_account" type="button" class="btn btn-primary float-right">Add Account</button>
           <div class="clearfix"></div>
       </div>
         
@@ -207,8 +206,8 @@
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
       <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
         <div class="mb-3">
-          <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
-          <input type="text" name="acc_name" id="acc_name" class="form-control" placeholder="SDRB" required>
+          <label for="edit_acc_name" class="form-label">Username <span style="color: red;">*</span></label>
+          <input type="text" name="edit_acc_name" id="edit_acc_name" class="form-control" placeholder="SDRB" required>
         </div>
 
         <div class="mb-3">
@@ -240,6 +239,27 @@
     </div>
   </div>
 </div>
+
+
+<!-- Pop up Modal -->
+
+<div class="modal" tabindex="-1" id="popup" style="display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+
+        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
+      </div>
+      <div class="modal-body">
+
+        <h5 id="display_message"></h5>
+
+      </div>
+      
+    </div>
+  </div>
+</div> 
 
 
 </div>
@@ -320,13 +340,23 @@
 
   document.addEventListener('DOMContentLoaded', function () {
 
-    const btn_add_department = document.getElementById('btn_add_department');
-    const department_dashboard = document.getElementById('department_dashboard');
+    document.getElementById('close_popup').addEventListener('click', function () {
+      document.getElementById('popup').style.display = 'none';
+    });
+
+    document.getElementById('close_popup2').addEventListener('click', function () {
+      document.getElementById('popupFormDelete').style.display = 'none';
+    });
+
+    const btn_add_account = document.getElementById('btn_add_account');
+    const account_dashboard = document.getElementById('account_dashboard');
+
+
     const add_account = document.getElementById('add_account');
     const cancel_account = document.getElementById('cancel_account');
 
-    btn_add_department.addEventListener("click", function(){
-      department_dashboard.style.display = 'none';
+    btn_add_account.addEventListener("click", function(){
+      account_dashboard.style.display = 'none';
       add_account.style.display = 'block';
     });
     
