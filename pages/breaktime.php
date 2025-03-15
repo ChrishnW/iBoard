@@ -145,16 +145,5 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
 
-    document.getElementById("break_start_am").addEventListener("change", function () {
-    const timeInput = this.value; // Gets the time in 24-hour format
-    let [hours, minutes] = timeInput.split(":").map(Number);
-
-    // Convert to 12-hour format
-    const hours12 = hours % 12 || 12; // Converts 0 or 24 to 12
-    console.log(`${hours12}:${minutes < 10 ? "0" + minutes : minutes}`); // Outputs without AM/PM
-    });
-
-  });
 </script>
