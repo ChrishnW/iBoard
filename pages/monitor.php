@@ -49,8 +49,14 @@
                         <tr>
                             <td>100</td>
                             <td>7</td>
-                            <td>0</td>
-                            <td class="h5 font-weight-bold mb-2 text-danger">-7</td>
+                            <td>0
+                            <div class="d-flex justify-content-between mt-2">
+                                <input type="submit" name="minus" value="-" class="btn btn-primary btn-sm">
+                                <input type="submit" name="plus" value="+" class="btn btn-primary btn-sm">
+                            </div>
+                            </td>
+                            </td>
+                            <td class="h5 font-weight-bold mb-2 text-danger">-7</td>        
                         </tr>
                     </tbody>
                 </table>
