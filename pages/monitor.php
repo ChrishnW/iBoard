@@ -10,25 +10,41 @@
     <title>Document</title>
 </head>
 <body>
-    <div class>
-        <div style="display: flex; align-items: center;">
-            <img src="../assets/img/logo.png" alt="" style="width: 50px; height: auto; margin-right: 10px;">
-            <h2 style="color: blue; font-weight: bold;">SDRB LINE</h2>
+    <div>
+        <div class="d-flex align-items-center">
+            <img src="../assets/img/logo.png" alt="logo.png" style="width: 50px; height: auto; margin-right: 10px;">
+            <span class="h5 font-weight-bold mb-0">SDRP LINE</span>
+            
+            <div class="ml-auto text-right">
+            <span class="h1 font-weight-bold mb-2">RUN</span> <br>
+            <span class="h5 font-weight-bold mb-0">00:00:00</span>
+            </div>
         </div>
 
+        <div id="details" class="d-flex align-items-start mt-3">
+            <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="" style="width: 250px; height: auto; margin-right: 10px;">
+            <div>
+                <span class="h5 font-weight-bold mb-2" style="color: red; text-decoration: underline;">Information</span> <br>
+                <span class="h5 font-weight-bold mb-2">SDRB-200/260</span> <br>
+                <span class="h5 font-weight-bold mb-2" style="color: red; text-decoration: underline;">Leader</span> <br>
+                <span class="h5 font-weight-bold mb-2">Juan Dela Cruz</span> <br>
+                
+            </div>
+        </div>
 
         <div class="card-body">
             <div class="table-responsive">
-            <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="bg-primary text-white text-center">
-                    <tr>
-                        <th class="align-text-top">DAILY TARGET</th>
-                        <th class="align-text-top">TARGET (NOW)</th>
-                        <th class="align-text-top">ACTUAL</th>
-                        <th class="align-text-top">BALANCE</th>
-                    </tr>
-                </thead>
-            </table>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-primary text-white text-center">
+                        <tr>
+                            <th class="align-text-top">DAILY TARGET</th>
+                            <th class="align-text-top">TARGET (NOW)</th>
+                            <th class="align-text-top">ACTUAL</th>
+                            <th class="align-text-top">BALANCE</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 </body>
