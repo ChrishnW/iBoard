@@ -64,6 +64,7 @@
                   <div class="col-md-6">
                     <label for="break_start_am">Breaktime Start (AM)</label><br>
                     <input type="time" class="form-control" name="break_start_am" id="break_start_am" placeholder="00:00" required>
+                    
                   </div>
                   
                   <div class="col-md-6">
