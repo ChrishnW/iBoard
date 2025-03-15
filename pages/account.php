@@ -50,7 +50,7 @@
   
       document.getElementById('display_message').innerHTML = '$message'; 
 
-      const popup = document.getElementById('popupForm');
+      const popup = document.getElementById('popup');
       popup.style.display = 'block';
         
     }); </script>";
@@ -58,8 +58,8 @@
     
     echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
-      var department_dashboard = document.getElementById('manage_account');
-      department_dashboard.style.display = 'block';
+      var account_dashboard = document.getElementById('account_dashboard');
+      account_dashboard.style.display = 'block';
 
     }); </script>";
 
@@ -69,7 +69,6 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-  
     // Add Account ------------------------------------------------------------------------------
 
     if(isset($_POST["add_account"])){
@@ -78,6 +77,7 @@
       $acc_password = filter_input(INPUT_POST, "acc_password", FILTER_SANITIZE_SPECIAL_CHARS);
       $acc_department_code = filter_input(INPUT_POST, "acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $acc_status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_access = 2;
 
       $hashed_password = password_hash($acc_password, PASSWORD_DEFAULT);
 
@@ -95,12 +95,6 @@
       exit;
 
     }
-  
-  
-  
-  
-  
-  
   
   
   
@@ -151,7 +145,8 @@
     </div>
 
     <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-      <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
+
+      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
         <div class="mb-3">
           <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
           <input type="text" name="acc_name" id="acc_name" class="form-control" placeholder="SDRB" required>
@@ -300,8 +295,8 @@
                     <form action="account.php" method="post" class="form_table">
                         <input type="hidden" name="id_account" value=' . $acc_id . '>
 
-                        <input type="submit" id="edit_account" class="edit btn btn-primary" value="Edit" name="edit_account">
-                        <input type="submit" id="delete_account" class="delete btn btn-danger" value="Delete" name="delete_account">
+                        <input type="submit" class="edit btn btn-primary" value="Edit" name="edit_account">
+                        <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_account">
 
                     </form>
                 </td>
@@ -358,7 +353,7 @@
     });
     
     cancel_account.addEventListener("click", function(){
-      department_dashboard.style.display = 'block';
+      account_dashboard.style.display = 'block';
       add_account.style.display = 'none';
     });
 
