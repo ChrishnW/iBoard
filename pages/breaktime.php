@@ -16,19 +16,19 @@
           
           <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
             
-            <thead class="bg-primary text-white">
+            <thead class="bg-primary text-white text-center">
 
               <tr>
-                <th>Breaktime Code</th>
-                <th>Breaktime Start (AM)</th>
-                <th>Breaktime End (AM)</th>
-                <th>Breaktime Start (Lunch)</th>
-                <th>Breaktime End (Lunch)</th>
-                <th>Breaktime Start (PM)</th>
-                <th>Breaktime End (PM)</th>
-                <th>Breaktime Start (OT)</th>
-                <th>Breaktime End (OT)</th>
-                <th>Status</th>
+                <th class="align-text-top">Breaktime Code</th>
+                <th class="align-text-top">Breaktime Start (AM)</th>
+                <th class="align-text-top">Breaktime End (AM)</th>
+                <th class="align-text-top">Breaktime Start (Lunch)</th>
+                <th class="align-text-top">Breaktime End (Lunch)</th>
+                <th class="align-text-top">Breaktime Start (PM)</th>
+                <th class="align-text-top">Breaktime End (PM)</th>
+                <th class="align-text-top">Breaktime Start (OT)</th>
+                <th class="align-text-top">Breaktime End (OT)</th>
+                <th class="align-text-top">Status</th>
                 <th></th>
               </tr>
 
