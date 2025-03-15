@@ -211,20 +211,20 @@
         </div>
 
         <div class="mb-3">
-          <label for="acc_password" class="form-label">Password <span style="color: red;">*</span></label>
-          <input type="password" name="acc_password" id="acc_password" class="form-control" placeholder="*******" required>
+          <label for="edit_acc_password" class="form-label">Password <span style="color: red;">*</span></label>
+          <input type="password" name="edit_acc_password" id="edit_acc_password" class="form-control" placeholder="*******" required>
         </div>
 
         <div class="mb-3">
-          <label for="acc_department_code" class="form-label">Code <span style="color: red;">*</span></label>
-          <select name="acc_department_code" id="acc_department_avail" class="form-control" required>
+          <label for="edit_acc_department_code" class="form-label">Code <span style="color: red;">*</span></label>
+          <select name="edit_acc_department_code" id="edit_acc_department_avail" class="form-control" required>
             <option value="" hidden></option>
           </select>
         </div>
 
         <div class="mb-3">
-          <label for="acc_status" class="form-label">Status <span style="color: red;">*</span></label>
-          <select name="acc_status" id="acc_status" class="form-control" required>
+          <label for="edit_acc_status" class="form-label">Status <span style="color: red;">*</span></label>
+          <select name="edit_acc_status" id="edit_acc_status" class="form-control" required>
             <option value="" hidden></option>
             <option value="1">Active</option>
             <option value="0">Inactive</option>
@@ -232,8 +232,8 @@
         </div>
 
         <div class="d-flex justify-content-left">
-          <input type="submit" name="add_account" value="Save" class="btn btn-primary pr-3">
-          <input type="reset" name="reset" value="Cancel" id="cancel_account"  class="btn btn-secondary ml-2">
+          <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
+          <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2">
         </div>
       </form>
     </div>
@@ -243,13 +243,13 @@
 
 <!-- Pop up Modal -->
 
-<div class="modal" tabindex="-1" id="popup" style="display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+<div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"></h5>
 
-        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
+        <button aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
       </div>
       <div class="modal-body">
 
@@ -350,7 +350,6 @@
 
     const btn_add_account = document.getElementById('btn_add_account');
     const account_dashboard = document.getElementById('account_dashboard');
-
 
     const add_account = document.getElementById('add_account');
     const cancel_account = document.getElementById('cancel_account');
