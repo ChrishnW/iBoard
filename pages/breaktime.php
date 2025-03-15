@@ -1,4 +1,13 @@
-<?php include '../include/header.php'; ?>
+<?php include '../include/header.php'; 
+
+
+
+
+
+
+
+
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -43,7 +52,7 @@
 
   <!-- Add Breaktime -->
 
-  <div id="add_breaktime" class="add_breaktime" style="display: block;">
+  <div id="add_breaktime" class="add_breaktime" style="display: none;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
@@ -124,7 +133,7 @@
 
           <div class="d-flex justify-content-left">
             <input type="submit" name="add_breaktime" value="Add Breaktime" class="btn btn-primary pr-3">
-            <input type="reset" name="reset" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
+            <input type="reset" name="reset" value="Cancel" id="cancel_add_breaktime"  class="btn btn-secondary ml-2">
           </div> 
         </div>
         
@@ -136,7 +145,7 @@
 
 <!-- Edit Breaktime -->
 
-  <div id="edit_breaktime" class="edit_dashboard" style="display: block;">
+  <div id="edit_breaktime" class="edit_dashboard" style="display: none;">
       
     <div class="card shadow mb-4">
 
@@ -247,5 +256,37 @@
 
 
 <script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const btn_add_breaktime = document.getElementById('btn_add_breaktime');
+    const breaktime_dashboard = document.getElementById('breaktime_dashboard');
+    const add_breaktime = document.getElementById('add_breaktime');
+    const cancel_add_breaktime= document.getElementById('cancel_add_breaktime');
+
+
+    btn_add_breaktime.addEventListener('click', function () {
+      breaktime_dashboard.style.display = 'none';
+      add_breaktime.style.display = 'block';
+    });
+
+    cancel_add_breaktime.addEventListener('click', function () {
+      breaktime_dashboard.style.display = 'block';
+      add_breaktime.style.display = 'none';
+    });
+
+
+
+
+
+
+  });
+
+
+
+
+
+
+
 
 </script>
