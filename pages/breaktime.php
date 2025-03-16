@@ -1,6 +1,30 @@
 <?php include '../include/header.php'; 
 
+  if(isset($_SESSION["message"])){
 
+    $message = $_SESSION["message"];
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+    
+      document.getElementById('display_message').innerHTML = '$message'; 
+
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      
+    }); </script>";
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+      var breaktime_dashboard = document.getElementById('breaktime_dashboard');
+      breaktime_dashboard.style.display = 'block';
+
+      var add_breaktime = document.getElementById('add_breaktime');
+      add_breaktime.style.display = 'none';
+
+    }); </script>";
+
+    unset($_SESSION["message"]);
+  }
 
 
 
@@ -28,6 +52,26 @@
 
       $status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);;
 
+      $sql_command = "INSERT INTO tbl_breaktime (breaktime_code, am_break_start, am_break_end, lunch_break_start, 
+                      lunch_break_end, pm_break_start, pm_break_end, ot_break_start, ot_break_end, status)
+                      VALUES ('$code', '$start_am', '$end_am', '$start_lunch', '$end_lunch', 
+                      '$start_pm', '$end_pm', '$start_ot', '$end_ot', '$status')";
+
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Breaktime added successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to add breaktime.";
+      }
+
+      header("Refresh: .3; url = breaktime.php");
+      exit;
+
+
+
+
 
     }
 
@@ -44,7 +88,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-  <div id="breaktime_dashboard" class="breaktime_dashboard" style="display: none;">
+  <div id="breaktime_dashboard" class="breaktime_dashboard" style="display: block;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
@@ -85,7 +129,7 @@
 
   <!-- Add Breaktime -->
 
-  <div id="add_breaktime" class="add_breaktime" style="display: block;">
+  <div id="add_breaktime" class="add_breaktime" style="display: none;">
 
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
@@ -94,7 +138,7 @@
       </div>
 
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-        <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
       
           <div id="breaktime">
             <div class="mb-3">
@@ -189,9 +233,7 @@
         <div class="clearfix"></div>
 
       </div>
-      
     
-
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
         <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
       
@@ -273,13 +315,95 @@
     </div>
   </div>
 
+<!-- Pop up Modal -->
+
+<div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+
+        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
+      </div>
+      <div class="modal-body">
+
+        <h5 id="display_message"></h5>
+
+      </div>
+      
+    </div>
+  </div>
+</div> 
 
 
 </div>
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
 
+  // Display Account List----------------------------------------------------------------------------
 
+  $sql_command = "SELECT * FROM tbl_breaktime";
+  $result = mysqli_query($conn, $sql_command);
+
+  if(mysqli_num_rows($result) > 0){
+      while($breaktime = mysqli_fetch_assoc($result)){
+
+        $breaktime_id = $breaktime["id"];
+
+        $breaktime_code = $breaktime["breaktime_code"];
+        $am_start = $breaktime["am_break_start"];
+        $am_end = $breaktime["am_break_end"];
+
+        $lunch_start = $breaktime["lunch_break_end"];
+        $lunch_end = $breaktime["lunch_break_end"];
+
+        $pm_start = $breaktime["pm_break_end"];
+        $pm_end = $breaktime["pm_break_end"];
+        
+        $ot_start = $breaktime["ot_break_end"];
+        $ot_end = $breaktime["ot_break_end"];
+
+        $status = $breaktime["status"];
+
+        $status_word = "";
+
+        if($status == "1"){
+            $status_word = "Active";
+        }
+        else{
+            $status_word = "Inactive";
+        }
+
+        echo '<script> document.addEventListener("DOMContentLoaded", function () {
+            const table = `
+            <tr>
+                <td>' . $breaktime_code . '</td>
+                <td>' . $am_start . '</td>
+                <td>' . $am_end . '</td>
+                
+                <td>' . $lunch_start . '</td>
+                <td>' . $lunch_end . '</td>
+                <td>' . $pm_start . '</td>
+                <td>' . $pm_end . '</td>
+                <td>' . $ot_start . '</td>
+                <td>' . $ot_end . '</td>
+                <td>' . $status_word . '</td>
+                <td>
+                    <form action="breaktime.php" method="post" class="form_table">
+                      <input type="hidden" name="id_breaktime" value=' . $breaktime_id . '>
+
+                      <input type="submit" class="edit btn btn-primary" value="Edit" name="edit_breaktime">
+                      <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_breaktime">
+
+                    </form>
+                </td>
+            </tr>`;
+            
+            document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
+        });</script>';
+
+      }
+  }
 
 
 
@@ -292,6 +416,11 @@
 <script>
 
   document.addEventListener('DOMContentLoaded', function () {
+
+    document.getElementById('close_popup').addEventListener('click', function () {
+      document.getElementById('popup').style.display = 'none';
+    });
+
 
     const btn_add_breaktime = document.getElementById('btn_add_breaktime');
     const breaktime_dashboard = document.getElementById('breaktime_dashboard');
