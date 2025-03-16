@@ -49,14 +49,15 @@
                     <tbody class="bg-white text-center">
                         <tr>
                             <td>100</td>
-                            <td>7</td>
-                            <td>0
-                            <div class="d-flex justify-content-between mt-2">
-                                <input type="submit" name="minus" value="-" class="btn btn-primary btn-sm">
-                                <input type="submit" name="plus" value="+" class="btn btn-primary btn-sm">
-                            </div>
+                            <td id="target_count">7</td>
+                            <td>
+                                <p id="actual_count">0</p>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <button class="btn btn-primary btn-sm" onclick="minus()">-</button>
+                                    <button class="btn btn-primary btn-sm" onclick="add()">+</button>
+                                </div>
                             </td>
-                            <td class="h5 font-weight-bold mb-2 text-danger">-7</td>        
+                            <td class="h5 font-weight-bold mb-2 text-danger" id="balance_count">0</td>        
                         </tr>
                     </tbody>
                 </table>
@@ -65,3 +66,34 @@
     </div>
 </body>
 </html>
+
+<?php
+
+?>
+
+<script>
+    function add() {
+
+        var actual = document.getElementById('actual_count').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
+        
+        var new_actual = parseInt(actual) + 1;
+        var new_balance = parseInt(target) - new_actual;
+
+        document.getElementById('actual_count').innerHTML = new_actual;
+        document.getElementById('balance_count').innerHTML = new_balance;
+
+    }
+
+    function minus() {
+
+        var actual = document.getElementById('actual_count').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
+        
+        var new_actual = parseInt(actual) - 1;
+        var new_balance = parseInt(target) - new_actual;
+
+        document.getElementById('actual_count').innerHTML = new_actual;
+        document.getElementById('balance_count').innerHTML = new_balance;
+    }
+</script>
