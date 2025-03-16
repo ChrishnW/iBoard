@@ -100,27 +100,27 @@
       <div class="card-body">
         <div class="table-responsive">
           
-          <table class=" table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             
-            <thead class="bg-primary text-white text-center">
+            <thead class="bg-primary text-white text-center" style="font-size: 0.75rem;">
 
               <tr>
-                <th class="align-text-top">Breaktime Code</th>
-                <th class="align-text-top">Breaktime Start (AM)</th>
-                <th class="align-text-top">Breaktime End (AM)</th>
-                <th class="align-text-top">Breaktime Start (Lunch)</th>
-                <th class="align-text-top">Breaktime End (Lunch)</th>
-                <th class="align-text-top">Breaktime Start (PM)</th>
-                <th class="align-text-top">Breaktime End (PM)</th>
-                <th class="align-text-top">Breaktime Start (OT)</th>
-                <th class="align-text-top">Breaktime End (OT)</th>
-                <th class="align-text-top">Status</th>
-                <th></th>
+              <th class="align-text-top">Breaktime Code</th>
+              <th class="align-text-top">Breaktime Start (AM)</th>
+              <th class="align-text-top">Breaktime End (AM)</th>
+              <th class="align-text-top">Breaktime Start (Lunch)</th>
+              <th class="align-text-top">Breaktime End (Lunch)</th>
+              <th class="align-text-top">Breaktime Start (PM)</th>
+              <th class="align-text-top">Breaktime End (PM)</th>
+              <th class="align-text-top">Breaktime Start (OT)</th>
+              <th class="align-text-top">Breaktime End (OT)</th>
+              <th class="align-text-top">Status</th>
+              <th></th>
               </tr>
 
             </thead>
 
-          </table>
+            </table>
 
         </div>
       </div>
@@ -389,12 +389,11 @@
                 <td>' . $ot_end . '</td>
                 <td>' . $status_word . '</td>
                 <td>
-                    <form action="breaktime.php" method="post" class="form_table">
-                      <input type="hidden" name="id_breaktime" value=' . $breaktime_id . '>
-
-                      <input type="submit" class="edit btn btn-primary" value="Edit" name="edit_breaktime">
-                      <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_breaktime">
-
+                    <form action="breaktime.php" method="post" class="form_table d-flex justify-content-between">
+                      <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id; ?>">
+                      <button type="submit" class="btn btn-primary btn-sm mr-1" name="edit_breaktime"">Edit</button>
+                      <button type="submit" class="btn btn-danger btn-sm" name="delete_breaktime">Delete</button>
+                    </form>
                     </form>
                 </td>
             </tr>`;
