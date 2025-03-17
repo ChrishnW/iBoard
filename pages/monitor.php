@@ -85,7 +85,7 @@
             <span class="h2 font-weight-bold mb-0 text-primary">SDRB LINE</span>
             
             <div class="ml-auto text-right mr-5">
-                <button class="display-4 font-weight-bold mb-2 mr-3 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
+                <button class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
                 <span class="h3 font-weight-bold mb-0 text-danger">00:00:00:00</span>
             </div>
 
