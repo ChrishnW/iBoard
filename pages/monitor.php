@@ -18,7 +18,7 @@
             <span class="h2 font-weight-bold mb-0 text-primary">SDRP LINE</span>
             
             <div class="ml-auto text-right mr-5">
-                <span class="display-4 font-weight-bold mb-2 mr-3 text-dark">RUN</span> <br>
+                <button class="display-4 font-weight-bold mb-2 mr-3 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
                 <span class="h3 font-weight-bold mb-0 text-danger">00:00:00:00</span>
             </div>
 
@@ -31,7 +31,7 @@
         <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
             <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 400px;">
             
-            <div class="d-flex flex-column pl-5 fs-1">
+            <div class="d-flex flex-column pl-5 fs-1" >
                 <span class="h2 text-danger"><u>Information</u></span> 
                 <span class="h2 text-dark">SDRB-200/260</span> 
                 <span class="h2 text-danger"><u>Leader</u></span> 
