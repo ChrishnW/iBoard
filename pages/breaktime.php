@@ -51,6 +51,143 @@
 
   }
 
+  // Edit Breaktime Dsisplay --------------------------------------------------------------------------
+
+  if(isset($_SESSION["edit_id_breaktime"])){
+
+    $break_id = $_SESSION["edit_id_breaktime"];
+
+    $sql_command = "SELECT * FROM tbl_breaktime WHERE id = '$break_id'";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+        $break = mysqli_fetch_assoc($result);
+
+        $break_code = $break["breaktime_code"];
+
+        $am_start = $break["am_break_start"];
+        $am_end = $break["am_break_end"];
+
+        $lunch_start = $break["lunch_break_start"];
+        $lunch_end = $break["lunch_break_end"];
+
+        $pm_start = $break["pm_break_start"];
+        $pm_end = $break["pm_break_end"];
+
+        $ot_start = $break["ot_break_start"];
+        $ot_end = $break["ot_break_end"];
+
+        $status = $break["status"];
+
+        $status_word = "";
+
+        if($status == "1"){
+          $status_word = "Active";
+        }
+        else{
+          $status_word = "Inactive";
+        }
+
+        echo '<script> document.addEventListener("DOMContentLoaded", function () {
+
+          var breaktime_dashboard = document.getElementById("breaktime_dashboard");
+          breaktime_dashboard.style.display = "none";
+
+          var add_breaktime = document.getElementById("add_breaktime");
+          add_breaktime.style.display = "none";
+
+          var edit_breaktime = document.getElementById("edit_breaktime");
+          edit_breaktime.style.display = "block";
+
+        }); </script>';
+
+        echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        const table = `
+        <tr>
+          <input type=\"hidden\" name=\"edit_acc_id\" id=\"edit_acc_id\" value=\"$break_id\">
+
+          <div id=\"breaktime\">
+            <div class=\"mb-3\">
+              <label for=\"break_code\">Breaktime Code</label>
+              <input type=\"text\" class=\"form-control\" name=\"break_code\" id=\"break_code\" placeholder=\"101\" required>
+            </div>
+
+            <div class=\"card mb-4\">
+              <div class=\"card-body\">
+                <div id=\"breaktime_am\" class=\"row mb-3\">
+                  <div class=\"col-md-6\">
+                    <label for=\"break_start_am\">Breaktime Start (AM)</label><br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_start_am\" id=\"break_start_am\" placeholder=\"00:00\" required>
+                    
+                  </div>
+                  
+                  <div class=\"col-md-6\">
+                    <label for=\"break_end_am\">Breaktime End (AM)</label><br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_end_am\" id=\"break_end_am\" placeholder=\"00:00\" required>
+                  </div>
+                </div>
+
+                <div id=\"breaktime_lunch\" class=\"row mb-3\">
+                  <div class=\"col-md-6\">
+                    <label for=\"break_start_lunch\">Breaktime Start (Lunch)</label> <br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_start_lunch\" id=\"break_start_lunch\" placeholder=\"00:00\" required>
+                  </div>
+                  
+                  <div class=\"col-md-6\">
+                    <label for=\"break_end_lunch\">Breaktime End (Lunch)</label><br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_end_lunch\" id=\"break_end_lunch\" placeholder=\"00:00\" required>
+                  </div>
+                </div>
+
+                <div id=\"breaktime_pm\" class=\"row mb-3\">
+                  <div class=\"col-md-6\">
+                   <label for=\"break_start_pm\">Breaktime Start (PM)</label><br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_start_pm\" id=\"break_start_pm\" placeholder=\"00:00\" required>
+                  </div>
+                  
+                  <div class=\"col-md-6\">
+                    <label for=\"break_end_pm\">Breaktime End (PM)</label><br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_end_pm\" id=\"break_end_pm\" placeholder=\"00:00\" required>
+                  </div>
+                </div>
+
+                <div id=\"breaktime_ot\" class=\"row mb-3\">
+                  <div class=\"col-md-6\">
+                    <label for=\"break_start_ot\">Breaktime Start (OT)</label><br>
+                    <input type=\"time\" class=\"form-control\" name=\"break_start_ot\" id=\"break_start_ot\" placeholder=\"00:00\" required>
+                  </div>
+
+                  <div class=\"col-md-6\">
+                    <label for=\"break_end_ot\">Breaktime End (OT)</label>
+                    <input type=\"time\" class=\"form-control\" name=\"break_end_ot\" id=\"break_end_ot\" placeholder=\"00:00\" required>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class=\"mb-3\">
+              <label for=\"acc_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
+              <select name=\"acc_status\" id=\"acc_status\" class=\"form-control\" required> 
+                <option value=\"\" hidden></option>
+                <option value=\"1\">Active</option>
+                <option value=\"0\">Inactive</option>
+              </select> 
+            </div>
+          
+        </tr>`;
+        
+        document.querySelector(\"#edit_breaktime_form\").insertAdjacentHTML(\"afterBegin\", table);
+
+      }); </script>";
+      
+    }
+
+    unset($_SESSION["edit_id_breaktime"]);
+  }
+
+  
+
 
 
 
@@ -125,6 +262,19 @@
       
       unset($_SESSION["delete_break"]);
       
+      header("Refresh: .3; url = breaktime.php");
+      exit;
+
+    }
+
+    // Edit Breaktime Ask --------------------------------------------------------------------------
+
+    if(isset($_POST["edit_breaktime"])){
+
+      $break_id = filter_input(INPUT_POST, "id_breaktime", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $_SESSION["edit_id_breaktime"] = $break_id;
+
       header("Refresh: .3; url = breaktime.php");
       exit;
 
@@ -290,7 +440,7 @@
       </div>
     
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-        <form action="admin.php" method="post" style="width: 100%; max-width: 600px;">
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
       
           <div id="breaktime">
             <div class="mb-3">
