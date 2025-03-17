@@ -1,11 +1,6 @@
 <?php 
-
     include '../include/link.php'; 
     include '../include/connect.php'
-
-
-
-
 ?>
 
 
@@ -36,7 +31,6 @@
         
             <div class="card-body">
                 <div class="table-responsive">
-                
                     <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-white text-center">
                         <tr>
@@ -73,11 +67,9 @@
                             <td class="text-danger">-</td>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>
