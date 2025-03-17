@@ -49,7 +49,7 @@
             
             <div class="ml-auto text-right mr-5">
                 <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
-                <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00</span>
+                <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
 
             <div id="settings" class="dropdown">
@@ -204,19 +204,22 @@
 
 <script>
 
-    let seconds = 0;
+    let milliseconds = 0;
     let interval = null;
 
     function updateTimer(){
-        seconds++;
-        let hrs = Math.floor(seconds / 3600);
-        let mins = Math.floor((seconds % 3600) / 60);
-        let secs = seconds % 60;
+        milliseconds += 10;
+        let secs = Math.floor(milliseconds / 1000);
+        let hrs = Math.floor(secs / 3600);
+        let mins = Math.floor((secs % 3600) / 60);
+        secs = secs % 60;
+        let millis = milliseconds % 1000;
 
         document.getElementById("timer").innerText =
             (hrs < 10 ? "0" : "") + hrs + ":" +
             (mins < 10 ? "0" : "") + mins + ":" +
-            (secs < 10 ? "0" : "") + secs;
+            (secs < 10 ? "0" : "") + secs + ":" +
+            (millis < 100 ? "0" : "") + (millis < 10 ? "0" : "") + millis;
     }
 
     function handleRunStop() {
@@ -225,17 +228,16 @@
 
         if (button.innerText === 'RUN') {
             clearInterval(interval);
-            seconds = 0;
+            milliseconds = 0; // Reset timer
             button.innerText = 'STOP';
             body.style.backgroundColor = '#ffcccb'; // light red
-            interval = setInterval(updateTimer, 1000);
+            interval = setInterval(updateTimer, 10);
         } else if (button.innerText === 'STOP') {
             clearInterval(interval);
-            seconds = 0;
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
-            document.getElementById("timer").innerText = '00:00:00';
-            seconds = 0;
+            milliseconds = 0; // Reset timer
+            interval = setInterval(updateTimer, 10); // Start timer again
         }
     }
 
