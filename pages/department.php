@@ -268,8 +268,8 @@
 
               <tr>
                 <th>ID</th>
+                <th>Department Name</th>
                 <th>Code</th>
-                <th>Name</th>
                 <th>Status</th>
                 <th></th>                
               </tr>

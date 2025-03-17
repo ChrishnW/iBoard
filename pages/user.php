@@ -128,10 +128,6 @@
                         <div class="col-md-6">
                             <!-- Line Details -->
                             <div class="mb-3">
-                                <label for="edit_line_name" class="form-label">Line Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_name" id="edit_line_name" placeholder="SDRB LINE" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="edit_line_desc" class="form-label">Line Description <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" placeholder="101" required>
                             </div>

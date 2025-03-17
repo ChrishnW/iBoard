@@ -366,7 +366,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="acc_department_code" class="form-label">Code <span style="color: red;">*</span></label>
+          <label for="acc_department_code" class="form-label">Department <span style="color: red;">*</span></label>
           <select name="acc_department_code" id="acc_department_avail" class="form-control" required>
             <option value="" hidden></option>
           </select>
