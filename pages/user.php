@@ -19,7 +19,7 @@
 <body class="container-fluid p-4" style="background-color: #add8e6;">
 
         <!-- EDIT MONITOR -->
-        <div id="edit_monitor" class="edit_monitor" style="display: block;">
+        <div id="edit_monitor" class="edit_monitor" style="display: none;">
             <div class="card shadow mb-4">
                 <div class="card-header py-3.5 pt-4">
                     <h2 class="float-left">Edit Details</h2>        
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-    <div style="display: block;">
+    <div id="monitor_dashboard" class="monitor_dashboard" style="display: block;">
         <!-- Header Section -->
         <div class="d-flex align-items-center px-3">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
@@ -92,8 +92,8 @@
             <div id="settings" class="dropdown">
                 <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
                 <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="#" onclick="showEditMonitor()">Settings</a>
+                    <a class="dropdown-item" href="#">Logout</a>
                 </div>
             </div>
 
@@ -147,6 +147,8 @@
         </div>
     </div>
 
+
+    
         <!-- Include jQuery and Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -172,6 +174,11 @@
 
                         document.getElementById('actual_count').innerHTML = new_actual;
                         document.getElementById('balance_count').innerHTML = new_balance;
+                }
+
+                function showEditMonitor() {
+                    document.getElementById('edit_monitor').style.display = 'block';
+                    document.getElementById('monitor_dashboard').style.display = 'none';
                 }
         </script>
 </body>
