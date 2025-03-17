@@ -78,7 +78,7 @@
             </div>
         </div>
 
-    <div style="display: none;">
+    <div style="display: block;">
         <!-- Header Section -->
         <div class="d-flex align-items-center px-3">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
@@ -111,7 +111,7 @@
             </div>
 
             <div class="ml-auto align-self-end">
-                <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border" style="width: 120px;">
+                <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border p-4 mr-5" style="width: 150px; height: 150px;">
             </div>  
         </div>
 
