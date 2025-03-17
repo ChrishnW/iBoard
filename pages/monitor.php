@@ -35,7 +35,7 @@
                 <span class="h2 text-danger"><u>Information</u></span> 
                 <span class="h2 text-dark">SDRB-200/260</span> 
                 <span class="h2 text-danger"><u>Leader</u></span> 
-                <span class="h2 text-dark">Juan Dela Cruz</span> 
+                <span class="h2 text-dark">Lee Serrano</span> 
             </div>
 
             <div class="ml-auto align-self-end">
