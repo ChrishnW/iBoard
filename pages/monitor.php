@@ -67,6 +67,15 @@
                             <td>-</td>
                             <td class="text-danger">-</td>
                         </tbody>
+                        <tbody class="text-black text-center">
+                            <td class="font-weight-bold">Test</td>
+                            <td class="font-weight-bold">Test 1</td>
+                            <td>Stopped</td>
+                            <td>10</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td class="text-danger">-5</td>
+                        </tbody>
                     </table>
                 </div>
             </div>
