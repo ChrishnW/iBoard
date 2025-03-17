@@ -549,7 +549,7 @@
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
 
-  // Display Account List----------------------------------------------------------------------------
+  // Display Breaktime List----------------------------------------------------------------------------
 
   $sql_command = "SELECT * FROM tbl_breaktime";
   $result = mysqli_query($conn, $sql_command);
@@ -563,13 +563,13 @@
         $am_start = $breaktime["am_break_start"];
         $am_end = $breaktime["am_break_end"];
 
-        $lunch_start = $breaktime["lunch_break_end"];
+        $lunch_start = $breaktime["lunch_break_start"];
         $lunch_end = $breaktime["lunch_break_end"];
 
-        $pm_start = $breaktime["pm_break_end"];
+        $pm_start = $breaktime["pm_break_start"];
         $pm_end = $breaktime["pm_break_end"];
         
-        $ot_start = $breaktime["ot_break_end"];
+        $ot_start = $breaktime["ot_break_start"];
         $ot_end = $breaktime["ot_break_end"];
 
         $status = $breaktime["status"];

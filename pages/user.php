@@ -1,7 +1,7 @@
 <?php 
 
     include '../include/link.php'; 
-    include '../include/connect.php'
+    include '../include/connect.php';
 
 
 
@@ -170,6 +170,21 @@
 </html>
 
 <?php
+
+    // Fetching username ....................................................
+
+
+
+    $user_id = $_SESSION['user_idd'];
+    // $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
+    // $result = mysqli_query($conn, $sql_command);
+
+    // if($result){
+    //     $_SESSION["message"] = "Breaktime updated successfully.";
+    // }
+    // else{
+    //     header("Refresh: .3; url = ../index.php");
+    // }
 
 ?>
 
