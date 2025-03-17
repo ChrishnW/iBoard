@@ -12,6 +12,7 @@
 </head>
 <body class="container-fluid p-4" style="background-color: #add8e6;">
     <div>
+        <!-- Header Section -->
         <div class="d-flex align-items-center px-3">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
             <span class="h2 font-weight-bold mb-0 text-primary">SDRP LINE</span>
@@ -20,9 +21,14 @@
                 <span class="display-4 font-weight-bold mb-2 mr-3 text-dark">RUN</span> <br>
                 <span class="h3 font-weight-bold mb-0 text-danger">00:00:00:00</span>
             </div>
+
+            <div id="settings" class="">
+                <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+            </div>
         </div>
 
-        <div id="details" class="d-flex align-items-start my-3 px-5 py-4 mr-4">
+        <!-- Details Section -->
+        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
             <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 400px;">
             
             <div class="d-flex flex-column pl-5 fs-1">
@@ -37,6 +43,7 @@
             </div>  
         </div>
 
+        <!-- Tables Section -->
         <div class="card-body">
             <div class="bg-white">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -50,16 +57,16 @@
                     </thead>
                     <tbody class="bg-white text-center text-dark h4">
                         <tr>
-                            <td class="font-weight-bolder">100</td>
-                            <td id="target_count" class="font-weight-bolder">7</td>
+                            <td class="font-weight-bolder" style="font-size: 50px;">100</td>
+                            <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">7</td>
                             <td>
-                                <p id="actual_count" class="font-weight-bolder pt-5">0</p>
-                                <div class="d-flex justify-content-between mt-2">
+                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 "style="font-size: 50px;">0</p>
+                                <div class="d-flex justify-content-between mt-1">
                                     <button class="btn btn-primary btn-sm" onclick="minus()">-</button>
                                     <button class="btn btn-primary btn-sm" onclick="add()">+</button>
                                 </div>
                             </td>
-                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" id="balance_count">0</td>        
+                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
                         </tr>
                     </tbody>
                 </table>
