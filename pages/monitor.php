@@ -12,31 +12,40 @@
 </head>
 <body class="container-fluid p-4" style="background-color: #add8e6;">
     <div>
+        <!-- Header Section -->
         <div class="d-flex align-items-center px-3">
-            <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 50px;">
-            <span class="h4 font-weight-bold mb-0">SDRP LINE</span>
+            <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
+            <span class="h2 font-weight-bold mb-0 text-primary">SDRP LINE</span>
             
             <div class="ml-auto text-right mr-5">
-                <span class="h1 font-weight-bold mb-2 text-dark">RUN</span> <br>
-                <span class="h5 font-weight-bold mb-0 text-danger">00:00:00</span>
+                <span class="display-4 font-weight-bold mb-2 mr-3 text-dark">RUN</span> <br>
+                <span class="h3 font-weight-bold mb-0 text-danger">00:00:00:00</span>
+            </div>
+
+            <div id="settings" class="">
+                <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
             </div>
         </div>
 
-        <div id="details" class="d-flex align-items-start mt-3 px-5 mr-4">
-            <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 350px;">
+        <!-- Details Section -->
+        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
+            <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 400px;">
+            
             <div class="d-flex flex-column pl-5 fs-1">
-            <span class="h3 text-danger text-decoration-underline">Information</span> 
-            <span class="h3 ">SDRB-200/260</span> 
-            <span class="h3 text-danger text-decoration-underline">Leader</span> 
-            <span class="h3 ">Juan Dela Cruz</span> 
+                <span class="h2 text-danger"><u>Information</u></span> 
+                <span class="h2 text-dark">SDRB-200/260</span> 
+                <span class="h2 text-danger"><u>Leader</u></span> 
+                <span class="h2 text-dark">Juan Dela Cruz</span> 
             </div>
+
             <div class="ml-auto align-self-end">
-            <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border" style="width: 80px;">
+                <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border" style="width: 120px;">
             </div>  
         </div>
 
-        <div class="card-body mt-3">
-            <div class="table-responsive bg-white">
+        <!-- Tables Section -->
+        <div class="card-body">
+            <div class="bg-white">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white text-center">
                         <tr>
@@ -46,18 +55,18 @@
                             <th class="align-text-top">BALANCE</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white text-center">
+                    <tbody class="bg-white text-center text-dark h4">
                         <tr>
-                            <td>100</td>
-                            <td id="target_count">7</td>
+                            <td class="font-weight-bolder" style="font-size: 50px;">100</td>
+                            <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">7</td>
                             <td>
-                                <p id="actual_count">0</p>
-                                <div class="d-flex justify-content-between mt-2">
+                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 "style="font-size: 50px;">0</p>
+                                <div class="d-flex justify-content-between mt-1">
                                     <button class="btn btn-primary btn-sm" onclick="minus()">-</button>
                                     <button class="btn btn-primary btn-sm" onclick="add()">+</button>
                                 </div>
                             </td>
-                            <td class="h5 font-weight-bold mb-2 text-danger" id="balance_count">0</td>        
+                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
                         </tr>
                     </tbody>
                 </table>
