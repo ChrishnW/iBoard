@@ -148,10 +148,14 @@
                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_image" id="edit_line_image" required>
                             </div>
                             
-                            <!-- Column 2: Table -->
                             <div class="mb-3">
                                 <label for="edit_daily_target" class="form-label">Daily Target <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" placeholder="100" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="edit_takt_time" class="form-label">Takt Time<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
                             </div>
                            
 
