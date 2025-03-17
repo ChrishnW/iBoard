@@ -26,6 +26,31 @@
     unset($_SESSION["message"]);
   }
 
+  // Delete Breaktime Ask Display --------------------------------------------------------------------------
+
+  if(isset($_SESSION["delete_id_breaktime"])){
+
+    $break_id = $_SESSION["delete_id_breaktime"];
+    $_SESSION["delete_break"] = $break_id;
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        var popup = document.getElementById('popupFormDelete');
+        popup.style.display = 'block';
+
+    }); </script>";
+
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        var breaktime_dashboard = document.getElementById('breaktime_dashboard');
+        breaktime_dashboard.style.display = 'block';
+
+    }); </script>";
+
+    unset($_SESSION["delete_id_breaktime"]);
+
+  }
+
 
 
 
@@ -69,9 +94,39 @@
       header("Refresh: .3; url = breaktime.php");
       exit;
 
+    }
 
+    // Delete Breaktime Ask --------------------------------------------------------------------------
 
+    if(isset($_POST["delete_breaktime"])){
 
+      $_SESSION["delete_id_breaktime"] = filter_input(INPUT_POST, "id_breaktime", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      header("Refresh: .3; url = breaktime.php");
+      exit;
+
+    } 
+
+    // Delete Breaktime Confirm --------------------------------------------------------------------------
+
+    if(isset($_POST["delete_data"])){
+
+      $break_id = $_SESSION["delete_break"];
+
+      $sql_command = "DELETE FROM tbl_breaktime WHERE id = '$break_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Breaktime deleted successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to delete breaktime.";
+      }
+      
+      unset($_SESSION["delete_break"]);
+      
+      header("Refresh: .3; url = breaktime.php");
+      exit;
 
     }
 
@@ -335,6 +390,32 @@
   </div>
 </div> 
 
+<!-- Pop up for Delete -->
+
+<div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+
+        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup2"></button>
+      </div>
+      <div class="modal-body">
+
+        <h2 class="h5 pb-3">Delete this permanently?</h2>
+
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+
+            <input type="submit" name="delete_data" value="Confirm" class="submit btn btn-danger pr-3">
+            <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
+        </form>
+
+      </div>
+      
+    </div>
+  </div>
+</div> 
+
 
 </div>
 <!-- /.container-fluid -->
@@ -390,10 +471,12 @@
                 <td>' . $status_word . '</td>
                 <td>
                     <form action="breaktime.php" method="post" class="form_table d-flex justify-content-between">
-                      <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id; ?>">
-                      <button type="submit" class="btn btn-primary btn-sm mr-1" name="edit_breaktime"">Edit</button>
-                      <button type="submit" class="btn btn-danger btn-sm" name="delete_breaktime">Delete</button>
-                    </form>
+
+                      <input type="hidden" name="id_breaktime" value=' . $breaktime_id . '>
+
+                      <input type="submit" class="btn btn-primary btn-sm mr-1" name="edit_breaktime" value="Edit">
+                      <input type="submit" class="btn btn-danger btn-sm" name="delete_breaktime" value="Delete">
+
                     </form>
                 </td>
             </tr>`;
@@ -420,6 +503,9 @@
       document.getElementById('popup').style.display = 'none';
     });
 
+    document.getElementById('close_popup2').addEventListener('click', function () {
+      document.getElementById('popupFormDelete').style.display = 'none';
+    });
 
     const btn_add_breaktime = document.getElementById('btn_add_breaktime');
     const breaktime_dashboard = document.getElementById('breaktime_dashboard');
@@ -443,6 +529,12 @@
 
 
   });
+
+  const popup2 = document.getElementById("popupFormDelete");
+
+  function closePopup2() {
+    popup2.style.display = "none";
+  }
 
 
 
