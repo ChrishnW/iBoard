@@ -96,7 +96,7 @@
       echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
         const table = `
-        <tr>
+        
           <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\" >
 
           <div class=\"mb-3\">
@@ -118,8 +118,7 @@
             </select> 
           </div>
           
-          </td>
-        </tr>`;
+          `;
         
         document.querySelector(\"#edit_department_form\").insertAdjacentHTML(\"afterBegin\", table);
 

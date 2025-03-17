@@ -161,7 +161,6 @@
         echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
         const table = `
-        <tr>
           <input type=\"hidden\" name=\"edit_acc_id\" id=\"edit_acc_id\" value=\"$acc_id\">
 
           <div class=\"mb-3\">
@@ -183,9 +182,8 @@
               <option value=\"1\">Active</option>
               <option value=\"0\">Inactive</option>
           </div>
-          
-          </td>
-        </tr>`;
+            
+        `;
         
         document.querySelector(\"#edit_account_form\").insertAdjacentHTML(\"afterBegin\", table);
 
