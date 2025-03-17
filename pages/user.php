@@ -48,7 +48,7 @@
             <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">asd</span>
             
             <div class="ml-auto text-right mr-5">
-                <button onclick="startStopWatch()" class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;" >RUN</button> <br>
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00</span>
             </div>
 
@@ -219,13 +219,26 @@
             (secs < 10 ? "0" : "") + secs;
     }
 
-    function startStopWatch(){
-        if(!interval){
+    function handleRunStop() {
+        const button = document.getElementById('runStopButton');
+        const body = document.body;
+
+        if (button.innerText === 'RUN') {
+            button.innerText = 'STOP';
+            body.style.backgroundColor = '#ffcccb'; // light red
             interval = setInterval(updateTimer, 1000);
+        } else if (button.innerText === 'STOP') {
+            button.innerText = 'FINISH';
+            body.style.backgroundColor = '#90ee90'; // light green
+            clearInterval(interval);
+            interval = null;
+        } else if (button.innerText === 'FINISH') {
+            button.innerText = 'RUN';
+            body.style.backgroundColor = '#add8e6'; // light blue
+            document.getElementById("timer").innerText = '00:00:00';
+            seconds = 0;
         }
     }
-
-
 
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
