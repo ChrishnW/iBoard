@@ -14,7 +14,7 @@ function Login() {
         window.location.href = 'pages/user.php';
       }
       else if(response == 'Monitor'){
-        window.location.href = 'pages/index.php';
+        window.location.href = 'pages/monitor.php';
       }
       else {
         alert(response);
