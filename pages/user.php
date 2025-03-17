@@ -224,20 +224,18 @@
         const body = document.body;
 
         if (button.innerText === 'RUN') {
+            clearInterval(interval);
+            seconds = 0;
             button.innerText = 'STOP';
             body.style.backgroundColor = '#ffcccb'; // light red
             interval = setInterval(updateTimer, 1000);
         } else if (button.innerText === 'STOP') {
-            button.innerText = 'FINISH';
-            body.style.backgroundColor = '#90ee90'; // light green
             clearInterval(interval);
-            interval = null;
-        } else if (button.innerText === 'FINISH') {
+            seconds = 0;
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
-            document.getElementById("timer").innerText = '00:00:00';
-            seconds = 0;
-        }
+            interval = setInterval(updateTimer, 1000);
+        } 
     }
 
     function add() {
