@@ -3,17 +3,25 @@
     include '../include/link.php'; 
     include '../include/connect.php';
     include '../include/auth.php';
+    
 
 
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-        // Edit line details ---------------------------------------------------------------------------
+        // Register Line Details ---------------------------------------------------------------------------
 
-        // if(isset($_POST['edit_line_submit'])){
+        if(isset($_POST['edit_line_submit'])){
 
-        // }
+            $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
+            $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
+            $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
+
+
+        }
 
 
 
@@ -36,6 +44,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style2.css">
 </head>
 <body class="container-fluid p-4" style="background-color: #add8e6;">
 
@@ -139,7 +148,7 @@
                             <!-- Column 2: Table -->
                             <div class="mb-3">
                                 <label for="edit_daily_target" class="form-label">Daily Target <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_daily_target" id="edit_daily_target" placeholder="100" required>
+                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" placeholder="100" required>
                             </div>
                            
 
@@ -157,7 +166,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
+                                <input type="number" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
                             </div>  
                             
                         </div>
