@@ -110,8 +110,8 @@
         <input type=\"hidden\" name=\"edit_break_id\" id=\"edit_break_id\" value=\"$break_id\">
 
         <div class=\"mb-3\">
-          <label for=\"break_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
-          <input type=\"text\" class=\"form-control\" name=\"break_code\" id=\"break_code\" required value=\"$break_code\">
+          <label for=\"edit_break_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
+          <input type=\"text\" class=\"form-control\" name=\"edit_break_code\" id=\"edit_break_code\" required value=\"$break_code\">
         </div>
 
         <div class=\"card mb-4\">
@@ -119,58 +119,58 @@
               <div id=\"breaktime_am\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
 
-                  <label for=\"break_start_am\">Breaktime Start (AM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_start_am\" id=\"break_start_am\" required value=\"$am_start\">
+                  <label for=\"edit_break_start_am\">Breaktime Start (AM) <span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_am\" id=\"edit_break_start_am\" required value=\"$am_start\">
                   
                 </div>
                 
                 <div class=\"col-md-6\">
-                  <label for=\"break_end_am\">Breaktime End (AM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_end_am\" id=\"break_end_am\" required value=\"$am_end\">
+                  <label for=\"edit_break_end_am\">Breaktime End (AM) <span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_am\" id=\"edit_break_end_am\" required value=\"$am_end\">
                 </div>
               </div>
 
               <div id=\"breaktime_lunch\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
-                  <label for=\"break_start_lunch\">Breaktime Start (Lunch) <span style=\"color: red;\">*</span></label> <br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_start_lunch\" id=\"break_start_lunch\" required value=\"$lunch_start\">
+                  <label for=\"edit_break_start_lunch\">Breaktime Start (Lunch) <span style=\"color: red;\">*</span></label> <br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_lunch\" id=\"edit_break_start_lunch\" required value=\"$lunch_start\">
                 </div>
                 
                 <div class=\"col-md-6\">
-                  <label for=\"break_end_lunch\">Breaktime End (Lunch) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_end_lunch\" id=\"break_end_lunch\" required value=\"$lunch_end\">
+                  <label for=\"edit_break_end_lunch\">Breaktime End (Lunch) <span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_lunch\" id=\"edit_break_end_lunch\" required value=\"$lunch_end\">
                 </div>
               </div>
 
               <div id=\"breaktime_pm\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
-                  <label for=\"break_start_pm\">Breaktime Start (PM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_start_pm\" id=\"break_start_pm\" required value=\"$pm_start\">
+                  <label for=\"edit_break_start_pm\">Breaktime Start (PM) <span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_pm\" id=\"edit_break_start_pm\" required value=\"$pm_start\">
                 </div>
                 
                 <div class=\"col-md-6\">
-                  <label for=\"break_end_pm\">Breaktime End (PM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_end_pm\" id=\"break_end_pm\" required value=\"$pm_end\">
+                  <label for=\"edit_break_end_pm\">Breaktime End (PM) <span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_pm\" id=\"edit_break_end_pm\" required value=\"$pm_end\">
                 </div>
               </div>
 
               <div id=\"breaktime_ot\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
-                  <label for=\"break_start_ot\">Breaktime Start (OT) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"break_start_ot\" id=\"break_start_ot\" required value=\"$ot_start\">
+                  <label for=\"edit_break_start_ot\">Breaktime Start (OT) <span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_ot\" id=\"edit_break_start_ot\" required value=\"$ot_start\">
                 </div>
 
                 <div class=\"col-md-6\">
-                  <label for=\"break_end_ot\">Breaktime End (OT) <span style=\"color: red;\">*</span></label>
-                  <input type=\"time\" class=\"form-control\" name=\"break_end_ot\" id=\"break_end_ot\" required value=\"$ot_end\">                  
+                  <label for=\"edit_break_end_ot\">Breaktime End (OT) <span style=\"color: red;\">*</span></label>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_ot\" id=\"edit_break_end_ot\" required value=\"$ot_end\">                  
                 </div>
               </div>
             </div>
           </div>
 
           <div class=\"mb-3\">
-            <label for=\"acc_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
-            <select name=\"acc_status\" id=\"acc_status\" class=\"form-control\" required> 
+            <label for=\"edit_break_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
+            <select name=\"edit_break_status\" id=\"edit_break_status\" class=\"form-control\" required> 
               <option value=\"$status\" hidden>$status_word</option>
               <option value=\"1\">Active</option>
               <option value=\"0\">Inactive</option>
@@ -597,8 +597,10 @@
     const btn_add_breaktime = document.getElementById('btn_add_breaktime');
     const breaktime_dashboard = document.getElementById('breaktime_dashboard');
     const add_breaktime = document.getElementById('add_breaktime');
-    const cancel_add_breaktime= document.getElementById('cancel_add_breaktime');
+    const cancel_add_breaktime = document.getElementById('cancel_add_breaktime');
 
+    edit_breaktime = document.getElementById('edit_breaktime');
+    cancel_breaktime = document.getElementById('cancel_breaktime');
 
     btn_add_breaktime.addEventListener('click', function () {
       breaktime_dashboard.style.display = 'none';
@@ -610,6 +612,10 @@
       add_breaktime.style.display = 'none';
     });
 
+    cancel_breaktime.addEventListener('click', function () {
+      breaktime_dashboard.style.display = 'block';
+      edit_breaktime.style.display = 'none';
+    });
 
 
 
