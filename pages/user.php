@@ -2,6 +2,7 @@
 
     include '../include/link.php'; 
     include '../include/connect.php';
+    include '../include/auth.php';
 
 
 
@@ -173,18 +174,18 @@
 
     // Fetching username ....................................................
 
+    $user_id = $_SESSION['user_id'];
 
+    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
+    $result = mysqli_query($conn, $sql_command);
 
-    $user_id = $_SESSION['user_idd'];
-    // $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
-    // $result = mysqli_query($conn, $sql_command);
+    if(mysqli_num_rows($result) > 0){
+        $user = mysqli_fetch_assoc($result);
 
-    // if($result){
-    //     $_SESSION["message"] = "Breaktime updated successfully.";
-    // }
-    // else{
-    //     header("Refresh: .3; url = ../index.php");
-    // }
+        $user_name = $user['username'];
+        
+        echo " <script> document.getElementById('line_name').innerHTML = '$user_name';</script>";
+    }
 
 ?>
 

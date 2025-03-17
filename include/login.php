@@ -14,7 +14,7 @@ if (isset($_POST['login'])) :
     if (password_verify($password, $user['password'])) {
       session_start();
 
-      $_SESSION['user_idd'] = $user['id'];
+      $_SESSION['user_id'] = $user['id'];
       $_SESSION['SESS_USERNAME']    = $username;
       $_SESSION['SESS_PASSWORD']    = $password;
       session_write_close();
