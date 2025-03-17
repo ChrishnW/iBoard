@@ -22,7 +22,7 @@
     <div class="container-fluid">
     <div id="monitor_dashboard" class="monitor_dashboard" style="display: block;">
 
-        <div class="card shadow mb-4">
+        <div class="card shadow my-4">
             <div class="card-header py-3.5 pt-4">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 55px;">
                 <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold"><u>GPI Production Status</u></h2>
