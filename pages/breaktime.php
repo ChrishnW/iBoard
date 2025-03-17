@@ -282,6 +282,47 @@
 
     }
 
+    // Edit Breaktime Submit --------------------------------------------------------------------------
+
+    if(isset($_POST["edit_breaktime_submit"])){
+
+      $id = filter_input(INPUT_POST, "edit_break_id", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $code = filter_input(INPUT_POST, "edit_break_code", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $start_am = filter_input(INPUT_POST, "edit_break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_am = filter_input(INPUT_POST, "edit_break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);;
+
+      $start_lunch = filter_input(INPUT_POST, "edit_break_start_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_lunch = filter_input(INPUT_POST, "edit_break_end_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
+
+      $start_pm = filter_input(INPUT_POST, "edit_break_start_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_pm = filter_input(INPUT_POST, "edit_break_end_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
+
+      $start_ot = filter_input(INPUT_POST, "edit_break_start_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $end_ot = filter_input(INPUT_POST, "edit_break_end_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
+
+      $status = filter_input(INPUT_POST, "edit_break_status", FILTER_SANITIZE_SPECIAL_CHARS);;
+
+      $sql_command = "UPDATE tbl_breaktime SET breaktime_code = '$code', 
+      am_break_start = '$start_am', am_break_end = '$end_am', lunch_break_start = '$start_lunch',
+      lunch_break_end = '$end_lunch', pm_break_start = '$start_pm', pm_break_end = '$end_pm', 
+      ot_break_start = '$start_ot', ot_break_end = '$end_ot', status = '$status' WHERE id = '$id' ";
+
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Breaktime updated successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to update breaktime.";
+      }
+
+      header("Refresh: .3; url = breaktime.php");
+      exit;
+
+    }
+
 
 
 
@@ -448,8 +489,8 @@
             
 
           <div class="d-flex justify-content-left">
-            <input type="submit" name="add_breaktime" value="Save" class="btn btn-primary pr-3">
-            <input type="reset" name="reset" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
+            <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
+            <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
           </div> 
           
         </div>
