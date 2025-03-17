@@ -133,18 +133,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="edit_line_image" class="form-label">Line Image <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" name="edit_line_image" id="edit_line_image" required>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_image" id="edit_line_image" required>
                             </div>
                             
-                                <!-- Column 2: Table -->
-                                <div class="mb-3">
+                            <!-- Column 2: Table -->
+                            <div class="mb-3">
                                 <label for="edit_daily_target" class="form-label">Daily Target <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="edit_daily_target" id="edit_daily_target" placeholder="100" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
-                            </div>  
+                           
 
                         </div>
                         
@@ -156,8 +153,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="edit_line_leader_image" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" name="edit_line_leader_image" id="edit_line_leader_image" required>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_leader_image" id="edit_line_leader_image" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
+                            </div>  
                             
                         </div>
                     </div>
