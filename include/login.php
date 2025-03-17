@@ -13,10 +13,23 @@ if (isset($_POST['login'])) :
     $user = mysqli_fetch_assoc($result);
     if (password_verify($password, $user['password'])) {
       session_start();
+      $_SESSION['user_id'] = $user['id'];
       $_SESSION['SESS_USERNAME']    = $username;
       $_SESSION['SESS_PASSWORD']    = $password;
-      session_write_close();    
-      echo "Success";
+      session_write_close();
+      
+      $access = $user['access'];
+
+      if($access == "1"){
+        echo "Admin";
+      }
+      elseif ($access == "2"){
+        echo "User";
+      }
+      elseif($access == "3"){
+        echo "Monitor";
+      }
+
     } else {
       echo "Incorrect password.";
     }

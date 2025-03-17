@@ -7,9 +7,16 @@ function Login() {
     processData: false,
     contentType: false,
     success: function (response) {
-      if (response == 'Success') {
+      if(response == 'Admin'){
         window.location.href = 'pages/index.php';
-      } else {
+      }
+      else if(response == 'User'){
+        window.location.href = 'pages/user.php';
+      }
+      else if(response == 'Monitor'){
+        window.location.href = 'pages/index.php';
+      }
+      else {
         alert(response);
       }
     }
