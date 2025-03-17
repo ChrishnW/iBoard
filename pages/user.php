@@ -235,7 +235,7 @@
         } else if (button.innerText === 'FINISH') {
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
-            document.getElementById("timer").innerText = '00:00:00';
+            document.getElementById("timer").innerText = '00:00:00:00';
             seconds = 0;
         }
     }
