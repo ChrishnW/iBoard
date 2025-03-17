@@ -7,6 +7,19 @@
 
 
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  
+        // Edit line details ---------------------------------------------------------------------------
+
+        // if(isset($_POST['edit_line_submit'])){
+
+        // }
+
+
+
+
+
+    }
 ?>
 
 
@@ -35,8 +48,8 @@
             <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">asd</span>
             
             <div class="ml-auto text-right mr-5">
-                <button class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
-                <span class="h3 font-weight-bold mb-0 text-danger">00:00:00:00</span>
+                <button onclick="startStopWatch()" class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;" >RUN</button> <br>
+                <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00</span>
             </div>
 
             <div id="settings" class="dropdown">
@@ -190,6 +203,30 @@
 ?>
 
 <script>
+
+    let seconds = 0;
+    let interval = null;
+
+    function updateTimer(){
+        seconds++;
+        let hrs = Math.floor(seconds / 3600);
+        let mins = Math.floor((seconds % 3600) / 60);
+        let secs = seconds % 60;
+
+        document.getElementById("timer").innerText =
+            (hrs < 10 ? "0" : "") + hrs + ":" +
+            (mins < 10 ? "0" : "") + mins + ":" +
+            (secs < 10 ? "0" : "") + secs;
+    }
+
+    function startStopWatch(){
+        if(!interval){
+            interval = setInterval(updateTimer, 1000);
+        }
+    }
+
+
+
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
         var target = document.getElementById('target_count').innerHTML;
