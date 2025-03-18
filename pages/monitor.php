@@ -59,7 +59,7 @@
                             <td>1</td>
                             <td class="text-danger">-2</td>
                         </tbody>
-        
+
                         <tbody class="text-black text-center">
                             <td class="font-weight-bold">Test</td>
                             <td class="font-weight-bold">Test 1</td>
