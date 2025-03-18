@@ -26,7 +26,7 @@
             <div class="card-header py-3.5 pt-4 align-items-center ">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
                 <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u>GPI Production Status</u></h2>
-                <button class="btn btn-danger float-right mt-2">
+                <button class="btn btn-danger float-right mt-2" onclick="window.location.href='../include/logout.php'">
                     <i class="fas fa-sign-out-alt"></i> Exit
                 </button>
                 <div class="clearfix"></div>
@@ -59,6 +59,7 @@
                             <td>1</td>
                             <td class="text-danger">-2</td>
                         </tbody>
+        
                         <tbody class="text-black text-center">
                             <td class="font-weight-bold">Test</td>
                             <td class="font-weight-bold">Test 1</td>

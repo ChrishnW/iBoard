@@ -3,6 +3,9 @@
     include '../include/link.php'; 
     include '../include/connect.php';
     include '../include/auth.php';
+    
+
+
 
 
     if(isset($_SESSION["line_id"])){
@@ -60,67 +63,11 @@
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
 
             $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
+            $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
+
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
 
-            $work_start = FILTER_INPUT(INPUT_POST, "edit_work_start", FILTER_SANITIZE_SPECIAL_CHARS);
-            $work_end = FILTER_INPUT(INPUT_POST, "edit_work_end", FILTER_SANITIZE_SPECIAL_CHARS);
 
-            $breaktime_code = FILTER_INPUT(INPUT_POST, "edit_breaktime_code", FILTER_SANITIZE_SPECIAL_CHARS);
-            $status = FILTER_INPUT(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
-
-            $line_name = $_SESSION["username"];
-            $model_id = $_SESSION["user_id"];
-
-            //print_r($_FILES);
-
-            if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
-
-                $date = date("Y-m-d H:i:s");
-
-                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
-                                incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
-                                breaktime_code, model_id, status) VALUES 
-                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
-                                '$daily_target', '$takt_time', '$work_start', '$work_end',
-                                '$breaktime_code', '$model_id', '$status')";
-
-                $result = mysqli_query($conn, $sql_command);
-
-                if($result){
-
-                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
-                    $result = mysqli_query($conn, $sql_command);
-
-                    $line = mysqli_fetch_assoc($result);
-                    $line_id = $line["id"];
-
-                    $_SESSION["line_id"] = $line_id;
-
-                    $img_name_raw_line = $_FILES["line_image_upload"]["name"];
-                    $img_name_line = str_replace(" ", "_", $img_name_raw_line);
-                    $img_line_path = "IMG/LINE/" . $img_name_line;
-                    $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
-
-                    move_uploaded_file($img_temp_path_line, $img_line_path);
-
-                    $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
-                    $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
-                    $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
-                    $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
-
-                    move_uploaded_file($img_temp_path_leader, $img_leader_path);
-
-                    $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
-                                    incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
-                    $result = mysqli_query($conn, $sql_command);
-
-                }
-                
-
-            }
-
-            header("Refresh: .3; url = user.php");
-            exit;
 
         }
 
@@ -209,13 +156,13 @@
                             <td class="font-weight-bolder" style="font-size: 50px;" id="daily_terget">0</td>
                             <td id="target_count" class="font-weight-bolder" style="font-size: 50px;" id="target_now">0</td>
                             <td>
-                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3" style="font-size: 50px;">0</p>
+                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">
                                     <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;">-</button>
                                     <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;">+</button>
                                 </div>
                             </td>
-                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count">0</td>        
+                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
                         </tr>
                     </tbody>
                 </table>
@@ -242,8 +189,8 @@
                                 <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" placeholder="101" required>
                             </div>
                             <div class="mb-3">
-                                <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="line_image_upload" id="line_image_upload" required>
+                                <label for="edit_line_image" class="form-label">Line Image <span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_image" id="edit_line_image" required>
                             </div>
                             
                             <div class="mb-3">
@@ -252,18 +199,11 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="edit_work_start" class="form-label">Work Start <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" placeholder="100" required>
+                                <label for="edit_takt_time" class="form-label">Takt Time<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
                             </div>
                            
-                            <div class="mb-3">
-                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
-                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
-                                    <option value="" hidden></option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                </select> 
-                            </div>
+
                         </div>
                         
                         <div class="col-md-6">
@@ -273,27 +213,14 @@
                                 <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" placeholder="Juan Dela Cruz" required>
                             </div>
                             <div class="mb-3">
-                                <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="leader_image_upload" id="leader_image_upload" required>
+                                <label for="edit_line_leader_image" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_leader_image" id="edit_line_leader_image" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
+                            </div>  
                             
-                            <div class="mb-3">
-                                <label for="edit_takt_time" class="form-label">Takt Time <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" placeholder="100" required>
-                            </div>
-
-                            <label for="edit_status" class="form-label">Status <span style="color: red;">*</span></label>
-                            <select name="edit_status" id="edit_status" class="form-control" required> 
-                                <option value="" hidden></option>
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select> 
-
                         </div>
                     </div>
                     <br>
@@ -327,7 +254,6 @@
         $user = mysqli_fetch_assoc($result);
 
         $user_name = $user['username'];
-        $_SESSION["username"] = $user['username'];
         
         echo " <script> document.getElementById('line_name').innerHTML = '$user_name';</script>";
     }
