@@ -166,11 +166,18 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="edit_takt_time" class="form-label">Takt Time<span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
+                                <label for="edit_work_start" class="form-label">Work Start<span class="text-danger">*</span></label>
+                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" placeholder="100" required>
                             </div>
                            
-
+                            <div class="mb-3">
+                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
+                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
+                                    <option value="" hidden></option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select> 
+                            </div>
                         </div>
                         
                         <div class="col-md-6">
@@ -184,7 +191,23 @@
                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="leader_image_upload" id="leader_image_upload" required>
                             </div>
                             
-                            
+                            <div class="mb-3">
+                                <label for="edit_takt_time" class="form-label">Takt Time<span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="edit_work_end" class="form-label">Work End<span class="text-danger">*</span></label>
+                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" placeholder="100" required>
+                            </div>
+
+                            <label for="edit_status" class="form-label">Status <span style="color: red;">*</span></label>
+                            <select name="edit_status" id="edit_status" class="form-control" required> 
+                                <option value="" hidden></option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select> 
+
                         </div>
                     </div>
                     <br>
