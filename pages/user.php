@@ -17,24 +17,48 @@
             $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
 
-            $status = 1;
+            $work_start = FILTER_INPUT(INPUT_POST, "edit_work_start", FILTER_SANITIZE_SPECIAL_CHARS);
+            $work_end = FILTER_INPUT(INPUT_POST, "edit_work_end", FILTER_SANITIZE_SPECIAL_CHARS);
 
-            $line_name = $_SESSION["line_name"];
+            $breaktime_code = FILTER_INPUT(INPUT_POST, "edit_breaktime_code", FILTER_SANITIZE_SPECIAL_CHARS);
+            $status = FILTER_INPUT(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $line_name = $_SESSION["username"];
             $modal_id = $_SESSION["user_id"];
 
-            print_r($_FILES);
+            //print_r($_FILES);
 
             if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
-                echo "<script>alert('asdasd');</script>";
+                //echo "<script>alert('asdasd');</script>";
 
-                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, incharge_name,
-                                daily_target, takt_time, modal_id, status) VALUES 
-                                ('$line_name', '$line_desc', '$line_leader', '$daily_target',
-                                '$takt_time', '$modal_id', '$status')";
+                $asd = "asd";
+
+                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img,
+                                daily_target, takt_time, work_time_from, work_time_to, 
+                                breaktime_code, modal_id, status) VALUES 
+                                ('$line_name', '$line_desc', '$asd', '$line_leader', '$asd', '$daily_target',
+                                '$takt_time', '$work_start', '$work_end',
+                                '$breaktime_code', '$modal_id', '$status')";
 
                 $result = mysqli_query($conn, $sql_command);
 
+                if($result){
+                
+                    echo "<script>alert('pasok');</script>";
+
+                }
+                else{
+
+                    echo "<script>alert('Hindi pasok');</script>";
+
+                }
+
+
+
             }
+
+            header("Refresh: 20; url = user.php");
+            exit;
 
         }
 
@@ -166,7 +190,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="edit_work_start" class="form-label">Work Start<span class="text-danger">*</span></label>
+                                <label for="edit_work_start" class="form-label">Work Start <span class="text-danger">*</span></label>
                                 <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" placeholder="100" required>
                             </div>
                            
@@ -192,12 +216,12 @@
                             </div>
                             
                             <div class="mb-3">
-                                <label for="edit_takt_time" class="form-label">Takt Time<span class="text-danger">*</span></label>
+                                <label for="edit_takt_time" class="form-label">Takt Time <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="edit_work_end" class="form-label">Work End<span class="text-danger">*</span></label>
+                                <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
                                 <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" placeholder="100" required>
                             </div>
 
@@ -241,7 +265,7 @@
         $user = mysqli_fetch_assoc($result);
 
         $user_name = $user['username'];
-        $_SESSION["username"] = $user['line_name'];
+        $_SESSION["username"] = $user['username'];
         
         echo " <script> document.getElementById('line_name').innerHTML = '$user_name';</script>";
     }
