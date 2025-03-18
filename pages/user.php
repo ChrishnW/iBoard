@@ -125,7 +125,7 @@
 
             }
 
-            header("Refresh: .3; url = user.php");
+            header("Refresh: 20; url = user.php");
             exit;
 
 
@@ -250,8 +250,8 @@
                                 <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" placeholder="101" required>
                             </div>
                             <div class="mb-3">
-                                <label for="edit_line_image" class="form-label">Line Image <span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_image" id="edit_line_image" required>
+                                <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="line_image_upload" id="line_image_upload" required>
                             </div>
                             
                             <div class="mb-3">
@@ -260,8 +260,17 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="edit_takt_time" class="form-label">Takt Time<span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
+                                <label for="edit_work_start" class="form-label">Work Start <span class="text-danger">*</span></label>
+                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" placeholder="100" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
+                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
+                                    <option value="" hidden></option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select> 
                             </div>
                            
 
@@ -273,22 +282,32 @@
                                 <label for="edit_line_leader" class="form-label">Line Leader <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" placeholder="Juan Dela Cruz" required>
                             </div>
+
                             <div class="mb-3">
-                                <label for="edit_line_leader_image" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_leader_image" id="edit_line_leader_image" required>
+                                <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="leader_image_upload" id="leader_image_upload" required>
                             </div>
+                            
                             <div class="mb-3">
-                                <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
-                            </div>  
+                                <label for="edit_takt_time" class="form-label">Takt Time <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
+                            </div> 
+
                             <div class="mb-3">
-                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
-                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
+                                <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
+                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" placeholder="100" required>
+                            </div>
+ 
+                            <div class="mb-3">
+                                <label for="edit_status" class="form-label">Status <span style="color: red;">*</span></label>
+                                <select name="edit_status" id="edit_status" class="form-control" required> 
                                     <option value="" hidden></option>
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select> 
                             </div>
+                             
+                            
                         
                         </div>
                     </div>
@@ -323,6 +342,7 @@
         $user = mysqli_fetch_assoc($result);
 
         $user_name = $user['username'];
+        $_SESSION["username"] = $user['username'];
         
         echo " <script> document.getElementById('line_name').innerHTML = '$user_name';</script>";
     }
