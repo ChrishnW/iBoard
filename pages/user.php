@@ -26,28 +26,35 @@
                 $daily_target = $line["daily_target"];
                 $takt_time = $line["takt_time"];
 
-
-                echo "<script> document.addEventListener('DOMContentLoaded', function () {
-                    
+                echo "<script>
+                document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('line_name').innerHTML = '$line_name'; 
                     document.getElementById('line_desc').innerHTML = '$line_desc';
 
-                    const line_img = \"<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 400px;\">\";
+                    document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
+                    document.getElementById('daily_target_display').innerHTML = '$daily_target';
+                    
+                    const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
                     document.getElementById('line_image_div').innerHTML = line_img; 
-                
-                    const incharge_img = \"<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border p-4 mr-5\" style=\"width: 150px; height: 150px;\">\";
+
+                    const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border p-4 mr-5\" style=\"width: 200px; height: 200px;\">';
                     document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
-                    document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
-                    document.getElementById('daily_target').innerHTML = '$daily_target'; 
-                
-                }); </script>";
+
+                    document.getElementById('minus').style.display = 'block';
+                    document.getElementById('plus').style.display = 'block';
+
+
+
+                });
+                </script>";
+
                 
                 
             }
+
+            unset($_SESSION["line_id"]);
         }
-
-
 
 
     }
@@ -184,10 +191,10 @@
         <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
 
             <div id="line_image_div">
-                <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 400px;">
+                <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 380px; height: 210px;">
             </div>
 
-            <div class="d-flex flex-column pl-5 fs-1" >
+            <div class="d-flex flex-column pl-5 fs-1" ><br>
                 <span class="h2 text-danger"><u>Information</u></span> 
                 <span class="h2 text-dark" id="line_desc">-----</span>
                 <span class="h2 text-danger"><u>Leader</u></span> 
@@ -195,7 +202,7 @@
             </div>
 
             <div class="ml-auto align-self-end" id="incharge_image_div">
-                <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border p-4 mr-5" style="width: 150px; height: 150px;">
+                <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border p-4 mr-5" style="width: 200px; height: 200px;">
             </div>
         </div>
 
@@ -214,13 +221,13 @@
 
                     <tbody class="bg-white text-center text-dark h4">
                         <tr>
-                            <td class="font-weight-bolder" style="font-size: 50px;" id="daily_terget">0</td>
+                            <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
                             <td id="target_count" class="font-weight-bolder" style="font-size: 50px;" id="target_now">0</td>
                             <td>
                                 <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">
-                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;">-</button>
-                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;">+</button>
+                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;" id="minus">-</button>
+                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;" id="plus">+</button>
                                 </div>
                             </td>
                             <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
