@@ -333,7 +333,7 @@
                 <th>Username</th>
                 <th>Department</th>
                 <th>Status</th>
-                <th></th>
+                <th style="width: 170px;"></th>
               </tr>
             </thead>
           </table>
@@ -511,7 +511,7 @@
                     <form action="account.php" method="post" class="form_table">
                         <input type="hidden" name="id_account" value=' . $acc_id . '>
 
-                        <input type="submit" class="edit btn btn-primary" value="Edit" name="edit_account">
+                        <input type="submit" class="edit btn btn-primary ml-2" value="Edit" name="edit_account">
                         <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_account">
 
                     </form>
