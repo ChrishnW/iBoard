@@ -30,23 +30,7 @@
 
             if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
 
-                $img_name_raw_line = $_FILES["line_image_upload"]["name"];
-                $img_name_line = str_replace(" ", "_", $img_name_raw_line);
-
-                $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
-
-                $img_line_path = "IMG/LINE/" . $img_name_line;
-
-                move_uploaded_file($img_temp_path_line, $img_line_path);
-
-                $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
-                $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
-
-                $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
-
-                $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
-
-                move_uploaded_file($img_temp_path_leader, $img_leader_path);
+                $date = date("Y-m-d H:i:s");
 
                 $sql_command = "INSERT INTO tbl_line (line_name, line_desc, incharge_name,
                                 daily_target, takt_time, work_time_from, work_time_to, 
@@ -56,6 +40,21 @@
                                 '$breaktime_code', '$model_id', '$status')";
 
                 $result = mysqli_query($conn, $sql_command);
+
+                $img_name_raw_line = $_FILES["line_image_upload"]["name"];
+                $img_name_line = str_replace(" ", "_", $img_name_raw_line);
+                $img_line_path = "IMG/LINE/" . $img_name_line;
+                $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
+
+                move_uploaded_file($img_temp_path_line, $img_line_path);
+
+                $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
+                $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
+                $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
+                $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
+
+                move_uploaded_file($img_temp_path_leader, $img_leader_path);
+                
 
                 if($result){
 
