@@ -59,15 +59,6 @@
                         </tbody>
 
                         <tbody class="text-black text-center">
-                            <td class="font-weight-bold"></td>
-                            <td class="font-weight-bold"></td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td class="text-danger">-</td>
-                        </tbody>
-                        <tbody class="text-black text-center">
                             <td class="font-weight-bold">Test</td>
                             <td class="font-weight-bold">Test 1</td>
                             <td>Stopped</td>
