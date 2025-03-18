@@ -24,25 +24,26 @@
             $status = FILTER_INPUT(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
             $line_name = $_SESSION["username"];
-            $modal_id = $_SESSION["user_id"];
+            $model_id = $_SESSION["user_id"];
 
             //print_r($_FILES);
 
             if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
-                //echo "<script>alert('asdasd');</script>";
 
-                $asd = "asd";
-
-                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img,
+                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, incharge_name,
                                 daily_target, takt_time, work_time_from, work_time_to, 
-                                breaktime_code, modal_id, status) VALUES 
-                                ('$line_name', '$line_desc', '$asd', '$line_leader', '$asd', '$daily_target',
+                                breaktime_code, model_id, status) VALUES 
+                                ('$line_name', '$line_desc', '$line_leader', '$daily_target',
                                 '$takt_time', '$work_start', '$work_end',
-                                '$breaktime_code', '$modal_id', '$status')";
+                                '$breaktime_code', '$model_id', '$status')";
 
                 $result = mysqli_query($conn, $sql_command);
 
                 if($result){
+
+                    
+
+
                 
                     echo "<script>alert('pasok');</script>";
 
@@ -57,7 +58,7 @@
 
             }
 
-            header("Refresh: 20; url = user.php");
+            header("Refresh: .3; url = user.php");
             exit;
 
         }
