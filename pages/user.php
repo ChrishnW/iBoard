@@ -70,6 +70,7 @@
                     $result = mysqli_query($conn, $sql_command);
 
                 }
+                
 
             }
 
