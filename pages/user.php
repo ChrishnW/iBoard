@@ -124,13 +124,13 @@
                             <td class="font-weight-bolder" style="font-size: 50px;" id="daily_terget">0</td>
                             <td id="target_count" class="font-weight-bolder" style="font-size: 50px;" id="target_now">0</td>
                             <td>
-                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
+                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3" style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">
                                     <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;">-</button>
                                     <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;">+</button>
                                 </div>
                             </td>
-                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
+                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count">0</td>        
                         </tr>
                     </tbody>
                 </table>
