@@ -38,7 +38,7 @@
               <div class="col-xl-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
 
-                  <form id="loginDetails">
+                  <form id="loginDetails" action="include/login.php" method="post">
 
                     <input type="hidden" name="login" value="True">
 
