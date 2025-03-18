@@ -5,6 +5,51 @@
     include '../include/auth.php';
 
 
+    if(isset($_SESSION["line_id"])){
+
+        $line_id = $_SESSION["line_id"];
+
+        $sql_command = "SELECT * FROM tbl_line WHERE id = '$line_id' ";
+        $result = mysqli_query($conn, $sql_command);
+
+        if(mysqli_num_rows($result) > 0){
+            while($line = mysqli_fetch_assoc($result)){
+
+                $line_name = $line["line_name"];
+                $line_desc = $line["line_desc"];
+                $line_img = $line["line_img"];
+                $incharge_name = $line["incharge_name"];
+                $incharge_img = $line["incharge_img"];
+                $daily_target = $line["daily_target"];
+                $takt_time = $line["takt_time"];
+
+
+                echo "<script> document.addEventListener('DOMContentLoaded', function () {
+                    
+                    document.getElementById('line_name').innerHTML = '$line_name'; 
+                    document.getElementById('line_desc').innerHTML = '$line_desc';
+
+                    const line_img = \"<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 400px;\">\";
+                    document.getElementById('line_image_div').innerHTML = line_img; 
+                
+                    const incharge_img = \"<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border p-4 mr-5\" style=\"width: 150px; height: 150px;\">\";
+                    document.getElementById('incharge_image_div').innerHTML = incharge_img; 
+
+                    document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
+                    document.getElementById('daily_terget').innerHTML = '$daily_target'; 
+                
+                }); </script>";
+                
+                
+            }
+        }
+
+
+
+
+    }
+
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         // Register Line Details ---------------------------------------------------------------------------
@@ -130,7 +175,7 @@
         <!-- Details Section -->
         <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
 
-            <div id="line_image">
+            <div id="line_image_div">
                 <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 400px;">
             </div>
 
@@ -141,7 +186,7 @@
                 <span class="h2 text-dark" id="incharge_name">-----</span> 
             </div>
 
-            <div class="ml-auto align-self-end" id="incharge_image">
+            <div class="ml-auto align-self-end" id="incharge_image_div">
                 <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border p-4 mr-5" style="width: 150px; height: 150px;">
             </div>
         </div>
