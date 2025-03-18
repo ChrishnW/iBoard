@@ -43,10 +43,8 @@
 
                 if($result){
 
-                    $sql_command = "SELECT id FROM tbl_line WHERE";
-
-
-
+                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
+                    $result = mysqli_query($conn, $sql_command);
 
 
                     $img_name_raw_line = $_FILES["line_image_upload"]["name"];
