@@ -39,7 +39,7 @@
                     document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                     document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
-                    document.getElementById('daily_terget').innerHTML = '$daily_target'; 
+                    document.getElementById('daily_target').innerHTML = '$daily_target'; 
                 
                 }); </script>";
                 
@@ -66,6 +66,67 @@
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
+ 
+            $work_start = FILTER_INPUT(INPUT_POST, "edit_work_start", FILTER_SANITIZE_SPECIAL_CHARS);
+            $work_end = FILTER_INPUT(INPUT_POST, "edit_work_end", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $breaktime_code = FILTER_INPUT(INPUT_POST, "edit_breaktime_code", FILTER_SANITIZE_SPECIAL_CHARS);
+            $status = FILTER_INPUT(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $line_name = $_SESSION["username"];
+            $model_id = $_SESSION["user_id"];
+
+            //print_r($_FILES);
+
+            if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
+
+                $date = date("Y-m-d H:i:s");
+
+                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
+                                incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
+                                breaktime_code, model_id, status) VALUES 
+                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
+                                '$daily_target', '$takt_time', '$work_start', '$work_end',
+                                '$breaktime_code', '$model_id', '$status')";
+
+                $result = mysqli_query($conn, $sql_command);
+
+                if($result){
+
+                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
+                    $result = mysqli_query($conn, $sql_command);
+
+                    $line = mysqli_fetch_assoc($result);
+                    $line_id = $line["id"];
+
+                    $_SESSION["line_id"] = $line_id;
+
+                    $img_name_raw_line = $_FILES["line_image_upload"]["name"];
+                    $img_name_line = str_replace(" ", "_", $img_name_raw_line);
+                    $img_line_path = "IMG/LINE/" . $img_name_line;
+                    $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
+
+                    move_uploaded_file($img_temp_path_line, $img_line_path);
+
+                    $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
+                    $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
+                    $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
+                    $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
+                    $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
+
+                    move_uploaded_file($img_temp_path_leader, $img_leader_path);
+
+                    $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
+                                    incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
+                    $result = mysqli_query($conn, $sql_command);
+
+                }
+                
+
+            }
+
+            header("Refresh: .3; url = user.php");
+            exit;
 
 
 
@@ -220,7 +281,15 @@
                                 <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
                             </div>  
-                            
+                            <div class="mb-3">
+                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
+                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
+                                    <option value="" hidden></option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select> 
+                            </div>
+                        
                         </div>
                     </div>
                     <br>
