@@ -46,6 +46,10 @@
                     $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
                     $result = mysqli_query($conn, $sql_command);
 
+                    $line = mysqli_fetch_assoc($result);
+                    $line_id = $line["id"];
+
+                    $_SESSION["line_id"] = $line_id;
 
                     $img_name_raw_line = $_FILES["line_image_upload"]["name"];
                     $img_name_line = str_replace(" ", "_", $img_name_raw_line);
@@ -61,18 +65,11 @@
 
                     move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
-
-                
-                    echo "<script>alert('pasok');</script>";
-
-                }
-                else{
-
-                    echo "<script>alert('Hindi pasok');</script>";
+                    $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
+                                    incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
+                    $result = mysqli_query($conn, $sql_command);
 
                 }
-
-
 
             }
 
