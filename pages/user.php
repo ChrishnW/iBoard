@@ -125,7 +125,7 @@
 
             }
 
-            header("Refresh: 20; url = user.php");
+            header("Refresh: .3; url = user.php");
             exit;
 
 
