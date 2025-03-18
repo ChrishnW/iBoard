@@ -451,7 +451,7 @@
                     <form action="department.php" method="post" class="form_table">
                       <input type="hidden" name="id_department" value=' . $dept_id . '>
 
-                        <input type="submit" id="edit_depatment" class="btn btn-primary ml-2" value="Edit" name="edit_department">
+                        <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
                         <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
 
                     </form>
