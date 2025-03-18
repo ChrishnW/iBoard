@@ -3,9 +3,6 @@
     include '../include/link.php'; 
     include '../include/connect.php';
     include '../include/auth.php';
-    
-
-
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,8 +18,24 @@
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
+            $status = 1;
 
+            $line_name = $_SESSION["line_name"];
+            $modal_id = $_SESSION["user_id"];
 
+            print_r($_FILES);
+
+            if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
+                echo "<script>alert('asdasd');</script>";
+
+                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, incharge_name,
+                                daily_target, takt_time, modal_id, status) VALUES 
+                                ('$line_name', '$line_desc', '$line_leader', '$daily_target',
+                                '$takt_time', '$modal_id', '$status')";
+
+                $result = mysqli_query($conn, $sql_command);
+
+            }
 
         }
 
@@ -144,8 +157,8 @@
                                 <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" placeholder="101" required>
                             </div>
                             <div class="mb-3">
-                                <label for="edit_line_image" class="form-label">Line Image <span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_image" id="edit_line_image" required>
+                                <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="line_image_upload" id="line_image_upload" required>
                             </div>
                             
                             <div class="mb-3">
@@ -168,8 +181,8 @@
                                 <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" placeholder="Juan Dela Cruz" required>
                             </div>
                             <div class="mb-3">
-                                <label for="edit_line_leader_image" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="edit_line_leader_image" id="edit_line_leader_image" required>
+                                <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="leader_image_upload" id="leader_image_upload" required>
                             </div>
                             <div class="mb-3">
                                 <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
@@ -209,6 +222,7 @@
         $user = mysqli_fetch_assoc($result);
 
         $user_name = $user['username'];
+        $_SESSION["username"] = $user['line_name'];
         
         echo " <script> document.getElementById('line_name').innerHTML = '$user_name';</script>";
     }
