@@ -15,9 +15,8 @@
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
 
             $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
-            $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
-
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
+
             $status = 1;
 
             $line_name = $_SESSION["line_name"];
@@ -184,10 +183,7 @@
                                 <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="leader_image_upload" id="leader_image_upload" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="edit_target_now" class="form-label">Target Now <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_target_now" id="edit_target_now" placeholder="7" required> 
-                            </div>  
+                            
                             
                         </div>
                     </div>
