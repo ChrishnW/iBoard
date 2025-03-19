@@ -116,6 +116,19 @@
 
         <div class=\"card mb-4\">
             <div class=\"card-boy\">
+              <div id=\"tool_meeting\" class=\"row mb-3\">
+                <div class=\"col-md-6\">
+                  <label for=\"edit_tool_start\">Tool Box Meeting Start<span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_start\" id=\"edit_tool_start\" required value=\"$am_start\">        
+                </div>
+                
+                <div class=\"col-md-6\">
+                  <label for=\"edit_tool_end\">Tool Box Meeting End<span style=\"color: red;\">*</span></label><br>
+                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_end\" id=\"edit_tool_end\" required value=\"$am_start\">        
+                </div>
+              </div>
+
+
               <div id=\"breaktime_am\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
 
@@ -357,6 +370,8 @@
               <tr>
               <th class="align-text-top">Breaktime Code</th>
               <th class="align-text-top">Breaktime Start (AM)</th>
+              <th class="align-text-top">Tool Box Meeting Start</th>
+              <th class="align-text-top">Tool Box Meeting End</th>
               <th class="align-text-top">Breaktime End (AM)</th>
               <th class="align-text-top">Breaktime Start (Lunch)</th>
               <th class="align-text-top">Breaktime End (Lunch)</th>
@@ -398,6 +413,19 @@
 
             <div class="card mb-4">
               <div class="card-body">
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="tool_start">Tool Box Meeting Start<span style="color: red;">*</span></label><br>
+                    <input type="time" class="form-control" name="tool_start" id="tool_start" placeholder="00:00" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="tool_start">Tool Box Meeting End<span style="color: red;">*</span></label><br>
+                    <input type="time" class="form-control" name="tool_start" id="tool_start" placeholder="00:00" required>
+                  </div>
+                </div>
+
                 <div id="breaktime_am" class="row mb-3">
                   <div class="col-md-6">
                     <label for="break_start_am">Breaktime Start (AM) <span style="color: red;">*</span></label><br>
@@ -589,6 +617,8 @@
             const table = `
             <tr>
                 <td>' . $breaktime_code . '</td>
+                <td>' . $am_start . '</td>
+                <td>' . $am_end . '</td>
                 <td>' . $am_start . '</td>
                 <td>' . $am_end . '</td>
                 
