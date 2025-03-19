@@ -3,10 +3,3 @@ input[type="number"]::-webkit-outer-spin-button
 {
     -webkit-appearance: none;
 }
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #abdbee !important; /* Sky blue color */
-}
-.table-striped tbody tr:nth-of-type(even) {
-    background-color: #FFFFFF !important; /* White for even rows */
-}

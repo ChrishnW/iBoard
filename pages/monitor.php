@@ -18,6 +18,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style2.css">
+
 </head>
 <body>
     <div class="container-fluid">
