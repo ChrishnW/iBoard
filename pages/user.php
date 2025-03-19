@@ -183,7 +183,7 @@
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
             <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">asd</span>
             
-            <div class="ml-auto d-flex justify-content-center align-items-center mr-5">
+            <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
                     <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none;">RUN</button> 
                     <br>
