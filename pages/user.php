@@ -46,11 +46,8 @@
                 });
                 </script>";
 
-                
-                
             }
 
-            unset($_SESSION["line_id"]);
         }
 
 
@@ -62,6 +59,8 @@
         // Register Line Details ---------------------------------------------------------------------------
 
         if(isset($_POST['edit_line_submit'])){
+
+            unset($_SESSION["line_id"]);
 
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -237,8 +236,8 @@
                             <td>
                                 <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">
-                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: block;" id="minus">-</button>
-                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: block;" id="plus">+</button>
+                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;" id="minus">-</button>
+                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;" id="plus">+</button>
                                 </div>
                             </td>
                             <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
