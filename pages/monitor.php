@@ -4,7 +4,6 @@
     include '../include/auth.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +17,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="../assets/css/style2.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -63,15 +63,11 @@
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 </body>
 </html>
 
-
 <script>
-
 
     function updateTable() {
         $.ajax({
@@ -79,17 +75,16 @@
             url: 'fetch.php',
             success: function (data) {
                 document.getElementById('insert_here').innerHTML = data;
+                console.log("Success");
+            },
+            error: function () {
+                console.log("Error");
             }
         });
     }
 
-    // Automatically update the table every second
     document.addEventListener("DOMContentLoaded", function () {
         setInterval(updateTable, 1000);
     });
         
-    
-
-
-
 </script>

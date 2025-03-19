@@ -52,7 +52,6 @@
 
     }
 
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         // Register Line Details ---------------------------------------------------------------------------
@@ -106,7 +105,6 @@
 
                 $result = mysqli_query($conn, $sql_command);
 
-
                 if($result){
 
                     $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
@@ -136,25 +134,17 @@
                                     incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
                     $result = mysqli_query($conn, $sql_command);
 
-                }
-                
+                } 
 
             }
 
             header("Refresh: .3; url = user.php");
             exit;
 
-
-
         }
-
-
-
-
 
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -188,7 +178,6 @@
                     <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
                 </div>
             </div>
-
 
             <div id="settings" class="dropdown">
                 <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
@@ -291,7 +280,6 @@
                                 </select> 
                             </div>
                            
-
                         </div>
                         
                         <div class="col-md-6">
@@ -324,8 +312,6 @@
                                     <option value="0">Inactive</option>
                                 </select> 
                             </div>  
-                            
-                            
                         
                         </div>
                     </div>
@@ -456,10 +442,10 @@
         } else {
             console.error('Invalid button text:', button.innerText);
         }
-        update();
-    }
 
-    
+        update();
+
+    }
 
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
@@ -508,6 +494,5 @@
         });
 
     });
-
 
 </script>
