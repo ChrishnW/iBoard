@@ -3,8 +3,6 @@
     include '../include/link.php'; 
     include '../include/connect.php';
     include '../include/auth.php';
-    
-
 
     // Display Registered Data ---------------------------------------------------------------------------
 

@@ -397,7 +397,7 @@
               <th class="align-text-top">Breaktime End (OT)</th>
 
               <th class="align-text-top">Status</th>
-              
+
               <th></th>
               </tr>
 
