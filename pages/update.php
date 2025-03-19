@@ -12,11 +12,9 @@
     $actual = isset($_POST['actual']) ? $_POST['actual'] : null;
     $balance = isset($_POST['balance']) ? $_POST['balance'] : null;
 
-    $sql_command = "UPDATE tbl_records SET status = '$status', target_day = '$targetPeDay',
-                    target_now = '$target', actual = '$actual', balance = '$balance' 
-                    WHERE date = '$date' AND model = '$model' AND unit = '$unit'";
-
-    $result = mysqli_query($conn, $sql_command);
+    mysqli_query($conn, "UPDATE tbl_records SET status = '$status', target_day = '$targetPeDay',
+                        target_now = '$target', actual = '$actual', balance = '$balance' 
+                        WHERE date = '$date' AND model = '$model' AND unit = '$unit'");
 
 
 ?>
