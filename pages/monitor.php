@@ -1,6 +1,7 @@
 <?php 
     include '../include/link.php'; 
-    include '../include/connect.php'
+    include '../include/connect.php';
+    include '../include/auth.php';
 ?>
 
 
@@ -50,24 +51,28 @@
                         </tr>
                         </thead>
 
-                        <tbody class="text-black text-center">
-                            <td class="font-weight-bold">SDRB</td>
-                            <td class="font-weight-bold">SDRB-200/260</td>
-                            <td>Run</td>
-                            <td>100</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td class="text-danger">-2</td>
+                        <tbody class="text-black text-center" id="insert_here">
+                            <tr>
+                                <td class="font-weight-bold">SDRB</td>
+                                <td class="font-weight-bold">SDRB-200/260</td>
+                                <td>Run</td>
+                                <td>100</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="text-danger">-2</td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">SDRB</td>
+                                <td class="font-weight-bold">SDRB-200/260</td>
+                                <td>Run</td>
+                                <td>100</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td class="text-danger">-2</td>
+                            </tr>
+                            
                         </tbody>
-                        <tbody class="text-black text-center">
-                            <td class="font-weight-bold">Test</td>
-                            <td class="font-weight-bold">Test 1</td>
-                            <td>Stopped</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td class="text-danger">-5</td>
-                        </tbody>
+                        
                     </table>
                 </div>
             </div>
@@ -75,3 +80,92 @@
     </div>
 </body>
 </html>
+
+<?php
+
+    // // Fetch data from tbl_records ....................................................
+
+    // $date = date("Y-m-d");
+    // $query = "SELECT * FROM tbl_records WHERE date = '$date'";
+    // $result = mysqli_query($conn, $query);
+
+    // if(mysqli_num_rows($result) > 0){
+    //     while($row = mysqli_fetch_assoc($result)){
+            
+    //         $model = $row['model'];
+    //         $unit = $row['unit'];
+    //         $status = $row['status'];
+    //         $targetPeDay = $row['target_day'];
+    //         $target = $row['target_now'];
+    //         $actual = $row['actual'];
+    //         $balance = $row['balance'];
+
+    //         echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+    //             const table = `
+    //                 <tbody class=\"text-black text-center\">
+    //                     <td class=\"font-weight-bold\">$model</td>
+    //                     <td class=\"font-weight-bold\">$unit</td>
+    //                     <td>$status</td>
+    //                     <td>$targetPeDay</td>
+    //                     <td>$target</td>
+    //                     <td>$actual</td>
+    //                     <td class=\"text-danger\">$balance</td>
+    //                 </tbody>`;
+        
+    //             document.querySelector(\"#dataTable\").insertAdjacentHTML(\"beforeend\", table);
+    //         });
+    //         </script>";
+    //     }
+    // }
+    // else{
+    //     echo "No data found.";
+    // }
+
+    
+
+
+
+?>
+
+<script>
+
+    
+
+
+    function updateTable() {
+        // Create a new XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+
+        // Set up the request
+        xhr.open("POST", "fetch.php", true);
+
+        // Specify what happens when the request is successful
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Update the table with the server's response
+                document.getElementById("insert_here").innerHTML = xhr.responseText;
+            } else {
+                console.error("Failed to update the table.");
+            }
+        };
+
+        // Handle errors
+        xhr.onerror = function () {
+            console.error("An error occurred during the transaction.");
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+    // Automatically update the table every second
+    document.addEventListener("DOMContentLoaded", function () {
+        setInterval(updateTable, 1000);
+    });
+        
+    
+
+
+
+</script>
