@@ -65,6 +65,9 @@
 
       $break_code = $break["breaktime_code"];
 
+      $tool_start = $break["tool_box_meeting_start"];
+      $tool_end = $break["tool_box_meeting_end"];
+
       $am_start = $break["am_break_start"];
       $am_end = $break["am_break_end"];
 
@@ -119,12 +122,12 @@
               <div id=\"tool_meeting\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
                   <label for=\"edit_tool_start\">Tool Box Meeting Start<span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_start\" id=\"edit_tool_start\" required value=\"$am_start\">        
+                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_start\" id=\"edit_tool_start\" required value=\"$tool_start\">        
                 </div>
                 
                 <div class=\"col-md-6\">
                   <label for=\"edit_tool_end\">Tool Box Meeting End<span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_end\" id=\"edit_tool_end\" required value=\"$am_start\">        
+                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_end\" id=\"edit_tool_end\" required value=\"$tool_end\">        
                 </div>
               </div>
 
@@ -215,6 +218,9 @@
 
       $code = filter_input(INPUT_POST, "break_code", FILTER_SANITIZE_SPECIAL_CHARS);
 
+      $tool_start = filter_input(INPUT_POST, "tool_start", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $tool_end = filter_input(INPUT_POST, "tool_end", FILTER_SANITIZE_SPECIAL_CHARS);;
+
       $start_am = filter_input(INPUT_POST, "break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);;
       $end_am = filter_input(INPUT_POST, "break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);;
 
@@ -229,9 +235,10 @@
 
       $status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);;
 
-      $sql_command = "INSERT INTO tbl_breaktime (breaktime_code, am_break_start, am_break_end, lunch_break_start, 
-                      lunch_break_end, pm_break_start, pm_break_end, ot_break_start, ot_break_end, status)
-                      VALUES ('$code', '$start_am', '$end_am', '$start_lunch', '$end_lunch', 
+      $sql_command = "INSERT INTO tbl_breaktime (breaktime_code, tool_box_meeting_start, tool_box_meeting_end,
+                      am_break_start, am_break_end, lunch_break_start, lunch_break_end, pm_break_start, 
+                      pm_break_end, ot_break_start, ot_break_end, status)
+                      VALUES ('$code', '$tool_start', '$tool_end', '$start_am', '$end_am', '$start_lunch', '$end_lunch', 
                       '$start_pm', '$end_pm', '$start_ot', '$end_ot', '$status')";
 
       $result = mysqli_query($conn, $sql_command);
@@ -302,6 +309,9 @@
       $id = filter_input(INPUT_POST, "edit_break_id", FILTER_SANITIZE_SPECIAL_CHARS);
 
       $code = filter_input(INPUT_POST, "edit_break_code", FILTER_SANITIZE_SPECIAL_CHARS);
+      
+      $tool_start = filter_input(INPUT_POST, "edit_tool_start", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $tool_end = filter_input(INPUT_POST, "edit_tool_end", FILTER_SANITIZE_SPECIAL_CHARS);;
 
       $start_am = filter_input(INPUT_POST, "edit_break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);;
       $end_am = filter_input(INPUT_POST, "edit_break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);;
@@ -317,10 +327,11 @@
 
       $status = filter_input(INPUT_POST, "edit_break_status", FILTER_SANITIZE_SPECIAL_CHARS);;
 
-      $sql_command = "UPDATE tbl_breaktime SET breaktime_code = '$code', 
-      am_break_start = '$start_am', am_break_end = '$end_am', lunch_break_start = '$start_lunch',
-      lunch_break_end = '$end_lunch', pm_break_start = '$start_pm', pm_break_end = '$end_pm', 
-      ot_break_start = '$start_ot', ot_break_end = '$end_ot', status = '$status' WHERE id = '$id' ";
+      $sql_command = "UPDATE tbl_breaktime SET breaktime_code = '$code', tool_box_meeting_start = '$tool_start',
+                      tool_box_meeting_end = '$tool_end', am_break_start = '$start_am', am_break_end = '$end_am',
+                      lunch_break_start = '$start_lunch', lunch_break_end = '$end_lunch', pm_break_start = '$start_pm', 
+                      pm_break_end = '$end_pm', ot_break_start = '$start_ot', ot_break_end = '$end_ot', status = '$status' 
+                      WHERE id = '$id' ";
 
       $result = mysqli_query($conn, $sql_command);
 
@@ -369,17 +380,24 @@
 
               <tr>
               <th class="align-text-top">Breaktime Code</th>
-              <th class="align-text-top">Breaktime Start (AM)</th>
+
               <th class="align-text-top">Tool Box Meeting Start</th>
               <th class="align-text-top">Tool Box Meeting End</th>
+
+              <th class="align-text-top">Breaktime Start (AM)</th>
               <th class="align-text-top">Breaktime End (AM)</th>
+
               <th class="align-text-top">Breaktime Start (Lunch)</th>
               <th class="align-text-top">Breaktime End (Lunch)</th>
+
               <th class="align-text-top">Breaktime Start (PM)</th>
               <th class="align-text-top">Breaktime End (PM)</th>
+
               <th class="align-text-top">Breaktime Start (OT)</th>
               <th class="align-text-top">Breaktime End (OT)</th>
+
               <th class="align-text-top">Status</th>
+              
               <th></th>
               </tr>
 
@@ -421,8 +439,8 @@
                   </div>
 
                   <div class="col-md-6">
-                    <label for="tool_start">Tool Box Meeting End<span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="tool_start" id="tool_start" placeholder="00:00" required>
+                    <label for="tool_end">Tool Box Meeting End<span style="color: red;">*</span></label><br>
+                    <input type="time" class="form-control" name="tool_end" id="tool_end" placeholder="00:00" required>
                   </div>
                 </div>
 
@@ -590,6 +608,10 @@
         $breaktime_id = $breaktime["id"];
 
         $breaktime_code = $breaktime["breaktime_code"];
+
+        $tool_start = $breaktime["tool_box_meeting_start"];
+        $tool_end = $breaktime["tool_box_meeting_end"];
+
         $am_start = $breaktime["am_break_start"];
         $am_end = $breaktime["am_break_end"];
 
@@ -617,8 +639,10 @@
             const table = `
             <tr>
                 <td>' . $breaktime_code . '</td>
-                <td>' . $am_start . '</td>
-                <td>' . $am_end . '</td>
+
+                <td>' . $tool_start . '</td>
+                <td>' . $tool_end . '</td>
+
                 <td>' . $am_start . '</td>
                 <td>' . $am_end . '</td>
                 
