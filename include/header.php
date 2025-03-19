@@ -13,6 +13,7 @@
   <title>iBoard | <?php echo ucfirst(basename($_SERVER['PHP_SELF'], '.php')); ?></title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
+  <link href="../assets/css/style2.css" rel="stylesheet">
 
   <?php include 'link.php'; ?>
 
