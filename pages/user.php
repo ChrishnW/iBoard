@@ -204,7 +204,7 @@
             </div>
 
             <div class="ml-auto align-self-end" id="incharge_image_div">
-                <img src="../assets/img/undraw_profile.svg" alt="" class="img-fluid border p-4 mr-5" style="width: 200px; height: 200px;">
+                <img src="../assets/img/image_not_available.png" alt="" class="mr-5" style="width: 200px; height: 200px;">
             </div>
         </div>
 
