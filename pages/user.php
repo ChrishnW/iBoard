@@ -183,10 +183,14 @@
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
             <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">asd</span>
             
-            <div class="ml-auto text-right mr-5">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 mr-1 text-center text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
-                <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
+            <div class="ml-auto d-flex justify-content-center align-items-center mr-5">
+                <div class="text-center">
+                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none;">RUN</button> 
+                    <br>
+                    <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
+                </div>
             </div>
+
 
             <div id="settings" class="dropdown">
                 <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
