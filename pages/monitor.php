@@ -60,39 +60,24 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 </body>
 </html>
 
 
 <script>
 
-    
-
 
     function updateTable() {
-        // Create a new XMLHttpRequest object
-        const xhr = new XMLHttpRequest();
-
-        // Set up the request
-        xhr.open("POST", "fetch.php", true);
-
-        // Specify what happens when the request is successful
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Update the table with the server's response
-                document.getElementById("insert_here").innerHTML = xhr.responseText;
-            } else {
-                console.error("Failed to update the table.");
+        $.ajax({
+            method: 'POST',
+            url: 'fetch.php',
+            success: function (data) {
+                document.getElementById('insert_here').innerHTML = data;
             }
-        };
-
-        // Handle errors
-        xhr.onerror = function () {
-            console.error("An error occurred during the transaction.");
-        };
-
-        // Send the request
-        xhr.send();
+        });
     }
 
     // Automatically update the table every second
