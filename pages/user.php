@@ -172,7 +172,7 @@
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style2.css">
 </head>
-<body class="container-fluid p-4 mt-3" style="background-color: #add8e6;">
+<body class="container-fluid p-4 m-0" style="background-color: #add8e6;">
 
     <!-- User Dashboard-->
 
