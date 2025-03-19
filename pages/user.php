@@ -193,7 +193,7 @@
         <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
 
             <div id="line_image_div">
-                <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 380px; height: 210px;">
+                <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 380px; height: 210px;">
             </div>
 
             <div class="d-flex flex-column pl-5 fs-1" ><br>
@@ -204,7 +204,7 @@
             </div>
 
             <div class="ml-auto align-self-end" id="incharge_image_div">
-                <img src="../assets/img/image_not_available.png" alt="" class="mr-5" style="width: 200px; height: 200px;">
+                <img src="../assets/img/img_not_available.png" alt="" class="mr-5" style="width: 200px; height: 200px;">
             </div>
         </div>
 
