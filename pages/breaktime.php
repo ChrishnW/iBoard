@@ -121,12 +121,12 @@
             <div class=\"card-boy\">
               <div id=\"tool_meeting\" class=\"row mb-3\">
                 <div class=\"col-md-6\">
-                  <label for=\"edit_tool_start\">Tool Box Meeting Start<span style=\"color: red;\">*</span></label><br>
+                  <label for=\"edit_tool_start\">Tool Box Meeting Start <span style=\"color: red;\">*</span></label><br>
                   <input type=\"time\" class=\"form-control\" name=\"edit_tool_start\" id=\"edit_tool_start\" required value=\"$tool_start\">        
                 </div>
                 
                 <div class=\"col-md-6\">
-                  <label for=\"edit_tool_end\">Tool Box Meeting End<span style=\"color: red;\">*</span></label><br>
+                  <label for=\"edit_tool_end\">Tool Box Meeting End <span style=\"color: red;\">*</span></label><br>
                   <input type=\"time\" class=\"form-control\" name=\"edit_tool_end\" id=\"edit_tool_end\" required value=\"$tool_end\">        
                 </div>
               </div>
@@ -434,12 +434,12 @@
 
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label for="tool_start">Tool Box Meeting Start<span style="color: red;">*</span></label><br>
+                    <label for="tool_start">Tool Box Meeting Start <span style="color: red;">*</span></label><br>
                     <input type="time" class="form-control" name="tool_start" id="tool_start" placeholder="00:00" required>
                   </div>
 
                   <div class="col-md-6">
-                    <label for="tool_end">Tool Box Meeting End<span style="color: red;">*</span></label><br>
+                    <label for="tool_end">Tool Box Meeting End <span style="color: red;">*</span></label><br>
                     <input type="time" class="form-control" name="tool_end" id="tool_end" placeholder="00:00" required>
                   </div>
                 </div>
