@@ -290,8 +290,6 @@
                                 <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
                                 <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
                                     <option value="" hidden></option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
                                 </select> 
                             </div>
                            
@@ -367,6 +365,27 @@
         $_SESSION["username"] = $user['username'];
         
         echo " <script> document.getElementById('line_name').innerHTML = '$user_name';</script>";
+    }
+
+    // Fetching Breaktime ....................................................
+
+    $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+        while($break = mysqli_fetch_assoc($result)){
+
+            $breaktime_id = $break['id'];
+            $breaktime_code = $break['breaktime_code'];
+
+            echo '<script> document.addEventListener("DOMContentLoaded", function () {
+                const table = `
+                <option value="' . $breaktime_id . '">' . $breaktime_code . '</option>`;
+                
+                document.querySelector("#edit_breaktime_code").insertAdjacentHTML("beforeend", table);
+            });</script>';
+        }
+
     }
 
 ?>
