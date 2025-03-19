@@ -6,6 +6,16 @@
 
     // Display Registered Data ---------------------------------------------------------------------------
 
+    $time = date("H:i");
+    $start_time = new DateTime("07:00");
+    $end_time = new DateTime("16:00");
+
+    $interval = $start_time->diff($end_time);
+
+    $total_minutes = ($interval->h * 60) + $interval->i;
+
+    echo "<script>alert('$total_minutes')</script>";
+
     if(isset($_SESSION["line_id"])){
 
         $line_id = $_SESSION["line_id"];
@@ -26,6 +36,7 @@
 
                 echo "<script>
                 document.addEventListener('DOMContentLoaded', function () {
+
                     document.getElementById('line_name').innerHTML = '$line_name'; 
                     document.getElementById('line_desc').innerHTML = '$line_desc';
 
@@ -68,8 +79,8 @@
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
 
-            $work_start = FILTER_INPUT(INPUT_POST, "edit_work_start", FILTER_SANITIZE_SPECIAL_CHARS);
-            $work_end = FILTER_INPUT(INPUT_POST, "edit_work_end", FILTER_SANITIZE_SPECIAL_CHARS);
+            $work_start = $_POST["edit_work_start"];
+            $work_end = $_POST["edit_work_end"];
 
             $breaktime_code = FILTER_INPUT(INPUT_POST, "edit_breaktime_code", FILTER_SANITIZE_SPECIAL_CHARS);
             $status = FILTER_INPUT(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -270,7 +281,7 @@
 
                             <div class="mb-3">
                                 <label for="edit_work_start" class="form-label">Work Start <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" placeholder="100" required>
+                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" required>
                             </div>
 
                             <div class="mb-3">
