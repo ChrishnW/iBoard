@@ -6,7 +6,7 @@
     
 
 
-
+    // Display Registered Data ---------------------------------------------------------------------------
 
     if(isset($_SESSION["line_id"])){
 
@@ -94,6 +94,20 @@
                                 '$breaktime_code', '$model_id', '$status')";
 
                 $result = mysqli_query($conn, $sql_command);
+
+                // This is for the records table
+
+                $date_records = date("Y-m-d");
+                $status_records = "RUN";
+                $value_records = 0;
+
+                $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
+                                target_day, target_now, actual, balance) VALUES 
+                                ('$date_records', '$line_name', '$line_desc', '$status_records',
+                                '$daily_target', '$value_records', '$value_records', '$value_records')";
+
+                $result = mysqli_query($conn, $sql_command);
+
 
                 if($result){
 
@@ -223,8 +237,8 @@
                             <td>
                                 <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">
-                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;" id="minus">-</button>
-                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;" id="plus">+</button>
+                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: block;" id="minus">-</button>
+                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: block;" id="plus">+</button>
                                 </div>
                             </td>
                             <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
@@ -392,6 +406,39 @@
         }
     }
 
+    function update(){
+        var model = document.getElementById('line_name').innerHTML;
+        var unit = document.getElementById('line_desc').innerHTML;
+        var status = document.getElementById('runStopButton').innerHTML;
+
+        var targetPerDay = document.getElementById('daily_target_display').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
+        var actual = document.getElementById('actual_count').innerHTML;
+        var balance = document.getElementById('balance_count').innerHTML;
+
+        var updateDetails = {
+            model: model,
+            unit: unit,
+            status: status,
+            targetPerDay: targetPerDay,
+            target: target,
+            actual: actual,
+            balance: balance
+        };
+
+        $.ajax({
+            method: 'POST',
+            url: 'update.php',
+            data: updateDetails,
+            success: function(response){
+                console.log("Success");
+            },
+            error: function(){
+                console.log("Error");
+            }
+        });
+    }
+
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
         var target = document.getElementById('target_count').innerHTML;
@@ -401,6 +448,9 @@
 
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
+
+        update();
+
     }
 
     function minus() {  
@@ -412,6 +462,9 @@
 
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
+
+        update();
+
     }
 
     function showEdituser() {
