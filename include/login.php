@@ -17,7 +17,6 @@ if (isset($_POST['login'])) :
       $_SESSION['user_id'] = $user['id'];
       $_SESSION['SESS_USERNAME']    = $username;
       $_SESSION['SESS_PASSWORD']    = $password;
-      session_write_close();
       
       $access = $user['access'];
 
