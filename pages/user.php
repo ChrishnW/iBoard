@@ -50,6 +50,7 @@
 
         }
 
+        unset($_SESSION["line_id"]);
 
     }
 
