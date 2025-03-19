@@ -373,6 +373,39 @@
 
 <script>
 
+    function update(){
+        var model = document.getElementById('line_name').innerHTML;
+        var unit = document.getElementById('line_desc').innerHTML;
+        var status = document.getElementById('runStopButton').innerHTML;
+
+        var targetPerDay = document.getElementById('daily_target_display').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
+        var actual = document.getElementById('actual_count').innerHTML;
+        var balance = document.getElementById('balance_count').innerHTML;
+
+        var updateDetails = {
+            model: model,
+            unit: unit,
+            status: status,
+            targetPerDay: targetPerDay,
+            target: target,
+            actual: actual,
+            balance: balance
+        };
+
+        $.ajax({
+            method: 'POST',
+            url: 'update.php',
+            data: updateDetails,
+            success: function(response){
+                console.log("Success");
+            },
+            error: function(){
+                console.log("Error");
+            }
+        });
+    }
+
     let milliseconds = 0;
     let interval = null;
 
@@ -406,40 +439,10 @@
         } else {
             console.error('Invalid button text:', button.innerText);
         }
+        update();
     }
 
-    function update(){
-        var model = document.getElementById('line_name').innerHTML;
-        var unit = document.getElementById('line_desc').innerHTML;
-        var status = document.getElementById('runStopButton').innerHTML;
-
-        var targetPerDay = document.getElementById('daily_target_display').innerHTML;
-        var target = document.getElementById('target_count').innerHTML;
-        var actual = document.getElementById('actual_count').innerHTML;
-        var balance = document.getElementById('balance_count').innerHTML;
-
-        var updateDetails = {
-            model: model,
-            unit: unit,
-            status: status,
-            targetPerDay: targetPerDay,
-            target: target,
-            actual: actual,
-            balance: balance
-        };
-
-        $.ajax({
-            method: 'POST',
-            url: 'update.php',
-            data: updateDetails,
-            success: function(response){
-                console.log("Success");
-            },
-            error: function(){
-                console.log("Error");
-            }
-        });
-    }
+    
 
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
