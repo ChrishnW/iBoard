@@ -69,7 +69,7 @@
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
- 
+
             $work_start = FILTER_INPUT(INPUT_POST, "edit_work_start", FILTER_SANITIZE_SPECIAL_CHARS);
             $work_end = FILTER_INPUT(INPUT_POST, "edit_work_end", FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -322,8 +322,8 @@
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select> 
-                            </div>
-                             
+                            </div>  
+                            
                             
                         
                         </div>
