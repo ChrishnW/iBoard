@@ -35,7 +35,7 @@
         
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered table-sm table-striped" id="dataTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-white text-center">
                         <tr>
                             <th rowspan="2" class="text-center align-middle">Model</th>
