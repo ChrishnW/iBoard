@@ -198,7 +198,7 @@
         </div>
 
         <!-- Details Section -->
-        <div id="details" class="d-flex align-items-start my-3 px-5 py-5 mr-4">
+        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
 
             <div id="line_image_div">
                 <img src="../assets/img/pexels-pixabay-434337.jpeg" alt="line" class="img-fluid mr-3 border" style="width: 380px; height: 210px;">
