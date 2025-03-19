@@ -391,8 +391,6 @@
         const body = document.body;
 
         if (button.innerText === 'RUN') {
-            clearInterval(interval);
-            milliseconds = 0; // Reset timer
             button.innerText = 'STOP';
             body.style.backgroundColor = '#ffcccb'; // light red
             interval = setInterval(updateTimer, 10);
@@ -400,8 +398,8 @@
             clearInterval(interval);
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
-            milliseconds = 0; // Reset timer
-            interval = setInterval(updateTimer, 10); // Start timer again
+        } else {
+            console.error('Invalid button text:', button.innerText);
         }
     }
 
