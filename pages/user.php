@@ -183,7 +183,7 @@
             <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">asd</span>
             
             <div class="ml-auto text-right mr-5">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 mr-2 text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 mr-1 text-center text-dark" style="background-color: transparent; border: none;">RUN</button> <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
 
