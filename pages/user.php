@@ -58,8 +58,8 @@
                         
                         const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
                         document.getElementById('line_image_div').innerHTML = line_img; 
-
-                        const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border p-4 mr-5\" style=\"width: 200px; height: 200px;\">';
+                        
+                        const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px;\">';
                         document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                         document.getElementById('target_count').innerHTML = '$target'; 
