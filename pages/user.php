@@ -496,7 +496,6 @@
         document.getElementById('target_count').innerHTML = new_target;
 
         update();
-
     }
 
     function check_breaktime_start(){
@@ -527,7 +526,6 @@
                 work_status = "BREAK";
                 break;
         }
-
     }
 
     function countingInterval(){
@@ -577,9 +575,7 @@
             }
             console.log(i);
             console.log(work_status);
-
         }
-
     }
 
 
@@ -618,7 +614,6 @@
         }
 
         update();
-
     }
 
     function update(){
@@ -665,7 +660,6 @@
         document.getElementById('balance_count').innerHTML = new_balance;
 
         update();
-
     }
 
     function minus() {  
@@ -679,7 +673,6 @@
         document.getElementById('balance_count').innerHTML = new_balance;
 
         update();
-
     }
 
     function showEdituser() {
@@ -697,18 +690,13 @@
 
             user_dashboard.style.display = "block";
             edit_user.style.display = "none";
-
         });
-
 
         var trigger = document.getElementById('line_desc').innerHTML;
         if (trigger != '-----') {
 
             setInterval(countingInterval, 1000);
-            
         }
-        
-        
 
     });
 
