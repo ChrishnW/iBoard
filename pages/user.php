@@ -527,7 +527,7 @@
                 break;
         }
     }
-
+     
     function countingInterval(){
 
         if(work_status == "WORK"){
