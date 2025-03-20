@@ -134,13 +134,19 @@
                     // Run if there is OT
 
                     $worked_hours = $gapInMinutes - 105;
-                    $quantity = $worked_hours / $takt_time;
+                    $quantity_round = $worked_hours / $takt_time;
+
+                    $quantity = round($quantity_round);
+                    
                 }
                 else{
                     // Run if there is no OT
 
                     $worked_hours = $gapInMinutes - 90;
-                    $quantity = $worked_hours / $takt_time;
+                    $quantity_round = $worked_hours / $takt_time;
+
+                    $quantity = round($quantity_round);
+
                 }
 
                 echo "<script> console.log('Work start: $work_start');</script>";
@@ -220,7 +226,7 @@
         <!-- Header Section -->
         <div class="d-flex align-items-center px-3">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
-            <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">asd</span>
+            <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">-----</span>
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
@@ -427,39 +433,6 @@
 
 <script>
 
-    function update(){
-        var model = document.getElementById('line_name').innerHTML;
-        var unit = document.getElementById('line_desc').innerHTML;
-        var status = document.getElementById('runStopButton').innerHTML;
-
-        var targetPerDay = document.getElementById('daily_target_display').innerHTML;
-        var target = document.getElementById('target_count').innerHTML;
-        var actual = document.getElementById('actual_count').innerHTML;
-        var balance = document.getElementById('balance_count').innerHTML;
-
-        var updateDetails = {
-            model: model,
-            unit: unit,
-            status: status,
-            targetPerDay: targetPerDay,
-            target: target,
-            actual: actual,
-            balance: balance
-        };
-
-        $.ajax({
-            method: 'POST',
-            url: 'update.php',
-            data: updateDetails,
-            success: function(response){
-                console.log("Success");
-            },
-            error: function(){
-                console.log("Error");
-            }
-        });
-    }
-
     let milliseconds = 0;
     let interval = null;
 
@@ -496,6 +469,39 @@
 
         update();
 
+    }
+
+    function update(){
+        var model = document.getElementById('line_name').innerHTML;
+        var unit = document.getElementById('line_desc').innerHTML;
+        var status = document.getElementById('runStopButton').innerHTML;
+
+        var targetPerDay = document.getElementById('daily_target_display').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
+        var actual = document.getElementById('actual_count').innerHTML;
+        var balance = document.getElementById('balance_count').innerHTML;
+
+        var updateDetails = {
+            model: model,
+            unit: unit,
+            status: status,
+            targetPerDay: targetPerDay,
+            target: target,
+            actual: actual,
+            balance: balance
+        };
+
+        $.ajax({
+            method: 'POST',
+            url: 'update.php',
+            data: updateDetails,
+            success: function(response){
+                console.log("Success");
+            },
+            error: function(){
+                console.log("Error");
+            }
+        });
     }
 
     function add() {
