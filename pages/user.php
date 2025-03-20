@@ -6,16 +6,6 @@
 
     // Display Registered Data ---------------------------------------------------------------------------
 
-    $time = date("H:i");
-    $start_time = new DateTime("07:00");
-    $end_time = new DateTime("16:00");
-
-    $interval = $start_time->diff($end_time);
-
-    $total_minutes = ($interval->h * 60) + $interval->i;
-
-    echo "<script>alert('$total_minutes')</script>";
-
     if(isset($_SESSION["line_id"])){
 
         $line_id = $_SESSION["line_id"];
@@ -26,40 +16,55 @@
         if(mysqli_num_rows($result) > 0){
             while($line = mysqli_fetch_assoc($result)){
 
+                $date = date("Y-m-d");
                 $line_name = $line["line_name"];
                 $line_desc = $line["line_desc"];
+
                 $line_img = $line["line_img"];
                 $incharge_name = $line["incharge_name"];
                 $incharge_img = $line["incharge_img"];
+
                 $daily_target = $line["daily_target"];
-                $takt_time = $line["takt_time"];
 
-                echo "<script>
-                document.addEventListener('DOMContentLoaded', function () {
+                $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
+                $result = mysqli_query($conn, $sql_command);
 
-                    document.getElementById('line_name').innerHTML = '$line_name'; 
-                    document.getElementById('line_desc').innerHTML = '$line_desc';
+                if(mysqli_num_rows($result) > 0){
+                    $record = mysqli_fetch_assoc($result);
 
-                    document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
-                    document.getElementById('daily_target_display').innerHTML = '$daily_target';
-                    
-                    const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
-                    document.getElementById('line_image_div').innerHTML = line_img; 
+                    $target = $record["target_now"];
+                    $actual = $record["actual"];
+                    $balance = $record["balance"];
+                   
+                    echo "<script>
+                    document.addEventListener('DOMContentLoaded', function () {
 
-                    const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border p-4 mr-5\" style=\"width: 200px; height: 200px;\">';
-                    document.getElementById('incharge_image_div').innerHTML = incharge_img; 
+                        document.getElementById('line_name').innerHTML = '$line_name'; 
+                        document.getElementById('line_desc').innerHTML = '$line_desc';
 
-                    document.getElementById('minus').style.display = 'block';
-                    document.getElementById('plus').style.display = 'block';
+                        document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
+                        document.getElementById('daily_target_display').innerHTML = '$daily_target';
+                        
+                        const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
+                        document.getElementById('line_image_div').innerHTML = line_img; 
 
-                });
-                </script>";
+                        const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border p-4 mr-5\" style=\"width: 200px; height: 200px;\">';
+                        document.getElementById('incharge_image_div').innerHTML = incharge_img; 
+
+                        document.getElementById('target_count').innerHTML = '$target'; 
+                        document.getElementById('actual_count').innerHTML = '$actual';
+                        document.getElementById('balance_count').innerHTML = '$balance';
+
+                        document.getElementById('minus').style.display = 'block';
+                        document.getElementById('plus').style.display = 'block';
+
+                    });
+                    </script>";
+                }
 
             }
 
         }
-
-        unset($_SESSION["line_id"]);
 
     }
 
@@ -78,6 +83,7 @@
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
+            $_SESSION["takt_time"] = $takt_time;
 
             $work_start = $_POST["edit_work_start"];
             $work_end = $_POST["edit_work_end"];
@@ -109,10 +115,33 @@
                 $status_records = "RUN";
                 $value_records = 0;
 
+                $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+                $gapInMinutes = $gapInSeconds / 60;
+                $quantity = 0;
+
+                if($gapInMinutes >= 660){
+                    // Run if there is OT
+
+                    $worked_hours = $gapInMinutes - 105;
+                    $quantity = $worked_hours / $takt_time;
+                }
+                else{
+                    // Run if there is no OT
+
+                    $worked_hours = $gapInMinutes - 90;
+                    $quantity = $worked_hours / $takt_time;
+                }
+
+                echo "<script> console.log('Work start: $work_start');</script>";
+                echo "<script> console.log('Work end: $work_end');</script>";
+
+                echo "<script> console.log('Work end: $gapInMinutes');</script>";
+                echo "<script> console.log('Quantity: $quantity');</script>";
+
                 $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
                                 target_day, target_now, actual, balance) VALUES 
                                 ('$date_records', '$line_name', '$line_desc', '$status_records',
-                                '$daily_target', '$value_records', '$value_records', '$value_records')";
+                                '$daily_target', '$quantity', '$value_records', '$quantity')";
 
                 $result = mysqli_query($conn, $sql_command);
 
@@ -235,7 +264,7 @@
                     <tbody class="bg-white text-center text-dark h4">
                         <tr>
                             <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
-                            <td id="target_count" class="font-weight-bolder" style="font-size: 50px;" id="target_now">0</td>
+                            <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
                             <td>
                                 <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">

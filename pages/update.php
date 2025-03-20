@@ -14,7 +14,7 @@
 
     mysqli_query($conn, "UPDATE tbl_records SET status = '$status', target_day = '$targetPeDay',
                         target_now = '$target', actual = '$actual', balance = '$balance' 
-                        WHERE date = '$date' AND model = '$model' AND unit = '$unit'");
+                        WHERE date = '$date' AND model = '$model' AND unit = '$unit' ");
 
 
 ?>
