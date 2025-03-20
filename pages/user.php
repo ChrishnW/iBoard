@@ -15,8 +15,6 @@
         }
     }
 
-    
-
     // Display Registered Data ---------------------------------------------------------------------------
 
     if(isset($_SESSION["line_id"])){
@@ -242,7 +240,7 @@
 
         </div>
 
-        <!-- Details Section -->    
+        <!-- Details Section -->
         <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
 
             <div id="line_image_div">

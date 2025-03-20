@@ -1,3 +1,29 @@
+<?php
+
+  include 'include/auth.php';
+
+  if($access_security){
+
+    if($access_security == 1){
+      header('location: pages/index.php');
+      exit();
+    }
+    elseif($access_security == 2){
+      header('location: pages/user.php');
+      exit();
+    }
+    elseif($access_security == 3){
+      header('location: pages/monitor.php');
+      exit();
+    }
+
+  }
+  
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 

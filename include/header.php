@@ -1,4 +1,18 @@
-<?php include 'auth.php'; ?>
+<?php include 'auth.php'; 
+
+  if(!$access_security){
+    header('location: ../index.php');
+    exit();
+  }
+  else{
+
+    if($access_security != 1){
+      header('location: ../index.php');
+      exit();
+    }
+  }
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 
