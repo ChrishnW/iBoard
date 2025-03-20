@@ -434,15 +434,57 @@
 <script>
 
     var i = 0;
+    var takt_time_string = <?php echo $_SESSION["takt_time"]; ?>;
+    var takt_time = parseInt(takt_time_string) * 60;
+
+    function add_target() {
+
+        var actual = document.getElementById('actual_count').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
+        
+        var new_target = parseInt(target) + 1;
+        var new_balance = new_target - actual;
+
+        document.getElementById('balance_count').innerHTML = new_balance;
+        document.getElementById('target_count').innerHTML = new_target;
+
+        update();
+
+    }
 
     function countingInterval(){
 
-        console.log(i++);
+
+        i++;
+
+        //console.log(i);
+
+        // This 'if' is for checking the takt time
+
+        if(takt_time == i){
+            i = 0;
+
+            console.log('success');
+
+            add_target();
+
+        }
+
+
+
+
+
+        
+
+        
+        
+
+
 
     }
 
 
-    setInterval(countingInterval, 1000);
+    //setInterval(countingInterval, 1000);
 
     let milliseconds = 0;
     let interval = null;
