@@ -484,7 +484,7 @@
     var ot_start = "<?php echo isset($_SESSION['ot_start']) ? $_SESSION['ot_start'] : ''; ?>";
     var ot_end = "<?php echo isset($_SESSION['ot_end']) ? $_SESSION['ot_end'] : ''; ?>";
 
-    function add_target() {
+    function add_target() { 
 
         var actual = document.getElementById('actual_count').innerHTML;
         var target = document.getElementById('target_count').innerHTML;
