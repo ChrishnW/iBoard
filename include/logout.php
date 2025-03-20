@@ -1,7 +1,7 @@
 <?php
-session_start(); // Start the session
-session_unset(); // Unset all session variables
+include 'auth.php'; // Include the auth.php file
+
 session_destroy(); // Destroy the session
 
-header("Location: /index.php"); // Redirect to the root index.php
+header("Location: ../index.php"); // Redirect to the root index.php
 exit(); // Ensure no further code is executed

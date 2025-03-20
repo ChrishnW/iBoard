@@ -17,16 +17,15 @@ if (isset($_POST['login'])) :
       $_SESSION['user_id'] = $user['id'];
       $_SESSION['SESS_USERNAME']    = $username;
       $_SESSION['SESS_PASSWORD']    = $password;
-      
-      $access = $user['access'];
-
-      if($access == "1"){
+      $_SESSION['SESS_ACCESS']    = $user['access'];
+    
+      if($user['access'] == "1"){
         echo "Admin";
       }
-      elseif ($access == "2"){
+      elseif ($user['access'] == "2"){
         echo "User";
       }
-      elseif($access == "3"){
+      elseif($user['access'] == "3"){
         echo "Monitor";
       }
 

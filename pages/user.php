@@ -1,8 +1,21 @@
 <?php 
 
     include '../include/link.php'; 
-    include '../include/connect.php';
     include '../include/auth.php';
+
+    if(!$access_security){
+        header('location: ../index.php');
+        exit();
+    }
+    else{
+
+        if($access_security != 2){
+            header('location: ../index.php');
+            exit();
+        }
+    }
+
+    
 
     // Display Registered Data ---------------------------------------------------------------------------
 
@@ -223,13 +236,13 @@
                 <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="#" onclick="showEdituser()">Settings</a>
-                    <a class="dropdown-item" href="../index.php">Logout</a>
+                    <a class="dropdown-item" href="../include/logout.php">Logout</a>
                 </div>
             </div>
 
         </div>
 
-        <!-- Details Section -->
+        <!-- Details Section -->    
         <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
 
             <div id="line_image_div">
