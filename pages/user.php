@@ -433,6 +433,17 @@
 
 <script>
 
+    var i = 0;
+
+    function countingInterval(){
+
+        console.log(i++);
+
+    }
+
+
+    setInterval(countingInterval, 1000);
+
     let milliseconds = 0;
     let interval = null;
 
