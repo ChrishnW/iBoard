@@ -108,5 +108,58 @@
     document.addEventListener("DOMContentLoaded", function () {
         setInterval(updateTable, 1000);
     });
+
+
+    let currentPage = 1;
+
+function updateTable() {
+    $.ajax({
+        method: 'POST',
+        url: 'fetch.php',
+        data: { page: currentPage },
+        success: function (data) {
+            document.getElementById('insert_here').innerHTML = data;
+
+            // Update Pagination UI
+            const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
+            updatePagination(totalPages);
+            console.log("Success");
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+}
+
+function updatePagination(totalPages) {
+    const pagination = document.querySelector('.pagination');
+    pagination.innerHTML = '';
+
+    pagination.innerHTML += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                                <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                             </li>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.innerHTML += `<li class="page-item ${currentPage === i ? 'active' : ''}">
+                                    <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                                 </li>`;
+    }
+
+    pagination.innerHTML += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                                <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                             </li>`;
+    }
+
+    function changePage(page) {
+        if (page > 0) {
+            currentPage = page;
+            updateTable();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        updateTable();
+    });
+
         
 </script>
