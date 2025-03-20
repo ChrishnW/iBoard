@@ -37,6 +37,9 @@
 
                 $daily_target = $line["daily_target"];
 
+                $breaktime_code_get = $line["breaktime_code"];
+
+
                 $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
                 $result = mysqli_query($conn, $sql_command);
 
@@ -71,6 +74,33 @@
 
                     });
                     </script>";
+
+
+                    $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
+                    $result = mysqli_query($conn, $sql_command);
+
+                    if(mysqli_num_rows($result) > 0){
+                        while($break = mysqli_fetch_assoc($result)){
+
+                            $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
+                            $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
+
+                            $_SESSION['am_start'] = $break["am_break_start"];
+                            $_SESSION['am_end'] = $break["am_break_end"];
+
+                            $_SESSION['lunch_start'] = $break["lunch_break_start"];
+                            $_SESSION['lunch_end'] = $break["lunch_break_end"];
+
+                            $_SESSION['pm_start'] = $break["pm_break_start"];
+                            $_SESSION['pm_end'] = $break["pm_break_end"];
+
+                            $_SESSION['ot_start'] = $break["ot_break_start"];
+                            $_SESSION['ot_end'] = $break["ot_break_end"];
+
+
+                        }
+                    }
+
                 }
 
             }
@@ -433,9 +463,26 @@
 
 <script>
 
+    var work_status = "WORK";
     var i = 0;
+
     var takt_time_string = <?php echo $_SESSION["takt_time"]; ?>;
     var takt_time = parseInt(takt_time_string) * 60;
+
+    var tool_start = "<?php echo $_SESSION['tool_start']; ?>";
+    var tool_end = "<?php echo $_SESSION['tool_end']; ?>";
+
+    var am_start = "<?php echo $_SESSION['am_start']; ?>";
+    var am_end = "<?php echo $_SESSION['am_end']; ?>";
+
+    var lunch_start = "<?php echo $_SESSION['lunch_start']; ?>";
+    var lunch_end = "<?php echo $_SESSION['lunch_end']; ?>";
+
+    var pm_start = "<?php echo $_SESSION['pm_start']; ?>";
+    var pm_end = "<?php echo $_SESSION['pm_end']; ?>";
+
+    var ot_start = "<?php echo $_SESSION['ot_start']; ?>";
+    var ot_end = "<?php echo $_SESSION['ot_end']; ?>";
 
     function add_target() {
 
@@ -452,39 +499,89 @@
 
     }
 
-    function countingInterval(){
+    function check_breaktime_start(){
 
+        var full_time_now = new Date();
+        var time_hour = full_time_now.getHours();
+        var time_minute = full_time_now.getMinutes();
 
-        i++;
+        var time_now = (time_hour < 10 ? "0" : "") + time_hour + ":" 
+                        + (time_minute < 10 ? "0" : "") + time_minute;
 
-        //console.log(i);
+        console.log(time_now);
 
-        // This 'if' is for checking the takt time
-
-        if(takt_time == i){
-            i = 0;
-
-            console.log('success');
-
-            add_target();
-
+        switch(time_now){
+            case tool_start: 
+                work_status = "BREAK";
+                break;
+            case am_start: 
+                work_status = "BREAK";
+                break;
+            case lunch_start: 
+                work_status = "BREAK";
+                break;
+            case pm_start: 
+                work_status = "BREAK";
+                break;
+            case ot_start: 
+                work_status = "BREAK";
+                break;
         }
-
-
-
-
-
-        
-
-        
-        
-
-
 
     }
 
+    function countingInterval(){
 
-    //setInterval(countingInterval, 1000);
+        if(work_status == "WORK"){
+
+            i++;
+            console.log(i);
+
+            if(takt_time == i){
+                i = 0;
+                add_target();
+            }
+
+            check_breaktime_start();
+
+            console.log(work_status);
+
+        }
+        else if(work_status == "BREAK"){
+
+            var full_time_now = new Date();
+            var time_hour = full_time_now.getHours();
+            var time_minute = full_time_now.getMinutes();
+
+            var time_now = (time_hour < 10 ? "0" : "") + time_hour + ":" 
+                        + (time_minute < 10 ? "0" : "") + time_minute;
+
+            console.log(time_now);
+
+            switch(time_now){
+                case tool_end: // Tool Box Meeting
+                    work_status = "WORK";
+                    break;
+                case am_end: // AM Break
+                    work_status = "WORK";
+                    break;
+                case lunch_end: // Lunch Break
+                    work_status = "WORK";
+                    break;
+                case pm_end: // PM Break
+                    work_status = "WORK";
+                    break;
+                case ot_end: // OT Break
+                    work_status = "WORK";
+                    break;
+            }
+            console.log(i);
+            console.log(work_status);
+
+        }
+
+    }
+
 
     let milliseconds = 0;
     let interval = null;
@@ -602,6 +699,20 @@
             edit_user.style.display = "none";
 
         });
+
+        window.onload = function() {
+        let trigger = document.getElementById('line_desc').value;
+            if (trigger != '-----') {
+                //setInterval(countingInterval, 1000);
+                alert("Error");
+
+            }
+            else{
+                alert("Error");
+            }
+        };
+
+        
 
     });
 
