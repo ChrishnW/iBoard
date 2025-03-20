@@ -466,23 +466,23 @@
     var work_status = "WORK";
     var i = 0;
 
-    var takt_time_string = <?php echo $_SESSION["takt_time"]; ?>;
-    var takt_time = parseInt(takt_time_string) * 60;
+    // var takt_time_string = "<?php //echo $_SESSION["takt_time"]; ?>";
+    // var takt_time = parseInt(takt_time_string) * 60;
 
-    var tool_start = "<?php echo $_SESSION['tool_start']; ?>";
-    var tool_end = "<?php echo $_SESSION['tool_end']; ?>";
+    // var tool_start = "<?php //echo $_SESSION['tool_start']; ?>";
+    // var tool_end = "<?php //echo $_SESSION['tool_end']; ?>";
 
-    var am_start = "<?php echo $_SESSION['am_start']; ?>";
-    var am_end = "<?php echo $_SESSION['am_end']; ?>";
+    // var am_start = "<?php //echo $_SESSION['am_start']; ?>";
+    // var am_end = "<?php //echo $_SESSION['am_end']; ?>";
 
-    var lunch_start = "<?php echo $_SESSION['lunch_start']; ?>";
-    var lunch_end = "<?php echo $_SESSION['lunch_end']; ?>";
+    // var lunch_start = "<?php //echo $_SESSION['lunch_start']; ?>";
+    // var lunch_end = "<?php //echo $_SESSION['lunch_end']; ?>";
 
-    var pm_start = "<?php echo $_SESSION['pm_start']; ?>";
-    var pm_end = "<?php echo $_SESSION['pm_end']; ?>";
+    // var pm_start = "<?php //echo $_SESSION['pm_start']; ?>";
+    // var pm_end = "<?php //echo $_SESSION['pm_end']; ?>";
 
-    var ot_start = "<?php echo $_SESSION['ot_start']; ?>";
-    var ot_end = "<?php echo $_SESSION['ot_end']; ?>";
+    // var ot_start = "<?php //echo $_SESSION['ot_start']; ?>";
+    // var ot_end = "<?php //echo $_SESSION['ot_end']; ?>";
 
     function add_target() {
 
@@ -700,17 +700,20 @@
 
         });
 
-        window.onload = function() {
-        let trigger = document.getElementById('line_desc').value;
-            if (trigger != '-----') {
-                //setInterval(countingInterval, 1000);
-                alert("Error");
 
-            }
-            else{
-                alert("Error");
-            }
-        };
+        var trigger = document.getElementById('line_desc').innerHTML;
+        if (trigger != '-----') {
+
+            //setInterval(countingInterval, 1000);
+            alert(trigger);
+
+            
+
+            
+        }
+        else{
+            alert("No data");
+        }
 
         
 
