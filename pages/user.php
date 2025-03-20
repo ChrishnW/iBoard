@@ -466,23 +466,23 @@
     var work_status = "WORK";
     var i = 0;
 
-    // var takt_time_string = "<?php //echo $_SESSION["takt_time"]; ?>";
-    // var takt_time = parseInt(takt_time_string) * 60;
+    var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
+    var takt_time = parseInt(takt_time_string) * 60;
 
-    // var tool_start = "<?php //echo $_SESSION['tool_start']; ?>";
-    // var tool_end = "<?php //echo $_SESSION['tool_end']; ?>";
+    var tool_start = "<?php echo isset($_SESSION['tool_start']) ? $_SESSION['tool_start'] : ''; ?>";
+    var tool_end = "<?php echo isset($_SESSION['tool_end']) ? $_SESSION['tool_end'] : ''; ?>";
 
-    // var am_start = "<?php //echo $_SESSION['am_start']; ?>";
-    // var am_end = "<?php //echo $_SESSION['am_end']; ?>";
+    var am_start = "<?php echo isset($_SESSION['am_start']) ? $_SESSION['am_start'] : ''; ?>";
+    var am_end = "<?php echo isset($_SESSION['am_end']) ? $_SESSION['am_end'] : ''; ?>";
 
-    // var lunch_start = "<?php //echo $_SESSION['lunch_start']; ?>";
-    // var lunch_end = "<?php //echo $_SESSION['lunch_end']; ?>";
+    var lunch_start = "<?php echo isset($_SESSION['lunch_start']) ? $_SESSION['lunch_start'] : ''; ?>";
+    var lunch_end = "<?php echo isset($_SESSION['lunch_end']) ? $_SESSION['lunch_end'] : ''; ?>";
 
-    // var pm_start = "<?php //echo $_SESSION['pm_start']; ?>";
-    // var pm_end = "<?php //echo $_SESSION['pm_end']; ?>";
+    var pm_start = "<?php echo isset($_SESSION['pm_start']) ? $_SESSION['pm_start'] : ''; ?>";
+    var pm_end = "<?php echo isset($_SESSION['pm_end']) ? $_SESSION['pm_end'] : ''; ?>";
 
-    // var ot_start = "<?php //echo $_SESSION['ot_start']; ?>";
-    // var ot_end = "<?php //echo $_SESSION['ot_end']; ?>";
+    var ot_start = "<?php echo isset($_SESSION['ot_start']) ? $_SESSION['ot_start'] : ''; ?>";
+    var ot_end = "<?php echo isset($_SESSION['ot_end']) ? $_SESSION['ot_end'] : ''; ?>";
 
     function add_target() {
 
@@ -559,19 +559,19 @@
             console.log(time_now);
 
             switch(time_now){
-                case tool_end: // Tool Box Meeting
+                case tool_end: 
                     work_status = "WORK";
                     break;
-                case am_end: // AM Break
+                case am_end: 
                     work_status = "WORK";
                     break;
-                case lunch_end: // Lunch Break
+                case lunch_end: 
                     work_status = "WORK";
                     break;
-                case pm_end: // PM Break
+                case pm_end: 
                     work_status = "WORK";
                     break;
-                case ot_end: // OT Break
+                case ot_end: 
                     work_status = "WORK";
                     break;
             }
@@ -704,17 +704,10 @@
         var trigger = document.getElementById('line_desc').innerHTML;
         if (trigger != '-----') {
 
-            //setInterval(countingInterval, 1000);
-            alert(trigger);
-
-            
-
+            setInterval(countingInterval, 1000);
             
         }
-        else{
-            alert("No data");
-        }
-
+        
         
 
     });
