@@ -40,8 +40,4 @@
     $totalPages = ceil($totalRows / $rowsPerPage);
 
     echo "<input type=\"hidden\" id=\"totalPages\" value=\"$totalPages\">";
-
-
-
-
 ?>
