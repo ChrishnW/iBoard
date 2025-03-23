@@ -60,6 +60,9 @@
             if(mysqli_num_rows($result) > 0){
                 $record = mysqli_fetch_assoc($result);
 
+                $records_id = $record["id"];
+                $_SESSION["records_id"] = $records_id;
+
                 $target = $record["target_now"];
                 $actual = $record["actual"];
                 $balance = $record["balance"];
@@ -118,68 +121,77 @@
                 echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
                     const table = `
+
+                        <div class=\"row\">
                     
-                    <div class=\"col-md-6\">
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_line_desc\" class=\"form-label\">Line Description <span class=\"text-danger\">*</span></label>
-                                <input type=\"text\" class=\"form-control\" name=\"edit_line_desc\" id=\"edit_line_desc\" required value=\"$line_desc\">
-                            </div>
-                            <div class=\"mb-3\">
-                                <label for=\"line_image_upload\" class=\"form-label\">Line Image <span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"line_image_upload\" id=\"line_image_upload\" required value=\"$line_img\">
-                            </div>
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_daily_target\" class=\"form-label\">Daily Target <span class=\"text-danger\">*</span></label>
-                                <input type=\"number\" class=\"form-control\" name=\"edit_daily_target\" id=\"edit_daily_target\" placeholder=\"100\" required value=\"$daily_target\">
-                            </div>
+                            <div class=\"col-md-6\">
+                                
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_line_desc\" class=\"form-label\">Line Description <span class=\"text-danger\">*</span></label>
+                                    <input type=\"text\" class=\"form-control\" name=\"edit_line_desc\" id=\"edit_line_desc\" required value=\"$line_desc\">
+                                </div>
+                                <div class=\"mb-3\">
+                                    <label for=\"line_image_upload\" class=\"form-label\">Line Image <span class=\"text-danger\">*</span></label>
+                                    <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"line_image_upload\" id=\"line_image_upload\" required value=\"$line_img\">
+                                </div>
+                                
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_daily_target\" class=\"form-label\">Daily Target <span class=\"text-danger\">*</span></label>
+                                    <input type=\"number\" class=\"form-control\" name=\"edit_daily_target\" id=\"edit_daily_target\" placeholder=\"100\" required value=\"$daily_target\">
+                                </div>
 
-                            <div class=\"mb-3\">
-                                <label for=\"edit_work_start\" class=\"form-label\">Work Start <span class=\"text-danger\">*</span></label>
-                                <input type=\"time\" class=\"form-control\" name=\"edit_work_start\" id=\"edit_work_start\" required value=\"$work_start\">
-                            </div>
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_work_start\" class=\"form-label\">Work Start <span class=\"text-danger\">*</span></label>
+                                    <input type=\"time\" class=\"form-control\" name=\"edit_work_start\" id=\"edit_work_start\" required value=\"$work_start\">
+                                </div>
 
-                            <div class=\"mb-3\">
-                                <label for=\"edit_breaktime_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
-                                <select name=\"edit_breaktime_code\" id=\"edit_breaktime_code\" class=\"form-control\" required > 
-                                    <option value=\"$breaktime_code_get\" hidden>$breaktime_code_get</option>
-                                </select> 
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_breaktime_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
+                                    <select name=\"edit_breaktime_code\" id=\"edit_breaktime_code\" class=\"form-control\" required > 
+                                        <option value=\"$breaktime_code_get\" hidden>$breaktime_code_get</option>
+                                    </select> 
+                                </div>
+                            
                             </div>
-                           
+                            
+                            <div class=\"col-md-6\">
+                                <!-- Line Person -->
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_line_leader\" class=\"form-label\">Line Leader <span class=\"text-danger\">*</span></label>
+                                    <input type=\"text\" class=\"form-control\" name=\"edit_line_leader\" id=\"edit_line_leader\" placeholder=\"Juan Dela Cruz\" required value=\"$incharge_name\">
+                                </div>
+
+                                <div class=\"mb-3\">
+                                    <label for=\"leader_image_upload\" class=\"form-label\">Line Leader Image <span class=\"text-danger\">*</span></label>
+                                    <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"leader_image_upload\" id=\"leader_image_upload\" required value=\"$incharge_img\">
+                                </div>
+                                
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_takt_time\" class=\"form-label\">Takt Time <span class=\"text-danger\">*</span></label>
+                                    <input type=\"number\" class=\"form-control\" name=\"edit_takt_time\" id=\"edit_takt_time\" placeholder=\"100\" required value=\"$takt_time\">
+                                </div> 
+
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_work_end\" class=\"form-label\">Work End <span class=\"text-danger\">*</span></label>
+                                    <input type=\"time\" class=\"form-control\" name=\"edit_work_end\" id=\"edit_work_end\" placeholder=\"100\" required value=\"$work_end\">
+                                </div>
+    
+                                <div class=\"mb-3\">
+                                    <label for=\"edit_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
+                                    <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required> 
+                                        <option value=\"$status\" hidden>$status_string</option>
+                                        <option value=\"1\">Active</option>
+                                        <option value=\"0\">Inactive</option>
+                                    </select> 
+                                </div>  
+                            
+                            </div>
                         </div>
-                        
-                        <div class=\"col-md-6\">
-                            <!-- Line Person -->
-                            <div class=\"mb-3\">
-                                <label for=\"edit_line_leader\" class=\"form-label\">Line Leader <span class=\"text-danger\">*</span></label>
-                                <input type=\"text\" class=\"form-control\" name=\"edit_line_leader\" id=\"edit_line_leader\" placeholder=\"Juan Dela Cruz\" required value=\"$incharge_name\">
-                            </div>
 
-                            <div class=\"mb-3\">
-                                <label for=\"leader_image_upload\" class=\"form-label\">Line Leader Image <span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"leader_image_upload\" id=\"leader_image_upload\" required value=\"$incharge_img\">
-                            </div>
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_takt_time\" class=\"form-label\">Takt Time <span class=\"text-danger\">*</span></label>
-                                <input type=\"number\" class=\"form-control\" name=\"edit_takt_time\" id=\"edit_takt_time\" placeholder=\"100\" required value=\"$takt_time\">
-                            </div> 
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_work_end\" class=\"form-label\">Work End <span class=\"text-danger\">*</span></label>
-                                <input type=\"time\" class=\"form-control\" name=\"edit_work_end\" id=\"edit_work_end\" placeholder=\"100\" required value=\"$work_end\">
-                            </div>
- 
-                            <div class=\"mb-3\">
-                                <label for=\"edit_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
-                                <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required> 
-                                    <option value=\"$status\" hidden>$status_string</option>
-                                    <option value=\"1\">Active</option>
-                                    <option value=\"0\">Inactive</option>
-                                </select> 
-                            </div>  
-                        
+                        <br>
+                        <div class=\"d-flex justify-content-left\">
+                            <input type=\"submit\" name=\"edit_line_submit\" class=\"btn btn-primary pr-3\" value=\"Save\">
+                            <input type=\"reset\" name=\"edit_line_cancel\" class=\"btn btn-secondary ml-2\" value=\"Cancel\" id=\"edit_line_cancel\">
                         </div>
                     
                     `;
@@ -311,7 +323,6 @@
                     $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
                     $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
                     $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
-                    $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
                     move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
@@ -434,8 +445,8 @@
             </div>
             
             <div class="card-body shadow-sm m-4 p-4">
-                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" style="width: 100%;">
-                    <div class="row" id="edit_user_form">
+                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" style="width: 100%;" id="edit_user_form">
+                    <div class="row">
                         <!-- Column 1: Line Details and Person -->
                         <div class="col-md-6">
                             <!-- Line Details -->
