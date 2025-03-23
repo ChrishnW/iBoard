@@ -25,85 +25,183 @@
         $result = mysqli_query($conn, $sql_command);
 
         if(mysqli_num_rows($result) > 0){
-            while($line = mysqli_fetch_assoc($result)){
+            $line = mysqli_fetch_assoc($result);
 
-                $date = date("Y-m-d");
-                $line_name = $line["line_name"];
-                $line_desc = $line["line_desc"];
+            $date = date("Y-m-d");
+            $line_name = $line["line_name"];
+            $line_desc = $line["line_desc"];
 
-                $line_img = $line["line_img"];
-                $incharge_name = $line["incharge_name"];
-                $incharge_img = $line["incharge_img"];
+            $line_img = $line["line_img"];
+            $incharge_name = $line["incharge_name"];
+            $incharge_img = $line["incharge_img"];
 
-                $daily_target = $line["daily_target"];
+            $work_start = $line["work_time_from"];
+            $work_end = $line["work_time_to"];
 
-                $breaktime_code_get = $line["breaktime_code"];
+            $daily_target = $line["daily_target"];
+
+            $breaktime_code_get = $line["breaktime_code"];
+            $takt_time = $line["takt_time"];
+
+            $status = $line["status"];
+
+            $status_string = "";
+            if($status == 1){
+                $status_string = "Active";
+            }
+            else{
+                $status_string = "Inactive";
+            }
 
 
-                $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
+            $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
+            $result = mysqli_query($conn, $sql_command);
+
+            if(mysqli_num_rows($result) > 0){
+                $record = mysqli_fetch_assoc($result);
+
+                $target = $record["target_now"];
+                $actual = $record["actual"];
+                $balance = $record["balance"];
+                
+                echo "<script>
+                document.addEventListener('DOMContentLoaded', function () {
+
+                    document.getElementById('line_name').innerHTML = '$line_name'; 
+                    document.getElementById('line_desc').innerHTML = '$line_desc';
+
+                    document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
+                    document.getElementById('daily_target_display').innerHTML = '$daily_target';
+                    
+                    const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
+                    document.getElementById('line_image_div').innerHTML = line_img; 
+                    
+                    const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px;\">';
+                    document.getElementById('incharge_image_div').innerHTML = incharge_img; 
+
+                    document.getElementById('target_count').innerHTML = '$target'; 
+                    document.getElementById('actual_count').innerHTML = '$actual';
+                    document.getElementById('balance_count').innerHTML = '$balance';
+
+                    document.getElementById('minus').style.display = 'block';
+                    document.getElementById('plus').style.display = 'block';
+
+                });
+                </script>";
+
+
+                $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
                 $result = mysqli_query($conn, $sql_command);
 
                 if(mysqli_num_rows($result) > 0){
-                    $record = mysqli_fetch_assoc($result);
+                    while($break = mysqli_fetch_assoc($result)){
 
-                    $target = $record["target_now"];
-                    $actual = $record["actual"];
-                    $balance = $record["balance"];
-                   
-                    echo "<script>
-                    document.addEventListener('DOMContentLoaded', function () {
+                        $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
+                        $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
 
-                        document.getElementById('line_name').innerHTML = '$line_name'; 
-                        document.getElementById('line_desc').innerHTML = '$line_desc';
+                        $_SESSION['am_start'] = $break["am_break_start"];
+                        $_SESSION['am_end'] = $break["am_break_end"];
 
-                        document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
-                        document.getElementById('daily_target_display').innerHTML = '$daily_target';
-                        
-                        const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
-                        document.getElementById('line_image_div').innerHTML = line_img; 
-                        
-                        const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px;\">';
-                        document.getElementById('incharge_image_div').innerHTML = incharge_img; 
+                        $_SESSION['lunch_start'] = $break["lunch_break_start"];
+                        $_SESSION['lunch_end'] = $break["lunch_break_end"];
 
-                        document.getElementById('target_count').innerHTML = '$target'; 
-                        document.getElementById('actual_count').innerHTML = '$actual';
-                        document.getElementById('balance_count').innerHTML = '$balance';
+                        $_SESSION['pm_start'] = $break["pm_break_start"];
+                        $_SESSION['pm_end'] = $break["pm_break_end"];
 
-                        document.getElementById('minus').style.display = 'block';
-                        document.getElementById('plus').style.display = 'block';
-
-                    });
-                    </script>";
+                        $_SESSION['ot_start'] = $break["ot_break_start"];
+                        $_SESSION['ot_end'] = $break["ot_break_end"];
 
 
-                    $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
-                    $result = mysqli_query($conn, $sql_command);
-
-                    if(mysqli_num_rows($result) > 0){
-                        while($break = mysqli_fetch_assoc($result)){
-
-                            $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
-                            $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
-
-                            $_SESSION['am_start'] = $break["am_break_start"];
-                            $_SESSION['am_end'] = $break["am_break_end"];
-
-                            $_SESSION['lunch_start'] = $break["lunch_break_start"];
-                            $_SESSION['lunch_end'] = $break["lunch_break_end"];
-
-                            $_SESSION['pm_start'] = $break["pm_break_start"];
-                            $_SESSION['pm_end'] = $break["pm_break_end"];
-
-                            $_SESSION['ot_start'] = $break["ot_break_start"];
-                            $_SESSION['ot_end'] = $break["ot_break_end"];
-
-
-                        }
                     }
-
                 }
 
+                echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+                    const table = `
+                    
+                    <div class=\"col-md-6\">
+                            
+                            <div class=\"mb-3\">
+                                <label for=\"edit_line_desc\" class=\"form-label\">Line Description <span class=\"text-danger\">*</span></label>
+                                <input type=\"text\" class=\"form-control\" name=\"edit_line_desc\" id=\"edit_line_desc\" required value=\"$line_desc\">
+                            </div>
+                            <div class=\"mb-3\">
+                                <label for=\"line_image_upload\" class=\"form-label\">Line Image <span class=\"text-danger\">*</span></label>
+                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"line_image_upload\" id=\"line_image_upload\" required value=\"$line_img\">
+                            </div>
+                            
+                            <div class=\"mb-3\">
+                                <label for=\"edit_daily_target\" class=\"form-label\">Daily Target <span class=\"text-danger\">*</span></label>
+                                <input type=\"number\" class=\"form-control\" name=\"edit_daily_target\" id=\"edit_daily_target\" placeholder=\"100\" required value=\"$daily_target\">
+                            </div>
+
+                            <div class=\"mb-3\">
+                                <label for=\"edit_work_start\" class=\"form-label\">Work Start <span class=\"text-danger\">*</span></label>
+                                <input type=\"time\" class=\"form-control\" name=\"edit_work_start\" id=\"edit_work_start\" required value=\"$work_start\">
+                            </div>
+
+                            <div class=\"mb-3\">
+                                <label for=\"edit_breaktime_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
+                                <select name=\"edit_breaktime_code\" id=\"edit_breaktime_code\" class=\"form-control\" required > 
+                                    <option value=\"$breaktime_code_get\" hidden>$breaktime_code_get</option>
+                                </select> 
+                            </div>
+                           
+                        </div>
+                        
+                        <div class=\"col-md-6\">
+                            <!-- Line Person -->
+                            <div class=\"mb-3\">
+                                <label for=\"edit_line_leader\" class=\"form-label\">Line Leader <span class=\"text-danger\">*</span></label>
+                                <input type=\"text\" class=\"form-control\" name=\"edit_line_leader\" id=\"edit_line_leader\" placeholder=\"Juan Dela Cruz\" required value=\"$incharge_name\">
+                            </div>
+
+                            <div class=\"mb-3\">
+                                <label for=\"leader_image_upload\" class=\"form-label\">Line Leader Image <span class=\"text-danger\">*</span></label>
+                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"leader_image_upload\" id=\"leader_image_upload\" required value=\"$incharge_img\">
+                            </div>
+                            
+                            <div class=\"mb-3\">
+                                <label for=\"edit_takt_time\" class=\"form-label\">Takt Time <span class=\"text-danger\">*</span></label>
+                                <input type=\"number\" class=\"form-control\" name=\"edit_takt_time\" id=\"edit_takt_time\" placeholder=\"100\" required value=\"$takt_time\">
+                            </div> 
+
+                            <div class=\"mb-3\">
+                                <label for=\"edit_work_end\" class=\"form-label\">Work End <span class=\"text-danger\">*</span></label>
+                                <input type=\"time\" class=\"form-control\" name=\"edit_work_end\" id=\"edit_work_end\" placeholder=\"100\" required value=\"$work_end\">
+                            </div>
+ 
+                            <div class=\"mb-3\">
+                                <label for=\"edit_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
+                                <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required> 
+                                    <option value=\"$status\" hidden>$status_string</option>
+                                    <option value=\"1\">Active</option>
+                                    <option value=\"0\">Inactive</option>
+                                </select> 
+                            </div>  
+                        
+                        </div>
+                    
+                    `;
+                    
+                    document.getElementById('edit_user_form').innerHTML = table;
+
+                }); </script>";
+
+
+                
+
+
+
+
+
+
+
+
+
             }
+
+            
 
         }
 
@@ -337,7 +435,7 @@
             
             <div class="card-body shadow-sm m-4 p-4">
                 <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" style="width: 100%;">
-                    <div class="row">
+                    <div class="row" id="edit_user_form">
                         <!-- Column 1: Line Details and Person -->
                         <div class="col-md-6">
                             <!-- Line Details -->
@@ -401,6 +499,7 @@
                             </div>  
                         
                         </div>
+
                     </div>
                     <br>
                     <div class="d-flex justify-content-left">
