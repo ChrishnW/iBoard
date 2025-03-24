@@ -115,7 +115,6 @@
                         $_SESSION['ot_start'] = $break["ot_break_start"];
                         $_SESSION['ot_end'] = $break["ot_break_end"];
 
-
                     }
                 }
 
@@ -667,7 +666,7 @@
 
             echo '<script> document.addEventListener("DOMContentLoaded", function () {
                 const table = `
-                <option value="' . $breaktime_id . '">' . $breaktime_code . '</option>`;
+                <option value="' . $breaktime_code . '">' . $breaktime_code . '</option>`;
                 
                 document.querySelector("#edit_breaktime_code").insertAdjacentHTML("beforeend", table);
             });</script>';
@@ -730,6 +729,7 @@
                 work_status = "BREAK";
                 break;
             case am_start: 
+                console.log("Breaktime!!!");
                 work_status = "BREAK";
                 break;
             case lunch_start: 
