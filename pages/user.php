@@ -297,12 +297,6 @@
 
                 }
 
-                // echo "<script> console.log('Work start: $work_start');</script>";
-                // echo "<script> console.log('Work end: $work_end');</script>";
-
-                // echo "<script> console.log('Work end: $gapInMinutes');</script>";
-                // echo "<script> console.log('Quantity: $quantity');</script>";
-
                 $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
                                 target_day, target_now, actual, balance) VALUES 
                                 ('$date_records', '$line_name', '$line_desc', '$status_records',
@@ -334,6 +328,14 @@
 
                     move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
+                    if(isset($_FILES["extra_view_upload"])){
+
+                        echo "<script>alert('qwerty');</script>";
+
+                    }else{
+                        echo "<script>alert('asd');</script>";
+                    }
+
                     $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
                                     incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
                     $result = mysqli_query($conn, $sql_command);
@@ -342,7 +344,7 @@
 
             }
 
-            header("Refresh: .3; url = user.php");
+            header("Refresh: 20; url = user.php");
             exit;
             ob_end_flush();
 
@@ -626,8 +628,8 @@
 
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label for="extra_view_upload" class="form-label">Extra View<span class="text-danger">*</span></label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="extra_view_upload" id="extra_view_upload" required>
+                                <label for="extra_view_upload" class="form-label">Extra View</label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="extra_view_upload" id="extra_view_upload">
                             </div>
                         </div>
 
