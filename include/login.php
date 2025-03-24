@@ -13,7 +13,9 @@ function check_depeartment($username, $password){
     if (password_verify($password, $dept['password'])) {
 
       $_SESSION['department_code'] = $dept['dept_code'];
-      
+      $_SESSION['SESS_USERNAME']    = $username;
+      $_SESSION['SESS_PASSWORD']    = $password;
+      $_SESSION['SESS_ACCESS'] = "3";
       echo "Monitor";
 
     }

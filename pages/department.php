@@ -1,6 +1,5 @@
 <?php include '../include/header.php'; 
 
-  // session_start();
 
   // Display Message ----------------------------------------------------------------------------
 
@@ -131,14 +130,6 @@
   }
 
 
-
-
-
-
-
-
-
-
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
     // Add Department ---------------------------------------------------------------------------
@@ -149,7 +140,9 @@
       $dept_code = filter_input(INPUT_POST, "dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $status = filter_input(INPUT_POST, "status", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $sql_command = "INSERT INTO tbl_department (dept_name, dept_code, status) VALUES ('$dept_name', '$dept_code', '$status')";
+      $hashed_password = password_hash("12345", PASSWORD_DEFAULT);
+
+      $sql_command = "INSERT INTO tbl_department (dept_name, password, dept_code, status) VALUES ('$dept_name', '$hashed_password', '$dept_code', '$status')";
       $result = mysqli_query($conn, $sql_command);
 
       if($result){

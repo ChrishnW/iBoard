@@ -2,6 +2,17 @@
     include '../include/link.php'; 
     include '../include/connect.php';
     include '../include/auth.php';
+
+    if(!$access_security){
+        header('location: ../index.php');
+        exit();
+    }
+    else {
+        if($access_security != 3){
+            header('location: ../index.php');
+            exit();
+        }
+    }
 ?>
 
 <!DOCTYPE html>
