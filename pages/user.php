@@ -947,6 +947,7 @@
 
             user_dashboard.style.display = "block";
             edit_user.style.display = "none";
+            
         });
 
         var trigger = document.getElementById('line_desc').innerHTML;
