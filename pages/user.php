@@ -2,6 +2,7 @@
 
     include '../include/link.php'; 
     include '../include/auth.php';
+    ob_start();
 
     if(!$access_security){
         header('location: ../index.php');
@@ -190,7 +191,7 @@
 
                         <br>
                         <div class=\"d-flex justify-content-left\">
-                            <input type=\"submit\" name=\"edit_line_submit\" class=\"btn btn-primary pr-3\" value=\"Save\">
+                            <input type=\"submit\" name=\"reedit_line_submit\" class=\"btn btn-primary pr-3\" value=\"Save\">
                             <input type=\"reset\" name=\"edit_line_cancel\" class=\"btn btn-secondary ml-2\" value=\"Cancel\" id=\"edit_line_cancel\">
                         </div>
                     
@@ -289,11 +290,11 @@
 
                 }
 
-                echo "<script> console.log('Work start: $work_start');</script>";
-                echo "<script> console.log('Work end: $work_end');</script>";
+                // echo "<script> console.log('Work start: $work_start');</script>";
+                // echo "<script> console.log('Work end: $work_end');</script>";
 
-                echo "<script> console.log('Work end: $gapInMinutes');</script>";
-                echo "<script> console.log('Quantity: $quantity');</script>";
+                // echo "<script> console.log('Work end: $gapInMinutes');</script>";
+                // echo "<script> console.log('Quantity: $quantity');</script>";
 
                 $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
                                 target_day, target_now, actual, balance) VALUES 
@@ -336,6 +337,111 @@
 
             header("Refresh: .3; url = user.php");
             exit;
+            ob_end_flush();
+
+        }
+
+        // Edit Registeed Line Details ---------------------------------------------------------------------------
+
+        if(isset($_POST['reedit_line_submit'])){
+
+            $line_id = $_SESSION["line_id"];
+            $records_id = $_SESSION["records_id"];
+
+            $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
+            $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
+            $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
+
+            $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
+            $_SESSION["takt_time"] = $takt_time;
+
+            $work_start = $_POST["edit_work_start"];
+            $work_end = $_POST["edit_work_end"];
+
+            $breaktime_code = FILTER_INPUT(INPUT_POST, "edit_breaktime_code", FILTER_SANITIZE_SPECIAL_CHARS);
+            $status = FILTER_INPUT(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $line_name = $_SESSION["username"];
+            $model_id = $_SESSION["user_id"];
+
+            //print_r($_FILES);
+
+            if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
+
+                $date = date("Y-m-d H:i:s");
+
+                $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',
+                                incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',
+                                work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', 
+                                model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
+
+                $result = mysqli_query($conn, $sql_command);
+
+                // This is for the records table
+
+                $date_records = date("Y-m-d");
+                $status_records = "RUN";
+                $value_records = 0;
+
+                $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+                $gapInMinutes = $gapInSeconds / 60;
+                $quantity = 0;
+
+                if($gapInMinutes >= 660){
+                    // Run if there is OT
+
+                    $worked_hours = $gapInMinutes - 105;
+                    $quantity_round = $worked_hours / $takt_time;
+
+                    $quantity = round($quantity_round);
+                    
+                }
+                else{
+                    // Run if there is no OT
+
+                    $worked_hours = $gapInMinutes - 90;
+                    $quantity_round = $worked_hours / $takt_time;
+
+                    $quantity = round($quantity_round);
+
+                }
+
+                $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', 
+                                unit = '$line_desc', status = '$status_records', target_day = '$daily_target', 
+                                target_now = '$quantity', actual = '$value_records', balance = '$quantity' 
+                                WHERE id = '$records_id' ";
+
+                $result = mysqli_query($conn, $sql_command);
+
+                if($result){
+
+                    $img_name_raw_line = $_FILES["line_image_upload"]["name"];
+                    $img_name_line = str_replace(" ", "_", $img_name_raw_line);
+                    $img_line_path = "IMG/LINE/" . $img_name_line;
+                    $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
+
+                    move_uploaded_file($img_temp_path_line, $img_line_path);
+
+                    $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
+                    $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
+                    $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
+                    $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
+
+                    move_uploaded_file($img_temp_path_leader, $img_leader_path);
+
+                    $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
+                                    incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
+                    $result = mysqli_query($conn, $sql_command);
+
+                } 
+
+            }
+
+            header("Refresh: .3; url = user.php");            
+            exit;
+            ob_end_flush();
 
         }
 
