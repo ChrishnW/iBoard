@@ -184,8 +184,16 @@
                                         <option value=\"0\">Inactive</option>
                                     </select> 
                                 </div>  
+                                
                             
                             </div>
+
+                            <div class=\"col-md-12\">
+                            <div class=\"mb-3\">
+                                <label for=\"edit_extra\" class=\"form-label\">Extra View<span class=\"text-danger\">*</span></label>
+                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"edit_extra\" id=\"edit_extra\" required>
+                            </div>
+                        </div>
                         </div>
 
                         <br>
@@ -614,6 +622,13 @@
                                 </select> 
                             </div>  
                         
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="extra_view_upload" class="form-label">Extra View<span class="text-danger">*</span></label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="extra_view_upload" id="extra_view_upload" required>
+                            </div>
                         </div>
 
                     </div>

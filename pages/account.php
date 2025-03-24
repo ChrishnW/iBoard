@@ -124,7 +124,7 @@
 
     $acc_id = $_SESSION["acc_id"];
 
-    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id'";
+    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id' ORDER BY username ASC";
     $result = mysqli_query($conn, $sql_command);
 
     if(mysqli_num_rows($result) > 0){

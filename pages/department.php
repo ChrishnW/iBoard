@@ -420,7 +420,7 @@
 
   // Display Department List------------------------------------------------------------------------
 
-  $query = "SELECT * FROM tbl_department";
+  $query = "SELECT * FROM tbl_department ORDER BY dept_name ASC";
   $result = mysqli_query($conn, $query);
 
   if(mysqli_num_rows($result) > 0){

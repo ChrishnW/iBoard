@@ -602,7 +602,7 @@
 
   // Display Breaktime List----------------------------------------------------------------------------
 
-  $sql_command = "SELECT * FROM tbl_breaktime";
+  $sql_command = "SELECT * FROM tbl_breaktime ORDER BY breaktime_code ASC";
   $result = mysqli_query($conn, $sql_command);
 
   if(mysqli_num_rows($result) > 0){
