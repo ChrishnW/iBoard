@@ -680,7 +680,7 @@
 
     var work_status = "WORK";
     var i = 0;
-    var j = 0;
+    //var j = 0;
 
     var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
