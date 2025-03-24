@@ -468,9 +468,9 @@
 
     <div id="user_dashboard" class="user_dashboard" style="display: block;">
         <!-- Header Section -->
-        <div class="d-flex align-items-center px-3">
+        <div class="d-flex align-items-center px-3 py-2 shadow-lg">  
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
-            <span class="h2 font-weight-bold mb-0 text-primary" id="line_name">-----</span>
+            <span class="h1 font-weight-bold mb-0 text-primary" id="line_name">-----</span>
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
