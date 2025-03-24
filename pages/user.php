@@ -552,8 +552,8 @@
             <div class="card-body shadow-sm m-4 p-4">
                 <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" style="width: 100%;" id="edit_user_form">
                     <div class="row">
-                        <!-- Column 1: Line Details and Person -->
-                        <div class="col-md-6">
+
+                    <div class="col-md-6">
                             <!-- Line Details -->
                             <div class="mb-3">
                                 <label for="edit_line_desc" class="form-label">Line Description <span class="text-danger">*</span></label>
