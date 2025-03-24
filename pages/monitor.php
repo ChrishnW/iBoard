@@ -119,6 +119,8 @@
     document.addEventListener("DOMContentLoaded", function () {
         setInterval(updateTable, 1000);
     });
+    
+    //---------------------------------------------------------------------------------
 
 
     let currentPage = 1;
