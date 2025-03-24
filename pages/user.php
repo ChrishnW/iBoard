@@ -497,8 +497,8 @@
                 <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 380px; height: 210px;">
             </div>
 
-            <div class="d-flex flex-column pl-5 fs-1" ><br>
-                <span class="h2 text-danger"><u>Information</u></span> 
+            <div class="d-flex flex-column pl-5 fs-1"><br>
+                <span class="h2 text-danger "><u>Information</u></span> 
                 <span class="h2 text-dark" id="line_desc">-----</span>
                 <span class="h2 text-danger"><u>Leader</u></span> 
                 <span class="h2 text-dark" id="incharge_name">-----</span> 
