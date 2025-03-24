@@ -32,13 +32,13 @@
                     $balance = $row['balance'];
 
                     echo "<tr>
-                            <td class=\"font-weight-bold\">$model</td>
-                            <td class=\"font-weight-bold\">$unit</td>
-                            <td>$status</td>
-                            <td>$targetPeDay</td>
-                            <td>$target</td>
-                            <td>$actual</td>
-                            <td class=\"text-danger\">$balance</td>
+                            <td class=\"font-weight-bold\" style=\"height: 40px;\">$model</td>
+                            <td class=\"font-weight-bold\" style=\"height: 40px;\">$unit</td>
+                            <td style=\"height: 40px;\">$status</td>
+                            <td style=\"height: 40px;\">$targetPeDay</td>
+                            <td style=\"height: 40px;\">$target</td>
+                            <td style=\"height: 40px;\">$actual</td>
+                            <td class=\"text-danger\" style=\"height: 40px;\">$balance</td>
                         </tr>";
                 }
             }
