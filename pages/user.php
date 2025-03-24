@@ -900,7 +900,7 @@
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
 
-        if(new_actual == new_daily_target){
+        if(new_actual >= new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'FINISH';
             document.body.style.backgroundColor = '#90EE90'; // light green
 
@@ -922,7 +922,7 @@
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
 
-        if(new_actual != new_daily_target){
+        if(new_actual < new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'RUN';
             document.body.style.backgroundColor = '#add8e6'; // light blue
 
@@ -947,7 +947,7 @@
 
             user_dashboard.style.display = "block";
             edit_user.style.display = "none";
-            
+
         });
 
         var trigger = document.getElementById('line_desc').innerHTML;
