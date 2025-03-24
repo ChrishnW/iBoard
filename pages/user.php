@@ -812,6 +812,7 @@
                     work_status = "WORK";
                     break;
             }
+            
             console.log(i);
             console.log(work_status);
         }
