@@ -715,7 +715,7 @@
 
     function start_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'BREAK';
-        document.body.style.backgroundColor = '#ffcccb'; // light red
+        document.body.style.backgroundColor = 'lightgray'; // lighter shade of gray
 
         update();
     }

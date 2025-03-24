@@ -196,44 +196,44 @@
     header("Refresh: .3; url = department.php");
     exit;
 
-  }
-
-  // Edit Department --------------------------------------------------------------------------
-
-  if(isset($_POST["edit_department"])){
-
-    $dept_id = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
-
-    $_SESSION["dept_id"] = $dept_id;
-
-    header("Refresh: .3; url = department.php");
-    exit;
-
-  }
-
-  // Edit Department Submit --------------------------------------------------------------------------
-
-  if(isset($_POST["edit_department_submit"])){
-
-    $dept_id = filter_input(INPUT_POST, "edit_dept_id", FILTER_SANITIZE_SPECIAL_CHARS);
-    $dept_name = filter_input(INPUT_POST, "edit_dept_name", FILTER_SANITIZE_SPECIAL_CHARS);
-    $dept_code = filter_input(INPUT_POST, "edit_dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
-    $dept_status = filter_input(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
-
-    $sql_command = "UPDATE tbl_department SET dept_name = '$dept_name', dept_code = '$dept_code', status = '$dept_status' WHERE id = '$dept_id'";
-    $result = mysqli_query($conn, $sql_command);
-
-    if($result){
-        $_SESSION["message"] = "Department updated successfully.";
-    }
-    else{
-        $_SESSION["message"] = "Failed to update department.";
     }
 
-    header("Refresh: .3; url = department.php");
-    exit;
+    // Edit Department --------------------------------------------------------------------------
 
-  }
+    if(isset($_POST["edit_department"])){
+
+      $dept_id = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $_SESSION["dept_id"] = $dept_id;
+
+      header("Refresh: .3; url = department.php");
+      exit;
+
+    }
+
+    // Edit Department Submit --------------------------------------------------------------------------
+
+    if(isset($_POST["edit_department_submit"])){
+
+      $dept_id = filter_input(INPUT_POST, "edit_dept_id", FILTER_SANITIZE_SPECIAL_CHARS);
+      $dept_name = filter_input(INPUT_POST, "edit_dept_name", FILTER_SANITIZE_SPECIAL_CHARS);
+      $dept_code = filter_input(INPUT_POST, "edit_dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
+      $dept_status = filter_input(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $sql_command = "UPDATE tbl_department SET dept_name = '$dept_name', dept_code = '$dept_code', status = '$dept_status' WHERE id = '$dept_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+          $_SESSION["message"] = "Department updated successfully.";
+      }
+      else{
+          $_SESSION["message"] = "Failed to update department.";
+      }
+
+      header("Refresh: .3; url = department.php");
+      exit;
+
+    }
 
 
 
