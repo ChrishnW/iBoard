@@ -891,12 +891,21 @@
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
         var target = document.getElementById('target_count').innerHTML;
+        var daily_target = document.getElementById('daily_target_display').innerHTML;
         
         var new_actual = parseInt(actual) + 1;
         var new_balance = parseInt(target) - new_actual;
+        var new_daily_target = parseInt(daily_target);
 
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
+
+        if(new_actual == new_daily_target){
+            document.getElementById('runStopButton').innerHTML = 'FINISH';
+            document.body.style.backgroundColor = '#90EE90'; // light green
+
+            work_status = "FINISH";
+        }
 
         update();
     }
@@ -904,12 +913,21 @@
     function minus() {  
         var actual = document.getElementById('actual_count').innerHTML;
         var target = document.getElementById('target_count').innerHTML;
+        var daily_target = document.getElementById('daily_target_display').innerHTML;   
         
         var new_actual = parseInt(actual) - 1;
         var new_balance = parseInt(target) - new_actual;
+        var new_daily_target = parseInt(daily_target);
 
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
+
+        if(new_actual != new_daily_target){
+            document.getElementById('runStopButton').innerHTML = 'RUN';
+            document.body.style.backgroundColor = '#add8e6'; // light blue
+
+            work_status = "WORK";
+        }
 
         update();
     }
