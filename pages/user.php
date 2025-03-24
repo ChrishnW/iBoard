@@ -558,7 +558,7 @@
                             <!-- Line Details -->
                             <div class="mb-3">
                                 <label for="edit_line_desc" class="form-label">Line Description <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" placeholder="101" required>
+                                <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" required>
                             </div>
                             <div class="mb-3">
                                 <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
@@ -567,7 +567,7 @@
                             
                             <div class="mb-3">
                                 <label for="edit_daily_target" class="form-label">Daily Target <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" placeholder="100" required>
+                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" required>
                             </div>
 
                             <div class="mb-3">
@@ -588,7 +588,7 @@
                             <!-- Line Person -->
                             <div class="mb-3">
                                 <label for="edit_line_leader" class="form-label">Line Leader <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" placeholder="Juan Dela Cruz" required>
+                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" required>
                             </div>
 
                             <div class="mb-3">
@@ -598,12 +598,12 @@
                             
                             <div class="mb-3">
                                 <label for="edit_takt_time" class="form-label">Takt Time <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" placeholder="100" required>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" required>
                             </div> 
 
                             <div class="mb-3">
                                 <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" placeholder="100" required>
+                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" required>
                             </div>
  
                             <div class="mb-3">
