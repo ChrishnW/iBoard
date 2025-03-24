@@ -713,6 +713,20 @@
         update();
     }
 
+    function start_breaktime(){
+        document.getElementById('runStopButton').innerHTML = 'BREAK';
+        document.body.style.backgroundColor = '#ffcccb'; // light red
+
+        update();
+    }
+
+    function end_breaktime(){
+        document.getElementById('runStopButton').innerHTML = 'RUN';
+        document.body.style.backgroundColor = '#add8e6'; // light blue
+
+        update();
+    }
+
     function check_breaktime_start(){
 
         var full_time_now = new Date();
@@ -726,19 +740,23 @@
 
         switch(time_now){
             case tool_start: 
+                start_breaktime();
                 work_status = "BREAK";
                 break;
             case am_start: 
-                console.log("Breaktime!!!");
+                start_breaktime();
                 work_status = "BREAK";
                 break;
-            case lunch_start: 
+            case lunch_start:
+                start_breaktime(); 
                 work_status = "BREAK";
                 break;
             case pm_start: 
+                start_breaktime();
                 work_status = "BREAK";
                 break;
             case ot_start: 
+                start_breaktime();
                 work_status = "BREAK";
                 break;
         }
@@ -774,18 +792,23 @@
 
             switch(time_now){
                 case tool_end: 
+                    end_breaktime();
                     work_status = "WORK";
                     break;
                 case am_end: 
+                    end_breaktime();
                     work_status = "WORK";
                     break;
                 case lunch_end: 
+                    end_breaktime();
                     work_status = "WORK";
                     break;
                 case pm_end: 
+                    end_breaktime();
                     work_status = "WORK";
                     break;
                 case ot_end: 
+                    end_breaktime();
                     work_status = "WORK";
                     break;
             }
@@ -826,7 +849,7 @@
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
         } else {
-            console.error('Invalid button text:', button.innerText);
+            //console.error('Invalid button text:', button.innerText);
         }
 
         update();
