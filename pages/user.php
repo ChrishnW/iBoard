@@ -529,8 +529,8 @@
                             <td>
                                 <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
                                 <div class="d-flex justify-content-between mt-1">
-                                    <button class="btn btn-primary btn-sm" onclick="minus()" style="display: none;" id="minus">-</button>
-                                    <button class="btn btn-primary btn-sm" onclick="add()" style="display: none;" id="plus">+</button>
+                                    <button class="btn btn-primary btn-lg" onclick="minus()" style="display: none;" id="minus">-</button>
+                                    <button class="btn btn-primary btn-lg" onclick="add()" style="display: none;" id="plus">+</button>
                                 </div>
                             </td>
                             <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
