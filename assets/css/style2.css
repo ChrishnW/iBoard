@@ -3,3 +3,17 @@ input[type="number"]::-webkit-outer-spin-button
 {
     -webkit-appearance: none;
 }
+
+#btn_submit1{
+    background: none;
+    color: blue;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
+#btn_submit1:hover {
+    text-decoration: underline;
+    color: darkblue; 
+}
