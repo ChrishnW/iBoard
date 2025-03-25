@@ -169,7 +169,7 @@
           </div>
 
           <div class=\"mb-3\">
-            <label for=\"edit_acc_department_code\" class=\"form-label\">Code <span style=\"color: red;\">*</span></label>
+            <label for=\"edit_acc_department_code\" class=\"form-label\">Department <span style=\"color: red;\">*</span></label>
             <select name=\"edit_acc_department_code\" id=\"edit_acc_department_avail\" class=\"form-control\" required>
               <option value=\"$dept_code\" hidden>$dept_name</option>
             </select>
@@ -212,9 +212,9 @@
     if(isset($_POST["add_account"])){
 
       $acc_name = filter_input(INPUT_POST, "acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
-      $acc_password = filter_input(INPUT_POST, "acc_password", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_password = 12345;
       $acc_department_code = filter_input(INPUT_POST, "acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
-      $acc_status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_status = 1;
       $acc_access = 2;
 
       $hashed_password = password_hash($acc_password, PASSWORD_DEFAULT);
@@ -362,27 +362,13 @@
       <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
         <div class="mb-3">
           <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
-          <input type="text" name="acc_name" id="acc_name" class="form-control" placeholder="SDRB" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="acc_password" class="form-label">Password <span style="color: red;">*</span></label>
-          <input type="password" name="acc_password" id="acc_password" class="form-control" placeholder="*******" required>
+          <input type="text" name="acc_name" id="acc_name" class="form-control" required>
         </div>
 
         <div class="mb-3">
           <label for="acc_department_code" class="form-label">Department <span style="color: red;">*</span></label>
           <select name="acc_department_code" id="acc_department_avail" class="form-control" required>
             <option value="" hidden></option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label for="acc_status" class="form-label">Status <span style="color: red;">*</span></label>
-          <select name="acc_status" id="acc_status" class="form-control" required>
-            <option value="" hidden></option>
-            <option value="1">Active</option>
-            <option value="0">Inactive</option>
           </select>
         </div>
 
