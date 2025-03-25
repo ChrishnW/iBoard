@@ -169,7 +169,7 @@
       $name = $part[0];
       $number = $part[1];
 
-      $sql_command1 = "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code'";
+      $sql_command1 = "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' && status = '1'";
       $result1 = mysqli_query($conn, $sql_command1);
 
       $count = 0;
