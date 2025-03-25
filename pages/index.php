@@ -219,6 +219,14 @@
   }
 
 
+  // Generate Department Code ..............................................
+
+  // $department_code = 100;
+
+  // $sql_command = "SELECT * FROM tbl_department";
+
+
+
 ?>
 
 <script>
