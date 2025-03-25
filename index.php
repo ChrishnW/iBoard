@@ -40,7 +40,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 
-  <title>iBoard</title>
+  <title>i-Board</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
 
@@ -72,7 +72,7 @@
 
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <img src="assets/img/Logo.png" style="width: 50px;" class="mr-1">
-                      <span class="h5 font-weight-bold mb-0">iBoard</span>
+                      <span class="h5 font-weight-bold mb-0">i-Board</span>
                     </div>
 
                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
