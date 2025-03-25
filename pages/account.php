@@ -199,11 +199,6 @@
 
 
 
-
-
-
-
-
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
     // Add Account ------------------------------------------------------------------------------
@@ -211,8 +206,8 @@
     if(isset($_POST["add_account"])){
 
       $acc_name = filter_input(INPUT_POST, "acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
-      $acc_password = 12345;
       $acc_department_code = filter_input(INPUT_POST, "acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
+      $acc_password = 12345;
       $acc_status = 1;
       $acc_access = 2;
 
