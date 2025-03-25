@@ -97,16 +97,18 @@
         const table = `
         
           <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\" >
+          
+          <div class=\"mb-3\">
+            <label for=\"edit_dept_code\" class=\"form-label\">Department Code <span style=\"color: red;\">*</span></label>
+            <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" readonly value=\"$dept_code\" class=\"form-control\">
+          </div>
 
           <div class=\"mb-3\">
             <label for=\"edit_dept_name\" class=\"form-label\">Department Name <span style=\"color: red;\">*</span></label>
             <input type=\"text\" name=\"edit_dept_name\" id=\"edit_dept_name\" required value=\"$dept_name\" class=\"form-control\">
           </div>
 
-          <div class=\"mb-3\">
-            <label for=\"edit_dept_code\" class=\"form-label\">Department Code <span style=\"color: red;\">*</span></label>
-            <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" required value=\"$dept_code\" class=\"form-control\">
-          </div>
+          
 
           <div class=\"mb-3\">
             <label for=\"edit_status\">Status <span style=\"color: red;\">*</span></label>
@@ -138,7 +140,7 @@
 
       $dept_name = filter_input(INPUT_POST, "dept_name", FILTER_SANITIZE_SPECIAL_CHARS);
       $dept_code = filter_input(INPUT_POST, "dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
-      $status = filter_input(INPUT_POST, "status", FILTER_SANITIZE_SPECIAL_CHARS);
+      $status = 1;
 
       $hashed_password = password_hash("12345", PASSWORD_DEFAULT);
 
@@ -299,23 +301,15 @@
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
         
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
+          
+          <div class="mb-3">
+            <label for="dept_code" class="form-label">Department Code</label>
+            <input type="text" class="form-control" name="dept_code" id="dept_code" value="101" readonly>
+          </div>
+        
           <div class="mb-3">
             <label for="dept_name" class="form-label">Department Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="dept_name" id="dept_name" placeholder="Production 1" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="dept_code" class="form-label">Code <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="dept_code" id="dept_code" placeholder="101" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-            <select class="form-control" name="status" id="status" required>
-              <option value="" hidden></option>
-              <option value="1">Active</option>
-              <option value="0">Inactive</option>
-            </select>
+            <input type="text" class="form-control" name="dept_name" id="dept_name" required>
           </div>
 
           <div class="d-flex justify-content-left">
