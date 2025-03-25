@@ -302,9 +302,8 @@
         
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
           
-          <div class="mb-3">
+          <div class="mb-3" id="insert_dept_code">
             <label for="dept_code" class="form-label">Department Code</label>
-            <input type="text" class="form-control" name="dept_code" id="dept_code" value="101" readonly>
           </div>
         
           <div class="mb-3">
@@ -456,6 +455,41 @@
         });</script>';
 
       }
+  }
+
+
+  // Generate Department Code ..............................................
+
+  $department_code = 100;
+
+  $sql_command = "SELECT * FROM tbl_department";
+  $result = mysqli_query($conn, $sql_command);
+
+  if(mysqli_num_rows($result) > 0){
+    while($dept = mysqli_fetch_assoc($result)) {
+
+      $code = (int)$dept['dept_code'];
+      $department_code = $department_code > $code ? $department_code : $code;
+
+    }
+
+    $department_code++;
+    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+      const table = `
+        <input type=\"text\" class=\"form-control\" name=\"dept_code\" id=\"dept_code\" value=\"$department_code\" readonly>
+      `;
+      
+      document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
+
+    }); </script>";
+
+
+
+
+
+
+
   }
 
 
