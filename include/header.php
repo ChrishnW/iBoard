@@ -24,7 +24,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>iBoard | <?php echo ucfirst(basename($_SERVER['PHP_SELF'], '.php')); ?></title>
+  <title>i-Board | <?php echo ucfirst(basename($_SERVER['PHP_SELF'], '.php')); ?></title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
   <link href="../assets/css/style2.css" rel="stylesheet">
@@ -43,11 +43,17 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <!-- LOGO HERE -->
         </div>
-        <div class="sidebar-brand-text mx-3">iBoard</div>
+        <div class="sidebar-brand-text mx-3">i-Board</div>
       </a>
 
       <hr class="sidebar-divider my-0">
 
+      <li class="nav-item">
+        <a class="nav-link" href="../pages/index.php">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+      
       <li class="nav-item">
         <a class="nav-link" href="../pages/department.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
