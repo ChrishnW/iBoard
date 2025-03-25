@@ -56,7 +56,7 @@
       
       <li class="nav-item">
         <a class="nav-link" href="../pages/department.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="far fa-building"></i>
           <span>Manage Department</span></a>
       </li>
 
