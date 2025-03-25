@@ -12,7 +12,6 @@
       });
     </script>";
 
-    //unset($_SESSION['department_code']);
 
   }
 
@@ -34,6 +33,27 @@
       ob_end_flush();
       
     }
+
+    // Back Button ------------------------------------------------------------------------------
+
+    if(isset($_POST['back'])){
+      
+      unset($_SESSION["department_code"]);
+
+      header("Refresh: .3; url = index.php");
+      exit();
+      ob_end_flush();
+      
+    }
+
+
+
+
+
+
+
+
+
 
 
   }
@@ -70,9 +90,14 @@
         <div class="card-header py-3.5 pt-4 align-items-center ">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
             <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u>GPI Production Status</u></h2>
-            <a class="btn btn-danger float-right mt-2" href="index.php">
-                <i class="fas fa-sign-out-alt"></i> Exit
+            <a class="btn btn-danger float-right mt-2" href="#" onclick="back_btn()">
+                <i class="fas fa-sign-out-alt"></i> Back
             </a>
+            
+            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="back_form">
+              <input type="hidden" name="back" value="back">
+            </form>
+
             <div class="clearfix"></div>
         </div>
 
@@ -203,22 +228,22 @@
   let currentPage = 1;
 
   function updateTable() {
-      $.ajax({
-          method: 'POST',
-          url: 'fetch.php',
-          data: { page: currentPage },
-          success: function (data) {
-              document.getElementById('insert_here').innerHTML = data;
+    $.ajax({
+        method: 'POST',
+        url: 'fetch.php',
+        data: { page: currentPage },
+        success: function (data) {
+            document.getElementById('insert_here').innerHTML = data;
 
-              // Update Pagination UI
-              const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
-              updatePagination(totalPages);
-              console.log("Success");
-          },
-          error: function () {
-              console.log("Error");
-          }
-      });
+            // Update Pagination UI
+            const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
+            updatePagination(totalPages);
+            console.log("Success");
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
   }
 
   function updatePagination(totalPages) {
@@ -246,6 +271,14 @@
           updateTable();
       }
   }
+
+  function back_btn(){
+    document.getElementById('back_form').submit();
+  }
+
+
+
+
   
   document.addEventListener('DOMContentLoaded', function () {
 
@@ -253,7 +286,7 @@
       setInterval(updateTable, 1000);
     }
 
-
+    
 
 
 
