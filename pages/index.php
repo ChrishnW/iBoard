@@ -1,10 +1,8 @@
 <?php include '../include/header.php'; 
   ob_start();
 
-  if(isset($_SESSION['tigger'])){
+  if(isset($_SESSION['department_code'])){
     
-    unset($_SESSION['tigger']);
-
     echo "<script>
       document.addEventListener('DOMContentLoaded', function () {
         
@@ -13,6 +11,8 @@
       
       });
     </script>";
+
+    //unset($_SESSION['department_code']);
 
   }
 
@@ -27,8 +27,7 @@
     if(isset($_POST['submit'])){
 
       $dept_code = $_POST['depart_code'];
-      $_SESSION['depart_code'] = $dept_code;
-      $_SESSION['tigger'] = 1;
+      $_SESSION['department_code'] = $dept_code;
 
       header("Refresh: .3; url = index.php");
       exit();
@@ -128,12 +127,6 @@
 
   </div>
 
-
-
-
-
-
-
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
 
@@ -201,11 +194,69 @@
   }
 
 
-
-
-
-
-
-
-
 ?>
+
+<script>
+  
+  var depart_code =  "<?php echo isset($_SESSION['department_code']) ? TRUE : FALSE; ?>";
+
+  let currentPage = 1;
+
+  function updateTable() {
+      $.ajax({
+          method: 'POST',
+          url: 'fetch.php',
+          data: { page: currentPage },
+          success: function (data) {
+              document.getElementById('insert_here').innerHTML = data;
+
+              // Update Pagination UI
+              const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
+              updatePagination(totalPages);
+              console.log("Success");
+          },
+          error: function () {
+              console.log("Error");
+          }
+      });
+  }
+
+  function updatePagination(totalPages) {
+      const pagination = document.querySelector('.pagination');
+      pagination.innerHTML = '';
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                              </li>`;
+
+      for (let i = 1; i <= totalPages; i++) {
+          pagination.innerHTML += `<li class="page-item ${currentPage === i ? 'active' : ''}">
+                                      <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                                  </li>`;
+      }
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                              </li>`;
+  }
+
+  function changePage(page) {
+      if (page > 0) {
+          currentPage = page;
+          updateTable();
+      }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function () {
+
+    if(depart_code){
+      setInterval(updateTable, 1000);
+    }
+
+
+
+
+
+  });
+
+</script>

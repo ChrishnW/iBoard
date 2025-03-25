@@ -105,23 +105,23 @@
 
 <script>
 
-    function updateTable() {
-        $.ajax({
-            method: 'POST',
-            url: 'fetch.php',
-            success: function (data) {
-                document.getElementById('insert_here').innerHTML = data;
-                console.log("Success");
-            },
-            error: function () {
-                console.log("Error");
-            }
-        });
-    }
+    // function updateTable() {
+    //     $.ajax({
+    //         method: 'POST',
+    //         url: 'fetch.php',
+    //         success: function (data) {
+    //             document.getElementById('insert_here').innerHTML = data;
+    //             console.log("Success");
+    //         },
+    //         error: function () {
+    //             console.log("Error");
+    //         }
+    //     });
+    // }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        setInterval(updateTable, 1000);
-    });
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     setInterval(updateTable, 1000);
+    // });
     
     //---------------------------------------------------------------------------------
 
