@@ -3,7 +3,7 @@
 
   if(isset($_SESSION['tigger'])){
     
-    //unset($_SESSION['tigger']);
+    unset($_SESSION['tigger']);
 
     echo "<script>
       document.addEventListener('DOMContentLoaded', function () {
