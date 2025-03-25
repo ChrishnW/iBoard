@@ -1,14 +1,43 @@
 <?php include '../include/header.php'; 
+  ob_start();
 
+  if(isset($_SESSION['tigger'])){
+    
+    unset($_SESSION['tigger']);
 
-  if(isset($_POST['submit'])){
     echo "<script>
-      alert('Submit button clicked');
+      document.addEventListener('DOMContentLoaded', function () {
+        
+        document.getElementById('display_department').style.display = 'none';
+        document.getElementById('monitor_department').style.display = 'block';
+      
+      });
     </script>";
+
   }
 
 
 
+
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Viewing monitor ------------------------------------------------------------------------------
+
+    if(isset($_POST['submit'])){
+
+      $dept_code = $_POST['depart_code'];
+      $_SESSION['depart_code'] = $dept_code;
+      $_SESSION['tigger'] = 1;
+
+      header("Refresh: .3; url = index.php");
+      exit();
+      ob_end_flush();
+      
+    }
+
+
+  }
 
 
 
@@ -152,7 +181,7 @@
                               </div>
                           </div>
                           <form action=\"index.php\" method=\"post\">
-                              <input type=\"hidden\" id=\"totalPages\" value=\"1\">
+                              <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
                               <input type=\"submit\" name=\"submit\" value=\"More Info ->\" id=\"btn_submit1\">
                           </form>
                       </div>
