@@ -230,6 +230,31 @@
 
     }
 
+    // Reset Password --------------------------------------------------------------------------
+
+    if(isset($_POST["reset_password"])){
+
+      $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
+      $password = 12345;
+
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+      
+      $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Department password updated successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to update department password.";
+      }
+
+      header("Refresh: .3; url = account.php");
+      exit;
+    }
+
+
+
   }
  
 ?>
@@ -342,6 +367,7 @@
           <div class="d-flex justify-content-left">
 
             <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
+            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
             <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
           
           </div>

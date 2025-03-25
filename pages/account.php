@@ -227,80 +227,109 @@
       exit;
 
     }
+
+    // Delete Account Ask --------------------------------------------------------------------------
+
+    if(isset($_POST["delete_account"])){
+
+      $_SESSION["delete_id_acc"] = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      header("Refresh: .3; url = account.php");
+      exit;
+
+    } 
+
+    // Delete Account Confirm --------------------------------------------------------------------------
+
+    if(isset($_POST["delete_data"])){
+
+      $acc_id = $_SESSION["delete_acc"];
+
+      $sql_command = "DELETE FROM tbl_accounts WHERE id = '$acc_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Account deleted successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to delete account.";
+      }
+      
+      unset($_SESSION["delete_acc"]);
+      
+      header("Refresh: .3; url = account.php");
+      exit;
+
+    }
+
+    // Edit Account --------------------------------------------------------------------------
+
+    if(isset($_POST["edit_account"])){
+
+      $acc_id = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $_SESSION["acc_id"] = $acc_id;
+
+      header("Refresh: .3; url = account.php");
+      exit;
+
+    }
+
+    // Edit Account Submit --------------------------------------------------------------------------
+
+    if(isset($_POST["edit_add_account"])){
+
+      $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
+      $username = filter_input(INPUT_POST, "edit_acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
+      $dept_code = filter_input(INPUT_POST, "edit_acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
+      $status = filter_input(INPUT_POST, "edit_acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+      $sql_command = "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Account updated successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to update account.";
+      }
+
+      header("Refresh: .3; url = account.php");
+      exit;
+
+    }
+
+    // Reset Password --------------------------------------------------------------------------
+
+    if(isset($_POST["reset_password"])){
+
+      $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
+      $password = 12345;
+
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+      
+      $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      if($result){
+        $_SESSION["message"] = "Account password updated successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to update account password.";
+      }
+
+      header("Refresh: .3; url = account.php");
+      exit;
+    }
+
+
+
+
   
   }
 
-  // Delete Account Ask --------------------------------------------------------------------------
+  
 
-  if(isset($_POST["delete_account"])){
-
-    $_SESSION["delete_id_acc"] = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
-
-    header("Refresh: .3; url = account.php");
-    exit;
-
-  } 
-
-  // Delete Account Confirm --------------------------------------------------------------------------
-
-  if(isset($_POST["delete_data"])){
-
-    $acc_id = $_SESSION["delete_acc"];
-
-    $sql_command = "DELETE FROM tbl_accounts WHERE id = '$acc_id'";
-    $result = mysqli_query($conn, $sql_command);
-
-    if($result){
-      $_SESSION["message"] = "Account deleted successfully.";
-    }
-    else{
-      $_SESSION["message"] = "Failed to delete account.";
-    }
-    
-    unset($_SESSION["delete_acc"]);
-    
-    header("Refresh: .3; url = account.php");
-    exit;
-
-  }
-
-  // Edit Account --------------------------------------------------------------------------
-
-  if(isset($_POST["edit_account"])){
-
-    $acc_id = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
-
-    $_SESSION["acc_id"] = $acc_id;
-
-    header("Refresh: .3; url = account.php");
-    exit;
-
-  }
-
-
-  // Edit Account Submit --------------------------------------------------------------------------
-
-  if(isset($_POST["edit_add_account"])){
-
-    $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
-    $username = filter_input(INPUT_POST, "edit_acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
-    $dept_code = filter_input(INPUT_POST, "edit_acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
-    $status = filter_input(INPUT_POST, "edit_acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
-
-    $sql_command = "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'";
-    $result = mysqli_query($conn, $sql_command);
-
-    if($result){
-      $_SESSION["message"] = "Account updated successfully.";
-    }
-    else{
-      $_SESSION["message"] = "Failed to update account.";
-    }
-
-    header("Refresh: .3; url = account.php");
-    exit;
-
-  }
 
 
 ?>
@@ -397,6 +426,7 @@
 
           <div class="d-flex justify-content-left">
             <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
+            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
             <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2">
           </div>
 
