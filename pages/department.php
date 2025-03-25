@@ -99,7 +99,7 @@
           <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\" >
           
           <div class=\"mb-3\">
-            <label for=\"edit_dept_code\" class=\"form-label\">Department Code <span style=\"color: red;\">*</span></label>
+            <label for=\"edit_dept_code\" class=\"form-label\">Department Code </label>
             <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" readonly value=\"$dept_code\" class=\"form-control\">
           </div>
 
