@@ -50,7 +50,7 @@
 
     
 
-    // Add total page calculation for pagination
+    // Add total page calculation for pagination 
     $totalRowsQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM tbl_records WHERE date = '$date'");
     $totalRows = mysqli_fetch_assoc($totalRowsQuery)['total'];
     $totalPages = ceil($totalRows / $rowsPerPage);
