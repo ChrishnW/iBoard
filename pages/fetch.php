@@ -42,6 +42,19 @@
                         </tr>";
                 }
             }
+            else{
+                $blank = "";
+                $model = $username;
+                echo "<tr>
+                        <td class=\"font-weight-bold\" style=\"height: 40px;\">$model</td>
+                        <td class=\"font-weight-bold\" style=\"height: 40px;\">$blank</td>
+                        <td style=\"height: 40px;\">$blank</td>
+                        <td style=\"height: 40px;\">$blank</td>
+                        <td style=\"height: 40px;\">$blank</td>
+                        <td style=\"height: 40px;\">$blank</td>
+                        <td class=\"text-danger\" style=\"height: 40px;\">$blank</td>
+                    </tr>";
+            }
 
 
 
