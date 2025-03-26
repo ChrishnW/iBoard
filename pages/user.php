@@ -330,17 +330,24 @@
 
                     if($_FILES["extra_view_upload"]["error"] == 0){
 
-                        echo "<script>alert('qwerty');</script>";
+                        $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
+                        $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
+                        $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                        $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
+
+                        move_uploaded_file($img_temp_path_extra, $img_extra_path);
+
+                        $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
+                                        incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
+                                        WHERE id = '$line_id' ";
+                                        
+                        $result = mysqli_query($conn, $sql_command);
 
                     }else{
-                        echo "<script>alert('asd');</script>";
+                        $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
+                                        incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
+                        $result = mysqli_query($conn, $sql_command);
                     }
-
-                   print_r($_FILES);
-
-                    $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
-                                    incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
-                    $result = mysqli_query($conn, $sql_command);
 
                 } 
 
