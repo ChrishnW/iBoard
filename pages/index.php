@@ -187,24 +187,29 @@
 
           const table = `
               <div class=\"col-xl-3 col-md-6 mb-4\">
-                  <div class=\"card border-left-primary shadow h-100 py-2\">
-                      <div class=\"card-body\">
-                          <div class=\"row no-gutters align-items-center\">
-                              <div class=\"col mr-2\">
-                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 35px;\">$count</div>
-                              </div>
-                              <div class=\"col-auto\">
-                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\"><h3>$name</h3></div>
-                                <div class=\"ml-5\"><h3>$number</h3></div>
-                              </div>
-                          </div>
-                          <form action=\"index.php\" method=\"post\">
-                              <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
-                              <input type=\"submit\" name=\"submit\" value=\"More Info ->\" id=\"btn_submit1\">
-                          </form>
-                      </div>
-                  </div>
-              </div>
+                <div class=\"card shadow h-100 py-1\" style=\"border-radius: 15px; border-left: 5px solid #4e73df;\">
+                    <div class=\"card-body\" style=\"padding: 10px;\">
+                        <div class=\"row align-items-center\" style=\"gap: 5px;\">
+                            <div class=\"row align-items-center\" style=\"gap: 5px;\">
+
+                                <div class=\"text-center ml-4\">
+                                    <form action=\"index.php\" method=\"post\" class=\"flex-column align-items-center mr-1 py-1\" style=\"gap: 5px;\">
+                                        <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
+                                        <div class=\"h5 font-weight-bold text-primary\" style=\"font-size: 50px; line-height: 1.2;\">$count</div>
+                                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary btn-sm px-2\" style=\"border-radius: 8px;\">More Info</button>
+                                    </form>
+                                </div>
+
+                                <div class=\"col text-center mr-2\">
+                                    <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 25px; line-height: 1.2;\">$name</div>
+                                    <div class=\"h6 text-muted\" style=\"font-size: 25px; line-height: 1.2;\">$number</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         
           `;
       

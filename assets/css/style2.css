@@ -17,3 +17,15 @@ input[type="number"]::-webkit-outer-spin-button
     text-decoration: underline;
     color: darkblue; 
 }
+
+
+.circle-bg {
+    background-color: #f8f9fc; /* Choose your desired background color */
+    border-radius: 50%; /* Makes it a perfect circle */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers the text inside the circle */
+    width: 100px; /* Adjust the width for your circle size */
+    height: 100px; /* Should be the same as the width for a circle */
+  }
+  
