@@ -654,11 +654,9 @@
                             </div>
  
                             <div class="mb-3">
-                                <label for="edit_status" class="form-label">Status <span style="color: red;">*</span></label>
-                                <select name="edit_status" id="edit_status" class="form-control" required> 
-                                    <option value="" hidden></option>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
+                                <label for="edit_status" class="form-label">Status</label>
+                                <select name="edit_status" id="edit_status" class="form-control" required > 
+                                    <option value="1" hidden>Active</option>
                                 </select> 
                             </div>  
                         
