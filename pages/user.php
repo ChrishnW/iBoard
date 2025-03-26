@@ -1097,54 +1097,33 @@
             console.log(work_status);
         }
 
-
         // extra view display
 
-        
         if(img_extra_path != "0"){
-            console.log("may picture");
 
             if(document.getElementById('edit_user').style.display == "none"){
-                console.log("asdasdas");
+
+                j++;
+
+                if(j == 10){
+                    document.getElementById('user_dashboard').style.display = "block";
+                    document.getElementById('body').style.backgroundImage = "none";
+
+                }
+                else if(j == 20){
+                    document.getElementById('user_dashboard').style.display = "none";
+
+                    document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
+                    document.getElementById('body').style.backgroundSize = "cover";
+                    document.getElementById('body').style.backgroundPosition = "center";
+
+                    j = 0;
+                    
+                }
 
             }
-            else{
-                console.log("opiuy");
-            }
+
         }
-        else{
-            console.log("walang picture");
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        // j++;
-
-        // if(j == 10){
-        //     document.getElementById('user_dashboard').style.display = "block";
-        //     document.getElementById('body').style.backgroundImage = "none";
-
-        // }
-        // else if(j == 20){
-        //     document.getElementById('user_dashboard').style.display = "none";
-
-        //     document.getElementById('body').style.backgroundImage = "url('IMG/EXTRA_VIEW/logo.png')";
-        //     document.getElementById('body').style.backgroundSize = "cover";
-        //     document.getElementById('body').style.backgroundPosition = "center";
-
-
-        //     j = 0;
-            
-
-        // }
-
-
-
 
     }
 
@@ -1179,9 +1158,7 @@
             clearInterval(interval);
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
-        } else {
-            //console.error('Invalid button text:', button.innerText);
-        }
+        } 
 
         update();
     }
