@@ -1,6 +1,37 @@
 </div>
 <!-- End of Main Content -->
 
+<!-- Log out Pop up Modal -->
+<div class="modal" tabindex="-1" id="popoutLogout" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">Logout Account Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="h6">Are you sure you want to log out? Once logged out, you will need to log in again to access your account.</p>
+      </div>
+
+      <div class="modal-footer">
+        <!-- Confirm button triggers JavaScript logout logic -->
+        <button onclick="handleLogout()" class="btn btn-danger">Logout</button>
+        <a href="#" onclick="closePopupLogout()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function handleLogout() {
+    window.location.href = '../include/logout.php';
+  }
+</script>
+
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
   <div class="container my-auto">
