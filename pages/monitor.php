@@ -98,33 +98,33 @@
             </div>
         </div>
     </div>    
-</body>
 
-<!-- Exit Pop out Modal -->
-<div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title text-danger">Exit Confirmation</h5>
-            <button type="button" class="close" aria-label="Close" id="close_popup2">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        
-        <div class="modal-body">
-            <p class="h5">Are you sure you want to Exit?</p>
-        </div>
 
-        <div class="modal-footer">
-            <!-- Logout button triggers JavaScript logout logic -->
-            <button onclick="handleExit()" class="btn btn-danger">Exit</button>
-            <a href="#" onclick="closePopupExit()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
-        </div>
+    <!-- Exit Pop out Modal -->
+    <div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Exit Confirmation</h5>
+                <button type="button" class="close" aria-label="Close" id="close_popup2">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <p class="h5">Are you sure you want to Exit?</p>
+            </div>
 
+            <div class="modal-footer">
+                <!-- Logout button triggers JavaScript logout logic -->
+                <button onclick="handleExit()" class="btn btn-danger">Exit</button>
+                <a href="#" onclick="closePopupExit()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+            </div>
+
+            </div>
         </div>
     </div>
-</div>
-
+</body>
 </html>
 
 
@@ -218,7 +218,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        updateTable();
+        setInterval(updateTable, 1000);
     });
     
      
