@@ -30,6 +30,20 @@
   function handleLogout() {
     window.location.href = '../include/logout.php';
   }
+
+  function closePopupLogout() {
+    // Close the modal by hiding it
+    const modal = document.getElementById("popoutLogout");
+    modal.style.display = "none";
+
+    // Remove the backdrop if any is present
+    const modalBackdrops = document.getElementsByClassName("modal-backdrop");
+    while (modalBackdrops.length > 0) {
+      modalBackdrops[0].parentNode.removeChild(modalBackdrops[0]);
+    }
+  }
+
+  
 </script>
 
 <!-- Footer -->
