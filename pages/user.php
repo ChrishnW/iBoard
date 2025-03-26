@@ -190,8 +190,8 @@
 
                             <div class=\"col-md-12\">
                             <div class=\"mb-3\">
-                                <label for=\"edit_extra\" class=\"form-label\">Extra View<span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"edit_extra\" id=\"edit_extra\" required>
+                                <label for=\"edit_extra\" class=\"form-label\">Extra View</label>
+                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"edit_extra\" id=\"edit_extra\">
                             </div>
                         </div>
                         </div>
@@ -328,13 +328,15 @@
 
                     move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
-                    if(isset($_FILES["extra_view_upload"])){
+                    if($_FILES["extra_view_upload"]["error"] == 0){
 
                         echo "<script>alert('qwerty');</script>";
 
                     }else{
                         echo "<script>alert('asd');</script>";
                     }
+
+                   print_r($_FILES);
 
                     $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
                                     incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
@@ -344,7 +346,7 @@
 
             }
 
-            header("Refresh: 20; url = user.php");
+            header("Refresh: .3; url = user.php");
             exit;
             ob_end_flush();
 
@@ -439,6 +441,17 @@
                     $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
 
                     move_uploaded_file($img_temp_path_leader, $img_leader_path);
+
+                    if($_FILES["extra_view_upload"]["error"] == 0){
+
+                        echo "<script>alert('qwerty');</script>";
+
+                    }else{
+                        echo "<script>alert('asd');</script>";
+                    }
+
+                   print_r($_FILES);
+
 
                     $sql_command = "UPDATE tbl_line SET line_img = '$img_line_path',
                                     incharge_img = '$img_leader_path' WHERE id = '$line_id' ";
