@@ -49,7 +49,7 @@
 
   <!-- Custom styles for this template-->
   <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="assets/css/style.css?v=1.1  " rel="stylesheet">
+  <link href="assets/css/style.css?v=1.2" rel="stylesheet">
 
 </head>
 
