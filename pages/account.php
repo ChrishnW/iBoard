@@ -361,10 +361,31 @@
                 <th style="width: 170px;"></th>
               </tr>
             </thead>
-            <tbody id="dataTable">
+            <tbody id="insert_here">
 
             </tbody>
           </table>
+        </div>
+        <div class="d-flex justify-content-end">
+          <nav aria-label="...">
+              <ul class="pagination">
+                  <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  
+                  <li class="page-item">
+                      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                  </li>
+
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  
+                  <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                  </li>
+              </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -494,50 +515,50 @@
 
   // Display Account List----------------------------------------------------------------------------
 
-  $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2'";
-  $result = mysqli_query($conn, $sql_command);
+  // $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2'";
+  // $result = mysqli_query($conn, $sql_command);
 
-  if(mysqli_num_rows($result) > 0){
-      while($account = mysqli_fetch_assoc($result)){
+  // if(mysqli_num_rows($result) > 0){
+  //     while($account = mysqli_fetch_assoc($result)){
 
-        $acc_id = $account["id"];
-        $username = $account["username"];
-        $dept_code = $account["dept_code"];
-        $status = $account["status"];
-        $status_word = "";
+  //       $acc_id = $account["id"];
+  //       $username = $account["username"];
+  //       $dept_code = $account["dept_code"];
+  //       $status = $account["status"];
+  //       $status_word = "";
 
-        $dept_string = getDepartmentName_string($dept_code);
+  //       $dept_string = getDepartmentName_string($dept_code);
 
-        if($status == "1"){
-            $status_word = "Active";
-        }
-        else{
-            $status_word = "Inactive";
-        }
+  //       if($status == "1"){
+  //           $status_word = "Active";
+  //       }
+  //       else{
+  //           $status_word = "Inactive";
+  //       }
 
-        echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            const table = `
-            <tr>
-                <td>' . $acc_id . '</td>
-                <td>' . $username . '</td>
-                <td>' . $dept_string . '</td>
-                <td>' . $status_word . '</td>
-                <td>
-                    <form action="account.php" method="post" class="form_table">
-                        <input type="hidden" name="id_account" value=' . $acc_id . '>
+  //       echo '<script> document.addEventListener("DOMContentLoaded", function () {
+  //           const table = `
+  //           <tr>
+  //               <td>' . $acc_id . '</td>
+  //               <td>' . $username . '</td>
+  //               <td>' . $dept_string . '</td>
+  //               <td>' . $status_word . '</td>
+  //               <td>
+  //                   <form action="account.php" method="post" class="form_table">
+  //                       <input type="hidden" name="id_account" value=' . $acc_id . '>
 
-                        <input type="submit" class="edit btn btn-primary ml-2" value="Edit" name="edit_account">
-                        <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_account">
+  //                       <input type="submit" class="edit btn btn-primary ml-2" value="Edit" name="edit_account">
+  //                       <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_account">
 
-                    </form>
-                </td>
-            </tr>`;
+  //                   </form>
+  //               </td>
+  //           </tr>`;
             
-            document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
-        });</script>';
+  //           document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
+  //       });</script>';
 
-      }
-  }
+  //     }
+  // }
 
   // Display All Department in Add Account --------------------------------------------------------------------------
 
@@ -564,7 +585,59 @@
 
 <script>
 
+  let currentPage = 1;
+
+  function updateTable() {
+      $.ajax({
+          method: 'POST',
+          url: 'fetch_account.php',
+          data: { page: currentPage },
+          success: function (data) {
+              document.getElementById('insert_here').innerHTML = data;
+
+              // Update Pagination UI
+              const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
+              updatePagination(totalPages);
+
+              console.log("Success");
+          },
+          error: function () {
+              console.log("Error");
+          }
+      });
+  }
+
+  function updatePagination(totalPages) {
+      const pagination = document.querySelector('.pagination');
+      pagination.innerHTML = '';
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                              </li>`;
+
+      for (let i = 1; i <= totalPages; i++) {
+          pagination.innerHTML += `<li class="page-item ${currentPage === i ? 'active' : ''}">
+                                      <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                                  </li>`;
+      }
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                              </li>`;
+  }
+
+  function changePage(page) {
+      if (page > 0) {
+          currentPage = page;
+          updateTable();
+      }
+  }
+
+
+
   document.addEventListener('DOMContentLoaded', function () {
+
+    updateTable();
 
     document.getElementById('close_popup').addEventListener('click', function () {
       document.getElementById('popup').style.display = 'none';
