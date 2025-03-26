@@ -463,8 +463,24 @@
 
 
 <!-- Pop up Modal -->
-
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body my-2">
+        <p class="h5" id="display_message"></p>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -480,7 +496,36 @@
       
     </div>
   </div>
-</div> 
+</div>  -->
+
+<!-- Pop up  -->
+
+<!-- <div class="modal" tabindex="-1" id="popupFormDelete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pop up</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      <div class="modal-body">    
+        <p>Test Pop up</p>
+      </div>
+
+      <div class="modal-footer">
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div> -->
 
 <!-- Pop up for Delete -->
 
@@ -488,25 +533,26 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"></h5>
-
-        <button type="button" aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup2"></button>
-      </div>
-      <div class="modal-body">
-
-        <h2 class="h5 pb-3">Delete this permanently?</h2>
-
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-
-            <input type="submit" name="delete_data" value="Confirm" class="submit btn btn-danger pr-3">
-            <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
-        </form>
-
+        <h5 class="modal-title text-danger">Delete Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       
+      <div class="modal-body">
+        <p class="h5">Are you sure you want to delete this account permanently?</p> 
+      </div>
+
+      <div class="modal-footer">
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+          <input type="submit" name="delete_data" value="Confirm" class="submit btn btn-danger pr-3"> 
+          <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
+        </form>
+      </div>
+
     </div>
   </div>
-</div> 
+</div>
 
 
 </div>
