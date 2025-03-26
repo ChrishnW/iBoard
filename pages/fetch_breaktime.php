@@ -44,21 +44,21 @@
             }
 
             echo "<tr>
-                    <td>'$breaktime_code'</td>
+                    <td>$breaktime_code</td>
 
-                    <td>'$tool_start'</td>
-                    <td>'$tool_end'</td>
+                    <td>$tool_start</td>
+                    <td>$tool_end</td>
 
-                    <td>'$am_start'</td>
-                    <td>'$am_end'</td>
+                    <td>$am_start</td>
+                    <td>$am_end</td>
                     
-                    <td>'$lunch_start'</td>
-                    <td>'$lunch_end'</td>
-                    <td>'$pm_start'</td>
-                    <td>'$pm_end'</td>
-                    <td>'$ot_start'</td>
-                    <td>'$ot_end'</td>
-                    <td>'$status_word'</td>
+                    <td>$lunch_start</td>
+                    <td>$lunch_end</td>
+                    <td>$pm_start</td>
+                    <td>$pm_end</td>
+                    <td>$ot_start</td>
+                    <td>$ot_end</td>
+                    <td>$status_word</td>
                     <td>
                         <form action=\"breaktime.php\" method=\"post\" class=\"form_table d-flex justify-content-between\">
 
