@@ -494,8 +494,8 @@
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style2.css">
 </head>
-<body class="container-fluid p-4 m-0" style="background-color: #add8e6;">
-
+<body class="container-fluid p-4 m-0" style="background-color: #add8e6;" id="body">
+    
     <!-- User Dashboard-->
 
     <div id="user_dashboard" class="user_dashboard" style="display: block;">
@@ -719,7 +719,7 @@
 
     var work_status = "WORK";
     var i = 0;
-    //var j = 0;
+    var j = 0;
 
     var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
@@ -856,6 +856,33 @@
             console.log(i);
             console.log(work_status);
         }
+
+
+        // extra view display
+
+        // j++;
+
+        // if(j == 10){
+        //     document.getElementById('user_dashboard').style.display = "block";
+        //     document.getElementById('body').style.backgroundImage = "none";
+
+        // }
+        // else if(j == 20){
+        //     document.getElementById('user_dashboard').style.display = "none";
+
+        //     document.getElementById('body').style.backgroundImage = "url('IMG/EXTRA_VIEW/logo.png')";
+        //     document.getElementById('body').style.backgroundSize = "cover";
+        //     document.getElementById('body').style.backgroundPosition = "center";
+
+
+        //     j = 0;
+            
+
+        // }
+
+
+
+
     }
 
 
@@ -991,11 +1018,13 @@
 
         });
 
-        var trigger = document.getElementById('line_desc').innerHTML;
-        if (trigger != '-----') {
+        console.log(document.getElementById('edit_user').style.display);
 
-            setInterval(countingInterval, 1000);
-        }
+        // var trigger = document.getElementById('line_desc').innerHTML;
+        // if (trigger != '-----') {
+
+        //     setInterval(countingInterval, 1000);
+        // }
 
     });
 
