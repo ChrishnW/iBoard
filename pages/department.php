@@ -295,12 +295,34 @@
 
             </thead>
 
-            <tbody id="dataTable">
+            <tbody id="insert_here">
 
             </tbody>
 
           </table>
           
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    
+                    <li class="page-item">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
       </div>
@@ -436,49 +458,49 @@
 
   // Display Department List------------------------------------------------------------------------
 
-  $query = "SELECT * FROM tbl_department ORDER BY dept_name ASC";
-  $result = mysqli_query($conn, $query);
+  // $query = "SELECT * FROM tbl_department ORDER BY dept_name ASC";
+  // $result = mysqli_query($conn, $query);
 
-  if(mysqli_num_rows($result) > 0){
-      while($department = mysqli_fetch_assoc($result)){
+  // if(mysqli_num_rows($result) > 0){
+  //     while($department = mysqli_fetch_assoc($result)){
 
-        $dept_id = $department["id"];
-        $dept_name = $department["dept_name"];
-        $dept_code = $department["dept_code"];
-        $status = $department["status"];
-        $status_word = "";
+  //       $dept_id = $department["id"];
+  //       $dept_name = $department["dept_name"];
+  //       $dept_code = $department["dept_code"];
+  //       $status = $department["status"];
+  //       $status_word = "";
 
-        if($status == "1"){
-            $status_word = "Active";
-        }
-        else{
-            $status_word = "Inactive";
-        }
+  //       if($status == "1"){
+  //           $status_word = "Active";
+  //       }
+  //       else{
+  //           $status_word = "Inactive";
+  //       }
 
-        echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            const table = `
-            <tr>
-                <td>' . $dept_id . '</td>
-                <td>' . $dept_name . '</td>
-                <td>' . $dept_code . '</td>
-                <td>' . $status_word . '</td>
-                <td>
-                    <form action="department.php" method="post" class="form_table ml-2">
-                      <input type="hidden" name="id_department" value=' . $dept_id . '>
+  //       echo '<script> document.addEventListener("DOMContentLoaded", function () {
+  //           const table = `
+  //           <tr>
+  //               <td>' . $dept_id . '</td>
+  //               <td>' . $dept_name . '</td>
+  //               <td>' . $dept_code . '</td>
+  //               <td>' . $status_word . '</td>
+  //               <td>
+  //                   <form action="department.php" method="post" class="form_table ml-2">
+  //                     <input type="hidden" name="id_department" value=' . $dept_id . '>
 
-                        <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
-                        <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
+  //                       <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
+  //                       <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
 
-                    </form>
+  //                   </form>
 
-                </td>
-            </tr>`;
+  //               </td>
+  //           </tr>`;
             
-            document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
-        });</script>';
+  //           document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
+  //       });</script>';
 
-      }
-  }
+  //     }
+  // }
 
 
   // Generate Department Code ..............................................
@@ -525,7 +547,61 @@
 
 <script>
 
+  let currentPage = 1;
+
+  function updateTable() {
+      $.ajax({
+          method: 'POST',
+          url: 'fetch_department.php',
+          data: { page: currentPage },
+          success: function (data) {
+              document.getElementById('insert_here').innerHTML = data;
+
+              // Update Pagination UI
+              const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
+              updatePagination(totalPages);
+
+              console.log("Success");
+          },
+          error: function () {
+              console.log("Error");
+          }
+      });
+  }
+
+  function updatePagination(totalPages) {
+      const pagination = document.querySelector('.pagination');
+      pagination.innerHTML = '';
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                              </li>`;
+
+      for (let i = 1; i <= totalPages; i++) {
+          pagination.innerHTML += `<li class="page-item ${currentPage === i ? 'active' : ''}">
+                                      <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                                  </li>`;
+      }
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                              </li>`;
+  }
+
+  function changePage(page) {
+      if (page > 0) {
+          currentPage = page;
+          updateTable();
+      }
+  }
+
+
+
+
+
   document.addEventListener('DOMContentLoaded', function () {
+
+    updateTable();
 
     document.getElementById('close_popup').addEventListener('click', function () {
       document.getElementById('popup').style.display = 'none';
