@@ -376,38 +376,60 @@
           
             <table class="table table-bordered table-striped" width="100%" cellspacing="0">
             
-            <thead class="bg-primary text-white text-center" style="font-size: 0.75rem;">
+              <thead class="bg-primary text-white text-center" style="font-size: 0.75rem;">
 
-              <tr>
-              <th class="align-text-top">Breaktime Code</th>
+                <tr>
+                <th class="align-text-top">Breaktime Code</th>
 
-              <th class="align-text-top">Tool Box Meeting Start</th>
-              <th class="align-text-top">Tool Box Meeting End</th>
+                <th class="align-text-top">Tool Box Meeting Start</th>
+                <th class="align-text-top">Tool Box Meeting End</th>
 
-              <th class="align-text-top">Breaktime Start (AM)</th>
-              <th class="align-text-top">Breaktime End (AM)</th>
+                <th class="align-text-top">Breaktime Start (AM)</th>
+                <th class="align-text-top">Breaktime End (AM)</th>
 
-              <th class="align-text-top">Breaktime Start (Lunch)</th>
-              <th class="align-text-top">Breaktime End (Lunch)</th>
+                <th class="align-text-top">Breaktime Start (Lunch)</th>
+                <th class="align-text-top">Breaktime End (Lunch)</th>
 
-              <th class="align-text-top">Breaktime Start (PM)</th>
-              <th class="align-text-top">Breaktime End (PM)</th>
+                <th class="align-text-top">Breaktime Start (PM)</th>
+                <th class="align-text-top">Breaktime End (PM)</th>
 
-              <th class="align-text-top">Breaktime Start (OT)</th>
-              <th class="align-text-top">Breaktime End (OT)</th>
+                <th class="align-text-top">Breaktime Start (OT)</th>
+                <th class="align-text-top">Breaktime End (OT)</th>
 
-              <th class="align-text-top">Status</th>
+                <th class="align-text-top">Status</th>
 
-              <th></th>
-              </tr>
+                <th></th>
+                </tr>
 
-            </thead>
-            <tbody id="dataTable">
+              </thead>
 
-            </tbody>
+              <tbody id="insert_here">
+
+              </tbody>
 
             </table>
 
+        </div>
+        <div class="d-flex justify-content-end">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    
+                    <li class="page-item">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
       </div>
     </div>
@@ -602,77 +624,77 @@
 
   // Display Breaktime List----------------------------------------------------------------------------
 
-  $sql_command = "SELECT * FROM tbl_breaktime ORDER BY breaktime_code ASC";
-  $result = mysqli_query($conn, $sql_command);
+  // $sql_command = "SELECT * FROM tbl_breaktime ORDER BY breaktime_code ASC";
+  // $result = mysqli_query($conn, $sql_command);
 
-  if(mysqli_num_rows($result) > 0){
-      while($breaktime = mysqli_fetch_assoc($result)){
+  // if(mysqli_num_rows($result) > 0){
+  //     while($breaktime = mysqli_fetch_assoc($result)){
 
-        $breaktime_id = $breaktime["id"];
+  //       $breaktime_id = $breaktime["id"];
 
-        $breaktime_code = $breaktime["breaktime_code"];
+  //       $breaktime_code = $breaktime["breaktime_code"];
 
-        $tool_start = $breaktime["tool_box_meeting_start"];
-        $tool_end = $breaktime["tool_box_meeting_end"];
+  //       $tool_start = $breaktime["tool_box_meeting_start"];
+  //       $tool_end = $breaktime["tool_box_meeting_end"];
 
-        $am_start = $breaktime["am_break_start"];
-        $am_end = $breaktime["am_break_end"];
+  //       $am_start = $breaktime["am_break_start"];
+  //       $am_end = $breaktime["am_break_end"];
 
-        $lunch_start = $breaktime["lunch_break_start"];
-        $lunch_end = $breaktime["lunch_break_end"];
+  //       $lunch_start = $breaktime["lunch_break_start"];
+  //       $lunch_end = $breaktime["lunch_break_end"];
 
-        $pm_start = $breaktime["pm_break_start"];
-        $pm_end = $breaktime["pm_break_end"];
+  //       $pm_start = $breaktime["pm_break_start"];
+  //       $pm_end = $breaktime["pm_break_end"];
         
-        $ot_start = $breaktime["ot_break_start"];
-        $ot_end = $breaktime["ot_break_end"];
+  //       $ot_start = $breaktime["ot_break_start"];
+  //       $ot_end = $breaktime["ot_break_end"];
 
-        $status = $breaktime["status"];
+  //       $status = $breaktime["status"];
 
-        $status_word = "";
+  //       $status_word = "";
 
-        if($status == "1"){
-            $status_word = "Active";
-        }
-        else{
-            $status_word = "Inactive";
-        }
+  //       if($status == "1"){
+  //           $status_word = "Active";
+  //       }
+  //       else{
+  //           $status_word = "Inactive";
+  //       }
 
-        echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            const table = `
-            <tr>
-                <td>' . $breaktime_code . '</td>
+  //       echo '<script> document.addEventListener("DOMContentLoaded", function () {
+  //           const table = `
+  //           <tr>
+  //               <td>' . $breaktime_code . '</td>
 
-                <td>' . $tool_start . '</td>
-                <td>' . $tool_end . '</td>
+  //               <td>' . $tool_start . '</td>
+  //               <td>' . $tool_end . '</td>
 
-                <td>' . $am_start . '</td>
-                <td>' . $am_end . '</td>
+  //               <td>' . $am_start . '</td>
+  //               <td>' . $am_end . '</td>
                 
-                <td>' . $lunch_start . '</td>
-                <td>' . $lunch_end . '</td>
-                <td>' . $pm_start . '</td>
-                <td>' . $pm_end . '</td>
-                <td>' . $ot_start . '</td>
-                <td>' . $ot_end . '</td>
-                <td>' . $status_word . '</td>
-                <td>
-                    <form action="breaktime.php" method="post" class="form_table d-flex justify-content-between">
+  //               <td>' . $lunch_start . '</td>
+  //               <td>' . $lunch_end . '</td>
+  //               <td>' . $pm_start . '</td>
+  //               <td>' . $pm_end . '</td>
+  //               <td>' . $ot_start . '</td>
+  //               <td>' . $ot_end . '</td>
+  //               <td>' . $status_word . '</td>
+  //               <td>
+  //                   <form action="breaktime.php" method="post" class="form_table d-flex justify-content-between">
 
-                      <input type="hidden" name="id_breaktime" value=' . $breaktime_id . '>
+  //                     <input type="hidden" name="id_breaktime" value=' . $breaktime_id . '>
 
-                      <input type="submit" class="btn btn-primary btn-sm mr-1" name="edit_breaktime" value="Edit">
-                      <input type="submit" class="btn btn-danger btn-sm" name="delete_breaktime" value="Delete">
+  //                     <input type="submit" class="btn btn-primary btn-sm mr-1" name="edit_breaktime" value="Edit">
+  //                     <input type="submit" class="btn btn-danger btn-sm" name="delete_breaktime" value="Delete">
 
-                    </form>
-                </td>
-            </tr>`;
+  //                   </form>
+  //               </td>
+  //           </tr>`;
             
-            document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
-        });</script>';
+  //           document.querySelector("#dataTable").insertAdjacentHTML("beforeend", table);
+  //       });</script>';
 
-      }
-  }
+  //     }
+  // }
 
 
 
@@ -684,7 +706,57 @@
 
 <script>
 
+  let currentPage = 1;
+
+  function updateTable() {
+      $.ajax({
+          method: 'POST',
+          url: 'fetch_breaktime.php',
+          data: { page: currentPage },
+          success: function (data) {
+              document.getElementById('insert_here').innerHTML = data;
+
+              // Update Pagination UI
+              const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
+              updatePagination(totalPages);
+
+              console.log("Success");
+          },
+          error: function () {
+              console.log("Error");
+          }
+      });
+  }
+
+  function updatePagination(totalPages) {
+      const pagination = document.querySelector('.pagination');
+      pagination.innerHTML = '';
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
+                              </li>`;
+
+      for (let i = 1; i <= totalPages; i++) {
+          pagination.innerHTML += `<li class="page-item ${currentPage === i ? 'active' : ''}">
+                                      <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                                  </li>`;
+      }
+
+      pagination.innerHTML += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                                  <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
+                              </li>`;
+  }
+
+  function changePage(page) {
+      if (page > 0) {
+          currentPage = page;
+          updateTable();
+      }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    
+    updateTable();
 
     document.getElementById('close_popup').addEventListener('click', function () {
       document.getElementById('popup').style.display = 'none';
