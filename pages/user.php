@@ -341,6 +341,8 @@
                                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
                                             WHERE id = '$line_id' ");
 
+                        $_SESSION["img_extra_path"] = $img_extra_path;
+
                     }else{
                         
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
@@ -384,7 +386,7 @@
 
             //print_r($_FILES);
 
-            if($_FILES["line_image_upload"]["error"] == 0 && $_FILES["leader_image_upload"]["error"] == 0){
+            if(isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
 
@@ -447,7 +449,7 @@
 
                     move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
-                    if($_FILES["extra_view_upload"]["error"] == 0){
+                    if(isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0){
 
                         $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
                         $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
@@ -459,6 +461,9 @@
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
                                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
                                             WHERE id = '$line_id' ");
+
+                        $_SESSION["img_extra_path"] = $img_extra_path;
+
 
                     }else{
                         
@@ -721,6 +726,8 @@
     var i = 0;
     var j = 0;
 
+    var img_extra_path = "<?php echo isset($_SESSION['img_extra_path']) ? $_SESSION['img_extra_path'] : '0'; ?>"
+
     var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
@@ -860,6 +867,29 @@
 
         // extra view display
 
+        
+        if(img_extra_path != "0"){
+            console.log("may picture");
+
+            if(document.getElementById('edit_user').style.display == "none"){
+                console.log("asdasdas");
+
+            }
+            else{
+                console.log("opiuy");
+            }
+        }
+        else{
+            console.log("walang picture");
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         // j++;
 
         // if(j == 10){
@@ -1018,13 +1048,11 @@
 
         });
 
-        console.log(document.getElementById('edit_user').style.display);
+        var trigger = document.getElementById('line_desc').innerHTML;
+        if (trigger != '-----') {
 
-        // var trigger = document.getElementById('line_desc').innerHTML;
-        // if (trigger != '-----') {
-
-        //     setInterval(countingInterval, 1000);
-        // }
+            setInterval(countingInterval, 1000);
+        }
 
     });
 
