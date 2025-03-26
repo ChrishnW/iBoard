@@ -41,9 +41,11 @@
             <div class="card-header py-3.5 pt-4 align-items-center ">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
                 <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u>GPI Production Status</u></h2>
-                <a class="btn btn-danger float-right mt-2" href="../include/logout.php">
-                    <i class="fas fa-sign-out-alt"></i> Exit
+                <a class="btn btn-danger float-right mt-2" href="#" onclick="showExitModal()">
+                    <i class="fas fa-sign-out-alt"></i> 
+                    Exit
                 </a>
+
                 <div class="clearfix"></div>
             </div>
         
@@ -95,15 +97,57 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-    
-    
+    </div>    
 </body>
+
+<!-- Exit Pop out Modal -->
+<div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title text-danger">Exit Confirmation</h5>
+            <button type="button" class="close" aria-label="Close" id="close_popup2">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <p class="h5">Are you sure you want to Exit?</p>
+        </div>
+
+        <div class="modal-footer">
+            <!-- Logout button triggers JavaScript logout logic -->
+            <button onclick="handleExit()" class="btn btn-danger">Exit</button>
+            <a href="#" onclick="closePopupExit()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+        </div>
+
+        </div>
+    </div>
+</div>
+
 </html>
 
+
 <script>
+    document.getElementById('close_popup2').addEventListener('click', function () {
+      document.getElementById('popoutExit').style.display = 'none';
+    });
+
+    function showExitModal() {
+        const modal = document.getElementById('popoutExit');
+        modal.style.display = 'block'; // Show the modal
+    }
+
+    function handleExit() {
+        window.location.href = '../include/logout.php'; // Redirect upon confirmation
+    }
+
+    function closePopupExit() {
+        const modal = document.getElementById('popoutExit');
+        modal.style.display = 'none'; // Hide the modal
+    }
+
+
 
     // function updateTable() {
     //     $.ajax({
