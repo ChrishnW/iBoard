@@ -189,28 +189,27 @@
         document.addEventListener('DOMContentLoaded', function () {
 
           const table = `
-              <div class=\"col-xl-3 col-md-6 mb-4\">
-                <div class=\"card shadow h-100 py-1\" style=\"border-radius: 15px; border-left: 5px solid #4e73df;\">
-                    <div class=\"card-body\" style=\"padding: 10px;\">
-                        <div class=\"row align-items-center\" >
-                            <div class=\"row align-items-center\" >
+            <div class=\"col-lg-3 col-md-6 col-sm-12 mb-4\">
+              <div class=\"card shadow h-100 py-1\" style=\"border-radius: 15px; border-left: 5px solid #4e73df;\">
+                <div class=\"card-body\" style=\"padding: 10px;\">
 
-                                <div class=\"text-center ml-4\">
-                                    <form action=\"index.php\" method=\"post\" class=\"flex-column align-items-center mr-1 py-1\" style=\"gap: 5px;\">
-                                        <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
-                                        <div class=\"h5 font-weight-bold text-primary\" style=\"font-size: 50px; line-height: 1.2;\">$count</div>
-                                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary btn-sm px-2\" style=\"border-radius: 8px;\">More Info</button>
-                                    </form>
-                                </div>
-
-                                <div class=\" text-center mr-2 pl-2\">
-                                    <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 25px; line-width: .5; line-height: 1.2;\">$name</div>
-                                    <div class=\"h6 text-muted\" style=\"font-size: 25px; line-width: .5; line-height: 1.2;\">$number</div>
-                                </div>
-                            </div>
-                        </div>
+                  <div class=\"row justify-content-center\">
+                  
+                    <div class=\"text-center ml-2 mr-1\">
+                      <form action=\"index.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px;\">
+                        <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
+                        <div class=\"h5 font-weight-bold text-primary\" style=\"font-size: 50px; line-height: 1;\">$count</div>
+                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary btn-sm px-2\" style=\"border-radius: 8px;\">More Info</button>
+                      </form>
                     </div>
+
+                    <div class=\"text-center ml-3 mt-3 pr-2\">
+                      <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 25px;\">$name</div>
+                      <div class=\"h6 text-muted\" style=\"font-size: 25px;\">$number</div>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
 
 
