@@ -195,7 +195,6 @@
 
                 $date_records = date("Y-m-d");
                 $status_records = "RUN";
-                $value_records = 0;
 
                 $gapInSeconds = strtotime($work_end) - strtotime($work_start);
                 $gapInMinutes = $gapInSeconds / 60;
@@ -222,7 +221,7 @@
 
                 $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', 
                                 unit = '$line_desc', status = '$status_records', target_day = '$daily_target', 
-                                target_now = '$quantity', actual = '$value_records', balance = '$quantity' 
+                                target_now = '$quantity', balance = '$quantity' 
                                 WHERE id = '$records_id' ";
 
                 $result = mysqli_query($conn, $sql_command);
