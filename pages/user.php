@@ -299,7 +299,7 @@
 
     <div id="user_dashboard" class="user_dashboard" style="display: block;">
         <!-- Header Section -->
-        <div class="d-flex align-items-center px-3 py-2 shadow-lg">  
+        <div class="d-flex align-items-center px-3 py-2">  
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
             <span class="h1 font-weight-bold mb-0 text-primary" id="line_name">-----</span>
             
