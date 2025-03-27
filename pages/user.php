@@ -145,7 +145,7 @@
                 } 
 
             }
-            
+
 
             header("Refresh: .3; url = user.php");
             exit;
@@ -1230,6 +1230,15 @@
 
             user_dashboard.style.display = "block";
             edit_user.style.display = "none";
+
+        });
+
+        document.getElementById("body").addEventListener("click", function(){
+            
+            if(document.getElementById('body').style.backgroundImage != "none"){
+                document.getElementById('user_dashboard').style.display = "block";
+                document.getElementById('body').style.backgroundImage = "none";
+            }
 
         });
 

@@ -204,28 +204,28 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // Add Account ------------------------------------------------------------------------------
+    // Add Breaktime ------------------------------------------------------------------------------
 
     if(isset($_POST["add_breaktime"])){
 
       $code = filter_input(INPUT_POST, "break_code", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $tool_start = filter_input(INPUT_POST, "tool_start", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $tool_end = filter_input(INPUT_POST, "tool_end", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $tool_start = filter_input(INPUT_POST, "tool_start", FILTER_SANITIZE_SPECIAL_CHARS);
+      $tool_end = filter_input(INPUT_POST, "tool_end", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_am = filter_input(INPUT_POST, "break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_am = filter_input(INPUT_POST, "break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_am = filter_input(INPUT_POST, "break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_am = filter_input(INPUT_POST, "break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_lunch = filter_input(INPUT_POST, "break_start_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_lunch = filter_input(INPUT_POST, "break_end_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_lunch = filter_input(INPUT_POST, "break_start_lunch", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_lunch = filter_input(INPUT_POST, "break_end_lunch", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_pm = filter_input(INPUT_POST, "break_start_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_pm = filter_input(INPUT_POST, "break_end_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_pm = filter_input(INPUT_POST, "break_start_pm", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_pm = filter_input(INPUT_POST, "break_end_pm", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_ot = filter_input(INPUT_POST, "break_start_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_ot = filter_input(INPUT_POST, "break_end_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_ot = filter_input(INPUT_POST, "break_start_ot", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_ot = filter_input(INPUT_POST, "break_end_ot", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $status = filter_input(INPUT_POST, "acc_status", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $status = "1";
 
       $sql_command = "INSERT INTO tbl_breaktime (breaktime_code, tool_box_meeting_start, tool_box_meeting_end,
                       am_break_start, am_break_end, lunch_break_start, lunch_break_end, pm_break_start, 
@@ -302,22 +302,22 @@
 
       $code = filter_input(INPUT_POST, "edit_break_code", FILTER_SANITIZE_SPECIAL_CHARS);
       
-      $tool_start = filter_input(INPUT_POST, "edit_tool_start", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $tool_end = filter_input(INPUT_POST, "edit_tool_end", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $tool_start = filter_input(INPUT_POST, "edit_tool_start", FILTER_SANITIZE_SPECIAL_CHARS);
+      $tool_end = filter_input(INPUT_POST, "edit_tool_end", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_am = filter_input(INPUT_POST, "edit_break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_am = filter_input(INPUT_POST, "edit_break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_am = filter_input(INPUT_POST, "edit_break_start_am", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_am = filter_input(INPUT_POST, "edit_break_end_am", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_lunch = filter_input(INPUT_POST, "edit_break_start_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_lunch = filter_input(INPUT_POST, "edit_break_end_lunch", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_lunch = filter_input(INPUT_POST, "edit_break_start_lunch", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_lunch = filter_input(INPUT_POST, "edit_break_end_lunch", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_pm = filter_input(INPUT_POST, "edit_break_start_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_pm = filter_input(INPUT_POST, "edit_break_end_pm", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_pm = filter_input(INPUT_POST, "edit_break_start_pm", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_pm = filter_input(INPUT_POST, "edit_break_end_pm", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $start_ot = filter_input(INPUT_POST, "edit_break_start_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
-      $end_ot = filter_input(INPUT_POST, "edit_break_end_ot", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $start_ot = filter_input(INPUT_POST, "edit_break_start_ot", FILTER_SANITIZE_SPECIAL_CHARS);
+      $end_ot = filter_input(INPUT_POST, "edit_break_end_ot", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $status = filter_input(INPUT_POST, "edit_break_status", FILTER_SANITIZE_SPECIAL_CHARS);;
+      $status = filter_input(INPUT_POST, "edit_break_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
       $sql_command = "UPDATE tbl_breaktime SET breaktime_code = '$code', tool_box_meeting_start = '$tool_start',
                       tool_box_meeting_end = '$tool_end', am_break_start = '$start_am', am_break_end = '$end_am',
@@ -503,15 +503,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="acc_status" class="form-label">Status <span style="color: red;">*</span></label>
-              <select name="acc_status" id="acc_status" class="form-control" required> 
-                <option value="" hidden></option>
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
-              </select> 
             </div>
 
           <div class="d-flex justify-content-left">
