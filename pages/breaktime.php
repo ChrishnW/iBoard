@@ -104,8 +104,6 @@
 
       }); </script>';
 
-      
-
       echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
       const table = `
@@ -203,12 +201,6 @@
 
     unset($_SESSION["edit_id_breaktime"]);
   }
-
-  
-
-
-
-
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -347,15 +339,8 @@
 
     }
 
-
-
-
   }
   
-
-
-
-
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -556,11 +541,8 @@
       </div>
     
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="edit_breaktime_form" method="post" style="width: 100%; max-width: 600px;">
-      
-          
-            
 
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="edit_breaktime_form" method="post" style="width: 100%; max-width: 600px;">
           <div class="d-flex justify-content-left">
             <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
             <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
@@ -568,6 +550,7 @@
           
         </div>
       </form>
+
     </div>
   </div>
 
@@ -617,14 +600,9 @@
   </div>
 </div>
 
-
 </div>
 <!-- /.container-fluid -->
-<?php include '../include/footer.php'; 
-
-
-?>
-
+<?php include '../include/footer.php'; ?>
 
 <script>
 
@@ -711,10 +689,6 @@
       edit_breaktime.style.display = 'none';
     });
 
-
-
-
-
   });
 
   const popup2 = document.getElementById("popupFormDelete");
@@ -722,12 +696,5 @@
   function closePopup2() {
     popup2.style.display = "none";
   }
-
-
-
-
-
-
-
 
 </script>

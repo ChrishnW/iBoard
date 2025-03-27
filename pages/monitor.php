@@ -99,7 +99,6 @@
         </div>
     </div>    
 
-
     <!-- Exit Pop out Modal -->
     <div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
         <div class="modal-dialog modal-dialog-centered">
@@ -127,7 +126,6 @@
 </body>
 </html>
 
-
 <script>
     document.getElementById('close_popup2').addEventListener('click', function () {
       document.getElementById('popoutExit').style.display = 'none';
@@ -146,29 +144,6 @@
         const modal = document.getElementById('popoutExit');
         modal.style.display = 'none'; // Hide the modal
     }
-
-
-
-    // function updateTable() {
-    //     $.ajax({
-    //         method: 'POST',
-    //         url: 'fetch.php',
-    //         success: function (data) {
-    //             document.getElementById('insert_here').innerHTML = data;
-    //             console.log("Success");
-    //         },
-    //         error: function () {
-    //             console.log("Error");
-    //         }
-    //     });
-    // }
-
-    // document.addEventListener("DOMContentLoaded", function () {
-    //     setInterval(updateTable, 1000);
-    // });
-    
-    //---------------------------------------------------------------------------------
-
 
     let currentPage = 1;
 
@@ -221,5 +196,4 @@
         setInterval(updateTable, 1000);
     });
     
-     
 </script>

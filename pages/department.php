@@ -1,6 +1,5 @@
 <?php include '../include/header.php'; 
 
-
   // Display Message ----------------------------------------------------------------------------
 
   if(isset($_SESSION["message"])){
@@ -125,12 +124,10 @@
 
       }); </script>";
 
-        
     }
 
     unset($_SESSION["dept_id"]);
   }
-
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
@@ -253,14 +250,11 @@
       exit;
     }
 
-
-
   }
  
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
 
   <div id="department_dashboard" class="department_dashboard" style="display: block;">
       
@@ -330,7 +324,6 @@
     </div>
     
   </div> 
-
 
   <!-- ADD DEPARTMENT -->
 
@@ -402,7 +395,6 @@
 
   </div>
 
-
 </div>
 
 <!-- Pop up Modal -->
@@ -451,8 +443,6 @@
   </div>
 </div>
 
-
-
 <?php 
   
   include '../include/footer.php'; 
@@ -483,19 +473,7 @@
 
     }); </script>";
 
-
-
-
-
-
-
   }
-
-
-
-
-
-
 
 ?>
 
@@ -549,10 +527,6 @@
       }
   }
 
-
-
-
-
   document.addEventListener('DOMContentLoaded', function () {
 
     updateTable();
@@ -587,8 +561,6 @@
       department_dashboard.style.display = 'block';
       add_department.style.display = 'none';
     });
-
-    
 
   });
   const popup2 = document.getElementById("popupFormDelete");
