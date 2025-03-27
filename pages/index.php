@@ -199,7 +199,7 @@
                                     <form action=\"index.php\" method=\"post\" class=\"flex-column align-items-center mr-1 py-1\" style=\"gap: 5px;\">
                                         <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
                                         <div class=\"h5 font-weight-bold text-primary\" style=\"font-size: 50px; line-height: 1.2;\">$count</div>
-                                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary btn-sm px-2\" style=\"border-radius: 8px;\">More Info</button>
+                                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary btn-sm px-1\" style=\"border-radius: 8px;\">More Info</button>
                                     </form>
                                 </div>
 
@@ -212,9 +212,6 @@
                     </div>
                 </div>
             </div>
-
-
-        
           `;
       
           document.querySelector(\"#dashboad_insert\").insertAdjacentHTML(\"beforeend\", table);
