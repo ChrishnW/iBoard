@@ -201,7 +201,7 @@
                                     <button type=\"submit\" name=\"submit\" class=\"btn btn-primary px-2 mt-n1\" style=\"border-radius: 8px; font-size: 12px; padding: 1px 1px;\">More Info</button>
                                 </form>
                             </div>
-                            <div class=\"text-center ml-5 mt-3 pr-2\">
+                            <div class=\"text-center ml-3 mt-3 pr-2\">
                                 <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 26px;\">$name</div>
                                 <div class=\"h6 text-muted\" style=\"font-size: 26px;\">$number</div>
                             </div>
