@@ -1005,22 +1005,27 @@
             case tool_start: 
                 start_breaktime();
                 work_status = "BREAK";
+                clearInterval(interval);
                 break;
             case am_start: 
                 start_breaktime();
                 work_status = "BREAK";
+                clearInterval(interval);
                 break;
             case lunch_start:
                 start_breaktime(); 
                 work_status = "BREAK";
+                clearInterval(interval);
                 break;
             case pm_start: 
                 start_breaktime();
                 work_status = "BREAK";
+                clearInterval(interval);
                 break;
             case ot_start: 
                 start_breaktime();
                 work_status = "BREAK";
+                clearInterval(interval);
                 break;
         }
     }
@@ -1195,6 +1200,7 @@
         if(new_actual >= new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'FINISH';
             document.body.style.backgroundColor = '#90EE90'; // light green
+            clearInterval(interval);
 
             work_status = "FINISH";
         }
