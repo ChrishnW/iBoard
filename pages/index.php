@@ -206,8 +206,8 @@
                     </div>
 
                     <div class=\"text-center ml-3 mt-3 pr-2\">
-                      <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 25px;\">$name</div>
-                      <div class=\"h6 text-muted\" style=\"font-size: 25px;\">$number</div>
+                      <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 26px;\">$name</div>
+                      <div class=\"h6 text-muted\" style=\"font-size: 26px;\">$number</div>
                     </div>
                   </div>
                 </div>
