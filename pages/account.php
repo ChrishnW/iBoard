@@ -116,7 +116,6 @@
 
   }
 
-
   // Edit Account Dsisplay --------------------------------------------------------------------------
 
   if(isset($_SESSION["acc_id"])){
@@ -194,10 +193,6 @@
 
     unset($_SESSION["acc_id"]);
   }
-
-
-
-
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
@@ -322,18 +317,9 @@
       exit;
     }
 
-
-
-
-  
   }
 
-  
-
-
-
 ?>
-
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -480,53 +466,6 @@
   </div>
 </div> 
 
-<!-- <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-
-        <button aria-hidden="true" class="fa fa-times" data-bs-dismiss="modal" aria-label="Close" id="close_popup"></button>
-      </div>
-      <div class="modal-body">
-
-        <h5 id="display_message"></h5>
-
-      </div>
-      
-    </div>
-  </div>
-</div>  -->
-
-<!-- Pop up  -->
-
-<!-- <div class="modal" tabindex="-1" id="popupFormDelete">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Pop up</h5>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
-          <span aria-hidden="true">&times;</span>
-        </button>
-
-      </div>
-
-      <div class="modal-body">    
-        <p>Test Pop up</p>
-      </div>
-
-      <div class="modal-footer">
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </form>
-        
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <!-- Pop up for Delete -->
 
 <div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
@@ -553,7 +492,6 @@
     </div>
   </div>
 </div>
-
 
 </div>
 <!-- /.container-fluid -->
@@ -632,8 +570,6 @@
       }
   }
 
-
-
   document.addEventListener('DOMContentLoaded', function () {
 
     updateTable();
@@ -670,12 +606,6 @@
       edit_account.style.display = 'none';
     });
 
-
-
-
-
-
-
   });
 
   const popup2 = document.getElementById("popupFormDelete");
@@ -683,7 +613,5 @@
   function closePopup2() {
     popup2.style.display = "none";
   }
-
-  
 
 </script>
