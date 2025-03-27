@@ -8,7 +8,7 @@ function Login() {
     contentType: false,
     success: function (response) {
       if(response == 'Admin'){
-        window.location.href = 'pages/index.php';
+        window.location.href = 'pages/dashboard.php';
       }
       else if(response == 'User'){
         window.location.href = 'pages/user.php';

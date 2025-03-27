@@ -28,7 +28,7 @@
       $dept_code = $_POST['depart_code'];
       $_SESSION['department_code'] = $dept_code;
 
-      header("Refresh: .3; url = index.php");
+      header("Refresh: .3; url = dashboard.php");
       exit();
       ob_end_flush();
       
@@ -40,31 +40,13 @@
       
       unset($_SESSION["department_code"]);
 
-      header("Refresh: .3; url = index.php");
+      header("Refresh: .3; url = dashboard.php");
       exit();
       ob_end_flush();
       
     }
 
-
-
-
-
-
-
-
-
-
-
   }
-
-
-
-
-
-
-
-
 
 ?>
 
@@ -132,7 +114,7 @@
                 <nav aria-label="...">
                     <ul class="pagination">
                         <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            <a class="page-link" href="#" tabdashboard="-1">Previous</a>
                         </li>
 
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -194,7 +176,7 @@
                 <div class=\"card-body\">
                   <div class=\"row justify-content-center\" >
                     <div class=\"text-center\">
-                      <form action=\"index.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px; line-height: .75;\">
+                      <form action=\"dashboard.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px; line-height: .75;\">
                           <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
                           <div class=\"text-secondary mt-2 mb-1\" style=\"font-size: 12px;\">Number of lines</div>
                           <div class=\"h1 font-weight-bold text-primary\" style=\"line-height: .75;\">$count</div>

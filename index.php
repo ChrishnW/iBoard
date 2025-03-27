@@ -5,7 +5,7 @@
   if($access_security){
 
     if($access_security == 1){
-      header('location: pages/index.php');
+      header('location: pages/dashboard.php');
       exit();
     }
     elseif($access_security == 2){
