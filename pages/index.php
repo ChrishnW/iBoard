@@ -189,29 +189,25 @@
         document.addEventListener('DOMContentLoaded', function () {
 
           const table = `
-            <div class=\"col-lg-3 col-md-6 col-sm-12 mb-4\">
-              <div class=\"card shadow h-100 py-1\" style=\"border-radius: 15px; border-left: 5px solid #4e73df;\">
-                <div class=\"card-body\" style=\"padding: 10px;\">
-
-                  <div class=\"row justify-content-center\">
-                  
-                    <div class=\"text-center ml-2 mr-1\">
-                      <form action=\"index.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px; line-height: 1;\">
-                        <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
-                        <div class=\"text-secondary mt-2\" style=\"font-size: 12px;\">line number</div>
-                        
-                        <div class=\"h5 font-weight-bold text-primary \" style=\"font-size: 50px; line-height: .85;\">$count</div>
-                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary px-2 mt-n1\" style=\"border-radius: 8px; font-size: 12px; padding: 1px 1px;\">More Info</button>                      
-                      </form>
+            <div class=\"col-lg-4 col-md-5 col-sm-10 mb-4\">
+                <div class=\"card shadow h-100\" style=\"border-radius: 15px; border-left: 5px solid #4e73df;\">
+                    <div class=\"card-body\">
+                        <div class=\"row justify-content-center\">
+                            <div class=\"text-center ml-2 mr-1\">
+                                <form action=\"index.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px; line-height: .85;\">
+                                    <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
+                                    <div class=\"text-secondary mt-2\" style=\"font-size: 12px;\">number of lines</div>
+                                    <div class=\"h5 font-weight-bold text-primary\" style=\"font-size: 50px; line-height: .85;\">$count</div>
+                                    <button type=\"submit\" name=\"submit\" class=\"btn btn-primary px-2 mt-n1\" style=\"border-radius: 8px; font-size: 12px; padding: 1px 1px;\">More Info</button>
+                                </form>
+                            </div>
+                            <div class=\"text-center ml-5 mt-3 pr-2\">
+                                <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 26px;\">$name</div>
+                                <div class=\"h6 text-muted\" style=\"font-size: 26px;\">$number</div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class=\"text-center ml-3 mt-3 pr-2\">
-                      <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 26px;\">$name</div>
-                      <div class=\"h6 text-muted\" style=\"font-size: 26px;\">$number</div>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
 
 
