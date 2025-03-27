@@ -69,20 +69,22 @@
 ?>
 
   <!-- Begin Page Content -->
-  <div class="container-fluid" id="display_department" style="display: block;">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    </div>
-
-    <!-- Content Row -->
-    <div class="row" id="dashboad_insert">
-
+  <div class="container-fluid">
+  <div id="display_department" style="display: block;">
+    <div class="card shadow mb-4">
       
+      <div class="card-header py-3.5 pt-4">
+        <!-- Page Heading -->
+          <h2 class="float-left">Dashboard</h1>
+          <div class="clearfix"></div>
+      </div>
+        <!-- Content Row -->
+      <div class="card-body">          
+        <div class="row" id="dashboad_insert"> </div>
+      </div>
     </div>
-
   </div>
+</div>
 
   <div class="container-fluid" id="monitor_department" style="display: none;">
 
@@ -152,6 +154,7 @@
 
   </div>
 
+
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
 
@@ -189,8 +192,8 @@
               <div class=\"col-xl-3 col-md-6 mb-4\">
                 <div class=\"card shadow h-100 py-1\" style=\"border-radius: 15px; border-left: 5px solid #4e73df;\">
                     <div class=\"card-body\" style=\"padding: 10px;\">
-                        <div class=\"row align-items-center\" style=\"gap: 5px;\">
-                            <div class=\"row align-items-center\" style=\"gap: 5px;\">
+                        <div class=\"row align-items-center\" >
+                            <div class=\"row align-items-center\" >
 
                                 <div class=\"text-center ml-4\">
                                     <form action=\"index.php\" method=\"post\" class=\"flex-column align-items-center mr-1 py-1\" style=\"gap: 5px;\">
@@ -200,15 +203,16 @@
                                     </form>
                                 </div>
 
-                                <div class=\"col text-center mr-2\">
-                                    <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 25px; line-height: 1.2;\">$name</div>
-                                    <div class=\"h6 text-muted\" style=\"font-size: 25px; line-height: 1.2;\">$number</div>
+                                <div class=\" text-center mr-2 pl-2\">
+                                    <div class=\"h6 mb-0 font-weight-bold text-gray-800\" style=\"font-size: 25px; line-width: .5; line-height: 1.2;\">$name</div>
+                                    <div class=\"h6 text-muted\" style=\"font-size: 25px; line-width: .5; line-height: 1.2;\">$number</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         
           `;
