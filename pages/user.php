@@ -354,23 +354,29 @@
                     </thead>
 
                     <tbody class="bg-white text-center text-dark h4">
-                        <tr>
-                            <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
-                            <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
-                            <td>
-                                <p id="actual_count" class="font-weight-bolder mt-5 mb-0 pb-3"style="font-size: 50px;">0</p>
-                                <div class="d-flex justify-content-between mt-1">
-                                    <button class="btn btn-primary btn-lg" onclick="minus()" style="display: none;" id="minus">-</button>
-                                    <button class="btn btn-primary btn-lg" onclick="add()" style="display: none;" id="plus">+</button>
-                                </div>
-                            </td>
-                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder "style="font-size: 50px;" id="balance_count">0</td>        
-                        </tr>
+                
+                    <tr style="height: 175px;"> <!-- Adjust height here -->
+                        <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
+                        <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
+                        <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
+                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;">0</p>
+                            <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
+                                <button class="btn btn-primary btn-lg ml-1 mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
+                                <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: none;" onclick="add()" id="plus">+</button>
+                            </div>
+                        </td>
+                        <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count">0</td>
+                    </tr>
+
+
+
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 
     <!-- EDIT USER -->
     <div id="edit_user" class="edit_user" style="display: none;">
