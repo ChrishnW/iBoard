@@ -1133,11 +1133,12 @@
         const button = document.getElementById('runStopButton');
         const body = document.body;
 
-        if (button.innerText === 'RUN') {
+        if (button.innerText == 'RUN') {
+            clearInterval(interval);
             button.innerText = 'STOP';
             body.style.backgroundColor = '#ffcccb'; // light red
             interval = setInterval(updateTimer, 10);
-        } else if (button.innerText === 'STOP') {
+        } else if (button.innerText == 'STOP') {
             clearInterval(interval);
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
