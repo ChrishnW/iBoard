@@ -284,7 +284,7 @@
                 <th>Department Name</th>
                 <th>Code</th>
                 <th>Status</th>
-                <th style="width: 170px;"></th>                
+                <th style="width: 170px;">Action</th>                
               </tr>
 
             </thead>
@@ -295,28 +295,6 @@
 
           </table>
           
-        </div>
-
-        <div class="d-flex justify-content-end">
-            <nav aria-label="...">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    
-                    <li class="page-item">
-                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
         </div>
 
       </div>
@@ -483,20 +461,12 @@
       $('#dataTable').DataTable();
   });
 
-  // let currentPage = 1;
-
   function updateTable() {
       $.ajax({
           method: 'POST',
           url: 'fetch_department.php',
-          // data: { page: currentPage },
           success: function (data) {
               document.getElementById('insert_here').innerHTML = data;
-
-              // // Update Pagination UI
-              // const totalPages = parseInt(document.getElementById('totalPages').value || 1, 10);
-              // updatePagination(totalPages);
-
               console.log("Success");
           },
           error: function () {
@@ -504,32 +474,6 @@
           }
       });
   }
-
-  // function updatePagination(totalPages) {
-  //     const pagination = document.querySelector('.pagination');
-  //     pagination.innerHTML = '';
-
-  //     pagination.innerHTML += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-  //                                 <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>
-  //                             </li>`;
-
-  //     for (let i = 1; i <= totalPages; i++) {
-  //         pagination.innerHTML += `<li class="page-item ${currentPage === i ? 'active' : ''}">
-  //                                     <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
-  //                                 </li>`;
-  //     }
-
-  //     pagination.innerHTML += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-  //                                 <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>
-  //                             </li>`;
-  // }
-
-  // function changePage(page) {
-  //     if (page > 0) {
-  //         currentPage = page;
-  //         updateTable();
-  //     }
-  // }
 
   document.addEventListener('DOMContentLoaded', function () {
 

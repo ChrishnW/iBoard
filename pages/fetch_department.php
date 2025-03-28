@@ -3,10 +3,6 @@
     include "../include/connect.php";
     include "../include/auth.php";
 
-    // $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
-    // $rowsPerPage = 5; // Number of rows per page
-    // $offset = ($page - 1) * $rowsPerPage; LIMIT $offset, $rowsPerPage
-
     $query = "SELECT * FROM tbl_department";
     $result = mysqli_query($conn, $query);
 
@@ -46,10 +42,4 @@
         }
     }
 
-    // // Add total page calculation for pagination 
-    // $totalRowsQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM tbl_department");
-    // $totalRows = mysqli_fetch_assoc($totalRowsQuery)['total'];
-    // $totalPages = ceil($totalRows / $rowsPerPage);
-
-    // echo "<input type=\"hidden\" id=\"totalPages\" value=\"$totalPages\">";
 ?>
