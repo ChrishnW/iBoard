@@ -193,6 +193,10 @@
 <script>
   
   var depart_code =  "<?php echo isset($_SESSION['department_code']) ? TRUE : FALSE; ?>";
+  
+  function back_btn(){
+    document.getElementById('back_form').submit();
+  }
 
   function updateTable() {
     $.ajax({
@@ -212,16 +216,6 @@
     });
   }
 
-  
-
-  function back_btn(){
-    document.getElementById('back_form').submit();
-  }
-
-
-
-
-  
   document.addEventListener('DOMContentLoaded', function () {
 
     if(depart_code){
@@ -229,5 +223,38 @@
     }
 
   });
+
+
+  // function updateTable() {
+  //   $.ajax({
+  //       method: 'POST',
+  //       url: 'fetch.php',
+  //       success: function (data) {
+  //           var table = $('#dataTable').DataTable(); 
+  //           var page = table.page(); // Get the current page
+  //           var order = table.order(); // Get the current order
+  //           var search = table.search(); // Get the current search value
+
+  //           table.destroy(); 
+  //           document.getElementById('insert_here').innerHTML = data;
+
+  //           $('#dataTable').DataTable({
+  //               order: order, // Restore the order
+  //               pageLength: table.page.len(), // Restore the page length
+  //               search: { search: search } // Restore the search value
+  //           }).page(page).draw(false); // Restore the page and redraw without resetting
+  //           console.log("Success");
+  //       },
+  //       error: function () {
+  //           console.log("Error");
+  //       }
+  //   });
+  // }
+
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   if(depart_code){
+  //     setInterval(updateTable, 1000);
+  //   }
+  // });
 
 </script>
