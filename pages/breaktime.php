@@ -213,26 +213,26 @@
               <thead class="bg-primary text-white text-center" style="font-size: 0.7rem; text-align: center; padding: 0;">
 
                 <tr>
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime Code</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Code</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Tool Box Meeting Start</th>
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Tool Box Meeting End</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Tool Box Meeting Start</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Tool Box Meeting End</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime Start (AM)</th>
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime End (AM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (AM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (AM)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime Start (Lunch)</th>
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime End (Lunch)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (Lunch)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (Lunch)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime Start (PM)</th>
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime End (PM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (PM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (PM)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime Start (OT)</th>
-                  <th class="text-center align-middle pl-2" style="font-size: 0.7rem; text-align: center; width: 8%;">Breaktime End (OT)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (OT)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (OT)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Status</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Status</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.7rem; text-align: center; width: 8%;">Actions</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Actions</th>
                 </tr>
 
               </thead>
@@ -278,28 +278,28 @@
                 ?>
 
                 <tr>
-                    <td><?php echo $breaktime_code ?></td>
+                    <td style="font-size: 1rem;"><?php echo $breaktime_code ?></td>
 
-                    <td><?php echo $tool_start ?></td>
-                    <td><?php echo $tool_end ?></td>
+                    <td style="font-size: 1rem;"><?php echo $tool_start ?></td>
+                    <td style="font-size: 1rem;"><?php echo $tool_end ?></td>
 
-                    <td><?php echo $am_start ?></td>
-                    <td><?php echo $am_end ?></td>
+                    <td style="font-size: 1rem;"><?php echo $am_start ?></td>
+                    <td style="font-size: 1rem;"><?php echo $am_end ?></td>
                     
-                    <td><?php echo $lunch_start ?></td>
-                    <td><?php echo $lunch_end ?></td>
-                    <td><?php echo $pm_start ?></td>
-                    <td><?php echo $pm_end ?></td>
-                    <td><?php echo $ot_start ?></td>
-                    <td><?php echo $ot_end ?></td>
-                    <td><?php echo $status_word ?></td>
+                    <td style="font-size: 1rem;"><?php echo $lunch_start ?></td>
+                    <td style="font-size: 1rem;"><?php echo $lunch_end ?></td>
+                    <td style="font-size: 1rem;"><?php echo $pm_start ?></td>
+                    <td style="font-size: 1rem;"><?php echo $pm_end ?></td>
+                    <td style="font-size: 1rem;"><?php echo $ot_start ?></td>
+                    <td style="font-size: 1rem;"><?php echo $ot_end ?></td>
+                    <td style="font-size: 1rem;"><?php echo $status_word ?></td>
                     <td class="text-center align-middle">
                       <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="justify-content-center form_table d-flex">
 
-                      <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id ?>">
+                        <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id ?>">
 
-                      <input type="submit" class="btn btn-primary btn-sm mr-1 ml-n4" name="edit_breaktime" value="Edit">
-                      <input type="submit" class="btn btn-danger btn-sm mr-n4" name="delete_breaktime" value="Delete">
+                        <input type="submit" class="btn btn-primary btn-sm mr-1 ml-n4" name="edit_breaktime" value="Edit">
+                        <input type="submit" class="btn btn-danger btn-sm mr-n4" name="delete_breaktime" value="Delete">
 
                       </form>
                     </td>
