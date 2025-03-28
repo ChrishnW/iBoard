@@ -573,7 +573,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
 
-    updateTable();
+    //updateTable();
 
     document.getElementById('close_popup').addEventListener('click', function () {
       document.getElementById('popup').style.display = 'none';
