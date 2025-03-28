@@ -394,10 +394,9 @@
           </div>
 
           <?php
-                }
-
-                unset($_SESSION["dept_id"]);
               }
+              unset($_SESSION["dept_id"]);
+            }
           ?>
 
         </form>

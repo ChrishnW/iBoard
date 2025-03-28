@@ -277,22 +277,22 @@
                 $result = mysqli_query($conn, $sql_command);
 
                 if(mysqli_num_rows($result) > 0){
-                    while($account = mysqli_fetch_assoc($result)){
+                  while($account = mysqli_fetch_assoc($result)){
 
-                        $acc_id = $account["id"];
-                        $username = $account["username"];
-                        $dept_code = $account["dept_code"];
-                        $status = $account["status"];
-                        $status_word = "";
+                    $acc_id = $account["id"];
+                    $username = $account["username"];
+                    $dept_code = $account["dept_code"];
+                    $status = $account["status"];
+                    $status_word = "";
 
-                        $dept_string = getDepartmentName_string($dept_code);
+                    $dept_string = getDepartmentName_string($dept_code);
 
-                        if($status == "1"){
-                            $status_word = "Active";
-                        }
-                        else{
-                            $status_word = "Inactive";
-                        }
+                    if($status == "1"){
+                        $status_word = "Active";
+                    }
+                    else{
+                        $status_word = "Inactive";
+                    }
 
               ?>
 
@@ -390,35 +390,35 @@
               $result = mysqli_query($conn, $sql_command);
 
               if(mysqli_num_rows($result) > 0){
-                  $account = mysqli_fetch_assoc($result);
+                $account = mysqli_fetch_assoc($result);
 
-                  $username = $account["username"];
-                  $access = $account["access"];
-                  $dept_code = $account["dept_code"];
-                  $status = $account["status"];
-                  $status_word = "";
+                $username = $account["username"];
+                $access = $account["access"];
+                $dept_code = $account["dept_code"];
+                $status = $account["status"];
+                $status_word = "";
 
-                  if($status == "1"){
-                    $status_word = "Active";
-                  }
-                  else{
-                    $status_word = "Inactive";
-                  }
+                if($status == "1"){
+                  $status_word = "Active";
+                }
+                else{
+                  $status_word = "Inactive";
+                }
 
-                  $dept_name = getDepartmentName_string($dept_code);
+                $dept_name = getDepartmentName_string($dept_code);
 
-                  echo '<script> document.addEventListener("DOMContentLoaded", function () {
+                echo '<script> document.addEventListener("DOMContentLoaded", function () {
 
-                    var account_dashboard = document.getElementById("account_dashboard");
-                    account_dashboard.style.display = "none";
+                  var account_dashboard = document.getElementById("account_dashboard");
+                  account_dashboard.style.display = "none";
 
-                    var add_account = document.getElementById("add_account");
-                    add_account.style.display = "none";
+                  var add_account = document.getElementById("add_account");
+                  add_account.style.display = "none";
 
-                    var edit_account = document.getElementById("edit_account");
-                    edit_account.style.display = "block";
+                  var edit_account = document.getElementById("edit_account");
+                  edit_account.style.display = "block";
 
-                  }); </script>';
+                }); </script>';
 
           ?>
 
@@ -451,19 +451,13 @@
           </div>
 
           <?php
-                  getAllDepartment_edit();
-              
-                }
-            
-                unset($_SESSION["acc_id"]);
+                getAllDepartment_edit();
               }
+              unset($_SESSION["acc_id"]);
+            }
           ?>
 
-
-          
-
         </form>
-        
 
       </div>
 
@@ -472,7 +466,6 @@
   </div>
 
 </div>
-
 
 <!-- Pop up Modal -->
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">

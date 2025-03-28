@@ -61,8 +61,12 @@
           <div class="clearfix"></div>
       </div>
         <!-- Content Row -->
-      <div class="card-body">          
-        <div class="row" id="dashboad_insert"> </div>
+      <div class="card-body">   
+
+        <div class="row" id="dashboad_insert">
+
+        </div>
+        
       </div>
     </div>
   </div>
