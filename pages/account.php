@@ -424,8 +424,8 @@
           <input type="hidden" name="edit_acc_id" id="edit_acc_id" value="<?php echo $acc_id ?>">
 
           <div class="mb-3">
-          <label for="edit_acc_name" class="form-label">Username <span style="color: red;">*</span></label>
-          <input type="text" name="edit_acc_name" id="edit_acc_name" class="form-control" required value="<?php echo $username ?>">
+            <label for="edit_acc_name" class="form-label">Username <span style="color: red;">*</span></label>
+            <input type="text" name="edit_acc_name" id="edit_acc_name" class="form-control" required value="<?php echo $username ?>">
           </div>
 
           <div class="mb-3">
@@ -444,9 +444,9 @@
           </div>
 
           <div class="d-flex justify-content-left">
-            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
-            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
-            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2">
+            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3 mt-3">
+            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2 mt-3">
+            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2 mt-3">
           </div>
 
           <?php
