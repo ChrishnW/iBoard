@@ -3,10 +3,6 @@
     include "../include/connect.php";
     include "../include/auth.php";
 
-    $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
-    $rowsPerPage = 10; // Number of rows per page
-    $offset = ($page - 1) * $rowsPerPage;
-
     $dept_code = $_SESSION['department_code'];
     $date = date("Y-m-d");
     
@@ -17,7 +13,7 @@
         while($account = mysqli_fetch_assoc($result)){
             $username = $account['username'];
 
-            $query = "SELECT * FROM tbl_records WHERE date = '$date' && model = '$username' LIMIT $offset, $rowsPerPage";
+            $query = "SELECT * FROM tbl_records WHERE date = '$date' && model = '$username' ";
             $result1 = mysqli_query($conn, $query);
 
             if(mysqli_num_rows($result1) > 0){
@@ -63,10 +59,4 @@
 
     
 
-    // Add total page calculation for pagination 
-    $totalRowsQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM tbl_records WHERE date = '$date'");
-    $totalRows = mysqli_fetch_assoc($totalRowsQuery)['total'];
-    $totalPages = ceil($totalRows / $rowsPerPage);
-
-    echo "<input type=\"hidden\" id=\"totalPages\" value=\"$totalPages\">";
 ?>
