@@ -445,7 +445,7 @@
                           <td><?php echo $ot_end ?></td>
                           <td><?php echo $status_word ?></td>
                           <td>
-                              <form action="breaktime.php" method="post" class="form_table d-flex justify-content-between">
+                              <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
 
                               <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id ?>">
 
@@ -585,6 +585,8 @@
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
 
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="edit_breaktime_form" method="post" style="width: 100%; max-width: 600px;">
+          
+        
           <div class="d-flex justify-content-left">
             <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
             <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">

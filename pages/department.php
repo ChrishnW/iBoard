@@ -284,7 +284,7 @@
                 <th>Department Name</th>
                 <th>Code</th>
                 <th>Status</th>
-                <th style="width: 170px;">Action</th>                
+                <th style="width: 170px;"></th>                
               </tr>
 
             </thead>
@@ -318,7 +318,7 @@
                     <td><?php echo $dept_code ?></td>
                     <td><?php echo $status_word ?></td>
                     <td>
-                        <form action="department.php" method="post" class="form_table ml-2">
+                        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table ml-2">
                         <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
                             <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
