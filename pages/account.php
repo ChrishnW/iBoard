@@ -122,7 +122,7 @@
 
     $acc_id = $_SESSION["acc_id"];
 
-    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id' ORDER BY username ASC";
+    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id'";
     $result = mysqli_query($conn, $sql_command);
 
     if(mysqli_num_rows($result) > 0){
@@ -457,7 +457,6 @@
         
         <form action="account.php" method="post" style="width: 100%; max-width: 600px;" id="edit_account_form">
           
-
           <div class="d-flex justify-content-left">
             <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
             <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
