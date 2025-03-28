@@ -242,17 +242,18 @@
                     <td><?php echo $dept_name ?></td>
                     <td><?php echo $dept_code ?></td>
                     <td><?php echo $status_word ?></td>
-                    <td>
-                        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table ml-2">
+                    <td style="table-layout: fixed; width: 15%;">
+                        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
                         <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
-                            <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
+                            <input type="submit" id="edit_depatment" class="btn btn-primary mr-2" value="Edit" name="edit_department">
                             <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
 
                         </form>
 
                     </td>
                 </tr>
+
 
             <?php
                   }
