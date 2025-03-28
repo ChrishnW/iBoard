@@ -51,157 +51,6 @@
 
   }
 
-  // Edit Breaktime Dsisplay --------------------------------------------------------------------------
-
-  if(isset($_SESSION["edit_id_breaktime"])){
-
-    $break_id = $_SESSION["edit_id_breaktime"];
-
-    $sql_command = "SELECT * FROM tbl_breaktime WHERE id = '$break_id'";
-    $result = mysqli_query($conn, $sql_command);
-
-    if(mysqli_num_rows($result) > 0){
-      $break = mysqli_fetch_assoc($result);
-
-      $break_code = $break["breaktime_code"];
-
-      $tool_start = $break["tool_box_meeting_start"];
-      $tool_end = $break["tool_box_meeting_end"];
-
-      $am_start = $break["am_break_start"];
-      $am_end = $break["am_break_end"];
-
-      $lunch_start = $break["lunch_break_start"];
-      $lunch_end = $break["lunch_break_end"];
-
-      $pm_start = $break["pm_break_start"];
-      $pm_end = $break["pm_break_end"];
-
-      $ot_start = $break["ot_break_start"];
-      $ot_end = $break["ot_break_end"];
-
-      $status = $break["status"];
-
-      $status_word = "";
-
-      if($status == "1"){
-        $status_word = "Active";
-      }
-      else{
-        $status_word = "Inactive";
-      }
-
-      echo '<script> document.addEventListener("DOMContentLoaded", function () {
-
-        var breaktime_dashboard = document.getElementById("breaktime_dashboard");
-        breaktime_dashboard.style.display = "none";
-
-        var add_breaktime = document.getElementById("add_breaktime");
-        add_breaktime.style.display = "none";
-
-        var edit_breaktime = document.getElementById("edit_breaktime");
-        edit_breaktime.style.display = "block";
-
-      }); </script>';
-
-      echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-      const table = `
-              
-        <input type=\"hidden\" name=\"edit_break_id\" id=\"edit_break_id\" value=\"$break_id\">
-
-        <div class=\"mb-3\">
-          <label for=\"edit_break_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
-          <input type=\"text\" class=\"form-control\" name=\"edit_break_code\" id=\"edit_break_code\" required value=\"$break_code\">
-        </div>
-
-        <div class=\"card mb-4\">
-            <div class=\"card-boy\">
-              <div id=\"tool_meeting\" class=\"row mb-3\">
-                <div class=\"col-md-6\">
-                  <label for=\"edit_tool_start\">Tool Box Meeting Start <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_start\" id=\"edit_tool_start\" required value=\"$tool_start\">        
-                </div>
-                
-                <div class=\"col-md-6\">
-                  <label for=\"edit_tool_end\">Tool Box Meeting End <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_tool_end\" id=\"edit_tool_end\" required value=\"$tool_end\">        
-                </div>
-              </div>
-
-
-              <div id=\"breaktime_am\" class=\"row mb-3\">
-                <div class=\"col-md-6\">
-
-                  <label for=\"edit_break_start_am\">Breaktime Start (AM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_am\" id=\"edit_break_start_am\" required value=\"$am_start\">
-                  
-                </div>
-                
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_end_am\">Breaktime End (AM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_am\" id=\"edit_break_end_am\" required value=\"$am_end\">
-                </div>
-              </div>
-
-              <div id=\"breaktime_lunch\" class=\"row mb-3\">
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_start_lunch\">Breaktime Start (Lunch) <span style=\"color: red;\">*</span></label> <br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_lunch\" id=\"edit_break_start_lunch\" required value=\"$lunch_start\">
-                </div>
-                
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_end_lunch\">Breaktime End (Lunch) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_lunch\" id=\"edit_break_end_lunch\" required value=\"$lunch_end\">
-                </div>
-              </div>
-
-              <div id=\"breaktime_pm\" class=\"row mb-3\">
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_start_pm\">Breaktime Start (PM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_pm\" id=\"edit_break_start_pm\" required value=\"$pm_start\">
-                </div>
-                
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_end_pm\">Breaktime End (PM) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_pm\" id=\"edit_break_end_pm\" required value=\"$pm_end\">
-                </div>
-              </div>
-
-              <div id=\"breaktime_ot\" class=\"row mb-3\">
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_start_ot\">Breaktime Start (OT) <span style=\"color: red;\">*</span></label><br>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_start_ot\" id=\"edit_break_start_ot\" required value=\"$ot_start\">
-                </div>
-
-                <div class=\"col-md-6\">
-                  <label for=\"edit_break_end_ot\">Breaktime End (OT) <span style=\"color: red;\">*</span></label>
-                  <input type=\"time\" class=\"form-control\" name=\"edit_break_end_ot\" id=\"edit_break_end_ot\" required value=\"$ot_end\">                  
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class=\"mb-3\">
-            <label for=\"edit_break_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
-            <select name=\"edit_break_status\" id=\"edit_break_status\" class=\"form-control\" required> 
-              <option value=\"$status\" hidden>$status_word</option>
-              <option value=\"1\">Active</option>
-              <option value=\"0\">Inactive</option>
-            </select> 
-          </div>
-
-        `;
-      
-      document.querySelector(\"#edit_breaktime_form\").insertAdjacentHTML(\"afterBegin\", table);
-
-    }); </script>";
-      
-    }
-
-    unset($_SESSION["edit_id_breaktime"]);
-  }
-
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Add Breaktime ------------------------------------------------------------------------------
@@ -383,7 +232,7 @@
 
                 <th class="align-text-top">Status</th>
 
-                <th>Action</th>
+                <th class="align-text-top">Action</th>
                 </tr>
 
               </thead>
@@ -586,14 +435,161 @@
 
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="edit_breaktime_form" method="post" style="width: 100%; max-width: 600px;">
           
+          <?php
+
+            if(isset($_SESSION["edit_id_breaktime"])){
+
+              $break_id = $_SESSION["edit_id_breaktime"];
+          
+              $sql_command = "SELECT * FROM tbl_breaktime WHERE id = '$break_id'";
+              $result = mysqli_query($conn, $sql_command);
+          
+              if(mysqli_num_rows($result) > 0){
+                $break = mysqli_fetch_assoc($result);
+          
+                $break_code = $break["breaktime_code"];
+          
+                $tool_start = $break["tool_box_meeting_start"];
+                $tool_end = $break["tool_box_meeting_end"];
+          
+                $am_start = $break["am_break_start"];
+                $am_end = $break["am_break_end"];
+          
+                $lunch_start = $break["lunch_break_start"];
+                $lunch_end = $break["lunch_break_end"];
+          
+                $pm_start = $break["pm_break_start"];
+                $pm_end = $break["pm_break_end"];
+          
+                $ot_start = $break["ot_break_start"];
+                $ot_end = $break["ot_break_end"];
+          
+                $status = $break["status"];
+          
+                $status_word = "";
+          
+                if($status == "1"){
+                  $status_word = "Active";
+                }
+                else{
+                  $status_word = "Inactive";
+                }
+          
+                echo '<script> document.addEventListener("DOMContentLoaded", function () {
+          
+                  var breaktime_dashboard = document.getElementById("breaktime_dashboard");
+                  breaktime_dashboard.style.display = "none";
+          
+                  var add_breaktime = document.getElementById("add_breaktime");
+                  add_breaktime.style.display = "none";
+          
+                  var edit_breaktime = document.getElementById("edit_breaktime");
+                  edit_breaktime.style.display = "block";
+          
+                }); </script>';
+          ?>
+
+          <input type="hidden" name="edit_break_id" id="edit_break_id" value="<?php echo $break_id ?>">
+
+          <div class="mb-3">
+            <label for="edit_break_code">Breaktime Code <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" name="edit_break_code" id="edit_break_code" required value="<?php echo $break_code ?>">
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-boy">
+              <div id="tool_meeting" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="edit_tool_start">Tool Box Meeting Start <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_tool_start" id="edit_tool_start" required value="<?php echo $tool_start ?>">        
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="edit_tool_end">Tool Box Meeting End <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_tool_end" id="edit_tool_end" required value="<?php echo $tool_end ?>">        
+                </div>
+              </div>
+
+
+              <div id="breaktime_am" class="row mb-3">
+                <div class="col-md-6">
+
+                  <label for="edit_break_start_am">Breaktime Start (AM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_break_start_am" id="edit_break_start_am" required value="<?php echo $am_start ?>">
+                  
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="edit_break_end_am">Breaktime End (AM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_break_end_am" id="edit_break_end_am" required value="<?php echo $am_end ?>">
+                </div>
+              </div>
+
+              <div id="breaktime_lunch" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="edit_break_start_lunch">Breaktime Start (Lunch) <span style="color: red;">*</span></label> <br>
+                  <input type="time" class="form-control" name="edit_break_start_lunch" id="edit_break_start_lunch" required value="<?php echo $lunch_start ?>">
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="edit_break_end_lunch">Breaktime End (Lunch) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_break_end_lunch" id="edit_break_end_lunch" required value="<?php echo $lunch_end ?>">
+                </div>
+              </div>
+
+              <div id="breaktime_pm" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="edit_break_start_pm">Breaktime Start (PM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_break_start_pm" id="edit_break_start_pm" required value="<?php echo $pm_start ?>">
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="edit_break_end_pm">Breaktime End (PM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_break_end_pm" id="edit_break_end_pm" required value="<?php echo $pm_end ?>">
+                </div>
+              </div>
+
+              <div id="breaktime_ot" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="edit_break_start_ot">Breaktime Start (OT) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="edit_break_start_ot" id="edit_break_start_ot" required value="<?php echo $ot_start ?>">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="edit_break_end_ot">Breaktime End (OT) <span style="color: red;">*</span></label>
+                  <input type="time" class="form-control" name="edit_break_end_ot" id="edit_break_end_ot" required value="<?php echo $ot_end ?>">                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="edit_break_status" class="form-label">Status <span style="color: red;">*</span></label>
+            <select name="edit_break_status" id="edit_break_status" class="form-control" required> 
+              <option value="<?php echo $status ?>" hidden><?php echo $status_word ?></option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select> 
+          </div>
         
           <div class="d-flex justify-content-left">
             <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
             <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
           </div> 
+
+          <?php
+
+                }
+
+              unset($_SESSION["edit_id_breaktime"]);
+            }
+        
+          ?>
           
-        </div>
-      </form>
+        
+        </form>
+
+      </div>
 
     </div>
   </div>
