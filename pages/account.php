@@ -266,7 +266,7 @@
                 <th>Username</th>
                 <th>Department</th>
                 <th>Status</th>
-                <th style="width: 170px;">Action</th>
+                <th style="width: 170px;"></th>
               </tr>
             </thead>
             <tbody id="insert_here">

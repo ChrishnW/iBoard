@@ -232,7 +232,7 @@
 
                 <th class="align-text-top">Status</th>
 
-                <th class="align-text-top">Action</th>
+                <th class="align-text-top"></th>
                 </tr>
 
               </thead>
