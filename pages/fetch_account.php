@@ -3,10 +3,6 @@
     include "../include/connect.php";
     include "../include/auth.php";
 
-    $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
-    $rowsPerPage = 5; // Number of rows per page
-    $offset = ($page - 1) * $rowsPerPage;
-
     function getDepartmentName_string($dept_code){
     
         global $conn;
@@ -23,7 +19,7 @@
         }
     }
 
-    $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2' LIMIT $offset, $rowsPerPage";
+    $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2'";
     $result = mysqli_query($conn, $sql_command);
 
     if(mysqli_num_rows($result) > 0){
@@ -63,10 +59,5 @@
         }
     }
 
-    // Add total page calculation for pagination 
-    $totalRowsQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM tbl_accounts");
-    $totalRows = mysqli_fetch_assoc($totalRowsQuery)['total'];
-    $totalPages = ceil($totalRows / $rowsPerPage);
 
-    echo "<input type=\"hidden\" id=\"totalPages\" value=\"$totalPages\">";
 ?>
