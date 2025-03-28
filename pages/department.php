@@ -54,81 +54,6 @@
     unset($_SESSION["delete_id_dept"]);
   }
 
-  // Edit Department Display --------------------------------------------------------------------------
-
-  if(isset($_SESSION["dept_id"])){
-
-    $dept_id = $_SESSION["dept_id"];
-
-    $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
-    $result = mysqli_query($conn, $sql_command);
-
-    if(mysqli_num_rows($result) > 0){
-      $department = mysqli_fetch_assoc($result);
-
-      $dept_name = $department["dept_name"];
-      $dept_code = $department["dept_code"];
-      $status = $department["status"];
-      $status_word = "";
-
-      if($status == "1"){
-          $status_word = "Active";
-      }
-      else{
-          $status_word = "Inactive";
-      }
-
-      echo '<script> document.addEventListener("DOMContentLoaded", function () {
-
-        var department_dashboard = document.getElementById("department_dashboard");
-        department_dashboard.style.display = "none";
-
-        var add_department = document.getElementById("add_department");
-        add_department.style.display = "none";
-
-        var edit_department = document.getElementById("edit_department");
-        edit_department.style.display = "block";
-
-      }); </script>';
-
-      echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-        const table = `
-        
-          <input type=\"hidden\" name=\"edit_dept_id\" id=\"edit_dept_id\" value=\"$dept_id\" >
-          
-          <div class=\"mb-3\">
-            <label for=\"edit_dept_code\" class=\"form-label\">Department Code </label>
-            <input type=\"text\" name=\"edit_dept_code\" id=\"edit_dept_code\" readonly value=\"$dept_code\" class=\"form-control\">
-          </div>
-
-          <div class=\"mb-3\">
-            <label for=\"edit_dept_name\" class=\"form-label\">Department Name <span style=\"color: red;\">*</span></label>
-            <input type=\"text\" name=\"edit_dept_name\" id=\"edit_dept_name\" required value=\"$dept_name\" class=\"form-control\">
-          </div>
-
-          
-
-          <div class=\"mb-3\">
-            <label for=\"edit_status\">Status <span style=\"color: red;\">*</span></label>
-            <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required >
-                <option value=\"$status\"hidden>$status_word</option>
-                <option value=\"1\">Active</option>
-                <option value=\"0\">Inactive</option>
-            </select> 
-          </div>
-          
-          `;
-        
-        document.querySelector(\"#edit_department_form\").insertAdjacentHTML(\"afterBegin\", table);
-
-      }); </script>";
-
-    }
-
-    unset($_SESSION["dept_id"]);
-  }
-
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
     // Add Department ---------------------------------------------------------------------------
@@ -284,7 +209,7 @@
                 <th>Department Name</th>
                 <th>Code</th>
                 <th>Status</th>
-                <th style="width: 170px;"></th>                
+                <th style="width: 170px;">Action</th>                
               </tr>
 
             </thead>
@@ -399,6 +324,65 @@
         
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
           
+          <?php
+
+            if(isset($_SESSION["dept_id"])){
+
+              $dept_id = $_SESSION["dept_id"];
+          
+              $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
+              $result = mysqli_query($conn, $sql_command);
+          
+              if(mysqli_num_rows($result) > 0){
+                $department = mysqli_fetch_assoc($result);
+          
+                $dept_name = $department["dept_name"];
+                $dept_code = $department["dept_code"];
+                $status = $department["status"];
+                $status_word = "";
+          
+                if($status == "1"){
+                    $status_word = "Active";
+                }
+                else{
+                    $status_word = "Inactive";
+                }
+          
+                echo '<script> document.addEventListener("DOMContentLoaded", function () {
+          
+                  var department_dashboard = document.getElementById("department_dashboard");
+                  department_dashboard.style.display = "none";
+          
+                  var add_department = document.getElementById("add_department");
+                  add_department.style.display = "none";
+          
+                  var edit_department = document.getElementById("edit_department");
+                  edit_department.style.display = "block";
+          
+                }); </script>';
+                
+          ?>
+
+          <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
+          
+          <div class="mb-3">
+            <label for="edit_dept_code" class="form-label">Department Code </label>
+            <input type="text" name="edit_dept_code" id="edit_dept_code" readonly value="<?php echo $dept_code ?>" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="edit_dept_name" class="form-label">Department Name <span style="color: red;">*</span></label>
+            <input type="text" name="edit_dept_name" id="edit_dept_name" required value="<?php echo $dept_name ?>" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="edit_status">Status <span style="color: red;">*</span></label>
+            <select name="edit_status" id="edit_status" class="form-control" required >
+                <option value="<?php echo $status ?>"hidden><?php echo $status_word ?></option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select> 
+          </div>
 
           <div class="d-flex justify-content-left">
 
@@ -407,6 +391,13 @@
             <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
           
           </div>
+
+          <?php
+                }
+
+                unset($_SESSION["dept_id"]);
+              }
+          ?>
 
         </form>
 

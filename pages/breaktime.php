@@ -383,7 +383,7 @@
 
                 <th class="align-text-top">Status</th>
 
-                <th></th>
+                <th>Action</th>
                 </tr>
 
               </thead>
