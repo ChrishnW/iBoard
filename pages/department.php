@@ -291,6 +291,51 @@
 
             <tbody id="insert_here">
 
+            <?php
+                $query = "SELECT * FROM tbl_department";
+                $result = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($result) > 0){
+                    while($department = mysqli_fetch_assoc($result)){
+
+                        $dept_id = $department["id"];
+                        $dept_name = $department["dept_name"];
+                        $dept_code = $department["dept_code"];
+                        $status = $department["status"];
+                        $status_word = "";
+
+                        if($status == "1"){
+                            $status_word = "Active";
+                        }
+                        else{
+                            $status_word = "Inactive";
+                        } 
+            ?>
+
+            <tr>
+                    <td><?php echo $dept_id ?>  </td>
+                    <td><?php echo $dept_name ?></td>
+                    <td><?php echo $dept_code ?></td>
+                    <td><?php echo $status_word ?></td>
+                    <td>
+                        <form action="department.php" method="post" class="form_table ml-2">
+                        <input type="hidden" name="id_department" value="$dept_id">
+
+                            <input type="submit" id="edit_depatment" class="btn btn-primary" value="Edit" name="edit_department">
+                            <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
+
+                        </form>
+
+                    </td>
+                </tr>
+
+
+          <?php
+                }
+              }
+          ?>
+
+
             </tbody>
 
           </table>
@@ -458,22 +503,24 @@
 <script>
 
   $(document).ready(function () {
-      $('#dataTable').DataTable();
+    $('#dataTable').DataTable();
   });
 
-  function updateTable() {
-      $.ajax({
-          method: 'POST',
-          url: 'fetch_department.php',
-          success: function (data) {
-              document.getElementById('insert_here').innerHTML = data;
-              console.log("Success");
-          },
-          error: function () {
-              console.log("Error");
-          }
-      });
-  }
+  // function updateTable() {
+  //     $.ajax({
+  //         method: 'POST',
+  //         url: 'fetch_department.php',
+  //         success: function (data) {
+  //             $('#dataTable').DataTable().destroy(); // Destroy existing DataTable instance
+  //             document.getElementById('insert_here').innerHTML = data;
+  //             $('#dataTable').DataTable(); // Reinitialize DataTable
+  //             console.log("Success");
+  //         },
+  //         error: function () {
+  //             console.log("Error");
+  //         }
+  //     });
+  // }
 
   document.addEventListener('DOMContentLoaded', function () {
 
