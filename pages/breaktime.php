@@ -571,20 +571,17 @@
               <option value="0">Inactive</option>
             </select> 
           </div>
-        
+
+          <?php
+                }
+              unset($_SESSION["edit_id_breaktime"]);
+            }
+          ?>
+
           <div class="d-flex justify-content-left">
             <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
             <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
           </div> 
-
-          <?php
-
-                }
-
-              unset($_SESSION["edit_id_breaktime"]);
-            }
-        
-          ?>
           
         
         </form>

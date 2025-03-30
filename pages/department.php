@@ -384,6 +384,12 @@
                 <option value="0">Inactive</option>
             </select> 
           </div>
+          
+          <?php
+              }
+              unset($_SESSION["dept_id"]);
+            }
+          ?>
 
           <div class="d-flex justify-content-left">
 
@@ -392,12 +398,6 @@
             <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
           
           </div>
-
-          <?php
-              }
-              unset($_SESSION["dept_id"]);
-            }
-          ?>
 
         </form>
 

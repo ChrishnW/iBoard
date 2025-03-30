@@ -444,18 +444,18 @@
               <option value="0">Inactive</option>
           </div>
 
-          <div class="d-flex justify-content-left">
-            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3 mt-3">
-            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2 mt-3">
-            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2 mt-3">
-          </div>
-
           <?php
                 getAllDepartment_edit();
               }
               unset($_SESSION["acc_id"]);
             }
           ?>
+
+          <div class="d-flex justify-content-left">
+            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3 mt-3">
+            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2 mt-3">
+            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2 mt-3">
+          </div>
 
         </form>
 
