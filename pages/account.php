@@ -411,8 +411,9 @@
                 echo '<script> document.addEventListener("DOMContentLoaded", function () {
 
                   var edit_account = document.getElementById("edit_account");
-                  document.body.style.overflow = "hidden";
                   edit_account.style.display = "block";
+                  
+                  document.body.style.overflow = "hidden";
 
                 }); </script>';
 

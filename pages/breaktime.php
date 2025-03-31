@@ -423,22 +423,19 @@
 
 
   <!-- Edit Breaktime -->
-
-  <div id="edit_breaktime" class="edit_dashboard" style="display: none;">
-      
-    <div class="card shadow mb-4">
-
-      <div class="card-header py-3.5 pt-4">
-
-        <h2 class="float-left">Edit Breaktime</h2>
+  <div class="modal" tabindex="-1" id="edit_breaktime" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary">
+          <h5 class="modal-title text-white">Edit Breaktime</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_editBreaktime">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         
-        <div class="clearfix"></div>
-
-      </div>
-    
-      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="edit_breaktime_form" method="post" style="width: 100%; max-width: 600px;">
+        <div class="modal-body">
+          
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" id="edit_breaktime_form" method="post" style="width: 100%; max-width: 600px;">
           
           <?php
 
@@ -482,15 +479,12 @@
           
                 echo '<script> document.addEventListener("DOMContentLoaded", function () {
           
-                  var breaktime_dashboard = document.getElementById("breaktime_dashboard");
-                  breaktime_dashboard.style.display = "none";
-          
-                  var add_breaktime = document.getElementById("add_breaktime");
-                  add_breaktime.style.display = "none";
-          
                   var edit_breaktime = document.getElementById("edit_breaktime");
                   edit_breaktime.style.display = "block";
-          
+
+                  document.body.style.overflow = "hidden";
+                  edit_breaktime.style.overflow = "auto";
+
                 }); </script>';
           ?>
 
@@ -583,18 +577,31 @@
             }
           ?>
 
-          <div class="d-flex justify-content-left">
-            <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
-            <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
-          </div> 
+        </div>
+
+            <div class="modal-footer">
+              <input type="submit" name="edit_breaktime_submit" value="Save" class="btn btn-primary pr-3">
+              <input type="reset" name="cancel_breaktime" value="Cancel" id="cancel_breaktime"  class="btn btn-secondary ml-2">
+            </div> 
           
-        
         </form>
 
       </div>
-
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Pop up for Message -->
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
@@ -687,6 +694,7 @@
 
     const edit_breaktime = document.getElementById('edit_breaktime');
     const cancel_breaktime = document.getElementById('cancel_breaktime');
+    const close_editBreaktime = document.getElementById('close_editBreaktime');
 
     btn_add_breaktime.addEventListener('click', function () {
       add_breaktime.style.display = 'block';
@@ -706,18 +714,16 @@
       document.body.style.overflow = 'auto';
     });
 
-
-
-
-
-
-
-
-
-
     cancel_breaktime.addEventListener('click', function () {
       breaktime_dashboard.style.display = 'block';
       edit_breaktime.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    close_editBreaktime.addEventListener('click', function () {
+      breaktime_dashboard.style.display = 'block';
+      edit_breaktime.style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
   });
