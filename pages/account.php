@@ -243,7 +243,7 @@
 
 ?>
 
-<!-- Begin Page Content -->
+<!-- Dashboard Account -->
 <div class="container-fluid">
 
   <div id="account_dashboard" class="account_dashboard" style="display: block;">
@@ -327,8 +327,7 @@
     </div>
 </div>
 
-<!-- ADD ACCOUNT -->
-
+<!-- Add Account -->
 <div class="modal" tabindex="-1" id="add_account" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -368,23 +367,19 @@
 </div>
 
 <!-- Edit Account -->
-<div class="container-fluid">
-
-  <div id="edit_account" class="edit_dashboard" style="display: none;">
-      
-    <div class="card shadow mb-4">
-
-      <div class="card-header py-3.5 pt-4">
-
-        <h2 class="float-left">Edit Account</h2>
-        
-        <div class="clearfix"></div>
-
+<div class="modal" tabindex="-1" id="edit_account" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-gradient-primary">
+        <h5 class="modal-title text-white">Edit Account</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_editAccount">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-
-      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
+      
+      <div class="modal-body">
         
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;" id="edit_account_form">
+      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
           
           <?php
 
@@ -415,13 +410,8 @@
 
                 echo '<script> document.addEventListener("DOMContentLoaded", function () {
 
-                  var account_dashboard = document.getElementById("account_dashboard");
-                  account_dashboard.style.display = "none";
-
-                  var add_account = document.getElementById("add_account");
-                  add_account.style.display = "none";
-
                   var edit_account = document.getElementById("edit_account");
+                  document.body.style.overflow = "hidden";
                   edit_account.style.display = "block";
 
                 }); </script>';
@@ -448,6 +438,7 @@
               <option value="<?php echo $status ?>"hidden><?php echo $status_word ?></option>
               <option value="1">Active</option>
               <option value="0">Inactive</option>
+            </select>
           </div>
 
           <?php
@@ -457,23 +448,21 @@
             }
           ?>
 
-          <div class="d-flex justify-content-left">
-            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3 mt-3">
-            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2 mt-3">
-            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account"  class="btn btn-secondary ml-2 mt-3">
-          </div>
-
-        </form>
-
       </div>
 
+          <div class="modal-footer">
+            <input type="submit" name="edit_add_account" value="Save" class="btn btn-primary pr-3">
+            <!-- <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2 mt-3"> -->
+            <input type="reset" name="reset" value="Cancel" id="edit_cancel_account" class="btn btn-secondary ml-2">
+          </div>
+        
+        </form>
+
     </div>
-
   </div>
-
 </div>
 
-<!-- Pop up Modal -->
+<!-- Pop up for Message -->
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -492,7 +481,6 @@
 </div> 
 
 <!-- Pop up for Delete -->
-
 <div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -597,20 +585,23 @@
     });
 
     cancel_account.addEventListener("click", function(){
-      account_dashboard.style.display = 'block';
       add_account.style.display = 'none';
       document.body.style.overflow = 'auto';
     });
 
     close_addAccount.addEventListener("click", function(){
-      account_dashboard.style.display = 'block';
       add_account.style.display = 'none';
       document.body.style.overflow = 'auto';
     });
 
     edit_cancel_account.addEventListener("click", function(){
-      account_dashboard.style.display = 'block';
       edit_account.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    close_editAccount.addEventListener("click", function(){
+      edit_account.style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
   });
