@@ -284,12 +284,14 @@
               <input type="text" class="form-control" name="dept_name" id="dept_name" required>
             </div>
 
+        </div>
+        
             <div class="modal-footer">
               <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
               <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
             </div>
           </form>
-        </div>
+
       </div>
     </div>
   </div> 
