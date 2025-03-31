@@ -85,9 +85,9 @@
     <div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-danger">Exit Confirmation</h5>
-                <button type="button" class="close" aria-label="Close" id="close_popup2">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white">Exit Confirmation</h5>
+                <button type="button" class="close text-white" aria-label="Close" id="close_popup2">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
