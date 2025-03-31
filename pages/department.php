@@ -389,7 +389,7 @@
             </div>
 
           </form>
-          
+
       </div>
     </div>
   </div>                
@@ -418,7 +418,7 @@
     <div class="modal-content">
       <div class="modal-header bg-danger">
         <h5 class="modal-title text-white">Delete Confirmation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup2">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
