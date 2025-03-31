@@ -1295,6 +1295,21 @@
             setInterval(countingInterval, 1000);
         }
 
+        document.addEventListener("keypress", function(event){
+
+            if(document.getElementById('user_dashboard').style.display == "block" && trigger != '-----'){
+            
+                if(event.key == "1"){
+                    add();
+                }
+                else if(event.key == "2"){
+                    minus();
+                }
+            
+            }
+            
+        });
+
     });
 
 </script>
