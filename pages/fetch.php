@@ -71,12 +71,7 @@
                         <td class=\"text-danger\" style=\"height: 40px;\">$blank</td>
                     </tr>";
             }
-
-
-
         }
     }
-
-    
 
 ?>

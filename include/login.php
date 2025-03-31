@@ -27,7 +27,6 @@ function check_depeartment($username, $password){
     echo "Username not found.";
   }
 
-
 }
 
 if (isset($_POST['login'])) :

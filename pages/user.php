@@ -16,7 +16,6 @@
         }
     }
 
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         // Register Line Details ---------------------------------------------------------------------------
@@ -141,16 +140,12 @@
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
                                             incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                     }
-
                 } 
-
             }
-
 
             header("Refresh: .3; url = user.php");
             exit;
             ob_end_flush();
-
         }
 
         // Edit Registeed Line Details ---------------------------------------------------------------------------
@@ -381,7 +376,6 @@
         </div>
     </div>
 
-
     <!-- EDIT USER -->
     <div id="edit_user" class="edit_user" style="display: none;">
         <div class="card shadow mb-4">
@@ -527,7 +521,6 @@
         });</script>";
     }
 
-    
     // Display Registered Data ---------------------------------------------------------------------------
 
     if(isset($_SESSION["line_id"])){
@@ -566,7 +559,6 @@
                 $status_string = "Inactive";
             }
 
-
             $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
             $result = mysqli_query($conn, $sql_command);
 
@@ -604,7 +596,6 @@
 
                 });
                 </script>";
-
 
                 $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
                 $result = mysqli_query($conn, $sql_command);
@@ -724,7 +715,6 @@
                     } else {
                         console.error(\"Element with ID 'edit_user_form' not found in the DOM.\");
                     }
-
 
                 }); 
                 </script>";
@@ -933,7 +923,6 @@
                         console.error(\"Element with ID 'edit_user_form' not found in the DOM.\");
                     }
 
-
                 }); 
                 </script>";
 
@@ -962,7 +951,6 @@
         }
 
     }
-
 
 ?>
  
@@ -1159,7 +1147,6 @@
         }
 
     }
-
 
     let milliseconds = 0;
     let interval = null;

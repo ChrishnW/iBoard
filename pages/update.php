@@ -16,5 +16,4 @@
                         target_now = '$target', actual = '$actual', balance = '$balance' 
                         WHERE date = '$date' AND model = '$model' AND unit = '$unit' ");
 
-
 ?>

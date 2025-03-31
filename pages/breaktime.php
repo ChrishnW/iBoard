@@ -415,7 +415,6 @@
     </div>
   </div>
 
-
   <!-- Edit Breaktime -->
   <div class="modal" tabindex="-1" id="edit_breaktime" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
     <div class="modal-dialog modal-dialog-centered">
@@ -658,9 +657,7 @@
   //         }
   //     });
   // }
-
   
-
   document.addEventListener('DOMContentLoaded', function () {
     
     // updateTable();

@@ -309,8 +309,6 @@
                         </form>
                     </td>
                 </tr>
-
-
                 
               <?php
                   }
@@ -552,9 +550,6 @@
   //         }
   //     });
   // }
-
-  
-  
 
   document.addEventListener('DOMContentLoaded', function () {
 

@@ -285,7 +285,7 @@
             </div>
 
         </div>
-        
+
             <div class="modal-footer">
               <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
               <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
@@ -453,19 +453,19 @@
       $department_code = $department_code > $code ? $department_code : $code;
 
     }
-
-    $department_code++;
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-      const table = `
-        <input type=\"text\" class=\"form-control\" name=\"dept_code\" id=\"dept_code\" value=\"$department_code\" readonly>
-      `;
-      
-      document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
-
-    }); </script>";
-
   }
+  
+  $department_code++;
+
+  echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+    const table = `
+      <input type=\"text\" class=\"form-control\" name=\"dept_code\" id=\"dept_code\" value=\"$department_code\" readonly>
+    `;
+    
+    document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
+
+  }); </script>";
 
 ?>
 

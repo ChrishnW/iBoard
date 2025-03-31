@@ -12,12 +12,7 @@
       });
     </script>";
 
-
   }
-
-
-
-
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -113,13 +108,11 @@
                     
                 </table>
             </div>
-
             
         </div>
     </div>
 
   </div>
-
 
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
@@ -183,14 +176,8 @@
         });
       </script>";
 
-
-
     }
   }
-
-
-
-
 
 ?>
 
@@ -227,7 +214,6 @@
     }
 
   });
-
 
   // function updateTable() {
   //   $.ajax({
