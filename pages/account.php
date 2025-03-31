@@ -103,12 +103,10 @@
         var popup = document.getElementById('popupFormDelete');
         popup.style.display = 'block';
 
-    }); </script>";
-
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
         var account_dashboard = document.getElementById('account_dashboard');
         account_dashboard.style.display = 'block';
+
+        document.body.style.overflow = 'hidden';
 
     }); </script>";
 
@@ -412,7 +410,7 @@
 
                   var edit_account = document.getElementById("edit_account");
                   edit_account.style.display = "block";
-                  
+
                   document.body.style.overflow = "hidden";
 
                 }); </script>';
@@ -568,6 +566,7 @@
 
     document.getElementById('close_popup2').addEventListener('click', function () {
       document.getElementById('popupFormDelete').style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
     const btn_add_account = document.getElementById('btn_add_account');
@@ -611,6 +610,7 @@
 
   function closePopup2() {
     popup2.style.display = "none";
+    document.body.style.overflow = 'auto';
   }
 
 </script>
