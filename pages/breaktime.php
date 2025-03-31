@@ -207,26 +207,26 @@
               <thead class="bg-primary text-white text-center" style="font-size: 0.7rem; text-align: center; padding: 0;">
 
                 <tr>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Code</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime Code</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Tool Box Meeting Start</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Tool Box Meeting End</th>
+                  <th class="text-center align-middle" style="width: 2%;">Tool Box Meeting Start</th>
+                  <th class="text-center align-middle" style="width: 2%;">Tool Box Meeting End</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (AM)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (AM)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime Start (AM)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime End (AM)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (Lunch)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (Lunch)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime Start (Lunch)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime End (Lunch)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (PM)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (PM)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime Start (PM)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime End (PM)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (OT)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (OT)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime Start (OT)</th>
+                  <th class="text-center align-middle" style="width: 2%;">Breaktime End (OT)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Status</th>
+                  <th class="text-center align-middle" style="width: 2%;">Status</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Actions</th>
+                  <th class="text-center align-middle" style="width: 2%;">Actions</th>
                 </tr>
 
               </thead>
