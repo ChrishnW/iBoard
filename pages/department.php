@@ -29,7 +29,6 @@
   }
 
   // Delete Department Ask Display --------------------------------------------------------------------------
-
   if(isset($_SESSION["delete_id_dept"])){
 
     $dept_id = $_SESSION["delete_id_dept"];
@@ -93,30 +92,28 @@
     }
 
     // Delete Account Confirm --------------------------------------------------------------------------
-
     if(isset($_POST["delete_data"])){
 
-    $dept_id = $_SESSION["delete_dept"];
+      $dept_id = $_SESSION["delete_dept"];
 
-    $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
-    $result = mysqli_query($conn, $sql_command);
+      $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
+      $result = mysqli_query($conn, $sql_command);
 
-    if($result){
-      $_SESSION["message"] = "Account deleted successfully.";
-    }
-    else{
-      $_SESSION["message"] = "Failed to delete account.";
-    }
-    
-    unset($_SESSION["delete_dept"]);
-    
-    header("Refresh: .3; url = department.php");
-    exit;
+      if($result){
+        $_SESSION["message"] = "Account deleted successfully.";
+      }
+      else{
+        $_SESSION["message"] = "Failed to delete account.";
+      }
+      
+      unset($_SESSION["delete_dept"]);
+      
+      header("Refresh: .3; url = department.php");
+      exit;
 
     }
 
     // Edit Department --------------------------------------------------------------------------
-
     if(isset($_POST["edit_department"])){
 
       $dept_id = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -129,7 +126,6 @@
     }
 
     // Edit Department Submit --------------------------------------------------------------------------
-
     if(isset($_POST["edit_department_submit"])){
 
       $dept_id = filter_input(INPUT_POST, "edit_dept_id", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -153,7 +149,6 @@
     }
 
     // Reset Password --------------------------------------------------------------------------
-
     if(isset($_POST["reset_password"])){
 
       $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -273,144 +268,132 @@
   </div> 
 
   <!-- ADD DEPARTMENT -->
+  <div class="modal" tabindex="-1" id="add_department" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary">
+          <h5 class="modal-title text-white">Add Department</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_addDepartment">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-  <div id="add_department" class="add_department" style="display: none;">
-    
-    <div class="card shadow mb-4">
-
-      <div class="card-header py-3.5 pt-4">
-        <h2 class="float-left">Add Department</h2>        
-      </div>
-
-      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-        
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
+        <div class="modal-body">
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">         
+            <div class="mb-3" id="insert_dept_code">
+              <label for="dept_code" class="form-label">Department Code</label>
+            </div>
           
-          <div class="mb-3" id="insert_dept_code">
-            <label for="dept_code" class="form-label">Department Code</label>
-          </div>
-        
-          <div class="mb-3">
-            <label for="dept_name" class="form-label">Department Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" name="dept_name" id="dept_name" required>
-          </div>
+            <div class="mb-3 pb-3">
+              <label for="dept_name" class="form-label">Department Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="dept_name" id="dept_name" required>
+            </div>
 
-          <div class="d-flex justify-content-left">
-            <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
-            <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
-          </div>
-
-        </form>
-
+            <div class="modal-footer">
+              <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
+              <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
+            </div>
+          </form>
+        </div>
       </div>
-
     </div>
-
   </div> 
 
-  <!-- Edit DEPARTMENT -->
+  <!-- Edit Department -->
+  <div class="modal" tabindex="-1" id="edit_department" class="edit_department" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient-primary">
+          <h5 class="modal-title text-white">Edit Department</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_EditDepartment">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-  <div id="edit_department" class="edit_department" style="display: none;">
+        <div class="modal-body">
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
+            
+            <?php
 
-    <div class="card shadow mb-4">
-      
-      <div class="card-header py-3.5 pt-4">
+              if(isset($_SESSION["dept_id"])){
 
-        <h2 class="float-left">Edit Department</h2>
-        <div class="clearfix"></div>
+                $dept_id = $_SESSION["dept_id"];
+            
+                $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
+                $result = mysqli_query($conn, $sql_command);
+            
+                if(mysqli_num_rows($result) > 0){
+                  $department = mysqli_fetch_assoc($result);
+            
+                  $dept_name = $department["dept_name"];
+                  $dept_code = $department["dept_code"];
+                  $status = $department["status"];
+                  $status_word = "";
+            
+                  if($status == "1"){
+                      $status_word = "Active";
+                  }
+                  else{
+                      $status_word = "Inactive";
+                  }
+            
+                  echo '<script> document.addEventListener("DOMContentLoaded", function () {
+            
+                    var department_dashboard = document.getElementById("department_dashboard");
+                    department_dashboard.style.display = "none";
+            
+                    var add_department = document.getElementById("add_department");
+                    add_department.style.display = "none";
+            
+                    var edit_department = document.getElementById("edit_department");
+                    edit_department.style.display = "block";
+            
+                  }); </script>';
+                  
+            ?>
 
-      </div>
+            <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
+            
+            <div class="mb-3">
+              <label for="edit_dept_code" class="form-label">Department Code </label>
+              <input type="text" name="edit_dept_code" id="edit_dept_code" readonly value="<?php echo $dept_code ?>" class="form-control">
+            </div>
 
-      <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-        
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
-          
-          <?php
+            <div class="mb-3">
+              <label for="edit_dept_name" class="form-label">Department Name <span style="color: red;">*</span></label>
+              <input type="text" name="edit_dept_name" id="edit_dept_name" required value="<?php echo $dept_name ?>" class="form-control">
+            </div>
 
-            if(isset($_SESSION["dept_id"])){
+            <div class="mb-3">
+              <label for="edit_status">Status <span style="color: red;">*</span></label>
+              <select name="edit_status" id="edit_status" class="form-control" required >
+                  <option value="<?php echo $status ?>"hidden><?php echo $status_word ?></option>
+                  <option value="1">Active</option>
+                  <option value="0">Inactive</option>
+              </select> 
+            </div>
 
-              $dept_id = $_SESSION["dept_id"];
-          
-              $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
-              $result = mysqli_query($conn, $sql_command);
-          
-              if(mysqli_num_rows($result) > 0){
-                $department = mysqli_fetch_assoc($result);
-          
-                $dept_name = $department["dept_name"];
-                $dept_code = $department["dept_code"];
-                $status = $department["status"];
-                $status_word = "";
-          
-                if($status == "1"){
-                    $status_word = "Active";
+            <div class="modal-footer">
+
+              <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
+              <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
+              <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
+            
+            </div>
+
+            <?php
                 }
-                else{
-                    $status_word = "Inactive";
-                }
-          
-                echo '<script> document.addEventListener("DOMContentLoaded", function () {
-          
-                  var department_dashboard = document.getElementById("department_dashboard");
-                  department_dashboard.style.display = "none";
-          
-                  var add_department = document.getElementById("add_department");
-                  add_department.style.display = "none";
-          
-                  var edit_department = document.getElementById("edit_department");
-                  edit_department.style.display = "block";
-          
-                }); </script>';
-                
-          ?>
-
-          <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
-          
-          <div class="mb-3">
-            <label for="edit_dept_code" class="form-label">Department Code </label>
-            <input type="text" name="edit_dept_code" id="edit_dept_code" readonly value="<?php echo $dept_code ?>" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label for="edit_dept_name" class="form-label">Department Name <span style="color: red;">*</span></label>
-            <input type="text" name="edit_dept_name" id="edit_dept_name" required value="<?php echo $dept_name ?>" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label for="edit_status">Status <span style="color: red;">*</span></label>
-            <select name="edit_status" id="edit_status" class="form-control" required >
-                <option value="<?php echo $status ?>"hidden><?php echo $status_word ?></option>
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
-            </select> 
-          </div>
-          
-          <?php
+                unset($_SESSION["dept_id"]);
               }
-              unset($_SESSION["dept_id"]);
-            }
-          ?>
+            ?>
 
-          <div class="d-flex justify-content-left">
-
-            <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
-            <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
-            <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
-          
-          </div>
-
-        </form>
-
+          </form>
+        </div>
       </div>
-
     </div>
-
-  </div>
-
-</div>
+  </div>                
 
 <!-- Pop up Modal -->
-
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -429,12 +412,11 @@
 </div> 
 
 <!-- Pop up for Delete -->
-
 <div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-danger">Delete Confirmation</h5>
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white">Delete Confirmation</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -525,25 +507,42 @@
 
     const btn_add_department = document.getElementById('btn_add_department');
     const department_dashboard = document.getElementById('department_dashboard');
+    
     const add_department = document.getElementById('add_department');
     const cancel_department = document.getElementById('cancel_department');
+    const close_addDepartment = document.getElementById('close_addDepartment');
 
     const cancel_edit_department = document.getElementById('cancel_edit_department');
     const edit_department = document.getElementById('edit_department');
 
-    cancel_edit_department.addEventListener('click', function () {
-      edit_department.style.display = 'none';
-      department_dashboard.style.display = 'block';
+    btn_add_department.addEventListener('click', function () {
+      department_dashboard.style.display = 'block'; // Hide the dashboard
+      add_department.style.display = 'block'; // Display the modal
+      document.body.style.overflow = 'hidden'; // Prevent page scrolling
     });
 
-    btn_add_department.addEventListener('click', function () {
-      department_dashboard.style.display = 'none';
-      add_department.style.display = 'block';
+    close_addDepartment.addEventListener("click", function(){
+      department_dashboard.style.display = 'block';
+      add_department.style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
     cancel_department.addEventListener('click', function () {
       department_dashboard.style.display = 'block';
       add_department.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });   
+
+    close_EditDepartment.addEventListener("click", function(){
+      department_dashboard.style.display = 'block';
+      edit_department.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    cancel_edit_department.addEventListener('click', function () {
+      department_dashboard.style.display = 'block';
+      edit_department.style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
   });
