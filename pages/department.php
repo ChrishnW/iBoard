@@ -533,14 +533,17 @@
       document.body.style.overflow = 'auto';
     });   
 
-    close_EditDepartment.addEventListener("click", function(){
+    edit_department.addEventListener('click', function () {
       department_dashboard.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });   
+
+    close_EditDepartment.addEventListener("click", function(){
       edit_department.style.display = 'none';
       document.body.style.overflow = 'auto';
     });
 
     cancel_edit_department.addEventListener('click', function () {
-      department_dashboard.style.display = 'block';
       edit_department.style.display = 'none';
       document.body.style.overflow = 'auto';
     });
