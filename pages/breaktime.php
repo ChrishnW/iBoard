@@ -207,26 +207,26 @@
               <thead class="bg-primary text-white text-center" style="font-size: 0.7rem; text-align: center; padding: 0;">
 
                 <tr>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Code</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Code</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Tool Box Meeting Start</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Tool Box Meeting End</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Tool Box Meeting Start</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Tool Box Meeting End</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (AM)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (AM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (AM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (AM)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (Lunch)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (Lunch)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (Lunch)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (Lunch)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (PM)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (PM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (PM)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (PM)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime Start (OT)</th>
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Breaktime End (OT)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime Start (OT)</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Breaktime End (OT)</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Status</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Status</th>
 
-                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 8%;">Actions</th>
+                  <th class="text-center align-middle" style="font-size: 0.75rem; text-align: center; width: 2%;">Actions</th>
                 </tr>
 
               </thead>
@@ -635,7 +635,13 @@
 <script>
 
   $(document).ready(function(){
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable({
+        "autoWidth": false // Disable automatic width calculation
+    });
+
+    // Set the width to 200% for the table and wrapper
+    $('#dataTable').css('width', '100%');
+    $('.dataTables_wrapper').css('width', '200%');
   });
 
   // function updateTable() {
