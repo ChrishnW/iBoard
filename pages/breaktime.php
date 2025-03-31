@@ -37,13 +37,7 @@
 
         var popup = document.getElementById('popupFormDelete');
         popup.style.display = 'block';
-
-    }); </script>";
-
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-        var breaktime_dashboard = document.getElementById('breaktime_dashboard');
-        breaktime_dashboard.style.display = 'block';
+        document.body.style.overflow = 'hidden';
 
     }); </script>";
 
@@ -684,6 +678,7 @@
 
     document.getElementById('close_popup2').addEventListener('click', function () {
       document.getElementById('popupFormDelete').style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
     const btn_add_breaktime = document.getElementById('btn_add_breaktime');
@@ -732,6 +727,7 @@
 
   function closePopup2() {
     popup2.style.display = "none";
+    document.body.style.overflow = 'auto';
   }
 
 </script>
