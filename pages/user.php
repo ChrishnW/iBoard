@@ -297,15 +297,15 @@
     
     <!-- User Dashboard-->
 
-    <div id="user_dashboard" class="user_dashboard" style="display: block;">
+    <div id="user_dashboard" class="user_dashboard" style="display: block; background-color: none; border-radius: 10px; padding: 20px;">
         <!-- Header Section -->
-        <div class="d-flex align-items-center px-3 py-2">  
-            <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 100px;">
+        <div class="d-flex align-items-center px-3 py-2" style="border-bottom: 2px solid #007bff;">  
+            <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 80px; border-radius: 10%;">
             <span class="h1 font-weight-bold mb-0 text-primary" id="line_name">-----</span>
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
-                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none;">RUN</button> 
+                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none; font-size: 30px;">RUN</button> 
                     <br>
                     <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
                 </div>
@@ -329,28 +329,28 @@
         </div>
 
         <!-- Details Section -->
-        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4">
+        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
 
             <div id="line_image_div">
-                <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 380px; height: 210px;">
+                <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 350px; height: 200px; border-radius: 10px;">
             </div>
 
             <div class="d-flex flex-column pl-5 fs-1"><br>
-                <span class="h2 text-danger "><u>Information</u></span> 
+                <span class="h2 text-danger"><u>Information</u></span> 
                 <span class="h2 text-dark" id="line_desc">-----</span>
                 <span class="h2 text-danger"><u>Leader</u></span> 
                 <span class="h2 text-dark" id="incharge_name">-----</span> 
             </div>
 
             <div class="ml-auto align-self-end" id="incharge_image_div">
-                <img src="../assets/img/img_not_available.png" alt="" class="mr-5" style="width: 200px; height: 200px;">
+                <img src="../assets/img/img_not_available.png" alt="" class="mr-5" style="width: 180px; height: 180px; border-radius: 50%;">
             </div>
         </div>
 
         <!-- Tables Section -->
         <div class="card-body">
-            <div class="bg-white">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <div class="bg-white" style="border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="border-radius: 10px; overflow: hidden;">
                     <thead class="bg-primary text-white text-center">
                         <tr>
                             <th class="align-text-top">DAILY TARGET</th>
@@ -374,9 +374,6 @@
                         </td>
                         <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count">0</td>
                     </tr>
-
-
-
 
                     </tbody>
                 </table>
