@@ -331,87 +331,89 @@
       </div>
 
       <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
+        
+      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
       
-          <div id="breaktime">
-            <div class="mb-3">
-              <label for="break_code">Breaktime Code <span style="color: red;">*</span></label>
-              <input type="text" class="form-control" name="break_code" id="break_code" placeholder="101" required>
-            </div>
+        <div id="breaktime">
+          <div class="mb-3">
+            <label for="break_code">Breaktime Code <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" name="break_code" id="break_code" placeholder="101" required>
+          </div>
 
-            <div class="card mb-4">
-              <div class="card-body">
+          <div class="card mb-4">
+            <div class="card-body">
 
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="tool_start">Tool Box Meeting Start <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="tool_start" id="tool_start" placeholder="00:00" required>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="tool_end">Tool Box Meeting End <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="tool_end" id="tool_end" placeholder="00:00" required>
-                  </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="tool_start">Tool Box Meeting Start <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="tool_start" id="tool_start" placeholder="00:00" required>
                 </div>
 
-                <div id="breaktime_am" class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="break_start_am">Breaktime Start (AM) <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="break_start_am" id="break_start_am" placeholder="00:00" required>
-                    
-                  </div>
+                <div class="col-md-6">
+                  <label for="tool_end">Tool Box Meeting End <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="tool_end" id="tool_end" placeholder="00:00" required>
+                </div>
+              </div>
+
+              <div id="breaktime_am" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="break_start_am">Breaktime Start (AM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="break_start_am" id="break_start_am" placeholder="00:00" required>
                   
-                  <div class="col-md-6">
-                    <label for="break_end_am">Breaktime End (AM) <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="break_end_am" id="break_end_am" placeholder="00:00" required>
-                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="break_end_am">Breaktime End (AM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="break_end_am" id="break_end_am" placeholder="00:00" required>
+                </div>
+              </div>
+
+              <div id="breaktime_lunch" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="break_start_lunch">Breaktime Start (Lunch) <span style="color: red;">*</span></label> <br>
+                  <input type="time" class="form-control" name="break_start_lunch" id="break_start_lunch" placeholder="00:00" required>
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="break_end_lunch">Breaktime End (Lunch) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="break_end_lunch" id="break_end_lunch" placeholder="00:00" required>
+                </div>
+              </div>
+
+              <div id="breaktime_pm" class="row mb-3">
+                <div class="col-md-6">
+                <label for="break_start_pm">Breaktime Start (PM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="break_start_pm" id="break_start_pm" placeholder="00:00" required>
+                </div>
+                
+                <div class="col-md-6">
+                  <label for="break_end_pm">Breaktime End (PM) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="break_end_pm" id="break_end_pm" placeholder="00:00" required>
+                </div>
+              </div>
+
+              <div id="breaktime_ot" class="row mb-3">
+                <div class="col-md-6">
+                  <label for="break_start_ot">Breaktime Start (OT) <span style="color: red;">*</span></label><br>
+                  <input type="time" class="form-control" name="break_start_ot" id="break_start_ot" placeholder="00:00" required>
                 </div>
 
-                <div id="breaktime_lunch" class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="break_start_lunch">Breaktime Start (Lunch) <span style="color: red;">*</span></label> <br>
-                    <input type="time" class="form-control" name="break_start_lunch" id="break_start_lunch" placeholder="00:00" required>
-                  </div>
-                  
-                  <div class="col-md-6">
-                    <label for="break_end_lunch">Breaktime End (Lunch) <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="break_end_lunch" id="break_end_lunch" placeholder="00:00" required>
-                  </div>
-                </div>
-
-                <div id="breaktime_pm" class="row mb-3">
-                  <div class="col-md-6">
-                   <label for="break_start_pm">Breaktime Start (PM) <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="break_start_pm" id="break_start_pm" placeholder="00:00" required>
-                  </div>
-                  
-                  <div class="col-md-6">
-                    <label for="break_end_pm">Breaktime End (PM) <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="break_end_pm" id="break_end_pm" placeholder="00:00" required>
-                  </div>
-                </div>
-
-                <div id="breaktime_ot" class="row mb-3">
-                  <div class="col-md-6">
-                    <label for="break_start_ot">Breaktime Start (OT) <span style="color: red;">*</span></label><br>
-                    <input type="time" class="form-control" name="break_start_ot" id="break_start_ot" placeholder="00:00" required>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="break_end_ot">Breaktime End (OT) <span style="color: red;">*</span></label>
-                    <input type="time" class="form-control" name="break_end_ot" id="break_end_ot" placeholder="00:00" required>                  
-                  </div>
+                <div class="col-md-6">
+                  <label for="break_end_ot">Breaktime End (OT) <span style="color: red;">*</span></label>
+                  <input type="time" class="form-control" name="break_end_ot" id="break_end_ot" placeholder="00:00" required>                  
                 </div>
               </div>
             </div>
-
-          <div class="d-flex justify-content-left">
-            <input type="submit" name="add_breaktime" value="Add Breaktime" class="btn btn-primary pr-3">
-            <input type="reset" name="reset" value="Cancel" id="cancel_add_breaktime"  class="btn btn-secondary ml-2">
-          </div> 
+          </div>
         </div>
-        
+
+        <div class="d-flex justify-content-left">
+          <input type="submit" name="add_breaktime" value="Add Breaktime" class="btn btn-primary pr-3">
+          <input type="reset" name="reset" value="Cancel" id="cancel_add_breaktime"  class="btn btn-secondary ml-2">
+        </div>
+              
       </form>
+
     </div>
   </div>
 </div>

@@ -329,34 +329,40 @@
 
 <!-- ADD ACCOUNT -->
 
-<div id="add_account" class="add_account" style="display: none;">
+<div class="modal" tabindex="-1" id="add_account" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-gradient-primary">
+        <h5 class="modal-title text-white">Add Account</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_addAccount">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
+          <div class="mb-3">
+            <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
+            <input type="text" name="acc_name" id="acc_name" class="form-control" required>
+          </div>
 
-  <div class="card shadow mb-4">
-    <div class="card-header py-3.5 pt-4">
-      <h2 class="float-left">Add Account</h2>
-      <div class="clearfix"></div>
-    </div>
+          <div class="mb-3">
+            <label for="acc_department_code" class="form-label">Department <span style="color: red;">*</span></label>
+            <select name="acc_department_code" id="acc_department_avail" class="form-control" required>
+              <option value="" hidden></option>
+            </select>
+          </div>
 
-    <div class="card-body shadow-sm m-5 p-5 d-flex justify-content-center align-items-center">
+      </div>
 
-      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
-        <div class="mb-3">
-          <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
-          <input type="text" name="acc_name" id="acc_name" class="form-control" required>
-        </div>
+          <div class="modal-footer">
+            <input type="submit" name="add_account" value="Add Account" class="btn btn-primary pr-3">
+            <input type="reset" name="reset" value="Cancel" id="cancel_account"  class="btn btn-secondary ml-2">
+          </div>
+        
+        </form>
 
-        <div class="mb-3">
-          <label for="acc_department_code" class="form-label">Department <span style="color: red;">*</span></label>
-          <select name="acc_department_code" id="acc_department_avail" class="form-control" required>
-            <option value="" hidden></option>
-          </select>
-        </div>
-
-        <div class="d-flex justify-content-left">
-          <input type="submit" name="add_account" value="Add Account" class="btn btn-primary pr-3">
-          <input type="reset" name="reset" value="Cancel" id="cancel_account"  class="btn btn-secondary ml-2">
-        </div>
-      </form>
     </div>
   </div>
 </div>
@@ -490,9 +496,9 @@
 <div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-danger">Delete Confirmation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup2">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white">Delete Confirmation</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup2">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -580,18 +586,26 @@
 
     const add_account = document.getElementById('add_account');
     const cancel_account = document.getElementById('cancel_account');
+    const close_addAccount = document.getElementById('close_addAccount');
 
     const edit_cancel_account = document.getElementById('edit_cancel_account');
     const edit_account = document.getElementById('edit_account');
 
-    btn_add_account.addEventListener("click", function(){
-      account_dashboard.style.display = 'none';
-      add_account.style.display = 'block';
+    btn_add_account.addEventListener("click", function() {
+      add_account.style.display = 'block'; 
+      document.body.style.overflow = 'hidden';
     });
-    
+
     cancel_account.addEventListener("click", function(){
       account_dashboard.style.display = 'block';
       add_account.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    close_addAccount.addEventListener("click", function(){
+      account_dashboard.style.display = 'block';
+      add_account.style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
     edit_cancel_account.addEventListener("click", function(){
