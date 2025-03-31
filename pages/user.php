@@ -297,7 +297,7 @@
     
     <!-- User Dashboard-->
 
-    <div id="user_dashboard" class="user_dashboard" style="display: block; background-color: none; border-radius: 10px; padding: 20px;">
+    <div id="user_dashboard" class="user_dashboard" style="display: block; background-color: none; border-radius: 10px; padding-top: 5px;">
         <!-- Header Section -->
         <div class="d-flex align-items-center px-3 py-2" style="border-bottom: 2px solid #007bff;">  
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 80px; border-radius: 10%;">
