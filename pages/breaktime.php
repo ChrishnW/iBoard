@@ -584,19 +584,6 @@
     </div>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Pop up for Message -->
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
