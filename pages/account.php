@@ -185,7 +185,7 @@
 
       $_SESSION["acc_id"] = $acc_id;
 
-      header("Location: account.php");
+      header("Refresh: .3; url = account.php");
       exit;
 
     }

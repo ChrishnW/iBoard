@@ -27,10 +27,30 @@
                     $actual = $row['actual'];
                     $balance = $row['balance'];
 
+                    $color = "gray";
+                    $background = "transparent";
+
+                    if($status == "RUN"){
+                        $color = "black";
+                        $background = "lightblue";
+                    }
+                    elseif($status == "STOP"){
+                        $color = "black";
+                        $background = "pink";
+                    }
+                    elseif($status == "BREAK"){
+                        $color = "white";
+                        $background = "grey";
+                    }
+                    elseif($status == "FINISH"){
+                        $color = "black";
+                        $background = "lightgreen";
+                    }
+
                     echo "<tr>
                             <td class=\"font-weight-bold\" style=\"height: 40px;\">$model</td>
                             <td class=\"font-weight-bold\" style=\"height: 40px;\">$unit</td>
-                            <td style=\"height: 40px;\">$status</td>
+                            <td style=\"height: 40px; color: $color; background: $background;\">$status</td>
                             <td style=\"height: 40px;\">$targetPeDay</td>
                             <td style=\"height: 40px;\">$target</td>
                             <td style=\"height: 40px;\">$actual</td>
