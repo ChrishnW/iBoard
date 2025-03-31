@@ -226,7 +226,7 @@
             ?>
 
                 <tr>
-                    <td><?php echo $dept_name ?></td>
+                    <td style="table-layout: fixed; width: 30%;"><?php echo $dept_name ?></td>
                     <td><?php echo $dept_code ?></td>
                     <td><?php echo $status_word ?></td>
                     <td style="table-layout: fixed; width: 15%;">
