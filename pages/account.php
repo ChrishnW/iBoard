@@ -260,7 +260,6 @@
           <table class=" table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
             <thead class="bg-primary text-white">
               <tr>
-                <th>ID</th>
                 <th>Username</th>
                 <th>Department</th>
                 <th>Status</th>
@@ -277,7 +276,6 @@
                 if(mysqli_num_rows($result) > 0){
                   while($account = mysqli_fetch_assoc($result)){
 
-                    $acc_id = $account["id"];
                     $username = $account["username"];
                     $dept_code = $account["dept_code"];
                     $status = $account["status"];
@@ -295,7 +293,6 @@
               ?>
 
                 <tr>
-                    <td><?php echo $acc_id ?></td>
                     <td><?php echo $username ?></td>
                     <td><?php echo $dept_string ?></td>
                     <td><?php echo $status_word ?></td>

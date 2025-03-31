@@ -195,7 +195,6 @@
             <thead class="bg-primary text-white">
 
               <tr>
-                <th>ID</th>
                 <th>Department Name</th>
                 <th>Code</th>
                 <th>Status</th>
@@ -213,7 +212,6 @@
                 if(mysqli_num_rows($result) > 0){
                     while($department = mysqli_fetch_assoc($result)){
 
-                        $dept_id = $department["id"];
                         $dept_name = $department["dept_name"];
                         $dept_code = $department["dept_code"];
                         $status = $department["status"];
@@ -228,7 +226,6 @@
             ?>
 
                 <tr>
-                    <td><?php echo $dept_id ?>  </td>
                     <td><?php echo $dept_name ?></td>
                     <td><?php echo $dept_code ?></td>
                     <td><?php echo $status_word ?></td>
@@ -454,7 +451,7 @@
 
     }
   }
-  
+
   $department_code++;
 
   echo "<script> document.addEventListener('DOMContentLoaded', function () {
