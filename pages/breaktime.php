@@ -204,7 +204,7 @@
           
             <table class="table table-bordered table-striped" id="dataTable" width="200%" cellspacing="0">
             
-              <thead class="bg-primary text-white text-center" style="font-size: 0.7rem; text-align: center; padding: 0;">
+              <thead class="bg-primary text-white text-center" style="font-size: .9rem; text-align: center; padding: 0;">
 
                 <tr>
                   <th class="text-center align-middle" style="width: 2%;">Breaktime Code</th>
