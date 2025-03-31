@@ -275,7 +275,7 @@
 
                 if(mysqli_num_rows($result) > 0){
                   while($account = mysqli_fetch_assoc($result)){
-
+                    $acc_id = $account["id"];
                     $username = $account["username"];
                     $dept_code = $account["dept_code"];
                     $status = $account["status"];

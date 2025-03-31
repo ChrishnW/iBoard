@@ -211,7 +211,7 @@
 
                 if(mysqli_num_rows($result) > 0){
                     while($department = mysqli_fetch_assoc($result)){
-
+                        $dept_id = $department["id"];
                         $dept_name = $department["dept_name"];
                         $dept_code = $department["dept_code"];
                         $status = $department["status"];
@@ -231,10 +231,10 @@
                     <td><?php echo $status_word ?></td>
                     <td style="table-layout: fixed; width: 15%;">
                         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
-                        <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
+                          <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
-                            <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
-                            <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
+                          <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
+                          <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
 
                         </form>
 
