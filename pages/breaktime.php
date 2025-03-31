@@ -490,7 +490,7 @@
           </div>
 
           <div class="card mb-4">
-            <div class="card-boy">
+            <div class="card-body">
               <div id="tool_meeting" class="row mb-3">
                 <div class="col-md-6">
                   <label for="edit_tool_start">Tool Box Meeting Start <span style="color: red;">*</span></label><br>
