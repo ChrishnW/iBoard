@@ -241,7 +241,7 @@
                         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
                         <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
-                            <input type="submit" id="edit_depatment" class="btn btn-primary mr-2" value="Edit" name="edit_department">
+                            <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
                             <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
 
                         </form>
@@ -273,7 +273,7 @@
       <div class="modal-content">
         <div class="modal-header bg-gradient-primary">
           <h5 class="modal-title text-white">Add Department</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_addDepartment">
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_addDepartment">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -305,13 +305,14 @@
       <div class="modal-content">
         <div class="modal-header bg-gradient-primary">
           <h5 class="modal-title text-white">Edit Department</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_EditDepartment">
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_EditDepartment">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
         <div class="modal-body">
-          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="edit_department_form" style="width: 100%; max-width: 600px;">
+
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
             
             <?php
 
@@ -339,14 +340,11 @@
             
                   echo '<script> document.addEventListener("DOMContentLoaded", function () {
             
-                    var department_dashboard = document.getElementById("department_dashboard");
-                    department_dashboard.style.display = "none";
-            
-                    var add_department = document.getElementById("add_department");
-                    add_department.style.display = "none";
-            
                     var edit_department = document.getElementById("edit_department");
                     edit_department.style.display = "block";
+
+                    document.body.style.overflow = "hidden";
+                    
             
                   }); </script>';
                   
@@ -373,22 +371,25 @@
               </select> 
             </div>
 
-            <div class="modal-footer">
-
-              <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
-              <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2">
-              <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
-            
-            </div>
-
             <?php
                 }
                 unset($_SESSION["dept_id"]);
               }
             ?>
 
-          </form>
+            
         </div>
+
+            <div class="modal-footer">
+
+              <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
+              <!-- <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2"> -->
+              <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
+            
+            </div>
+
+          </form>
+          
       </div>
     </div>
   </div>                
@@ -513,12 +514,14 @@
     const close_addDepartment = document.getElementById('close_addDepartment');
 
     const cancel_edit_department = document.getElementById('cancel_edit_department');
+    const btn_edit_department = document.getElementById('btn_edit_department');
     const edit_department = document.getElementById('edit_department');
 
+    edit_department
+
     btn_add_department.addEventListener('click', function () {
-      department_dashboard.style.display = 'block'; // Hide the dashboard
-      add_department.style.display = 'block'; // Display the modal
-      document.body.style.overflow = 'hidden'; // Prevent page scrolling
+      add_department.style.display = 'block'; 
+      document.body.style.overflow = 'hidden'; 
     });
 
     close_addDepartment.addEventListener("click", function(){
@@ -533,10 +536,13 @@
       document.body.style.overflow = 'auto';
     });   
 
-    edit_department.addEventListener('click', function () {
-      department_dashboard.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    });   
+
+    
+
+    // btn_edit_department.addEventListener('click', function () {
+    //   edit_department.style.display = 'block';
+    //   document.body.style.overflow = 'hidden';
+    // });   
 
     close_EditDepartment.addEventListener("click", function(){
       edit_department.style.display = 'none';
