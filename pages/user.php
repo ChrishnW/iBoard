@@ -305,7 +305,7 @@
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
-                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none; font-size: 30px;">RUN</button> 
+                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none; font-size: 50px;">RUN</button> 
                     <br>
                     <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
                 </div>
@@ -329,7 +329,7 @@
         </div>
 
         <!-- Details Section -->
-        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mr-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mx-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
 
             <div id="line_image_div">
                 <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 350px; height: 200px; border-radius: 10px;">
