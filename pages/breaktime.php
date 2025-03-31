@@ -207,10 +207,10 @@
               <thead class="bg-primary text-white text-center" style="font-size: .9rem; text-align: center; padding: 0;">
 
                 <tr>
-                  <th class="text-center align-middle" style="width: 2%;">Breaktime Code</th>
+                  <th class="text-center align-middle" style="width: 1%;">Breaktime Code</th>
 
-                  <th class="text-center align-middle" style="width: 2%;">Tool Box Meeting Start</th>
-                  <th class="text-center align-middle" style="width: 2%;">Tool Box Meeting End</th>
+                  <th class="text-center align-middle" style="width: 3%;">Tool Box Meeting Start</th>
+                  <th class="text-center align-middle" style="width: 3%;">Tool Box Meeting End</th>
 
                   <th class="text-center align-middle" style="width: 2%;">Breaktime Start (AM)</th>
                   <th class="text-center align-middle" style="width: 2%;">Breaktime End (AM)</th>
@@ -224,9 +224,9 @@
                   <th class="text-center align-middle" style="width: 2%;">Breaktime Start (OT)</th>
                   <th class="text-center align-middle" style="width: 2%;">Breaktime End (OT)</th>
 
-                  <th class="text-center align-middle" style="width: 2%;">Status</th>
+                  <th class="text-center align-middle" style="width: 1%;">Status</th>
 
-                  <th class="text-center align-middle" style="width: 2%;">Actions</th>
+                  <th class="text-center align-middle" style="width: 1%;">Actions</th>
                 </tr>
 
               </thead>
