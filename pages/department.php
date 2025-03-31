@@ -41,12 +41,7 @@
         var popup = document.getElementById('popupFormDelete');
         popup.style.display = 'block';
 
-    }); </script>";
-
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-        var department_dashboard = document.getElementById('department_dashboard');
-        department_dashboard.style.display = 'block';
+        document.body.style.overflow = 'hidden';
 
     }); </script>";
 
@@ -398,9 +393,9 @@
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_popup">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-white">Notification</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -504,6 +499,7 @@
 
     document.getElementById('close_popup2').addEventListener('click', function () {
       document.getElementById('popupFormDelete').style.display = 'none';
+      document.body.style.overflow = 'auto';
     });
 
     const btn_add_department = document.getElementById('btn_add_department');
@@ -559,6 +555,7 @@
 
   function closePopup2() {
     popup2.style.display = "none";
+    document.body.style.overflow = 'auto';
   }
 
 </script>
