@@ -337,7 +337,7 @@
                 <span class="h2 text-dark" id="incharge_name">-----</span> 
             </div>
 
-            <div class="ml-auto align-self-end my-auto mr-2" id="incharge_image_div">
+            <div class="ml-auto align-self-end" id="incharge_image_div">
                 <img src="../assets/img/img_not_available.png" alt="" class="mr-5" style="width: 180px; height: 180px; border-radius: 50%;">
             </div>
         </div>
