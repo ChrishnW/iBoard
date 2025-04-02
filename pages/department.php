@@ -474,19 +474,7 @@
     $('#dataTable').DataTable();
   });
 
-  // // Ensure the Table2Excel library is included
-  // $(document).ready(function () {
-  //   $('#download').click(function () {
-  //     if (typeof Table2Excel !== 'undefined') {
-  //       let table2excel = new Table2Excel({
-  //         filename: "MydataTable.xlsx"
-  //       });
-  //       table2excel.export(document.querySelectorAll("#dataTable"));
-  //     } else {
-  //       console.error("Table2Excel library is not loaded. Please include it in your project.");
-  //     }
-  //   });
-  // });
+  
   
 
   // function updateTable() {
