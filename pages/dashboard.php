@@ -46,73 +46,101 @@
 ?>
 
   <!-- Begin Page Content -->
-  <div class="container-fluid">
+<div class="container-fluid">
   <div id="display_department" style="display: block;">
     <div class="card shadow mb-4">
       
       <div class="card-header py-3.5 pt-4">
         <!-- Page Heading -->
-          <h2 class="float-left">Dashboard</h1>
-          <div class="clearfix"></div>
+        <h2 class="float-left">Dashboard</h1>
+
+        <a class="btn btn-success float-right mr-2" href="#" onclick="showReportsModal()">
+          <i class="fa fa-download mr-1" aria-hidden="true"></i>
+          Reports
+        </a>
+
+        <div class="clearfix"></div>
       </div>
         <!-- Content Row -->
       <div class="card-body">   
-
         <div class="row" id="dashboad_insert">
-
-        </div>
-        
+        </div> 
       </div>
     </div>
   </div>
 </div>
 
-  <div class="container-fluid" id="monitor_department" style="display: none;">
-
-    <div class="card shadow my-4">
-        <div class="card-header py-3.5 pt-4 align-items-center ">
-            <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
-            <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name"></u></h2>
-            <a class="btn btn-danger float-right mt-2" href="#" onclick="back_btn()">
-                <i class="fas fa-sign-out-alt"></i> Back
-            </a>
-            
-            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="back_form">
-              <input type="hidden" name="back" value="back">
-            </form>
-
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-sm table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="bg-primary text-white text-center">
-                    <tr>
-                        <th rowspan="2" class="text-center align-middle">Model</th>
-                        <th rowspan="2" class="text-center align-middle">Unit</th>
-                        <th rowspan="2" class="text-center align-middle">Status</th>
-                        <th colspan="2" class="text-center align-middle">TARGET</th>
-                        <th rowspan="2" class="text-center align-middle">Actual</th>
-                        <th rowspan="2" class="text-center align-middle">Balance</th>
-                    </tr>
-                    <tr>
-                        <th class="text-center align-middle">(Day)</th>
-                        <th class="text-center align-middle">(Now)</th>
-                    </tr>
-                    </thead>
-
-                    <tbody class="text-black text-center" id="insert_here">
-                        
-                    </tbody>
-                    
-                </table>
-            </div>
-            
-        </div>
+<div class="container-fluid" id="monitor_department" style="display: none;">
+  <div class="card shadow my-4">
+    <div class="card-header py-3.5 pt-4 align-items-center ">
+      <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
+        <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name"></u></h2>
+        <a class="btn btn-danger float-right mt-2" href="#" onclick="back_btn()">
+            <i class="fas fa-sign-out-alt"></i> Back
+        </a>
+      
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" id="back_form">
+          <input type="hidden" name="back" value="back">
+        </form>
+      <div class="clearfix"></div>
     </div>
 
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm table-striped" id="dataTable" width="100%" cellspacing="0">
+          <thead class="bg-primary text-white text-center">
+          <tr>
+              <th rowspan="2" class="text-center align-middle">Model</th>
+              <th rowspan="2" class="text-center align-middle">Unit</th>
+              <th rowspan="2" class="text-center align-middle">Status</th>
+              <th colspan="2" class="text-center align-middle">TARGET</th>
+              <th rowspan="2" class="text-center align-middle">Actual</th>
+              <th rowspan="2" class="text-center align-middle">Balance</th>
+          </tr>
+          <tr>
+              <th class="text-center align-middle">(Day)</th>
+              <th class="text-center align-middle">(Now)</th>
+          </tr>
+          </thead>
+
+          <tbody class="text-black text-center" id="insert_here">
+              
+          </tbody>
+        </table>
+      </div>         
+    </div>
   </div>
+</div>
+
+<!-- Reports Modal -->
+<div class="modal" tabindex="-1" id="reportsModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-gradient-primary">
+        <h5 class="modal-title text-white">Download Reports</h5>
+        <button type="button" class="close text-white" aria-label="Close" id="close_popup1">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div>
+          <label for="">From: </label>
+          <input type="date" class="form-control">
+          <br>
+
+          <label for="">To: </label>
+          <input type="date" class="form-control">
+        </div>     
+      </div>
+
+      <div class="modal-footer">
+        <button onclick="reportsDownload()" class="btn btn-primary">Download</button>
+        <a href="#" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
@@ -183,6 +211,21 @@
 ?>
 
 <script>
+  function showReportsModal(){
+    const modal = document.getElementById('reportsModal');
+    modal.style.display = 'block';
+}
+
+  function closePopupReports() {
+    const modal = document.getElementById('reportsModal');
+    modal.style.display = 'none'; // Hide the modal
+  }
+
+
+  document.getElementById('close_popup1').addEventListener('click', function () {
+    document.getElementById('reportsModal').style.display = 'none';
+  });
+
   
   var depart_code =  "<?php echo isset($_SESSION['department_code']) ? TRUE : FALSE; ?>";
   var depart_name =  "<?php echo isset($_SESSION['department_name']) ? $_SESSION['department_name'] : FALSE; ?>";
