@@ -226,7 +226,7 @@
 
                   <th class="text-center align-middle" style="width: 1%;">Status</th>
 
-                  <th class="text-center align-middle" style="width: 1%;">Actions</th>
+                  <th class="text-center align-middle" style="width: 2%;">Actions</th>
                 </tr>
 
               </thead>
@@ -292,8 +292,8 @@
 
                         <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id ?>">
 
-                        <input type="submit" class="btn btn-primary btn-sm mr-1 ml-n4" name="edit_breaktime" value="Edit">
-                        <input type="submit" class="btn btn-danger btn-sm mr-n4" name="delete_breaktime" value="Delete">
+                        <input type="submit" class="btn btn-primary mr-1 ml-n4" name="edit_breaktime" value="Edit">
+                        <input type="submit" class="btn btn-danger mr-n4" name="delete_breaktime" value="Delete">
 
                       </form>
                     </td>
