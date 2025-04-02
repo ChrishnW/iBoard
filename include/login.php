@@ -5,7 +5,7 @@ session_start();
 function check_depeartment($username, $password){
   global $conn;
 
-  $query = "SELECT * FROM tbl_department WHERE dept_name = '$username'";
+  $query = "SELECT * FROM tbl_department WHERE dept_name = '$username' AND status = '1' ";
   $result = mysqli_query($conn, $query);
 
   if (mysqli_num_rows($result) > 0) {
@@ -34,7 +34,7 @@ if (isset($_POST['login'])) :
   $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
   // Check in users table
-  $query = "SELECT * FROM tbl_accounts WHERE username = '$username'";
+  $query = "SELECT * FROM tbl_accounts WHERE username = '$username' AND status = '1' ";
   $result = mysqli_query($conn, $query);
 
   if (mysqli_num_rows($result) > 0) {

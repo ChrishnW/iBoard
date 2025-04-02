@@ -6,7 +6,7 @@
     $dept_code = $_SESSION['department_code'];
     $date = date("Y-m-d");
     
-    $sql_command = "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code'";
+    $sql_command = "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' AND status = '1'";
     $result = mysqli_query($conn, $sql_command);
 
     if(mysqli_num_rows($result) > 0){
