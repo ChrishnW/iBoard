@@ -1022,6 +1022,16 @@
 
         update();
     }
+    
+    function btn_disabled(){
+        document.getElementById('minus').disabled = true;
+        document.getElementById('plus').disabled = true;
+    }
+
+    function btn_abled(){
+        document.getElementById('minus').disabled = false;
+        document.getElementById('plus').disabled = false;
+    }
 
     function check_breaktime_start(){
 
@@ -1039,26 +1049,31 @@
                 start_breaktime();
                 work_status = "BREAK";
                 clearInterval(interval);
+                btn_disabled();
                 break;
             case am_start: 
                 start_breaktime();
                 work_status = "BREAK";
                 clearInterval(interval);
+                btn_disabled();
                 break;
             case lunch_start:
                 start_breaktime(); 
                 work_status = "BREAK";
                 clearInterval(interval);
+                btn_disabled();
                 break;
             case pm_start: 
                 start_breaktime();
                 work_status = "BREAK";
                 clearInterval(interval);
+                btn_disabled();
                 break;
             case ot_start: 
                 start_breaktime();
                 work_status = "BREAK";
                 clearInterval(interval);
+                btn_disabled();
                 break;
         }
     }
@@ -1095,22 +1110,27 @@
                 case tool_end: 
                     end_breaktime();
                     work_status = "WORK";
+                    btn_abled();
                     break;
                 case am_end: 
                     end_breaktime();
                     work_status = "WORK";
+                    btn_abled();
                     break;
                 case lunch_end: 
                     end_breaktime();
                     work_status = "WORK";
+                    btn_abled();
                     break;
                 case pm_end: 
                     end_breaktime();
                     work_status = "WORK";
+                    btn_abled();
                     break;
                 case ot_end: 
                     end_breaktime();
                     work_status = "WORK";
+                    btn_abled();
                     break;
             }
 
@@ -1179,8 +1199,7 @@
             body.style.backgroundColor = '#ffcccb'; // light red
             interval = setInterval(updateTimer, 10);
 
-            document.getElementById('minus').disabled = true;
-            document.getElementById('plus').disabled = true;
+            btn_disabled();
 
             document.getElementById('runStopButton').style.background = "red";
 
@@ -1189,8 +1208,7 @@
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
 
-            document.getElementById('minus').disabled = false;
-            document.getElementById('plus').disabled = false;
+            btn_abled();
 
             document.getElementById('runStopButton').style.background = "blue";
         } 
