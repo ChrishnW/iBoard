@@ -49,7 +49,7 @@
                     Exit
                 </a>
 
-                <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="exportToExcel()">
+                <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="showReportsModal()">
                     <i class="fa fa-download mr-1" aria-hidden="true"></i>
                     Reports
                 </a>
@@ -85,6 +85,37 @@
             </div>
         </div>
     </div>    
+
+    <!-- Reports Modal -->
+    <div class="modal" tabindex="-1" id="reportsModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header bg-gradient-primary">
+                <h5 class="modal-title text-white">Download Reports</h5>
+                <button type="button" class="close text-white" aria-label="Close" id="close_popup1">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div>
+                    <label for="">From: </label>
+                    <input type="date" class="form-control">
+                    <br>
+
+                    <label for="">To: </label>
+                    <input type="date" class="form-control">
+                </div>     
+            </div>
+
+            <div class="modal-footer">
+                <button onclick="reportsDownload()" class="btn btn-primary">Download</button>
+                <a href="#" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+            </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Exit Pop out Modal -->
     <div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
@@ -141,6 +172,22 @@
     //     // Export the workbook to Excel file
     //     XLSX.writeFile(workbook, "GPI_Production_Status.xlsx");
     // }
+
+    function showReportsModal(){
+        const modal = document.getElementById('reportsModal');
+        modal.style.display = 'block';
+    }
+
+    function closePopupReports() {
+        const modal = document.getElementById('reportsModal');
+        modal.style.display = 'none'; // Hide the modal
+    }
+
+
+    document.getElementById('close_popup1').addEventListener('click', function () {
+      document.getElementById('reportsModal').style.display = 'none';
+    });
+
 
     document.getElementById('close_popup2').addEventListener('click', function () {
       document.getElementById('popoutExit').style.display = 'none';
