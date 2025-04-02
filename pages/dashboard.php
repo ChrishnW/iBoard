@@ -20,8 +20,8 @@
 
     if(isset($_POST['submit'])){
 
-      $dept_code = $_POST['depart_code'];
-      $_SESSION['department_code'] = $dept_code;
+      $_SESSION['department_code'] = $_POST['depart_code'];
+      $_SESSION['department_name'] = $_POST['depart_name'];
 
       header("Refresh: .3; url = dashboard.php");
       exit();
@@ -72,7 +72,7 @@
     <div class="card shadow my-4">
         <div class="card-header py-3.5 pt-4 align-items-center ">
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
-            <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u>GPI Production Status</u></h2>
+            <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name"></u></h2>
             <a class="btn btn-danger float-right mt-2" href="#" onclick="back_btn()">
                 <i class="fas fa-sign-out-alt"></i> Back
             </a>
@@ -155,6 +155,7 @@
                     <div class=\"text-center\">
                       <form action=\"dashboard.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px; line-height: .75;\">
                           <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
+                          <input type=\"hidden\" name=\"depart_name\" value=\"$dept_name\">
                           <div class=\"text-secondary mt-2 mb-1\" style=\"font-size: 12px;\">Number of lines</div>
                           <div class=\"h1 font-weight-bold text-primary\" style=\"line-height: .75;\">$count</div>
                           <button type=\"submit\" name=\"submit\" class=\"btn btn-primary px-2 mt-n1\" style=\"border-radius: 8px; font-size: 12px; padding: 1px 1px;\">More Info</button>
@@ -184,6 +185,7 @@
 <script>
   
   var depart_code =  "<?php echo isset($_SESSION['department_code']) ? TRUE : FALSE; ?>";
+  var depart_name =  "<?php echo isset($_SESSION['department_name']) ? $_SESSION['department_name'] : FALSE; ?>";
   
   function back_btn(){
     document.getElementById('back_form').submit();
@@ -199,6 +201,8 @@
             document.getElementById('insert_here').innerHTML = data;
             $('#dataTable').DataTable();
             console.log("Success");
+
+            document.getElementById("prod_name").innerHTML = ("GPI " + depart_name + " Status")
 
         },
         error: function () {
