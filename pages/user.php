@@ -300,7 +300,7 @@
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
-                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-dark" style="background-color: transparent; border: none; font-size: 50px;">RUN</button> 
+                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn btn-primary" style=" font-size: 50px;">RUN</button> 
                     <br>
                     <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
                 </div>
@@ -581,10 +581,10 @@
                     document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
                     document.getElementById('daily_target_display').innerHTML = '$daily_target';
                     
-                    const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; \" >';
+                    const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; object-fit: contain; \" >';
                     document.getElementById('line_image_div').innerHTML = line_img; 
                     
-                    const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px;\">';
+                    const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px; object-fit: contain;\">';
                     document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                     document.getElementById('target_count').innerHTML = '$target'; 
@@ -1178,10 +1178,21 @@
             button.innerText = 'STOP';
             body.style.backgroundColor = '#ffcccb'; // light red
             interval = setInterval(updateTimer, 10);
+
+            document.getElementById('minus').disabled = true;
+            document.getElementById('plus').disabled = true;
+
+            document.getElementById('runStopButton').style.background = "red";
+
         } else if (button.innerText == 'STOP') {
             clearInterval(interval);
             button.innerText = 'RUN';
             body.style.backgroundColor = '#add8e6'; // light blue
+
+            document.getElementById('minus').disabled = false;
+            document.getElementById('plus').disabled = false;
+
+            document.getElementById('runStopButton').style.background = "blue";
         } 
 
         update();
