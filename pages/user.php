@@ -562,6 +562,7 @@
         else{
             $status_string = "Inactive";
         }
+        $_SESSION["takt_time"] = $takt_time;
 
         $gapInSeconds = strtotime($work_end) - strtotime($work_start);
         $gapInMinutes = $gapInSeconds / 60;
