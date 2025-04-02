@@ -330,7 +330,7 @@
                 <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 350px; height: 200px; border-radius: 10px;">
             </div>
 
-            <div class="d-flex flex-column pl-5 fs-1 mt-n2"><br>
+            <div class="d-flex flex-column pl-5 fs-1"><br>
                 <span class="h2 text-danger"><u>Information</u></span> 
                 <span class="h2 text-dark" id="line_desc">-----</span>
                 <span class="h2 text-danger"><u>Leader</u></span> 
@@ -1135,8 +1135,9 @@
                     document.getElementById('user_dashboard').style.display = "none";
 
                     document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
-                    document.getElementById('body').style.backgroundSize = "contain";
+                    document.getElementById('body').style.backgroundSize = "cover";
                     document.getElementById('body').style.backgroundPosition = "center";
+                    document.getElementById('body').style.objectFit = "contain";
 
                     j = 0;
                     
