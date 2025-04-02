@@ -818,6 +818,7 @@
         $target = $quantity;
         $actual = 0;
         $balance = $quantity;
+        $status = "RUN";
 
         $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
         $result = mysqli_query($conn, $sql_command);
@@ -833,7 +834,12 @@
             
         }
         else{
-            
+            $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
+                            target_day, target_now, actual, balance) VALUES 
+                            ('$date', '$line_name', '$line_desc', '$status',
+                            '$daily_target', '$target', '$actual', '$balance')";
+
+            $result = mysqli_query($conn, $sql_command);
         }
 
         echo "<script>
@@ -992,11 +998,9 @@
     }
 
     function closePopupLogout() {
-        // Close the modal by hiding it
         const modal = document.getElementById("popoutLogout");
         modal.style.display = "none";
 
-        // Remove the backdrop if any is present
         const modalBackdrops = document.getElementsByClassName("modal-backdrop");
         while (modalBackdrops.length > 0) {
         modalBackdrops[0].parentNode.removeChild(modalBackdrops[0]);
