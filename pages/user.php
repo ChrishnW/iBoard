@@ -1135,7 +1135,7 @@
                     document.getElementById('user_dashboard').style.display = "none";
 
                     document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
-                    document.getElementById('body').style.backgroundSize = "cover";
+                    document.getElementById('body').style.backgroundSize = "contain";
                     document.getElementById('body').style.backgroundPosition = "center";
 
                     j = 0;
