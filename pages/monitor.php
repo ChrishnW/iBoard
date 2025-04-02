@@ -49,10 +49,10 @@
                     Exit
                 </a>
 
-                <!-- <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="exportToExcel()">
-                    <i class="fa fa-file-excel mr-1" aria-hidden="true"></i>
-                    Export
-                </a> -->
+                <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="exportToExcel()">
+                    <i class="fa fa-download mr-1" aria-hidden="true"></i>
+                    Reports
+                </a>
 
                 <div class="clearfix"></div>
             </div>
