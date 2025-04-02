@@ -42,7 +42,7 @@
         <div class="card shadow my-4">
             <div class="card-header py-3.5 pt-4 align-items-center ">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
-                <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u>GPI Production Status</u></h2>
+                <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name">GPI Production Status</u></h2>
                 <a class="btn btn-danger float-right mt-2" href="#" onclick="showExitModal()">
                     <i class="fas fa-sign-out-alt"></i> 
                     Exit
@@ -106,6 +106,23 @@
     </div>
 </body>
 </html>
+
+<?php
+
+    $dept_code = $_SESSION["department_code"];
+    $result = mysqli_query($conn, "SELECT dept_name FROM tbl_department WHERE dept_code = $dept_code");
+
+    if(mysqli_num_rows($result) > 0){
+        $department = mysqli_fetch_assoc($result);
+
+        $dept_name = $department["dept_name"];
+
+        echo "<script>document.addEventListener(\"DOMContentLoaded\", function () {
+            document.getElementById('prod_name').innerHTML = \"GPI $dept_name Status\";
+        });</script>";
+    }
+
+?>
 
 <script>
     
