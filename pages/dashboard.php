@@ -1,51 +1,38 @@
 <?php include '../include/header.php'; 
   ob_start();
 
-  if(isset($_SESSION['department_code'])){
-    
+  if(isset($_SESSION['department_code'])){   
     echo "<script>
       document.addEventListener('DOMContentLoaded', function () {
-        
         document.getElementById('display_department').style.display = 'none';
-        document.getElementById('monitor_department').style.display = 'block';
-      
+        document.getElementById('monitor_department').style.display = 'block';    
       });
     </script>";
-
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Viewing monitor ------------------------------------------------------------------------------
-
     if(isset($_POST['submit'])){
-
       $_SESSION['department_code'] = $_POST['depart_code'];
       $_SESSION['department_name'] = $_POST['depart_name'];
 
       header("Refresh: .3; url = dashboard.php");
       exit();
-      ob_end_flush();
-      
+      ob_end_flush(); 
     }
 
     // Back Button ------------------------------------------------------------------------------
-
-    if(isset($_POST['back'])){
-      
+    if(isset($_POST['back'])){      
       unset($_SESSION["department_code"]);
 
       header("Refresh: .3; url = dashboard.php");
       exit();
-      ob_end_flush();
-      
+      ob_end_flush();      
     }
-
   }
-
 ?>
 
-  <!-- Begin Page Content -->
+<!-- Begin Page Content -->
 <div class="container-fluid">
   <div id="display_department" style="display: block;">
     <div class="card shadow mb-4">
@@ -144,9 +131,7 @@
 
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
-
   // Fetching Active Departments ..............................................
-
   $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
   $result = mysqli_query($conn, $sql_command);
 
@@ -166,15 +151,12 @@
 
       if(mysqli_num_rows($result1) > 0){
         while($account = mysqli_fetch_assoc($result1)){
-
           $count++;
-
         }
       }
 
       echo "<script>
         document.addEventListener('DOMContentLoaded', function () {
-
           const table = `
             <div class=\"col-lg-3 col-md-4 col-sm-8 mb-4\">
               <div class=\"card shadow h-100\" style=\"border-radius: 8px; border-left: 5px solid #4e73df;\">
@@ -182,11 +164,11 @@
                   <div class=\"row justify-content-center\" >
                     <div class=\"text-center\">
                       <form action=\"dashboard.php\" method=\"post\" class=\"d-flex flex-column align-items-center py-1\" style=\"gap: 5px; line-height: .75;\">
-                          <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
-                          <input type=\"hidden\" name=\"depart_name\" value=\"$dept_name\">
-                          <div class=\"text-secondary mt-2 mb-1\" style=\"font-size: 12px;\">Number of lines</div>
-                          <div class=\"h1 font-weight-bold text-primary\" style=\"line-height: .75;\">$count</div>
-                          <button type=\"submit\" name=\"submit\" class=\"btn btn-primary px-2 mt-n1\" style=\"border-radius: 8px; font-size: 12px; padding: 1px 1px;\">More Info</button>
+                        <input type=\"hidden\" name=\"depart_code\" value=\"$dept_code\">
+                        <input type=\"hidden\" name=\"depart_name\" value=\"$dept_name\">
+                        <div class=\"text-secondary mt-2 mb-1\" style=\"font-size: 12px;\">Number of lines</div>
+                        <div class=\"h1 font-weight-bold text-primary\" style=\"line-height: .75;\">$count</div>
+                        <button type=\"submit\" name=\"submit\" class=\"btn btn-primary px-2 mt-n1\" style=\"border-radius: 8px; font-size: 12px; padding: 1px 1px;\">More Info</button>
                       </form>
                     </div>
                     
@@ -201,31 +183,26 @@
           `;
       
           document.querySelector(\"#dashboad_insert\").insertAdjacentHTML(\"beforeend\", table);
-
         });
       </script>";
-
     }
   }
-
 ?>
 
 <script>
   function showReportsModal(){
     const modal = document.getElementById('reportsModal');
     modal.style.display = 'block';
-}
+  }
 
   function closePopupReports() {
     const modal = document.getElementById('reportsModal');
     modal.style.display = 'none'; // Hide the modal
   }
 
-
   document.getElementById('close_popup1').addEventListener('click', function () {
     document.getElementById('reportsModal').style.display = 'none';
   });
-
   
   var depart_code =  "<?php echo isset($_SESSION['department_code']) ? TRUE : FALSE; ?>";
   var depart_name =  "<?php echo isset($_SESSION['department_name']) ? $_SESSION['department_name'] : FALSE; ?>";
@@ -236,30 +213,28 @@
 
   function updateTable() {
     $.ajax({
-        method: 'POST',
-        url: 'fetch.php',
-        success: function (data) {
+      method: 'POST',
+      url: 'fetch.php',
+      success: function (data) {
 
-            $('#dataTable').DataTable().destroy(); 
-            document.getElementById('insert_here').innerHTML = data;
-            $('#dataTable').DataTable();
-            console.log("Success");
+        $('#dataTable').DataTable().destroy(); 
+        document.getElementById('insert_here').innerHTML = data;
+        $('#dataTable').DataTable();
+        console.log("Success");
 
-            document.getElementById("prod_name").innerHTML = ("GPI " + depart_name + " Status")
+        document.getElementById("prod_name").innerHTML = ("GPI " + depart_name + " Status")
+      },
 
-        },
-        error: function () {
-            console.log("Error");
-        }
+      error: function () {
+        console.log("Error");
+      }
     });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-
     if(depart_code){
       setInterval(updateTable, 1000);
     }
-
   });
 
   // function updateTable() {
