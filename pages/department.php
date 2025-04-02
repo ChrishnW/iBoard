@@ -86,7 +86,7 @@
 
     }
 
-    // Delete Account Confirm --------------------------------------------------------------------------
+    // Delete Department Confirm --------------------------------------------------------------------------
     if(isset($_POST["delete_data"])){
 
       $dept_id = $_SESSION["delete_dept"];
@@ -95,10 +95,10 @@
       $result = mysqli_query($conn, $sql_command);
 
       if($result){
-        $_SESSION["message"] = "Account deleted successfully.";
+        $_SESSION["message"] = "Department deleted successfully.";
       }
       else{
-        $_SESSION["message"] = "Failed to delete account.";
+        $_SESSION["message"] = "Failed to delete Department.";
       }
       
       unset($_SESSION["delete_dept"]);
