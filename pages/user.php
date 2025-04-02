@@ -756,6 +756,8 @@
 
             $status = $line["status"];
 
+            $_SESSION['img_extra_path'] = $line["extra_view"];
+
             $status_string = "";
             if($status == 1){
                 $status_string = "Active";
@@ -975,8 +977,6 @@
     var i = 0;
     var j = 0;
 
-    var img_extra_path = "<?php echo isset($_SESSION['img_extra_path']) ? $_SESSION['img_extra_path'] : '0'; ?>"
-
     var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
@@ -1120,6 +1120,8 @@
 
         // extra view display
 
+        var img_extra_path = "<?php echo isset($_SESSION['img_extra_path']) ? $_SESSION['img_extra_path'] : '0'; ?>";
+
         if(img_extra_path != "0"){
 
             if(document.getElementById('edit_user').style.display == "none"){
@@ -1135,9 +1137,9 @@
                     document.getElementById('user_dashboard').style.display = "none";
 
                     document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
-                    document.getElementById('body').style.backgroundSize = "cover";
+                    document.getElementById('body').style.backgroundSize = "contain";
                     document.getElementById('body').style.backgroundPosition = "center";
-                    document.getElementById('body').style.objectFit = "contain";
+                    document.getElementById('body').style.backgroundRepeat = "no-repeat";
 
                     j = 0;
                     
