@@ -29,18 +29,7 @@
             $_SESSION['end_to'] = $end;
             $_SESSION['gap'] = $gap + 1;
 
-            // $asd = $_SESSION['gap'];
-
-            // echo "<script>console.log($asd)</script>";
-
-            // for($i = 1; $i <= $_SESSION['gap']; $i++){
-            //     $formattedDate = $startDate->format('Y-m-d');
-            //     $startDate->modify('+1 day');
-            //     echo "<script>console.log('$formattedDate')</script>";
-            // }
-
             header("Location: generate_excel.php");
-            //header("Refresh: .3; url = monitor.php");
             exit;
             
         }

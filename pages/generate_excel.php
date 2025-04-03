@@ -34,6 +34,7 @@ header("Cache-Control: private",false);
         <table width="100%" border="1" align="left">
             <thead>
                 <tr>
+                    <th>Date</th>
                     <th>Department</th>
                     <th>Model</th>
                     <th>Unit</th>
@@ -64,6 +65,7 @@ header("Cache-Control: private",false);
                     {
                     echo "
                     <tr>
+                        <td>". $row['date'] ."</td>
                         <td>". $row['dept_name'] ."</td>
                         <td>". $row['model'] ."</td>
                         <td>". $row['unit'] ."</td>
@@ -77,7 +79,7 @@ header("Cache-Control: private",false);
 
                     $startDate->modify('+1 day');
                 }
-                    
+                    header("Location: monitor.php");
             ?>
             </tbody>
         </table>
