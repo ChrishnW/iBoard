@@ -18,13 +18,26 @@
 
         if(isset($_POST['submit'])){
 
-            $_SESSION['start_from'] = $_POST["date_from"];
-            $_SESSION['start_from'] = $_POST["date_to"];
-            $asd = $_SESSION['start_from'];
+            $start = $_POST["date_from"];
+            $end = $_POST["date_to"];
 
-            echo "<script>console.log('$asd');</script>";
+            $startDate = new DateTime($start);
+            $endDate = new DateTime($end);
+            $gap = $startDate->diff($endDate)->days;
 
-            //header("Location: generate_excel.php");
+            $_SESSION['start_from'] = $start;
+            $_SESSION['end_to'] = $end;
+            $_SESSION['gap'] = $gap + 1;
+
+            $asd = $_SESSION['gap'];
+
+            echo "<script>console.log($gap)</script>";
+            echo "<script>console.log($asd)</script>";
+
+            header("Location: generate_excel.php");
+            //header("Refresh: .3; url = monitor.php");
+            exit;
+            
         }
     }
 
@@ -118,19 +131,19 @@
             <div class="modal-body">
                 <div>
                     <form action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" id="form">
-                        <label for="date_from">From: </label>
-                        <input type="date" class="form-control" id="date_from" name="date_from">
+                        <label for="date_from">From: <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" id="date_from" name="date_from" onchange="from_min()" required>
                         <br>
 
-                        <label for="date_to">To: </label>
-                        <input type="date" class="form-control" id="date_to" name="date_to">
+                        <label for="date_to">To: <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" id="date_to" name="date_to" required>
                 </div>     
             </div>
 
             <div class="modal-footer">
             
                         <!-- <button onclick="reportsDownload()" class="btn btn-primary" disabled>Download</button> -->
-                        <input type="submit" name="submit" value="Download" onclick="reportsDownload()" class="btn btn-primary" disabled id="submit">
+                        <input type="submit" name="submit" value="Download" class="btn btn-primary">
                         <input type="reset" name="reset" value="Cancel" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">
 
                     </form>
@@ -187,23 +200,31 @@
 
 <script>
 
-    document.getElementById("date_to").addEventListener("change", function(){
-        const date_from = document.getElementById("date_from");
-        const date_to = document.getElementById("date_to");
+    function from_min(){
+        const from = document.getElementById("date_from").value;
+        const to = document.getElementById("date_to");
+
+        to.min = from;
         
-        if (date_from.value && date_to.value) {
-            if (new Date(date_from.value) <= new Date(date_to.value)) {
-                document.getElementById('submit').disabled = false;
-            } else {
-                alert("'From' date cannot be later than 'To' date.");
-                document.getElementById('submit').disabled = true;
-                document.getElementById('date_to').value = '';
-            }
-        } else {
-            alert("Please select both 'From' and 'To' dates.");
-            document.getElementById('submit').disabled = true;
-        }
-    });
+    }
+
+    // document.getElementById("date_to").addEventListener("change", function(){
+    //     const date_from = document.getElementById("date_from");
+    //     const date_to = document.getElementById("date_to");
+        
+    //     if (date_from.value && date_to.value) {
+    //         if (new Date(date_from.value) <= new Date(date_to.value)) {
+    //             document.getElementById('submit').disabled = false;
+    //         } else {
+    //             alert("'From' date cannot be later than 'To' date.");
+    //             document.getElementById('submit').disabled = true;
+    //             document.getElementById('date_to').value = '';
+    //         }
+    //     } else {
+    //         alert("Please select both 'From' and 'To' dates.");
+    //         document.getElementById('submit').disabled = true;
+    //     }
+    // });
 
 
 

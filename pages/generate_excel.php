@@ -1,6 +1,7 @@
 <?php
 
 include '../include/connect.php'; 
+session_start();
 $today = date('Y-m-d');
 header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
 header("Content-Disposition: attachment; filename=Output Records".$today.".xls");  //File name extension was wrong
@@ -26,6 +27,8 @@ header("Cache-Control: private",false);
         <br>
         <h3><b>Output Records</b></h3>
         <br>
+        <b><?php echo $_SESSION["start_from"] ?></b>
+        <b><?php echo $_SESSION["start_to"] ?></b>
     </center>
     <br>
 
