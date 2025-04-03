@@ -79,7 +79,7 @@ header("Cache-Control: private",false);
 
                     $startDate->modify('+1 day');
                 }
-                    header("Location: monitor.php");
+                    //header("Location: monitor.php");
             ?>
             </tbody>
         </table>

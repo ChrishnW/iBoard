@@ -29,7 +29,7 @@
             $_SESSION['end_to'] = $end;
             $_SESSION['gap'] = $gap + 1;
 
-            header("Location: generate_excel.php");
+            header("Location: monitor_excel.php");
             exit;
             
         }
