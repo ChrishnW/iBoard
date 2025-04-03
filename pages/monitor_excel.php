@@ -15,25 +15,6 @@ header("Cache-Control: private",false);
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left; /* Aligns content to the left */
-        }
-        tbody tr:nth-child(odd) {
-            background-color: #007bff; /* Primary blue color */
-            color: white; /* Makes text white for better contrast on blue */
-        }
-        tbody tr:nth-child(even) {
-            background-color: #ffffff; /* White color */
-            color: black; /* Ensures readable text on white rows */
-        }
-    </style>
-
 </head>
 
 <body>
@@ -47,7 +28,6 @@ header("Cache-Control: private",false);
         <h3><b>Output Records</b></h3>
         <br>
     </center>
-    <br>
 
     <div id="table-scroll">
         <table width="100%" border="1" align="left">
