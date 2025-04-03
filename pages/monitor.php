@@ -33,6 +33,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script> -->
 
 </head>
 <body>
@@ -44,9 +45,14 @@
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
                 <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name">GPI Production Status</u></h2>
                 <a class="btn btn-danger float-right mt-2" href="#" onclick="showExitModal()">
-                    <i class="fas fa-sign-out-alt"></i> 
+                    <i class="fas fa-sign-out-alt mr-1"></i> 
                     Exit
                 </a>
+
+                <!-- <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="exportToExcel()">
+                    <i class="fa fa-file-excel mr-1" aria-hidden="true"></i>
+                    Export
+                </a> -->
 
                 <div class="clearfix"></div>
             </div>
@@ -125,7 +131,17 @@
 ?>
 
 <script>
-    
+    // function exportToExcel() {
+    //     // Get the table element
+    //     const table = document.getElementById("dataTable");
+
+    //     // Convert table data to a workbook
+    //     const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+
+    //     // Export the workbook to Excel file
+    //     XLSX.writeFile(workbook, "GPI_Production_Status.xlsx");
+    // }
+
     document.getElementById('close_popup2').addEventListener('click', function () {
       document.getElementById('popoutExit').style.display = 'none';
     });
