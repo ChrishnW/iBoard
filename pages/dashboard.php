@@ -225,6 +225,10 @@
   function showReportsModal(){
     const modal = document.getElementById('reportsModal');
     modal.style.display = 'block';
+
+    document.getElementById('date_from').value = '';
+    document.getElementById('date_to').value = '';
+
   }
 
   function closePopupReports() {

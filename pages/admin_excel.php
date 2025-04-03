@@ -34,16 +34,16 @@ header("Cache-Control: private",false);
     <div id="table-scroll">
         <table border="1" style="width: 100%; border-collapse: collapse;">
             <thead>
-                <tr>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Date</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Department</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Model</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Unit</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Status</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Daily Target</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Daily Output</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Daily Balance</th>
-                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">In-Charge</th>
+                <tr style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">
+                    <th>Date</th>
+                    <th>Department</th>
+                    <th>Model</th>
+                    <th>Unit</th>
+                    <th>Status</th>
+                    <th>Daily Target</th>
+                    <th>Daily Output</th>
+                    <th>Daily Balance</th>
+                    <th>In-Charge</th>
                 </tr>
             </thead>
 
