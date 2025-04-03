@@ -251,7 +251,7 @@
 
           </table>
           
-          <button id="download">Download</button>
+          <!-- <button id="download">Download</button> -->
           
         </div>
 
