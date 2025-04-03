@@ -24,8 +24,6 @@
 
             unset($_SESSION["line_id"]);
 
-            $date1 = date("Y-m-d");
-
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -51,10 +49,10 @@
 
                 $date = date("Y-m-d H:i:s");
 
-                $sql_command = "INSERT INTO tbl_line (date, line_name, line_desc, line_img, incharge_name, 
+                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
                                 incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
                                 breaktime_code, model_id, status) VALUES 
-                                ('$date1', '$line_name', '$line_desc', '$date', '$line_leader', '$date', 
+                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
                                 '$daily_target', '$takt_time', '$work_start', '$work_end',
                                 '$breaktime_code', '$model_id', '$status')";
 
