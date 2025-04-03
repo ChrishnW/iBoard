@@ -298,7 +298,7 @@
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
-                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn btn-primary" style=" font-size: 50px;">RUN</button> 
+                    <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn" style="background-color: blue; border: none; font-size: 50px;">RUN</button> 
                     <br>
                     <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
                 </div>
@@ -842,14 +842,14 @@
     function start_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'BREAK';
         document.body.style.backgroundColor = 'lightgray'; // lighter shade of gray
-
+        document.getElementById('runStopButton').style.backgroundColor = 'gray';
         update();
     }
 
     function end_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'RUN';
         document.body.style.backgroundColor = '#add8e6'; // light blue
-
+        document.getElementById('runStopButton').style.backgroundColor = 'blue';
         update();
     }
     
@@ -1094,6 +1094,7 @@
         if(new_actual >= new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'FINISH';
             document.body.style.backgroundColor = '#90EE90'; // light green
+            document.getElementById('runStopButton').style.backgroundColor = 'green';
             clearInterval(interval);
 
             work_status = "FINISH";
@@ -1117,7 +1118,8 @@
         if(new_actual < new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'RUN';
             document.body.style.backgroundColor = '#add8e6'; // light blue
-
+            document.getElementById('runStopButton').style.backgroundColor = 'blue';
+            
             work_status = "WORK";
         }
 

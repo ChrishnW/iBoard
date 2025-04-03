@@ -198,7 +198,7 @@
                 <th>Department Name</th>
                 <th>Code</th>
                 <th>Status</th>
-                <th style="width: 170px;"></th>                
+                <th style="width: 170px;">Actions</th>                
               </tr>
 
             </thead>
