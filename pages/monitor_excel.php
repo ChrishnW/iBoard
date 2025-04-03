@@ -4,7 +4,7 @@ include '../include/connect.php';
 session_start();
 $today = date('Y-m-d');
 header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
-header("Content-Disposition: attachment; filename=Output Records".$today.".xls");  //File name extension was wrong
+header("Content-Disposition: attachment; filename=Output_Records_".$today.".xls");
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Cache-Control: private",false);
@@ -15,53 +15,35 @@ header("Cache-Control: private",false);
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left; /* Aligns content to the left */
-        }
-        tbody tr:nth-child(odd) {
-            background-color: #007bff; /* Primary blue color */
-            color: white; /* Makes text white for better contrast on blue */
-        }
-        tbody tr:nth-child(even) {
-            background-color: #ffffff; /* White color */
-            color: black; /* Ensures readable text on white rows */
-        }
-    </style>
-
 </head>
 
 <body>
     <center>
-        <b>
-            <font color="blue">GLORY (PHILIPPINES), INC.</font>
-        </b>
-        <br>
-        <b>i-Board System</b>
-        <br>
-        <h3><b>Output Records</b></h3>
-        <br>
+        <div style="font-family: Arial, sans-serif; text-align: center; margin-bottom: 20px;">
+            <br>
+            <b style="font-size: 30px; color: #007bff;">GLORY (PHILIPPINES), INC.</b>
+            <br>
+            <b style="font-size: 20px; color: #333;">i-Board System</b>
+            <br>
+            <br>
+            <h3 style="font-size: 28px; color: #555; margin-top: 10px;"><b>Output Records</b></h3>
+        </div>
     </center>
     <br>
 
     <div id="table-scroll">
-        <table width="100%" border="1" align="left">
+        <table border="1" style="width: 100%; border-collapse: collapse;">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Department</th>
-                    <th>Model</th>
-                    <th>Unit</th>
-                    <th>Status</th>
-                    <th>Daily Target</th>
-                    <th>Daily Output</th>
-                    <th>Daily Balance</th>
-                    <th>In-Charge</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Date</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Department</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Model</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Unit</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Status</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Daily Target</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Daily Output</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">Daily Balance</th>
+                    <th style="background-color: #333; color: white; padding: 8px; text-align: center; font-weight: bold;">In-Charge</th>
                 </tr>
             </thead>
 
@@ -73,6 +55,7 @@ header("Cache-Control: private",false);
 
                 $startDate = new DateTime($start);
                 $endDate = new DateTime($end);
+                $j = 0;
 
                 for($i = 1; $i <= $_SESSION['gap']; $i++){
 
@@ -82,23 +65,23 @@ header("Cache-Control: private",false);
                     $result = mysqli_query($conn,"SELECT tbl_records.date, tbl_department.dept_name, tbl_records.model,tbl_records.unit, tbl_records.status, tbl_records.target_day, tbl_records.actual, tbl_records.balance, tbl_line.incharge_name FROM tbl_records INNER JOIN tbl_line ON tbl_line.line_name=tbl_records.model INNER JOIN tbl_accounts ON tbl_accounts.username=tbl_records.model INNER JOIN tbl_department ON tbl_department.dept_code=tbl_accounts.dept_code WHERE tbl_records.date='$formattedDate' AND tbl_department.dept_code='$dept_code'");  
                     while($row = mysqli_fetch_array($result))
                     {
+                        $j++;
                     echo "
-                    <tr>
-                        <td>". $row['date'] ."</td>
-                        <td>". $row['dept_name'] ."</td>
-                        <td>". $row['model'] ."</td>
-                        <td>". $row['unit'] ."</td>
-                        <td>". $row['status'] ."</td>
-                        <td>". $row['target_day'] ."</td>
-                        <td>". $row['actual'] ."</td>
-                        <td>". $row['balance'] ."</td>
-                        <td>". $row['incharge_name'] ."</td>
-                    </tr> ";
+                    <tr style='background-color: ". (($j % 2 == 0) ? "#d1e7dd" : "#f8f9fa") .";'>
+                        <td style='text-align: left;'>". $row['date'] ."</td>
+                        <td style='text-align: left;'>". $row['dept_name'] ."</td>
+                        <td style='text-align: left;'>". $row['model'] ."</td>
+                        <td style='text-align: left;'>". $row['unit'] ."</td>
+                        <td style='text-align: left;'>". $row['status'] ."</td>
+                        <td style='text-align: left;'>". $row['target_day'] ."</td>
+                        <td style='text-align: left;'>". $row['actual'] ."</td>
+                        <td style='text-align: left;'>". $row['balance'] ."</td>
+                        <td style='text-align: left;'>". $row['incharge_name'] ."</td>
+                    </tr>";
                     } 
 
                     $startDate->modify('+1 day');
                 }
-                    //header("Location: monitor.php");
             ?>
             </tbody>
         </table>
