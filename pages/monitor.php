@@ -13,6 +13,24 @@
             exit();
         }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        if(isset($_POST['date_from'])){
+
+            $_SESSION['start_from'] = $_POST["date_from"];
+            $_SESSION['start_from'] = $_POST["date_to"];
+            $asd = $_SESSION['start_from'];
+
+            echo "<script>console.log('$asd');</script>";
+
+            //header("Location: generate_excel.php");
+        }
+    }
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -99,18 +117,24 @@
             
             <div class="modal-body">
                 <div>
-                    <label for="">From: </label>
-                    <input type="date" class="form-control">
-                    <br>
+                    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" id="form">
+                        <label for="date_from">From: </label>
+                        <input type="date" class="form-control" id="date_from" name="date_from">
+                        <br>
 
-                    <label for="">To: </label>
-                    <input type="date" class="form-control">
+                        <label for="date_to">To: </label>
+                        <input type="date" class="form-control" id="date_to" name="date_to">
                 </div>     
             </div>
 
             <div class="modal-footer">
-                <button onclick="reportsDownload()" class="btn btn-primary">Download</button>
-                <a href="#" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+            
+                        <!-- <button onclick="reportsDownload()" class="btn btn-primary" disabled>Download</button> -->
+                        <input type="submit" name="submit" value="Download" onclick="reportsDownload()" class="btn btn-primary" disabled>
+                        <input type="reset" name="reset" value="Cancel" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">
+
+                    </form>
+
             </div>
 
             </div>
@@ -162,15 +186,41 @@
 ?>
 
 <script>
-    // function exportToExcel() {
-    //     // Get the table element
-    //     const table = document.getElementById("dataTable");
 
-    //     // Convert table data to a workbook
-    //     const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+    document.getElementById("date_to").addEventListener("change", function(){
+        const date_from = document.getElementById("date_from");
+        const date_to = document.getElementById("date_to");
+        
+        if (date_from.value && date_to.value) {
+            if (new Date(date_from.value) <= new Date(date_to.value)) {
+                console.log("powiefvhbjnds");
+                
+                
+            } else {
+                alert("'From' date cannot be later than 'To' date.");
+            }
+        } else {
+            alert("Please select both 'From' and 'To' dates.");
+        }
+    });
 
-    //     // Export the workbook to Excel file
-    //     XLSX.writeFile(workbook, "GPI_Production_Status.xlsx");
+
+
+    // function reportsDownload(){
+    //     const date_from = document.getElementById("date_from");
+    //     const date_to = document.getElementById("date_to");
+        
+    //     if (date_from.value && date_to.value) {
+    //         if (new Date(date_from.value) <= new Date(date_to.value)) {
+    //             console.log("powiefvhbjnds");
+                
+                
+    //         } else {
+    //             alert("'From' date cannot be later than 'To' date.");
+    //         }
+    //     } else {
+    //         alert("Please select both 'From' and 'To' dates.");
+    //     }
     // }
 
     function showReportsModal(){
