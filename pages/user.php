@@ -647,7 +647,7 @@
                 document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
                 document.getElementById('daily_target_display').innerHTML = '$daily_target';
                 
-                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid mr-3 border\" style=\"width: 380px; height: 210px; object-fit: contain; \" >';
+                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"mr-3\" style=\"width: 380px; height: 210px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
                 
                 const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px; object-fit: contain; \">';
