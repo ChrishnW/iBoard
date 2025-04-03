@@ -31,7 +31,7 @@ header("Cache-Control: private",false);
     <br>
 
     <div id="table-scroll">
-        <table width="100%" border="1" align="left">
+        <table class=" table table-bordered table-striped" width="100%" border="1" align="left">
             <thead>
                 <tr>
                     <th>Date</th>
