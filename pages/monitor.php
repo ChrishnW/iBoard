@@ -145,7 +145,6 @@
 
             <div class="modal-footer">
             
-                        <!-- <button onclick="reportsDownload()" class="btn btn-primary" disabled>Download</button> -->
                         <input type="submit" name="submit" value="Download" class="btn btn-primary">
                         <input type="reset" name="reset" value="Cancel" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">
 
