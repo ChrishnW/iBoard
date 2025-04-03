@@ -29,7 +29,6 @@ header("Cache-Control: private",false);
             <h3 style="font-size: 28px; color: #555; margin-top: 10px;"><b>Output Records</b></h3>
         </div>
     </center>
-    <br>
 
     <div id="table-scroll">
         <table border="1" style="width: 100%; border-collapse: collapse;">
