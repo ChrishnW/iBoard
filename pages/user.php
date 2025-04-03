@@ -286,7 +286,7 @@
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style2.css">
 </head>
-<body class="container-fluid p-4 m-0" style="background-color: #add8e6;" id="body">
+<body class="container-fluid px-4 pt-3 pb-4 m-0" style="background-color: #add8e6;" id="body">
     
     <!-- User Dashboard-->
 
@@ -322,9 +322,7 @@
         </div>
 
         <!-- Details Section -->
-        <div id="details" class="d-flex align-items-start my-3 px-5 py-3 mx-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-
-            
+        <div id="details" class="card-body d-flex align-items-start my-3 px-5 py-3 mx-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
             <div id="line_image_div">
                 <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 350px; height: 200px; border-radius: 10px;">
             </div>
@@ -339,7 +337,6 @@
             <div class="ml-auto align-self-end" id="incharge_image_div">
                 <img src="../assets/img/img_not_available.png" alt="" class="mr-5" style="width: 180px; height: 180px; border-radius: 50%;">
             </div>
-
         </div>
 
         <!-- Tables Section -->
