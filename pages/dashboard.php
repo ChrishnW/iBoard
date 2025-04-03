@@ -29,6 +29,24 @@
       exit();
       ob_end_flush();      
     }
+
+    // Download to Excel ------------------------------------------------------------------------------
+    if(isset($_POST['submit1'])){
+      $start = $_POST["date_from"];
+      $end = $_POST["date_to"];
+  
+      $startDate = new DateTime($start);
+      $endDate = new DateTime($end);
+      $gap = $startDate->diff($endDate)->days;
+  
+      $_SESSION['start_from'] = $start;
+      $_SESSION['end_to'] = $end;
+      $_SESSION['gap'] = $gap + 1;
+      $_SESSION['refresh'] = 1;
+  
+      header("Location: admin_excel.php");
+      exit;
+    }
   }
 ?>
 
@@ -101,33 +119,39 @@
 
 <!-- Reports Modal -->
 <div class="modal" tabindex="-1" id="reportsModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-gradient-primary">
-        <h5 class="modal-title text-white">Download Reports</h5>
-        <button type="button" class="close text-white" aria-label="Close" id="close_popup1">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <div class="modal-body">
-        <div>
-          <label for="">From: </label>
-          <input type="date" class="form-control">
-          <br>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header bg-gradient-primary">
+                <h5 class="modal-title text-white">Download Reports</h5>
+                <button type="button" class="close text-white" aria-label="Close" id="close_popup1">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div>
+                    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post" id="form">
+                        <label for="date_from">From: <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" id="date_from" name="date_from" onchange="from_min()" required>
+                        <br>
 
-          <label for="">To: </label>
-          <input type="date" class="form-control">
-        </div>     
-      </div>
+                        <label for="date_to">To: <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" id="date_to" name="date_to" required>
+                </div>     
+            </div>
 
-      <div class="modal-footer">
-        <button onclick="reportsDownload()" class="btn btn-primary">Download</button>
-        <a href="#" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
-      </div>
+            <div class="modal-footer">
+            
+                        <input type="submit" name="submit1" value="Download" class="btn btn-primary">
+                        <input type="reset" name="reset" value="Cancel" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">
+
+                    </form>
+
+            </div>
+
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
@@ -190,6 +214,14 @@
 ?>
 
 <script>
+
+  function from_min(){
+    const from = document.getElementById("date_from").value;
+    const to = document.getElementById("date_to");
+
+    to.min = from;
+      
+  }
   function showReportsModal(){
     const modal = document.getElementById('reportsModal');
     modal.style.display = 'block';
