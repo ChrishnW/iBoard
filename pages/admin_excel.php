@@ -34,7 +34,7 @@ header("Cache-Control: private",false);
         <table width="100%" border="1" align="left">
             <thead>
                 <tr>
-                    <th>Date</th>
+                    <th style="background-color: black;">Date</th>
                     <th>Department</th>
                     <th>Model</th>
                     <th>Unit</th>
