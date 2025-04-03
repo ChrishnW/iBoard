@@ -16,7 +16,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        if(isset($_POST['date_from'])){
+        if(isset($_POST['submit'])){
 
             $_SESSION['start_from'] = $_POST["date_from"];
             $_SESSION['start_from'] = $_POST["date_to"];
@@ -130,7 +130,7 @@
             <div class="modal-footer">
             
                         <!-- <button onclick="reportsDownload()" class="btn btn-primary" disabled>Download</button> -->
-                        <input type="submit" name="submit" value="Download" onclick="reportsDownload()" class="btn btn-primary" disabled>
+                        <input type="submit" name="submit" value="Download" onclick="reportsDownload()" class="btn btn-primary" disabled id="submit">
                         <input type="reset" name="reset" value="Cancel" onclick="closePopupReports()" class="btn btn-secondary" style="text-decoration: none;">
 
                     </form>
@@ -193,14 +193,15 @@
         
         if (date_from.value && date_to.value) {
             if (new Date(date_from.value) <= new Date(date_to.value)) {
-                console.log("powiefvhbjnds");
-                
-                
+                document.getElementById('submit').disabled = false;
             } else {
                 alert("'From' date cannot be later than 'To' date.");
+                document.getElementById('submit').disabled = true;
+                document.getElementById('date_to').value = '';
             }
         } else {
             alert("Please select both 'From' and 'To' dates.");
+            document.getElementById('submit').disabled = true;
         }
     });
 
