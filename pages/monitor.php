@@ -14,22 +14,31 @@
         }
     }
 
+    // if(isset($_SESSION['refresh'])){
+    //     echo "<script>
+    //         window.location.href = 'monitor_excel.php';
+    //     </script>";
+    //     unset($_SESSION['refresh']);
+    // }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if(isset($_POST['submit'])){
 
             $start = $_POST["date_from"];
             $end = $_POST["date_to"];
-
+        
             $startDate = new DateTime($start);
             $endDate = new DateTime($end);
             $gap = $startDate->diff($endDate)->days;
-
+        
             $_SESSION['start_from'] = $start;
             $_SESSION['end_to'] = $end;
             $_SESSION['gap'] = $gap + 1;
-
+            $_SESSION['refresh'] = 1;
+        
             header("Location: monitor_excel.php");
+        
             exit;
             
         }
