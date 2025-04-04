@@ -308,7 +308,7 @@
 
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
                 <div id="settings" class="dropdown">
-                    <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
+                    <button class="fa fa-cog fa-2x border-0 bg-transparent" aria-hidden="true" data-toggle="dropdown"></button>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#" onclick="showEdituser()">
                             <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>    
@@ -388,9 +388,9 @@
                         <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
                         <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
                         <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
-                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;">0</p>
+                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3 text-center" style="font-size: 50px;">0</p>
                             <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
-                                <button class="btn btn-primary btn-lg  mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
+                                <button class="btn btn-primary btn-lg mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
                                 <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: none;" onclick="add()" id="plus">+</button>
                             </div>
                         </td>
