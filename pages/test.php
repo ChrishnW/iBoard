@@ -306,9 +306,9 @@
                 $work_start = $row_line["work_time_from"];
                 $work_end = $row_line["work_time_to"];
 
-                echo $date;
-                echo $line_name;
-                echo $line_desc;
+                // echo $date;
+                // echo $line_name;
+                // echo $line_desc;
 
                 $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
                 $row_records = mysqli_fetch_assoc($result1);
@@ -360,47 +360,47 @@
         ?>
 
         <div class="card">
-        <div class="card-body">   
-            <div class="row" id="dashboad_insert">
-                <div class="col-md-4">
-                    <div class="card shadow h-100">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <div class="d-flex" id="line_image_div">
-                                    <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : '../assets/img/img_not_available.png' ?>" alt="Image not available" class="img-fluid w-100 h-100" style="border-radius: 10px;">
+            <div class="card-body">   
+                <div class="row" id="dashboad_insert">
+                    <div class="col-md-4">
+                        <div class="card shadow h-100">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="d-flex" id="line_image_div">
+                                        <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : '../assets/img/img_not_available.png' ?>" alt="Image not available" class="img-fluid w-100 h-100" style="border-radius: 10px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div> 
-                <div class="col-md-4">
-                    <div class="card shadow h-100">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <div class="d-flex flex-column fs-1"><br>
-                                    <span class="h2 text-danger"><u>Information</u></span> 
-                                    <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
-                                    <span class="h2 text-danger"><u>Leader</u></span> 
-                                    <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
+                    </div> 
+                    <div class="col-md-4">
+                        <div class="card shadow h-100">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="d-flex flex-column fs-1"><br>
+                                        <span class="h2 text-danger"><u>Information</u></span> 
+                                        <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
+                                        <span class="h2 text-danger"><u>Leader</u></span> 
+                                        <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div> 
+                    </div> 
 
-                <div class="col-md-4">
-                    <div class="card shadow h-100">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <div class="ml-auto align-self-end" id="incharge_image_div">
-                                    <img src="<?php echo isset($row_line["incharge_img"]) ? $row_line["incharge_img"] : '../assets/img/img_not_available.png' ?>" alt="Image not available" class="img-fluid w-100 h-100" style="border-radius: 10px;">
+                    <div class="col-md-4">
+                        <div class="card shadow h-100">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="ml-auto align-self-end" id="incharge_image_div">
+                                        <img src="<?php echo isset($row_line["incharge_img"]) ? $row_line["incharge_img"] : '../assets/img/img_not_available.png' ?>" alt="Image not available" class="img-fluid w-100 h-100" style="border-radius: 10px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div> 
-            </div> 
-        </div>
+            </div>
         </div>
         
 
