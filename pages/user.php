@@ -286,7 +286,7 @@
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style2.css">
 </head>
-<body class="container-fluid px-4 pt-3 pb-4 m-0" style="background-color: #add8e6;" id="body">
+<body class="container-fluid px-4 pt-3 pb-4 mt-n2" style="background-color: #add8e6;" id="body">
     
     <!-- User Dashboard-->
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
