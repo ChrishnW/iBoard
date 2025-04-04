@@ -292,16 +292,16 @@
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
-            <div class="col-12 col-sm-1 text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="">
+            <div class="col-12 col-sm-2 text-md-left text-lg-left text-center">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: 88px; height: 88px; border-radius: 10px;">
             </div>
 
-            <div class="col-12 col-sm text-md-left text-lg-left text-center">
+            <div class="col-12 text-md-left text-lg-left text-sm-center">
                 <span class="h1 font-weight-bold text-primary" id="line_name">-----</span>
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn d-sm-none d-md-inline border-none" style="background-color: blue; font-size: 50px">RUN</button> 
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn d-md-inline border-none" style="width: auto; height: auto; background-color: blue; font-size: 50px">RUN</button> 
                 <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
