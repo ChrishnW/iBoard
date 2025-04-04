@@ -157,6 +157,10 @@
             $line_name = $_SESSION["username"];
             $model_id = $_SESSION["user_id"];
 
+            echo "<script>alert('$line_desc');</script>";
+            echo "<script>alert('$line_leader');</script>";
+            echo "<script>alert('$line_id');</script>";
+
             //print_r($_FILES);
 
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
@@ -300,15 +304,15 @@
             if(!empty($row_line["line_name"])){
 
                 $_SESSION["line_id"] = $row_line["id"];
+
                 $line_name = $row_line["line_name"];
                 $line_desc = $row_line["line_desc"];
                 $line_breaktime_code = $row_line["breaktime_code"];
+
                 $work_start = $row_line["work_time_from"];
                 $work_end = $row_line["work_time_to"];
-
-                echo $date;
-                echo $line_name;
-                echo $line_desc;
+                $takt_time = $row_line["takt_time"];
+                $daily_target = $row_line["daily_target"];
 
                 $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
                 $row_records = mysqli_fetch_assoc($result1);
@@ -317,39 +321,29 @@
                     $_SESSION["records_id"] = $row_records["id"];
                 }
                 else{
-
                     $gapInSeconds = strtotime($work_end) - strtotime($work_start);
                     $gapInMinutes = $gapInSeconds / 60;
                     $quantity = 0;
 
-                    if($gapInMinutes >= 660){
-                        // Run if there is OT
-
+                    if($gapInMinutes >= 660){ // Run if there is OT
                         $worked_hours = $gapInMinutes - 105;
                         $quantity_round = $worked_hours / $takt_time;
-
                         $quantity = round($quantity_round);
                         
                     }
-                    else{
-                        // Run if there is no OT
-
+                    else{ // Run if there is no OT
                         $worked_hours = $gapInMinutes - 90;
                         $quantity_round = $worked_hours / $takt_time;
-
                         $quantity = round($quantity_round);
-
                     }
 
                     $actual = 0;
                     $status = "RUN";
 
-                    $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-                            target_day, target_now, actual, balance) VALUES 
-                            ('$date', '$line_name', '$line_desc', '$status',
-                            '$daily_target', '$quantity', '$actual', '$quantity')";
+                    $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status', '$daily_target', '$quantity', '$actual', '$quantity')");
 
-                    $result = mysqli_query($conn, $sql_command);
+                    $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
+                    $row_records = mysqli_fetch_assoc($result1);
                 }
 
                 $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$line_breaktime_code' ");
