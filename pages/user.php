@@ -292,8 +292,8 @@
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
-            <div class="col-12 col-sm-2 text-md-left text-lg-left text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: 88px; height: 88px;">
+            <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 text-md-left text-lg-left text-center">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: 100%; max-width: 88px; height: auto;">
             </div>
 
             <div class="col-12 col-sm text-md-left text-lg-left text-center">
