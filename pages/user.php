@@ -293,7 +293,7 @@
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
             <div class="col-12 col-sm-1 text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: auto; height: auto; object-fit: contain;">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="height: auto; width:auto; object-fit: contain;">
             </div>
 
             <div class="col-12 col-sm text-md-left text=lg-left text-center">
@@ -301,7 +301,7 @@
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn" style="background-color: blue; border: none; font-size: 50px;">RUN</button> 
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn" style="height: auto; width:auto; background-color: blue; border: none; font-size: 50px;">RUN</button> 
                 <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
@@ -365,7 +365,7 @@
                         <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
                             <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;">0</p>
                             <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
-                                <button class="btn btn-primary btn-lg ml-1 mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
+                                <button class="btn btn-primary btn-lg  mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
                                 <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: none;" onclick="add()" id="plus">+</button>
                             </div>
                         </td>
