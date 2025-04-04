@@ -292,8 +292,8 @@
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
-            <div class="col-12 col-sm-1 text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="">
+            <div class="col-12 col-sm-2 text-md-left text-lg-left text-center">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: 88px; height: 88px;">
             </div>
 
             <div class="col-12 col-sm text-md-left text-lg-left text-center">
@@ -301,7 +301,7 @@
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn d-sm-none d-md-inline border-none" style="background-color: blue; font-size: 50px">RUN</button> 
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: blue; font-size: 3rem">RUN</button> 
                 <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
@@ -652,7 +652,7 @@
                 const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: 50%; height: 50%; border-radius: 10px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
                 
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded-circle\" style=\"max-width: 50%; height: 50%; object-fit: contain; \">';
+                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded\" style=\"max-width: 50%; height: 50%; object-fit: contain; \">';
                 document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                 document.getElementById('target_count').innerHTML = '$target'; 
