@@ -293,15 +293,15 @@
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
             <div class="col-12 col-sm-1 text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="height: auto; width:auto; object-fit: contain;">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="">
             </div>
 
-            <div class="col-12 col-sm text-md-left text=lg-left text-center">
+            <div class="col-12 col-sm text-md-left text-lg-left text-center">
                 <span class="h1 font-weight-bold text-primary" id="line_name">-----</span>
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn" style="height: auto; width:auto; background-color: blue; border: none; font-size: 50px;">RUN</button> 
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn d-sm-none d-md-inline border-none" style="background-color: blue; font-size: 50px">RUN</button> 
                 <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
