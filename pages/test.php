@@ -44,19 +44,10 @@
 
             //print_r($_FILES);
 
-            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 &&
-                isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
+            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-
-                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
-                                incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
-                                breaktime_code, model_id, status) VALUES 
-                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
-                                '$daily_target', '$takt_time', '$work_start', '$work_end',
-                                '$breaktime_code', '$model_id', '$status')";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
 
                 // This is for the records table
 
@@ -87,17 +78,11 @@
 
                 }
 
-                $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-                                target_day, target_now, actual, balance) VALUES 
-                                ('$date_records', '$line_name', '$line_desc', '$status_records',
-                                '$daily_target', '$quantity', '$value_records', '$quantity')";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
                 if($result){
 
-                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
-                    $result = mysqli_query($conn, $sql_command);
+                    $result = mysqli_query($conn, "SELECT id FROM tbl_line WHERE line_img = '$date' ");
 
                     $line = mysqli_fetch_assoc($result);
                     $line_id = $line["id"];
@@ -127,16 +112,13 @@
 
                         move_uploaded_file($img_temp_path_extra, $img_extra_path);
                                         
-                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
-                                            WHERE id = '$line_id' ");
+                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_path' WHERE id = '$line_id' ");
 
                         $_SESSION["img_extra_path"] = $img_extra_path;
 
                     }else{
                         
-                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
+                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                     }
                 } 
             }
@@ -173,17 +155,10 @@
 
             //print_r($_FILES);
 
-            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 &&
-                isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
+            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-
-                $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',
-                                incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',
-                                work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', 
-                                model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time '$takt_time', work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
 
                 // This is for the records table
 
@@ -213,12 +188,7 @@
 
                 }
 
-                $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', 
-                                unit = '$line_desc', status = '$status_records', target_day = '$daily_target', 
-                                target_now = '$quantity', balance = '$quantity' 
-                                WHERE id = '$records_id' ";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
                 if($result){
 
@@ -245,16 +215,12 @@
 
                         move_uploaded_file($img_temp_path_extra, $img_extra_path);
                                         
-                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
-                                            WHERE id = '$line_id' ");
-
+                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_path' WHERE id = '$line_id' ");
                         $_SESSION["img_extra_path"] = $img_extra_path;
 
                     }else{
                         
-                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
+                        mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                         
                     }
 
@@ -489,6 +455,11 @@
                                 <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
                                 <select name="edit_status" id="edit_status" class="form-control" required > 
                                     <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>
+
+                                    
+                                    <?php echo isset($row_line["status"]) ? "<option value=\"1\">Active</option>
+                                    <option value=\"0\">Inactive</option>" : "" ?>
+
                                 </select> 
                             </div>  
                         
@@ -771,7 +742,7 @@
 
         // extra view display
 
-        var img_extra_path = "<?php echo isset($_SESSION['img_extra_path']) ? $_SESSION['img_extra_path'] : '0'; ?>";
+        var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
 
         if(img_extra_path != "0"){
 
