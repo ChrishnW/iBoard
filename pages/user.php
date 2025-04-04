@@ -289,7 +289,8 @@
 <body class="container-fluid px-4 pt-3 pb-4 m-0" style="background-color: #add8e6;" id="body">
     
     <!-- User Dashboard-->
-    <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
+
+    <div id="user_dashboard" class="user_dashboard" style="display: block; background-color: none; border-radius: 10px; padding-top: 5px;">
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
             <div class="col-12 col-sm-2 text-md-left text-lg-left text-center">
@@ -306,49 +307,46 @@
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
 
-            <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <div id="settings" class="dropdown">
-                    <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#" onclick="showEdituser()">
-                            <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>    
-                            Settings
-                        </a>
+            <div id="settings" class="dropdown">
+                <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#" onclick="showEdituser()">
+                        <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>    
+                        Settings
+                    </a>
 
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#popoutLogout">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
-                        </a>
-                    </div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#popoutLogout">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
                 </div>
             </div>
+
         </div>
 
         <!-- Details Section -->
-        <div id="details" class="card-body d-flex flex-wrap align-items-center my-3 px-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-            <div id="line_image_div" class="col-12 col-md-4 mb-3 mb-md-0 text-center">
-                <img src="../assets/img/img_not_available_landscape.png" alt="line image" class="img-fluid border rounded" style="max-width: auto; height: auto; border-radius: 10px;">
+        <div id="details" class="card-body d-flex align-items-start my-3 px-5 py-3 mx-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+            <div id="line_image_div">
+                <img src="../assets/img/img_not_available_landscape.png" alt="line" class="img-fluid mr-3 border" style="width: 350px; height: 200px; border-radius: 10px;">
             </div>
 
-            <div class="col-12 col-md-5 mb-3 mb-md-0 text-center text-sm-center text-lg-left text-md-center">
-                <div class="d-flex flex-column fs-1"><br>
-                    <span class="h2 text-danger"><u>Information</u></span> 
-                    <span class="h2 text-dark" id="line_desc">-----</span>
-                    <span class="h2 text-danger"><u>Leader</u></span> 
-                    <span class="h2 text-dark" id="incharge_name">-----</span> 
-                </div>
+            <div class="d-flex flex-column pl-5 fs-1"><br>
+                <span class="h2 text-danger"><u>Information</u></span> 
+                <span class="h2 text-dark" id="line_desc">-----</span>
+                <span class="h2 text-danger"><u>Leader</u></span> 
+                <span class="h2 text-dark" id="incharge_name">-----</span> 
             </div>
-            
-            <div class="col-12 col-md-3 mb-2 mb-md-0 text-center" id="incharge_image_div">
-                <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: auto; height: auto;">
+
+            <div class="ml-auto align-self-end" id="incharge_image_div">
+                <img src="../assets/img/img_not_available.png" alt="" class="mr-5" style="width: 180px; height: 180px; border-radius: 50%;">
             </div>
         </div>
 
         <!-- Tables Section -->
         <div class="card-body">
-            <div class="table-responsive bg-white rounded shadow">
-                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="bg-primary text-white">
+            <div class="bg-white" style="border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="border-radius: 10px; overflow: hidden;">
+                    <thead class="bg-primary text-white text-center">
                         <tr>
                             <th class="align-text-top">DAILY TARGET</th>
                             <th class="align-text-top">TARGET (NOW)</th>
@@ -357,7 +355,7 @@
                         </tr>
                     </thead>
 
-                    <tbody class="bg-whit text-dark h4">
+                    <tbody class="bg-white text-center text-dark h4">
                 
                     <tr style="height: 175px;"> <!-- Adjust height here -->
                         <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
@@ -365,7 +363,7 @@
                         <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
                             <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;">0</p>
                             <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
-                                <button class="btn btn-primary btn-lg  mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
+                                <button class="btn btn-primary btn-lg ml-1 mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
                                 <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: none;" onclick="add()" id="plus">+</button>
                             </div>
                         </td>
@@ -649,10 +647,10 @@
                 document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
                 document.getElementById('daily_target_display').innerHTML = '$daily_target';
                 
-                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: 50%; height: 50%; border-radius: 10px; object-fit: contain; \" >';
+                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"mr-3\" style=\"width: 380px; height: 210px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
                 
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded-circle\" style=\"max-width: 50%; height: 50%; object-fit: contain; \">';
+                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"mr-5\" style=\"width: 200px; height: 200px; object-fit: contain; \">';
                 document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                 document.getElementById('target_count').innerHTML = '$target'; 
