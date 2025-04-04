@@ -325,7 +325,7 @@
         </div>
 
         <!-- Details Section -->
-        <div class="card">
+        <div class="card" style="width: 97%; margin: 0 auto;"> <!-- Card width-->
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
