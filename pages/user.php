@@ -325,24 +325,49 @@
         </div>
 
         <!-- Details Section -->
-        <div id="details" class="card-body d-flex flex-wrap align-items-center my-3 px-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
-            <div id="line_image_div" class="col-12 col-md-4 mb-3 mb-md-0 text-center">
-                <img src="../assets/img/img_not_available_landscape.png" alt="line image" class="img-fluid border rounded" style="max-width: auto; height: auto; border-radius: 10px;">
-            </div>
-
-            <div class="col-12 col-md-5 mb-3 mb-md-0 text-center text-sm-center text-lg-left text-md-center">
-                <div class="d-flex flex-column fs-1"><br>
-                    <span class="h2 text-danger"><u>Information</u></span> 
-                    <span class="h2 text-dark" id="line_desc">-----</span>
-                    <span class="h2 text-danger"><u>Leader</u></span> 
-                    <span class="h2 text-dark" id="incharge_name">-----</span> 
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div id="line_image_div">
+                                        <img src="../assets/img/img_not_available_landscape.png" alt="line image" class="img-fluid border rounded" style="max-width: auto; height: 200; border-radius: 10px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="d-flex flex-column fs-1"><br>
+                                        <span class="h2 text-danger"><u>Information</u></span> 
+                                        <span class="h2 text-dark" id="line_desc">-----</span>
+                                        <span class="h2 text-danger"><u>Leader</u></span> 
+                                        <span class="h2 text-dark" id="incharge_name">-----</span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div id="incharge_image_div">
+                                        <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: auto; height: 200;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="col-12 col-md-3 mb-2 mb-md-0 text-center" id="incharge_image_div">
-                <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: auto; height: auto;">
-            </div>
         </div>
+        
 
         <!-- Tables Section -->
         <div class="card-body">
@@ -649,10 +674,10 @@
                 document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
                 document.getElementById('daily_target_display').innerHTML = '$daily_target';
                 
-                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: 50%; height: 50%; border-radius: 10px; object-fit: contain; \" >';
+                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; border-radius: 10px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
                 
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded\" style=\"max-width: 50%; height: 50%; object-fit: contain; \">';
+                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; object-fit: contain; \">';
                 document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                 document.getElementById('target_count').innerHTML = '$target'; 
