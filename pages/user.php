@@ -327,7 +327,7 @@
         <!-- Details Section -->
         <div id="details" class="card-body d-flex flex-wrap align-items-center my-3 px-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
             <div id="line_image_div" class="col-12 col-md-4 mb-3 mb-md-0 text-center">
-                <img src="../assets/img/img_not_available_landscape.png" alt="line image" class="img-fluid border rounded" style="max-width: 50%; height: 50%; border-radius: 10px;">
+                <img src="../assets/img/img_not_available_landscape.png" alt="line image" class="img-fluid border rounded" style="max-width: auto; height: auto; border-radius: 10px;">
             </div>
 
             <div class="col-12 col-md-5 mb-3 mb-md-0 text-center text-sm-center text-lg-left text-md-center">
@@ -340,7 +340,7 @@
             </div>
             
             <div class="col-12 col-md-3 mb-2 mb-md-0 text-center" id="incharge_image_div">
-                <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: 50%; height: 50%;">
+                <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: auto; height: auto;">
             </div>
         </div>
 
