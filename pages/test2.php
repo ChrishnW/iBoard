@@ -16,6 +16,18 @@
         }
     }
 
+    // Fetching username ....................................................
+
+    $user_id = $_SESSION['user_id'];
+
+    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+        $user = mysqli_fetch_assoc($result);
+        $_SESSION["username"] = $user['username'];
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         // Register Line Details ---------------------------------------------------------------------------
@@ -297,7 +309,7 @@
             </div>
 
             <div class="col-12 col-sm text-md-left text-lg-left text-center">
-                <span class="h1 font-weight-bold text-primary" id="line_name">-----</span>
+                <span class="h1 font-weight-bold text-primary" id="line_name"><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "-----" ?></span>
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
@@ -324,6 +336,14 @@
             </div>
         </div>
 
+        <?php
+        
+        $username = $_SESSION["username"];
+        $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
+        $row_line = mysqli_fetch_assoc($result);
+
+        ?>
+
         <!-- Details Section -->
         <div class="card">
             <div class="card-body">
@@ -345,9 +365,9 @@
                                 <div class="text-center">
                                     <div class="d-flex flex-column fs-1"><br>
                                         <span class="h2 text-danger"><u>Information</u></span> 
-                                        <span class="h2 text-dark" id="line_desc">-----</span>
+                                        <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
                                         <span class="h2 text-danger"><u>Leader</u></span> 
-                                        <span class="h2 text-dark" id="incharge_name">-----</span> 
+                                        <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
                                     </div>
                                 </div>
                             </div>
@@ -385,7 +405,7 @@
                     <tbody class="bg-whit text-dark h4">
                 
                     <tr style="height: 175px;"> <!-- Adjust height here -->
-                        <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
+                        <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
                         <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
                         <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
                             <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;">0</p>
@@ -530,23 +550,7 @@
 
 <?php
 
-    // Fetching username ....................................................
-
-    $user_id = $_SESSION['user_id'];
-
-    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
-    $result = mysqli_query($conn, $sql_command);
-
-    if(mysqli_num_rows($result) > 0){
-        $user = mysqli_fetch_assoc($result);
-
-        $user_name = $user['username'];
-        $_SESSION["username"] = $user['username'];
-        
-        echo " <script> document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('line_name').innerHTML = '$user_name';
-        });</script>";
-    }
+    
 
     // Display Registered Data ---------------------------------------------------------------------------
 
@@ -668,11 +672,7 @@
         echo "<script>
             document.addEventListener('DOMContentLoaded', function () {
 
-                document.getElementById('line_name').innerHTML = '$line_name'; 
-                document.getElementById('line_desc').innerHTML = '$line_desc';
 
-                document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
-                document.getElementById('daily_target_display').innerHTML = '$daily_target';
                 
                 const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; border-radius: 10px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
