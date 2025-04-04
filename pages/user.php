@@ -333,7 +333,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="line_image_div">
-                                        <img src="../assets/img/img_not_available_landscape.png" alt="line image" class="img-fluid border rounded" style="max-width: auto; height: 200; border-radius: 10px;">
+                                        <img src="../assets/img/img_not_available.png" alt="inchargeImage" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="incharge_image_div">
-                                        <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: auto; height: 200;">
+                                        <img src="../assets/img/img_not_available.png" alt="inchargeImage" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
