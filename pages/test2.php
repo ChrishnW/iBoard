@@ -281,6 +281,77 @@
         }
 
     }
+
+    // PHP Vanilla ----------------------------------------------------------------------
+    $date = date("Y-m-d");
+    $username = $_SESSION["username"];
+
+    $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
+    $row_line = mysqli_fetch_assoc($result);
+
+    if(!empty($row_line["id"])){
+        $_SESSION["line_id"] = $row_line["id"];
+        $line_name = $row_line["line_name"];
+        $line_desc = $row_line["line_desc"];
+
+        $work_start = $row_line["work_time_from"];
+        $work_end = $row_line["work_time_to"];
+
+        $breaktime_code_get = $row_line["breaktime_code"];
+        $_SESSION["takt_time"] = $row_line["takt_time"];
+
+        echo "asd";
+        // $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
+        // $row_records = mysqli_fetch_assoc($result1);
+
+        // if(!empty($row_records["id"])){
+        //     $_SESSION["records_id"] = $row_records["id"];
+        // }
+        // else{
+
+        //     $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+        //     $gapInMinutes = $gapInSeconds / 60;
+        //     $quantity = 0;
+
+        //     if($gapInMinutes >= 660){
+        //         // Run if there is OT
+
+        //         $worked_hours = $gapInMinutes - 105;
+        //         $quantity_round = $worked_hours / $takt_time;
+
+        //         $quantity = round($quantity_round);
+                
+        //     }
+        //     else{
+        //         // Run if there is no OT
+
+        //         $worked_hours = $gapInMinutes - 90;
+        //         $quantity_round = $worked_hours / $takt_time;
+
+        //         $quantity = round($quantity_round);
+
+        //     }
+
+        //     $actual = 0;
+        //     $status = "RUN";
+
+        //     $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
+        //             target_day, target_now, actual, balance) VALUES 
+        //             ('$date', '$line_name', '$line_desc', '$status',
+        //             '$daily_target', '$quantity', '$actual', '$quantity')";
+
+        //     $result = mysqli_query($conn, $sql_command);
+        // }
+
+        // $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$line_breaktime_code' ");
+        // $row_break = mysqli_fetch_assoc($result2);
+            
+    
+    }
+
+    
+
+
 ?>
 
 <!DOCTYPE html>
@@ -335,14 +406,6 @@
                 </div>
             </div>
         </div>
-
-        <?php
-        
-        $username = $_SESSION["username"];
-        $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
-        $row_line = mysqli_fetch_assoc($result);
-
-        ?>
 
         <!-- Details Section -->
         <div class="card">
@@ -565,22 +628,12 @@
 
         $date = date("Y-m-d");
 
-        $_SESSION["line_id"] = $line["id"];
 
-        $line_name = $line["line_name"];
-        $line_desc = $line["line_desc"];
 
-        $line_img = $line["line_img"];
-        $incharge_name = $line["incharge_name"];
-        $incharge_img = $line["incharge_img"];
 
-        $work_start = $line["work_time_from"];
-        $work_end = $line["work_time_to"];
 
-        $daily_target = $line["daily_target"];
 
-        $breaktime_code_get = $line["breaktime_code"];
-        $takt_time = $line["takt_time"];
+
 
         $status = $line["status"];
 
@@ -617,30 +670,6 @@
             $quantity = round($quantity_round);
 
         }
-
-        $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
-        $result = mysqli_query($conn, $sql_command);
-
-        if(mysqli_num_rows($result) > 0){
-            while($break = mysqli_fetch_assoc($result)){
-
-                $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
-                $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
-
-                $_SESSION['am_start'] = $break["am_break_start"];
-                $_SESSION['am_end'] = $break["am_break_end"];
-
-                $_SESSION['lunch_start'] = $break["lunch_break_start"];
-                $_SESSION['lunch_end'] = $break["lunch_break_end"];
-
-                $_SESSION['pm_start'] = $break["pm_break_start"];
-                $_SESSION['pm_end'] = $break["pm_break_end"];
-
-                $_SESSION['ot_start'] = $break["ot_break_start"];
-                $_SESSION['ot_end'] = $break["ot_break_end"];
-
-            }
-        }
         
         $target = $quantity;
         $actual = 0;
@@ -669,12 +698,32 @@
             $result = mysqli_query($conn, $sql_command);
         }
 
+        $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
+        $result = mysqli_query($conn, $sql_command);
+
+        if(mysqli_num_rows($result) > 0){
+            while($break = mysqli_fetch_assoc($result)){
+
+                $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
+                $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
+
+                $_SESSION['am_start'] = $break["am_break_start"];
+                $_SESSION['am_end'] = $break["am_break_end"];
+
+                $_SESSION['lunch_start'] = $break["lunch_break_start"];
+                $_SESSION['lunch_end'] = $break["lunch_break_end"];
+
+                $_SESSION['pm_start'] = $break["pm_break_start"];
+                $_SESSION['pm_end'] = $break["pm_break_end"];
+
+                $_SESSION['ot_start'] = $break["ot_break_start"];
+                $_SESSION['ot_end'] = $break["ot_break_end"];
+
+            }
+        }
+
         echo "<script>
             document.addEventListener('DOMContentLoaded', function () {
-
-
-                
-                
 
                 document.getElementById('target_count').innerHTML = '$target'; 
                 document.getElementById('actual_count').innerHTML = '$actual';
