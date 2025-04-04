@@ -293,7 +293,7 @@
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
             <div class="col-12 col-sm-1 text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: 80px; height: auto; object-fit: contain;">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo" style="width: auto; height: auto; object-fit: contain;">
             </div>
 
             <div class="col-12 col-sm text-md-left text=lg-left text-center">
