@@ -291,7 +291,7 @@
     <!-- User Dashboard-->
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
         <!-- Header Section -->
-        <div class="row align-items-center px-3 py-2 border-bottom border-primary">  
+        <div class="row align-items-center px-3 py-2">  
             <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 text-md-left text-lg-left text-center">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid border rounded logo pb-2" style="width: 100%; max-width: 88px; height: auto;">
             </div>
@@ -329,7 +329,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="line_image_div">
@@ -340,7 +340,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div class="d-flex flex-column fs-1"><br>
@@ -354,7 +354,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="incharge_image_div">
@@ -677,7 +677,7 @@
                 const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; border-radius: 10px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
                 
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; object-fit: contain; \">';
+                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid rounded\" style=\"max-width: auto; height: 210px; object-fit: contain; \">';
                 document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                 document.getElementById('target_count').innerHTML = '$target'; 
