@@ -301,7 +301,7 @@
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: blue; font-size: 3rem">RUN</button> 
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: #007bff; font-size: 3rem">RUN</button> 
                 <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
@@ -869,14 +869,14 @@
     function start_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'BREAK';
         document.body.style.backgroundColor = 'lightgray'; // lighter shade of gray
-        document.getElementById('runStopButton').style.backgroundColor = 'gray';
+        document.getElementById('runStopButton').style.backgroundColor = '#6c757d'; // gray
         update();
     }
 
     function end_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'RUN';
         document.body.style.backgroundColor = '#add8e6'; // light blue
-        document.getElementById('runStopButton').style.backgroundColor = 'blue';
+        document.getElementById('runStopButton').style.backgroundColor = '#007bff'; // blue
         update();
     }
     
@@ -1058,7 +1058,7 @@
 
             btn_disabled();
 
-            document.getElementById('runStopButton').style.background = "red";
+            document.getElementById('runStopButton').style.background = "#dc3545"; // red
 
         } else if (button.innerText == 'STOP') {
             clearInterval(interval);
@@ -1067,7 +1067,7 @@
 
             btn_abled();
 
-            document.getElementById('runStopButton').style.background = "blue";
+            document.getElementById('runStopButton').style.background = "#007bff"; // blue
         } 
 
         update();
@@ -1121,7 +1121,7 @@
         if(new_actual >= new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'FINISH';
             document.body.style.backgroundColor = '#90EE90'; // light green
-            document.getElementById('runStopButton').style.backgroundColor = 'green';
+            document.getElementById('runStopButton').style.backgroundColor = '#28a745'; // green
             clearInterval(interval);
 
             work_status = "FINISH";
@@ -1145,7 +1145,7 @@
         if(new_actual < new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'RUN';
             document.body.style.backgroundColor = '#add8e6'; // light blue
-            document.getElementById('runStopButton').style.backgroundColor = 'blue';
+            document.getElementById('runStopButton').style.backgroundColor = '#007bff'; // blue
             
             work_status = "WORK";
         }
