@@ -16,13 +16,21 @@
         }
     }
 
+    $user_id = $_SESSION['user_id'];
+    $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE id = '$user_id' ");
+
+    if(mysqli_num_rows($result) > 0){
+        $user = mysqli_fetch_assoc($result);
+        $user_name = $user['username'];
+        $_SESSION["username"] = $user['username'];
+        
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         // Register Line Details ---------------------------------------------------------------------------
 
         if(isset($_POST['edit_line_submit'])){
-
-            unset($_SESSION["line_id"]);
 
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -31,7 +39,6 @@
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
-            $_SESSION["takt_time"] = $takt_time;
 
             $work_start = $_POST["edit_work_start"];
             $work_end = $_POST["edit_work_end"];
@@ -87,8 +94,6 @@
                     $line = mysqli_fetch_assoc($result);
                     $line_id = $line["id"];
 
-                    $_SESSION["line_id"] = $line_id;
-
                     $img_name_raw_line = $_FILES["line_image_upload"]["name"];
                     $img_name_line = str_replace(" ", "_", $img_name_raw_line);
                     $img_line_path = "IMG/LINE/" . $img_name_line;
@@ -114,7 +119,6 @@
                                         
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_path' WHERE id = '$line_id' ");
 
-                        $_SESSION["img_extra_path"] = $img_extra_path;
 
                     }else{
                         
@@ -123,7 +127,7 @@
                 } 
             }
 
-            header("Refresh: .3; url = user.php");
+            header("Refresh: .3; url = test.php");
             exit;
             ob_end_flush();
         }
@@ -132,6 +136,7 @@
 
         if(isset($_POST['reedit_line_submit'])){
 
+            // echo "<script>alert('asd');</script>";
             $line_id = $_SESSION["line_id"];
             $records_id = $_SESSION["records_id"];
 
@@ -142,7 +147,6 @@
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
             $takt_time = FILTER_INPUT(INPUT_POST, "edit_takt_time", FILTER_SANITIZE_NUMBER_INT);
-            $_SESSION["takt_time"] = $takt_time;
 
             $work_start = $_POST["edit_work_start"];
             $work_end = $_POST["edit_work_end"];
@@ -216,7 +220,6 @@
                         move_uploaded_file($img_temp_path_extra, $img_extra_path);
                                         
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_path' WHERE id = '$line_id' ");
-                        $_SESSION["img_extra_path"] = $img_extra_path;
 
                     }else{
                         
@@ -228,7 +231,7 @@
 
             }
 
-            header("Refresh: .3; url = user.php");            
+            header("Refresh: .3; url = test.php");            
             exit;
             ob_end_flush();
 
@@ -260,7 +263,7 @@
         <!-- Header Section -->
         <div class="d-flex align-items-center px-3 py-2">  
             <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-3 border" style="width: 80px; border-radius: 10%;">
-            <span class="h1 font-weight-bold mb-0 text-primary" id="line_name">-----</span>
+            <span class="h1 font-weight-bold mb-0 text-primary" id="line_name"><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "-----" ?></span>
             
             <div class="ml-auto d-flex justify-content-center align-items-center mr-5 pr-4">
                 <div class="text-center">
@@ -296,17 +299,65 @@
 
             if(!empty($row_line["line_name"])){
 
+                $_SESSION["line_id"] = $row_line["id"];
                 $line_name = $row_line["line_name"];
                 $line_desc = $row_line["line_desc"];
-        
-                $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
+                $line_breaktime_code = $row_line["breaktime_code"];
+                $work_start = $row_line["work_time_from"];
+                $work_end = $row_line["work_time_to"];
 
+                echo $date;
+                echo $line_name;
+                echo $line_desc;
+
+                $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
                 $row_records = mysqli_fetch_assoc($result1);
+
+                if(!empty($row_records["id"])){
+                    $_SESSION["records_id"] = $row_records["id"];
+                }
+                else{
+
+                    $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+                    $gapInMinutes = $gapInSeconds / 60;
+                    $quantity = 0;
+
+                    if($gapInMinutes >= 660){
+                        // Run if there is OT
+
+                        $worked_hours = $gapInMinutes - 105;
+                        $quantity_round = $worked_hours / $takt_time;
+
+                        $quantity = round($quantity_round);
+                        
+                    }
+                    else{
+                        // Run if there is no OT
+
+                        $worked_hours = $gapInMinutes - 90;
+                        $quantity_round = $worked_hours / $takt_time;
+
+                        $quantity = round($quantity_round);
+
+                    }
+
+                    $actual = 0;
+                    $status = "RUN";
+
+                    $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
+                            target_day, target_now, actual, balance) VALUES 
+                            ('$date', '$line_name', '$line_desc', '$status',
+                            '$daily_target', '$quantity', '$actual', '$quantity')";
+
+                    $result = mysqli_query($conn, $sql_command);
+                }
+
+                $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$line_breaktime_code' ");
+                $row_break = mysqli_fetch_assoc($result2);
                     
             }
 
         ?>
-
 
         <div class="card">
         <div class="card-body">   
@@ -316,7 +367,7 @@
                         <div class="card-body">
                             <div class="text-center">
                                 <div class="d-flex" id="line_image_div">
-                                    <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : '../assets/img/img_not_available_landscape.png' ?>" alt="Image not available" class="img-fluid w-100 h-100" style="border-radius: 10px;">
+                                    <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : '../assets/img/img_not_available.png' ?>" alt="Image not available" class="img-fluid w-100 h-100" style="border-radius: 10px;">
                                 </div>
                             </div>
                         </div>
@@ -475,7 +526,7 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-left">
-                        <input type="submit" name="edit_line_submit" class="btn btn-primary pr-3" value="Save">
+                        <input type="submit" name="<?php echo isset($row_line["line_desc"]) ? "reedit_line_submit" : "edit_line_submit" ?>" class="btn btn-primary pr-3" value="Save">
                         <input type="reset" name="edit_line_cancel" class="btn btn-secondary ml-2" value="Cancel" id="edit_line_cancel">
                     </div>
                 </form>
@@ -519,24 +570,6 @@
 
 <?php
 
-    // Fetching username ....................................................
-
-    $user_id = $_SESSION['user_id'];
-
-    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
-    $result = mysqli_query($conn, $sql_command);
-
-    if(mysqli_num_rows($result) > 0){
-        $user = mysqli_fetch_assoc($result);
-
-        $user_name = $user['username'];
-        $_SESSION["username"] = $user['username'];
-        
-        echo " <script> document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('line_name').innerHTML = '$user_name';
-        });</script>";
-    }
-    
     // Fetching Breaktime ....................................................
 
     $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
@@ -579,23 +612,23 @@
     var i = 0;
     var j = 0;
 
-    var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
+    var takt_time_string = "<?php echo isset($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
-    var tool_start = "<?php echo isset($_SESSION['tool_start']) ? $_SESSION['tool_start'] : ''; ?>";
-    var tool_end = "<?php echo isset($_SESSION['tool_end']) ? $_SESSION['tool_end'] : ''; ?>";
+    var tool_start = "<?php echo isset($row_break['tool_box_meeting_start']) ? $row_break['tool_box_meeting_start'] : ''; ?>";
+    var tool_end = "<?php echo isset($row_break['tool_box_meeting_end']) ? $row_break['tool_box_meeting_end'] : ''; ?>";
 
-    var am_start = "<?php echo isset($_SESSION['am_start']) ? $_SESSION['am_start'] : ''; ?>";
-    var am_end = "<?php echo isset($_SESSION['am_end']) ? $_SESSION['am_end'] : ''; ?>";
+    var am_start = "<?php echo isset($row_break['am_break_start']) ? $row_break['am_break_start'] : ''; ?>";
+    var am_end = "<?php echo isset($row_break['am_break_end']) ? $row_break['am_break_end'] : ''; ?>";
 
-    var lunch_start = "<?php echo isset($_SESSION['lunch_start']) ? $_SESSION['lunch_start'] : ''; ?>";
-    var lunch_end = "<?php echo isset($_SESSION['lunch_end']) ? $_SESSION['lunch_end'] : ''; ?>";
+    var lunch_start = "<?php echo isset($row_break['lunch_break_start']) ? $row_break['lunch_break_start'] : ''; ?>";
+    var lunch_end = "<?php echo isset($row_break['lunch_break_end']) ? $row_break['lunch_break_end'] : ''; ?>";
 
-    var pm_start = "<?php echo isset($_SESSION['pm_start']) ? $_SESSION['pm_start'] : ''; ?>";
-    var pm_end = "<?php echo isset($_SESSION['pm_end']) ? $_SESSION['pm_end'] : ''; ?>";
+    var pm_start = "<?php echo isset($row_break['pm_break_start']) ? $row_break['pm_break_start'] : ''; ?>";
+    var pm_end = "<?php echo isset($row_break['pm_break_end']) ? $row_break['pm_break_end'] : ''; ?>";
 
-    var ot_start = "<?php echo isset($_SESSION['ot_start']) ? $_SESSION['ot_start'] : ''; ?>";
-    var ot_end = "<?php echo isset($_SESSION['ot_end']) ? $_SESSION['ot_end'] : ''; ?>";
+    var ot_start = "<?php echo isset($row_break['ot_break_start']) ? $row_break['ot_break_start'] : ''; ?>";
+    var ot_end = "<?php echo isset($row_break['ot_break_end']) ? $row_break['ot_break_end'] : ''; ?>";
 
     function add_target() { 
 
