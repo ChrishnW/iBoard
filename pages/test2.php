@@ -353,7 +353,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="line_image_div">
-                                        <img src="../assets/img/img_not_available.png" alt="inchargeImage" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
+                                        <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : "../assets/img/img_not_available.png" ?>" alt="Photo not available" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -378,7 +378,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="incharge_image_div">
-                                        <img src="../assets/img/img_not_available.png" alt="inchargeImage" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
+                                    <img src="<?php echo isset($row_line["incharge_img"]) ? $row_line["incharge_img"] : "../assets/img/img_not_available.png" ?>" alt="Photo not available" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -674,11 +674,7 @@
 
 
                 
-                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; border-radius: 10px; object-fit: contain; \" >';
-                document.getElementById('line_image_div').innerHTML = line_img; 
                 
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid rounded\" style=\"max-width: auto; height: 210px; object-fit: contain; \">';
-                document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                 document.getElementById('target_count').innerHTML = '$target'; 
                 document.getElementById('actual_count').innerHTML = '$actual';
