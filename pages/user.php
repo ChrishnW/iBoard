@@ -340,7 +340,7 @@
             </div>
             
             <div class="col-12 col-md-3 mb-2 mb-md-0 text-center" id="incharge_image_div">
-                <img src="../assets/img/img_not_available.png" alt="line image leader" class="rounded-circle" style="width: 50%; height: 50%;">
+                <img src="../assets/img/img_not_available.png" alt="line image leader" class="img-fluid border rounded-circle" style="width: 50%; height: 50%;">
             </div>
         </div>
 
@@ -652,7 +652,7 @@
                 const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: 50%; height: 50%; border-radius: 10px; object-fit: contain; \" >';
                 document.getElementById('line_image_div').innerHTML = line_img; 
                 
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"rounded-circle\" style=\"max-width: 50%; height: 50%; object-fit: contain; \">';
+                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid border rounded-circle\" style=\"max-width: 50%; height: 50%; object-fit: contain; \">';
                 document.getElementById('incharge_image_div').innerHTML = incharge_img; 
 
                 document.getElementById('target_count').innerHTML = '$target'; 
