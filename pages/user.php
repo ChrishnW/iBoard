@@ -49,14 +49,9 @@
 
                 $date = date("Y-m-d H:i:s");
 
-                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
-                                incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
-                                breaktime_code, model_id, status) VALUES 
-                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
-                                '$daily_target', '$takt_time', '$work_start', '$work_end',
-                                '$breaktime_code', '$model_id', '$status')";
+                // $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end','$breaktime_code', '$model_id', '$status')";
 
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end','$breaktime_code', '$model_id', '$status')");
 
                 // This is for the records table
 
@@ -87,17 +82,14 @@
 
                 }
 
-                $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-                                target_day, target_now, actual, balance) VALUES 
-                                ('$date_records', '$line_name', '$line_desc', '$status_records',
-                                '$daily_target', '$quantity', '$value_records', '$quantity')";
+                // $sql_command = "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')";
 
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
                 if($result){
 
-                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
-                    $result = mysqli_query($conn, $sql_command);
+                    // $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
+                    $result = mysqli_query($conn, "SELECT id FROM tbl_line WHERE line_img = '$date' ");
 
                     $line = mysqli_fetch_assoc($result);
                     $line_id = $line["id"];
@@ -178,12 +170,9 @@
 
                 $date = date("Y-m-d H:i:s");
 
-                $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',
-                                incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',
-                                work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', 
-                                model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
+                // $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
 
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
 
                 // This is for the records table
 
@@ -213,12 +202,9 @@
 
                 }
 
-                $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', 
-                                unit = '$line_desc', status = '$status_records', target_day = '$daily_target', 
-                                target_now = '$quantity', balance = '$quantity' 
-                                WHERE id = '$records_id' ";
+                // $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ";
 
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
                 if($result){
 
@@ -534,8 +520,8 @@
 
     $user_id = $_SESSION['user_id'];
 
-    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
-    $result = mysqli_query($conn, $sql_command);
+    // $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
+    $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE id = '$user_id' ");
 
     if(mysqli_num_rows($result) > 0){
         $user = mysqli_fetch_assoc($result);
@@ -553,8 +539,8 @@
     $date = date("Y-m-d");
     $username = $_SESSION["username"];
 
-    $sql_command = "SELECT * FROM tbl_line WHERE line_name = '$username' ";
-    $result = mysqli_query($conn, $sql_command);
+    // $sql_command = "SELECT * FROM tbl_line WHERE line_name = '$username' ";
+    $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
 
     if(mysqli_num_rows($result) > 0){
         $line = mysqli_fetch_assoc($result);
@@ -614,8 +600,8 @@
 
         }
 
-        $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
-        $result = mysqli_query($conn, $sql_command);
+        // $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
+        $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ");
 
         if(mysqli_num_rows($result) > 0){
             while($break = mysqli_fetch_assoc($result)){
@@ -643,8 +629,8 @@
         $balance = $quantity;
         $status = "RUN";
 
-        $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
-        $result = mysqli_query($conn, $sql_command);
+        // $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
+        $result = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ");
 
         if(mysqli_num_rows($result) > 0){
             $record = mysqli_fetch_assoc($result);
@@ -657,12 +643,9 @@
             
         }
         else{
-            $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-                            target_day, target_now, actual, balance) VALUES 
-                            ('$date', '$line_name', '$line_desc', '$status',
-                            '$daily_target', '$target', '$actual', '$balance')";
+            // $sql_command = "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status','$daily_target', '$target', '$actual', '$balance')";
 
-            $result = mysqli_query($conn, $sql_command);
+            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status','$daily_target', '$target', '$actual', '$balance')");
         }
 
         echo "<script>
@@ -794,8 +777,8 @@
 
     // Fetching Breaktime ....................................................
 
-    $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
-    $result = mysqli_query($conn, $sql_command);
+    // $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
+    $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE status = '1' ");
 
     if(mysqli_num_rows($result) > 0){
         while($break = mysqli_fetch_assoc($result)){
