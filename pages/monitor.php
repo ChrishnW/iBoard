@@ -161,6 +161,7 @@
                 </button>
             </div>
             
+            <div class="modal-body mt-2 mb-1">
                 <p class="h5">Are you sure you want to Exit?</p>
             </div>
 
