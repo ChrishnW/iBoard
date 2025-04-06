@@ -486,14 +486,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header bg-gradient-danger">
-            <h5 class="modal-title text-white">Logout Account Confirmation</h5>
+            <h5 class="modal-title text-white">Logout Confirmation</h5>
             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup2">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         
-        <div class="modal-body">
-            <p class="h6">Are you sure you want to log out? Once logged out, you will need to log in again to access your account.</p>
+        <div class="modal-body mt-2 mb-1">
+            <p class="h5">Are you sure you want to log out?</p>
         </div>
 
         <div class="modal-footer">
