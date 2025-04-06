@@ -179,7 +179,7 @@
 
         <h2 class="float-left">Department List</h2>
         <button id="btn_add_department" type="button" class="btn btn-primary float-right">
-            <i class="fa fa-plus pr-2"></i> Add Department
+            <i class="fa fa-plus pr-1"></i> Add Department
         </button>
         
         <div class="clearfix"></div>

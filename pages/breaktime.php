@@ -194,7 +194,7 @@
       <div class="card-header py-3.5 pt-4">
           <h2 class="float-left">Breaktime List</h2>
           <button id="btn_add_breaktime" type="button" class="btn btn-primary float-right">
-            <i class="fa fa-plus pr-2"></i> Add Breaktime
+            <i class="fa fa-plus pr-1"></i> Add Breaktime
           </button>
           <div class="clearfix"></div>
       </div>

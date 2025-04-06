@@ -250,7 +250,7 @@
       <div class="card-header py-3.5 pt-4">
           <h2 class="float-left">Account List</h2>
           <button id="btn_add_account" type="button" class="btn btn-primary float-right">
-            <i class="fa fa-plus pr-2"></i> Add Account
+            <i class="fa fa-plus pr-1"></i> Add Account
           </button>
           <div class="clearfix"></div>
       </div>
