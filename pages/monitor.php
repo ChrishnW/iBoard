@@ -74,7 +74,7 @@
     <div id="monitor_dashboard" class="monitor_dashboard" style="display: block;">
 
         <div class="card shadow my-4">
-            <div class="card-header py-3.5 pt-4 align-items-center ">
+            <div class="card-header p-3 align-items-center ">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid mr-2 border" style="width: 55px;">
                 <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name">GPI Production Status</u></h2>
                 <a class="btn btn-danger float-right mt-2" href="#" onclick="showExitModal()">
