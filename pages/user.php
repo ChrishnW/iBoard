@@ -1171,13 +1171,14 @@
 
         document.addEventListener("keypress", function(event){
 
-            if(document.getElementById('user_dashboard').style.display == "block" && trigger != '-----'){
+            var status_run = document.getElementById('runStopButton').innerHTML;
+
+            if(document.getElementById('user_dashboard').style.display == "block" && trigger != '-----' && (status_run == 'RUN' || status_run == 'FINISH')){
             
-                if(event.key == "1"){
+                if(event.key == "+"){
                     add();
-                    // console.log(document.getElementById('plus').disabled);
                 }
-                else if(event.key == "2"){
+                else if(event.key == "-"){
                     minus();
                 }
             
