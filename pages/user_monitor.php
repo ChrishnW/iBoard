@@ -18,7 +18,6 @@
 ?>
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,7 +28,6 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
   <link href="../assets/css/style2.css" rel="stylesheet">
-
 </head>
 
 <!-- Begin Page Content -->
@@ -54,45 +52,45 @@
 
     <!-- Details Section -->
     <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="">
-            <div class="card-body">
-              <div class="text-center">
-                <div id="line_image_div">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="">
+              <div class="card-body">
+                <div class="text-center">
+                  <div id="line_image_div">
+                    <img src="../assets/img/img_not_available.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          <div class="col-md-4">
+            <div class="">
+              <div class="card-body">
+                <div class="text-center">
+                  <div class="d-flex flex-column fs-1"><br>
+                    <span class="h2 text-danger"><u>Information</u></span> 
+                    <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "*****" ?></span>
+                    <span class="h2 text-danger"><u>Leader</u></span> 
+                    <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "*****" ?></span> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="">
+              <div class="card-body">
+                <div class="text-center">
+                  <div id="incharge_image_div">
                   <img src="../assets/img/img_not_available.png">
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-        <div class="col-md-4">
-          <div class="">
-            <div class="card-body">
-              <div class="text-center">
-                <div class="d-flex flex-column fs-1"><br>
-                  <span class="h2 text-danger"><u>Information</u></span> 
-                  <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "*****" ?></span>
-                  <span class="h2 text-danger"><u>Leader</u></span> 
-                  <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "*****" ?></span> 
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="">
-            <div class="card-body">
-              <div class="text-center">
-                <div id="incharge_image_div">
-                <img src="../assets/img/img_not_available.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
     
