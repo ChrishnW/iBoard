@@ -34,6 +34,8 @@
 
             unset($_SESSION["line_id"]);
 
+            $unit = FILTER_INPUT(INPUT_POST, "edit_line_name", FILTER_SANITIZE_SPECIAL_CHARS);
+
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -57,7 +59,7 @@
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
+                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$unit', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
 
                 // This is for the records table
 
@@ -88,7 +90,7 @@
 
                 }
 
-                $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
+                $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
                 if($result){
 
@@ -133,7 +135,7 @@
                 } 
             }
 
-            header("Refresh: .3; url = user.php");
+            header("Refresh: 20; url = user.php");
             exit;
             ob_end_flush();
         }
@@ -144,6 +146,8 @@
 
             $line_id = $_SESSION["line_id"];
             $records_id = $_SESSION["records_id"];
+
+            $unit = FILTER_INPUT(INPUT_POST, "edit_line_name", FILTER_SANITIZE_SPECIAL_CHARS);
 
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -168,7 +172,7 @@
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
+                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
 
                 // This is for the records table
 
@@ -198,7 +202,7 @@
 
                 }
 
-                $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
+                $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
                 if($result){
 
@@ -251,21 +255,21 @@
     // PHP Vanilla ----------------------------------------------------------------------
     $date = date("Y-m-d");
     $username = $_SESSION["username"];
+    $model = $_SESSION["user_id"];
 
-    $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
+    $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE model_id = '$model' ");
     $row_line = mysqli_fetch_assoc($result);
 
     if(!empty($row_line["id"])){
         $_SESSION["line_id"] = $row_line["id"];
         $line_name = $row_line["line_name"];
-        $line_desc = $row_line["line_desc"];
 
         $work_start = $row_line["work_time_from"];
         $work_end = $row_line["work_time_to"];
 
         $breaktime_code_get = $row_line["breaktime_code"];
 
-        $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
+        $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$username' AND unit = '$line_name'");
         $row_records = mysqli_fetch_assoc($result1);
 
         if(!empty($row_records["id"])){
@@ -339,7 +343,7 @@
             </div>
 
             <div class="col-12 col-sm text-md-left text-lg-left text-center">
-                <span class="h1 font-weight-bold text-primary" id="line_name"><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "-----" ?></span>
+                <span class="h1 font-weight-bold text-primary" id="line_name"><?php echo isset($row_line["line_name"]) ? $row_line["line_name"] : "-----" ?></span>
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
