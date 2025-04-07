@@ -386,7 +386,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="">
+                        <div class="pt-1">
                             <div class="card-body">
                                 <div class="text-center">
                                     <div class="d-flex flex-column fs-1">
