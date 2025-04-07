@@ -16,6 +16,18 @@
         }
     }
 
+    // Fetching username ....................................................
+
+    $user_id = $_SESSION['user_id'];
+
+    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
+    $result = mysqli_query($conn, $sql_command);
+
+    if(mysqli_num_rows($result) > 0){
+        $user = mysqli_fetch_assoc($result);
+        $_SESSION["username"] = $user['username'];
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
         // Register Line Details ---------------------------------------------------------------------------
@@ -49,9 +61,14 @@
 
                 $date = date("Y-m-d H:i:s");
 
-                // $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end','$breaktime_code', '$model_id', '$status')";
+                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
+                                incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
+                                breaktime_code, model_id, status) VALUES 
+                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
+                                '$daily_target', '$takt_time', '$work_start', '$work_end',
+                                '$breaktime_code', '$model_id', '$status')";
 
-                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end','$breaktime_code', '$model_id', '$status')");
+                $result = mysqli_query($conn, $sql_command);
 
                 // This is for the records table
 
@@ -82,14 +99,17 @@
 
                 }
 
-                // $sql_command = "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')";
+                $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
+                                target_day, target_now, actual, balance) VALUES 
+                                ('$date_records', '$line_name', '$line_desc', '$status_records',
+                                '$daily_target', '$quantity', '$value_records', '$quantity')";
 
-                $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
+                $result = mysqli_query($conn, $sql_command);
 
                 if($result){
 
-                    // $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
-                    $result = mysqli_query($conn, "SELECT id FROM tbl_line WHERE line_img = '$date' ");
+                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
+                    $result = mysqli_query($conn, $sql_command);
 
                     $line = mysqli_fetch_assoc($result);
                     $line_id = $line["id"];
@@ -122,8 +142,6 @@
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
                                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
                                             WHERE id = '$line_id' ");
-
-                        $_SESSION["img_extra_path"] = $img_extra_path;
 
                     }else{
                         
@@ -170,9 +188,12 @@
 
                 $date = date("Y-m-d H:i:s");
 
-                // $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
+                $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',
+                                incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',
+                                work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', 
+                                model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
 
-                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
+                $result = mysqli_query($conn, $sql_command);
 
                 // This is for the records table
 
@@ -202,9 +223,12 @@
 
                 }
 
-                // $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ";
+                $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', 
+                                unit = '$line_desc', status = '$status_records', target_day = '$daily_target', 
+                                target_now = '$quantity', balance = '$quantity' 
+                                WHERE id = '$records_id' ";
 
-                $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
+                $result = mysqli_query($conn, $sql_command);
 
                 if($result){
 
@@ -235,8 +259,6 @@
                                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
                                             WHERE id = '$line_id' ");
 
-                        $_SESSION["img_extra_path"] = $img_extra_path;
-
                     }else{
                         
                         mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
@@ -255,6 +277,70 @@
         }
 
     }
+
+    // PHP Vanilla ----------------------------------------------------------------------
+    $date = date("Y-m-d");
+    $username = $_SESSION["username"];
+
+    $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
+    $row_line = mysqli_fetch_assoc($result);
+
+    if(!empty($row_line["id"])){
+        $_SESSION["line_id"] = $row_line["id"];
+        $line_name = $row_line["line_name"];
+        $line_desc = $row_line["line_desc"];
+
+        $work_start = $row_line["work_time_from"];
+        $work_end = $row_line["work_time_to"];
+
+        $breaktime_code_get = $row_line["breaktime_code"];
+
+        $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
+        $row_records = mysqli_fetch_assoc($result1);
+
+        if(!empty($row_records["id"])){
+            $_SESSION["records_id"] = $row_records["id"];
+        }
+        else{
+
+            $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+            $gapInMinutes = $gapInSeconds / 60;
+            $quantity = 0;
+
+            if($gapInMinutes >= 660){
+                // Run if there is OT
+
+                $worked_hours = $gapInMinutes - 105;
+                $quantity_round = $worked_hours / $takt_time;
+
+                $quantity = round($quantity_round);
+                
+            }
+            else{
+                // Run if there is no OT
+
+                $worked_hours = $gapInMinutes - 90;
+                $quantity_round = $worked_hours / $takt_time;
+
+                $quantity = round($quantity_round);
+
+            }
+
+            $actual = 0;
+            $status = "RUN";
+
+            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status', '$daily_target', '$quantity', '$actual', '$quantity')");
+        }
+
+        $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ");
+        $row_break = mysqli_fetch_assoc($result2);
+            
+    
+    }
+
+    
+
+
 ?>
 
 <!DOCTYPE html>
@@ -272,29 +358,29 @@
     <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style2.css">
 </head>
-<body class="container-fluid px-4 pt-3 pb-4 mt-n2" style="background-color: #add8e6;" id="body">
+<body class="container-fluid px-4 pt-3 pb-4 m-0" style="background-color: #add8e6;" id="body">
     
     <!-- User Dashboard-->
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
         <!-- Header Section -->
         <div class="row align-items-center px-3 py-2">  
             <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 text-md-left text-lg-left text-center">
-                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid rounded logo" style="width: 100%; max-width: 88px; height: auto;">
+                <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid rounded logo pb-2" style="width: 100%; max-width: 88px; height: auto;">
             </div>
 
             <div class="col-12 col-sm text-md-left text-lg-left text-center">
-                <span class="h1 font-weight-bold text-primary" id="line_name">-----</span>
+                <span class="h1 font-weight-bold text-primary" id="line_name"><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "-----" ?></span>
             </div>
             
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
-                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: #007bff; font-size: 3rem">RUN</button> 
+                <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: blue; font-size: 3rem">RUN</button> 
                 <br>
                 <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
             </div>
 
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
                 <div id="settings" class="dropdown">
-                    <button class="fa fa-cog fa-2x border-0 bg-transparent" aria-hidden="true" data-toggle="dropdown"></button>
+                    <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#" onclick="showEdituser()">
                             <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>    
@@ -311,7 +397,7 @@
         </div>
 
         <!-- Details Section -->
-        <div class="card" style="width: 97%; margin: 0 auto;"> <!-- Card width-->
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -319,7 +405,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="line_image_div">
-                                        <img src="../assets/img/img_not_available.png" alt="inchargeImage" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
+                                        <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : "../assets/img/img_not_available.png" ?>" alt="Photo not available" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -331,9 +417,9 @@
                                 <div class="text-center">
                                     <div class="d-flex flex-column fs-1"><br>
                                         <span class="h2 text-danger"><u>Information</u></span> 
-                                        <span class="h2 text-dark" id="line_desc">-----</span>
+                                        <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
                                         <span class="h2 text-danger"><u>Leader</u></span> 
-                                        <span class="h2 text-dark" id="incharge_name">-----</span> 
+                                        <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
                                     </div>
                                 </div>
                             </div>
@@ -344,7 +430,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div id="incharge_image_div">
-                                        <img src="../assets/img/img_not_available.png" alt="inchargeImage" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
+                                    <img src="<?php echo isset($row_line["incharge_img"]) ? $row_line["incharge_img"] : "../assets/img/img_not_available.png" ?>" alt="Photo not available" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -371,16 +457,16 @@
                     <tbody class="bg-whit text-dark h4">
                 
                     <tr style="height: 175px;"> <!-- Adjust height here -->
-                        <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display">0</td>
-                        <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
+                        <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
+                        <td id="target_count" class="font-weight-bolder" style="font-size: 50px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>
                         <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
-                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3 text-center" style="font-size: 50px;">0</p>
+                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></p>
                             <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
-                                <button class="btn btn-primary btn-lg mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
-                                <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: none;" onclick="add()" id="plus">+</button>
+                                <button class="btn btn-primary btn-lg  mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="minus()" id="minus">-</button>
+                                <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="add()" id="plus">+</button>
                             </div>
                         </td>
-                        <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count">0</td>
+                        <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count"><?php echo isset($row_records["balance"]) ? $row_records["balance"] : 0 ?></td>
                     </tr>
 
                     </tbody>
@@ -401,11 +487,11 @@
                 <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" style="width: 100%;" id="edit_user_form">
                     <div class="row">
 
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                             <!-- Line Details -->
                             <div class="mb-3">
                                 <label for="edit_line_desc" class="form-label">Line Description <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" required>
+                                <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" value="<?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "" ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
@@ -414,18 +500,18 @@
                             
                             <div class="mb-3">
                                 <label for="edit_daily_target" class="form-label">Daily Target <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" required>
+                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" value="<?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : "" ?>" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="edit_work_start" class="form-label">Work Start <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" required>
+                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" value="<?php echo isset($row_line["work_time_from"]) ? $row_line["work_time_from"] : "" ?>" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
                                 <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
-                                    <option value="" hidden></option>
+                                    <option value="<?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?>" hidden><?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?></option>
                                 </select> 
                             </div>
                            
@@ -435,7 +521,7 @@
                             <!-- Line Person -->
                             <div class="mb-3">
                                 <label for="edit_line_leader" class="form-label">Line Leader <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" required>
+                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" value="<?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "" ?>" required>
                             </div>
 
                             <div class="mb-3">
@@ -445,18 +531,23 @@
                             
                             <div class="mb-3">
                                 <label for="edit_takt_time" class="form-label">Takt Time <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" required>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" value="<?php echo isset($row_line["takt_time"]) ? $row_line["takt_time"] : "" ?>" required>
                             </div> 
 
                             <div class="mb-3">
                                 <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" required>
+                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" value="<?php echo isset($row_line["work_time_to"]) ? $row_line["work_time_to"] : "" ?>" required>
                             </div>
  
                             <div class="mb-3">
-                                <label for="edit_status" class="form-label">Status</label>
+                                <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
                                 <select name="edit_status" id="edit_status" class="form-control" required > 
-                                    <option value="1" hidden>Active</option>
+                                    <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>
+
+                                    
+                                    <?php echo isset($row_line["status"]) ? "<option value=\"1\">Active</option>
+                                    <option value=\"0\">Inactive</option>" : "" ?>
+
                                 </select> 
                             </div>  
                         
@@ -472,7 +563,7 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-left">
-                        <input type="submit" name="edit_line_submit" class="btn btn-primary pr-3" value="Save">
+                        <input type="submit" name="<?php echo isset($row_line["line_desc"]) ? "reedit_line_submit" : "edit_line_submit" ?>" class="btn btn-primary pr-3" value="Save">
                         <input type="reset" name="edit_line_cancel" class="btn btn-secondary ml-2" value="Cancel" id="edit_line_cancel">
                     </div>
                 </form>
@@ -486,14 +577,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header bg-gradient-danger">
-            <h5 class="modal-title text-white">Logout Confirmation</h5>
+            <h5 class="modal-title text-white">Logout Account Confirmation</h5>
             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup2">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         
-        <div class="modal-body mt-2 mb-1">
-            <p class="h5">Are you sure you want to log out?</p>
+        <div class="modal-body">
+            <p class="h6">Are you sure you want to log out? Once logged out, you will need to log in again to access your account.</p>
         </div>
 
         <div class="modal-footer">
@@ -516,269 +607,10 @@
 
 <?php
 
-    // Fetching username ....................................................
-
-    $user_id = $_SESSION['user_id'];
-
-    // $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
-    $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE id = '$user_id' ");
-
-    if(mysqli_num_rows($result) > 0){
-        $user = mysqli_fetch_assoc($result);
-
-        $user_name = $user['username'];
-        $_SESSION["username"] = $user['username'];
-        
-        echo " <script> document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('line_name').innerHTML = '$user_name';
-        });</script>";
-    }
-
-    // Display Registered Data ---------------------------------------------------------------------------
-
-    $date = date("Y-m-d");
-    $username = $_SESSION["username"];
-
-    // $sql_command = "SELECT * FROM tbl_line WHERE line_name = '$username' ";
-    $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE line_name = '$username' ");
-
-    if(mysqli_num_rows($result) > 0){
-        $line = mysqli_fetch_assoc($result);
-
-        $date = date("Y-m-d");
-
-        $_SESSION["line_id"] = $line["id"];
-
-        $line_name = $line["line_name"];
-        $line_desc = $line["line_desc"];
-
-        $line_img = $line["line_img"];
-        $incharge_name = $line["incharge_name"];
-        $incharge_img = $line["incharge_img"];
-
-        $work_start = $line["work_time_from"];
-        $work_end = $line["work_time_to"];
-
-        $daily_target = $line["daily_target"];
-
-        $breaktime_code_get = $line["breaktime_code"];
-        $takt_time = $line["takt_time"];
-
-        $status = $line["status"];
-
-        $_SESSION['img_extra_path'] = $line["extra_view"];
-
-        $status_string = "";
-        if($status == 1){
-            $status_string = "Active";
-        }
-        else{
-            $status_string = "Inactive";
-        }
-        $_SESSION["takt_time"] = $takt_time;
-
-        $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-        $gapInMinutes = $gapInSeconds / 60;
-        $quantity = 0;
-
-        if($gapInMinutes >= 660){
-            // Run if there is OT
-
-            $worked_hours = $gapInMinutes - 105;
-            $quantity_round = $worked_hours / $takt_time;
-
-            $quantity = round($quantity_round);
-            
-        }
-        else{
-            // Run if there is no OT
-
-            $worked_hours = $gapInMinutes - 90;
-            $quantity_round = $worked_hours / $takt_time;
-
-            $quantity = round($quantity_round);
-
-        }
-
-        // $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
-        $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ");
-
-        if(mysqli_num_rows($result) > 0){
-            while($break = mysqli_fetch_assoc($result)){
-
-                $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
-                $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
-
-                $_SESSION['am_start'] = $break["am_break_start"];
-                $_SESSION['am_end'] = $break["am_break_end"];
-
-                $_SESSION['lunch_start'] = $break["lunch_break_start"];
-                $_SESSION['lunch_end'] = $break["lunch_break_end"];
-
-                $_SESSION['pm_start'] = $break["pm_break_start"];
-                $_SESSION['pm_end'] = $break["pm_break_end"];
-
-                $_SESSION['ot_start'] = $break["ot_break_start"];
-                $_SESSION['ot_end'] = $break["ot_break_end"];
-
-            }
-        }
-        
-        $target = $quantity;
-        $actual = 0;
-        $balance = $quantity;
-        $status = "RUN";
-
-        // $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
-        $result = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ");
-
-        if(mysqli_num_rows($result) > 0){
-            $record = mysqli_fetch_assoc($result);
-
-            $_SESSION["records_id"] = $record["id"];
-
-            $target = $record["target_now"];
-            $actual = $record["actual"];
-            $balance = $record["balance"];
-            
-        }
-        else{
-            // $sql_command = "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status','$daily_target', '$target', '$actual', '$balance')";
-
-            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status','$daily_target', '$target', '$actual', '$balance')");
-        }
-
-        echo "<script>
-            document.addEventListener('DOMContentLoaded', function () {
-
-                document.getElementById('line_name').innerHTML = '$line_name'; 
-                document.getElementById('line_desc').innerHTML = '$line_desc';
-
-                document.getElementById('incharge_name').innerHTML = '$incharge_name'; 
-                document.getElementById('daily_target_display').innerHTML = '$daily_target';
-                
-                const line_img = '<img src=\"$line_img\" alt=\"LineImage\" class=\"img-fluid border rounded\" style=\"max-width: auto; height: 210px; border-radius: 10px; object-fit: contain; \" >';
-                document.getElementById('line_image_div').innerHTML = line_img; 
-                
-                const incharge_img = '<img src=\"$incharge_img\" alt=\"inchargeImage\" class=\"img-fluid rounded\" style=\"max-width: auto; height: 210px; object-fit: contain; \">';
-                document.getElementById('incharge_image_div').innerHTML = incharge_img; 
-
-                document.getElementById('target_count').innerHTML = '$target'; 
-                document.getElementById('actual_count').innerHTML = '$actual';
-                document.getElementById('balance_count').innerHTML = '$balance';
-
-                document.getElementById('minus').style.display = 'block';
-                document.getElementById('plus').style.display = 'block';
-
-            });
-        </script>";
-
-
-        echo "<script> 
-            document.addEventListener('DOMContentLoaded', function () {
-
-                const table = `
-
-                    <div class=\"row\">
-                
-                        <div class=\"col-md-6\">
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_line_desc\" class=\"form-label\">Line Description <span class=\"text-danger\">*</span></label>
-                                <input type=\"text\" class=\"form-control\" name=\"edit_line_desc\" id=\"edit_line_desc\" required value=\"$line_desc\">
-                            </div>
-                            <div class=\"mb-3\">
-                                <label for=\"line_image_upload\" class=\"form-label\">Line Image <span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"line_image_upload\" id=\"line_image_upload\" required value=\"$line_img\">
-                            </div>
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_daily_target\" class=\"form-label\">Daily Target <span class=\"text-danger\">*</span></label>
-                                <input type=\"number\" class=\"form-control\" name=\"edit_daily_target\" id=\"edit_daily_target\" placeholder=\"100\" required value=\"$daily_target\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_work_start\" class=\"form-label\">Work Start <span class=\"text-danger\">*</span></label>
-                                <input type=\"time\" class=\"form-control\" name=\"edit_work_start\" id=\"edit_work_start\" required value=\"$work_start\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_breaktime_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
-                                <select name=\"edit_breaktime_code\" id=\"edit_breaktime_code\" class=\"form-control\" required > 
-                                    <option value=\"$breaktime_code_get\" hidden>$breaktime_code_get</option>
-                                </select> 
-                            </div>
-                        
-                        </div>
-                        
-                        <div class=\"col-md-6\">
-                            <!-- Line Person -->
-                            <div class=\"mb-3\">
-                                <label for=\"edit_line_leader\" class=\"form-label\">Line Leader <span class=\"text-danger\">*</span></label>
-                                <input type=\"text\" class=\"form-control\" name=\"edit_line_leader\" id=\"edit_line_leader\" placeholder=\"Juan Dela Cruz\" required value=\"$incharge_name\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"leader_image_upload\" class=\"form-label\">Line Leader Image <span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"leader_image_upload\" id=\"leader_image_upload\" required value=\"$incharge_img\">
-                            </div>
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_takt_time\" class=\"form-label\">Takt Time <span class=\"text-danger\">*</span></label>
-                                <input type=\"number\" class=\"form-control\" name=\"edit_takt_time\" id=\"edit_takt_time\" placeholder=\"100\" required value=\"$takt_time\">
-                            </div> 
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_work_end\" class=\"form-label\">Work End <span class=\"text-danger\">*</span></label>
-                                <input type=\"time\" class=\"form-control\" name=\"edit_work_end\" id=\"edit_work_end\" placeholder=\"100\" required value=\"$work_end\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
-                                <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required> 
-                                    <option value=\"$status\" hidden>$status_string</option>
-                                    <option value=\"1\">Active</option>
-                                    <option value=\"0\">Inactive</option>
-                                </select> 
-                            </div>  
-                            
-                        </div>
-
-                        <div class=\"col-md-12\">
-                        <div class=\"mb-3\">
-                            <label for=\"extra_view_upload\" class=\"form-label\">Extra View</label>
-                            <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"extra_view_upload\" id=\"extra_view_upload\">
-                        </div>
-                    </div>
-                    </div>
-
-                    <br>
-                    <div class=\"d-flex justify-content-left\">
-                        <input type=\"submit\" name=\"reedit_line_submit\" class=\"btn btn-primary pr-3\" value=\"Save\">
-                        <input type=\"reset\" name=\"edit_line_cancel\" class=\"btn btn-secondary ml-2\" value=\"Cancel\" id=\"edit_line_cancel\">
-                    </div>
-                
-                `;
-
-                const targetElement = document.getElementById('edit_user_form');
-
-                if (targetElement) {
-                    document.getElementById('edit_user_form').innerHTML = table;
-
-                } else {
-                    console.error(\"Element with ID 'edit_user_form' not found in the DOM.\");
-                }
-
-            }); 
-        </script>";
-
-    }
-    
-
     // Fetching Breaktime ....................................................
 
-    // $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
-    $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE status = '1' ");
+    $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
+    $result = mysqli_query($conn, $sql_command);
 
     if(mysqli_num_rows($result) > 0){
         while($break = mysqli_fetch_assoc($result)){
@@ -817,23 +649,25 @@
     var i = 0;
     var j = 0;
 
-    var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
+    var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
+
+    var takt_time_string = "<?php echo isset($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
-    var tool_start = "<?php echo isset($_SESSION['tool_start']) ? $_SESSION['tool_start'] : ''; ?>";
-    var tool_end = "<?php echo isset($_SESSION['tool_end']) ? $_SESSION['tool_end'] : ''; ?>";
+    var tool_start = "<?php echo isset($row_break['tool_box_meeting_start']) ? $row_break['tool_box_meeting_start'] : ''; ?>";
+    var tool_end = "<?php echo isset($row_break['tool_box_meeting_end']) ? $row_break['tool_box_meeting_end'] : ''; ?>";
 
-    var am_start = "<?php echo isset($_SESSION['am_start']) ? $_SESSION['am_start'] : ''; ?>";
-    var am_end = "<?php echo isset($_SESSION['am_end']) ? $_SESSION['am_end'] : ''; ?>";
+    var am_start = "<?php echo isset($row_break['am_break_start']) ? $row_break['am_break_start'] : ''; ?>";
+    var am_end = "<?php echo isset($row_break['am_break_end']) ? $row_break['am_break_end'] : ''; ?>";
 
-    var lunch_start = "<?php echo isset($_SESSION['lunch_start']) ? $_SESSION['lunch_start'] : ''; ?>";
-    var lunch_end = "<?php echo isset($_SESSION['lunch_end']) ? $_SESSION['lunch_end'] : ''; ?>";
+    var lunch_start = "<?php echo isset($row_break['lunch_break_start']) ? $row_break['lunch_break_start'] : ''; ?>";
+    var lunch_end = "<?php echo isset($row_break['lunch_break_end']) ? $row_break['lunch_break_end'] : ''; ?>";
 
-    var pm_start = "<?php echo isset($_SESSION['pm_start']) ? $_SESSION['pm_start'] : ''; ?>";
-    var pm_end = "<?php echo isset($_SESSION['pm_end']) ? $_SESSION['pm_end'] : ''; ?>";
+    var pm_start = "<?php echo isset($row_break['pm_break_start']) ? $row_break['pm_break_start'] : ''; ?>";
+    var pm_end = "<?php echo isset($row_break['pm_break_end']) ? $row_break['pm_break_end'] : ''; ?>";
 
-    var ot_start = "<?php echo isset($_SESSION['ot_start']) ? $_SESSION['ot_start'] : ''; ?>";
-    var ot_end = "<?php echo isset($_SESSION['ot_end']) ? $_SESSION['ot_end'] : ''; ?>";
+    var ot_start = "<?php echo isset($row_break['ot_break_start']) ? $row_break['ot_break_start'] : ''; ?>";
+    var ot_end = "<?php echo isset($row_break['ot_break_end']) ? $row_break['ot_break_end'] : ''; ?>";
 
     function add_target() { 
 
@@ -852,14 +686,14 @@
     function start_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'BREAK';
         document.body.style.backgroundColor = 'lightgray'; // lighter shade of gray
-        document.getElementById('runStopButton').style.backgroundColor = '#6c757d'; // gray
+        document.getElementById('runStopButton').style.backgroundColor = 'gray';
         update();
     }
 
     function end_breaktime(){
         document.getElementById('runStopButton').innerHTML = 'RUN';
         document.body.style.backgroundColor = '#add8e6'; // light blue
-        document.getElementById('runStopButton').style.backgroundColor = '#007bff'; // blue
+        document.getElementById('runStopButton').style.backgroundColor = 'blue';
         update();
     }
     
@@ -980,8 +814,6 @@
 
         // extra view display
 
-        var img_extra_path = "<?php echo isset($_SESSION['img_extra_path']) ? $_SESSION['img_extra_path'] : '0'; ?>";
-
         if(img_extra_path != "0"){
 
             if(document.getElementById('edit_user').style.display == "none"){
@@ -1041,7 +873,7 @@
 
             btn_disabled();
 
-            document.getElementById('runStopButton').style.background = "#dc3545"; // red
+            document.getElementById('runStopButton').style.background = "red";
 
         } else if (button.innerText == 'STOP') {
             clearInterval(interval);
@@ -1050,7 +882,7 @@
 
             btn_abled();
 
-            document.getElementById('runStopButton').style.background = "#007bff"; // blue
+            document.getElementById('runStopButton').style.background = "blue";
         } 
 
         update();
@@ -1104,7 +936,7 @@
         if(new_actual >= new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'FINISH';
             document.body.style.backgroundColor = '#90EE90'; // light green
-            document.getElementById('runStopButton').style.backgroundColor = '#28a745'; // green
+            document.getElementById('runStopButton').style.backgroundColor = 'green';
             clearInterval(interval);
 
             work_status = "FINISH";
@@ -1128,7 +960,7 @@
         if(new_actual < new_daily_target){
             document.getElementById('runStopButton').innerHTML = 'RUN';
             document.body.style.backgroundColor = '#add8e6'; // light blue
-            document.getElementById('runStopButton').style.backgroundColor = '#007bff'; // blue
+            document.getElementById('runStopButton').style.backgroundColor = 'blue';
             
             work_status = "WORK";
         }
