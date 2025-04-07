@@ -62,7 +62,7 @@
     <!-- Header Section -->
     <div class="row align-items-center px-3 py-2">  
       <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 text-md-left text-lg-left text-center">
-        <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid rounded logo pb-2" style="width: 100%; max-width: 88px; height: auto;">
+        <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid rounded logo" style="width: 100%; max-width: 88px; height: auto;">
       </div>
 
       <div class="col-12 col-sm text-md-left text-lg-left text-center">
