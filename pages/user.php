@@ -19,9 +19,7 @@
     // Fetching username ....................................................
 
     $user_id = $_SESSION['user_id'];
-
-    $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$user_id' ";
-    $result = mysqli_query($conn, $sql_command);
+    $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE id = '$user_id' ");
 
     if(mysqli_num_rows($result) > 0){
         $user = mysqli_fetch_assoc($result);
@@ -56,19 +54,10 @@
 
             //print_r($_FILES);
 
-            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 &&
-                isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
+            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-
-                $sql_command = "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, 
-                                incharge_img, daily_target, takt_time, work_time_from, work_time_to, 
-                                breaktime_code, model_id, status) VALUES 
-                                ('$line_name', '$line_desc', '$date', '$line_leader', '$date', 
-                                '$daily_target', '$takt_time', '$work_start', '$work_end',
-                                '$breaktime_code', '$model_id', '$status')";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$line_name', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
 
                 // This is for the records table
 
@@ -99,18 +88,11 @@
 
                 }
 
-                $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-                                target_day, target_now, actual, balance) VALUES 
-                                ('$date_records', '$line_name', '$line_desc', '$status_records',
-                                '$daily_target', '$quantity', '$value_records', '$quantity')";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$line_desc', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
                 if($result){
 
-                    $sql_command = "SELECT id FROM tbl_line WHERE line_img = '$date' ";
-                    $result = mysqli_query($conn, $sql_command);
-
+                    $result = mysqli_query($conn, "SELECT id FROM tbl_line WHERE line_img = '$date' ");
                     $line = mysqli_fetch_assoc($result);
                     $line_id = $line["id"];
 
@@ -183,17 +165,10 @@
 
             //print_r($_FILES);
 
-            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 &&
-                isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
+            if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-
-                $sql_command = "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',
-                                incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',
-                                work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', 
-                                model_id = '$model_id', status = '$status' WHERE id = '$line_id' ";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$line_name', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
 
                 // This is for the records table
 
@@ -223,12 +198,7 @@
 
                 }
 
-                $sql_command = "UPDATE tbl_records SET date = '$date_records', model = '$line_name', 
-                                unit = '$line_desc', status = '$status_records', target_day = '$daily_target', 
-                                target_now = '$quantity', balance = '$quantity' 
-                                WHERE id = '$records_id' ";
-
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$line_desc', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
                 if($result){
 
@@ -512,6 +482,19 @@
                                 <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
                                 <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
                                     <option value="<?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?>" hidden><?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?></option>
+
+                                    <?php 
+                                        $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE status = '1' ");
+
+                                        if(mysqli_num_rows($result) > 0){
+                                            while($break = mysqli_fetch_assoc($result)){
+                                    ?>
+                                                <option value="<?php echo $break['breaktime_code'] ?>"><?php echo $break['breaktime_code'] ?></option>
+                                    <?php 
+                                            }
+                                        }
+                                    ?>
+
                                 </select> 
                             </div>
                            
@@ -605,31 +588,6 @@
 </body>
 </html>
 
-<?php
-
-    // Fetching Breaktime ....................................................
-
-    $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
-    $result = mysqli_query($conn, $sql_command);
-
-    if(mysqli_num_rows($result) > 0){
-        while($break = mysqli_fetch_assoc($result)){
-
-            $breaktime_id = $break['id'];
-            $breaktime_code = $break['breaktime_code'];
-
-            echo '<script> document.addEventListener("DOMContentLoaded", function () {
-                const table = `
-                <option value="' . $breaktime_code . '">' . $breaktime_code . '</option>`;
-                
-                document.querySelector("#edit_breaktime_code").insertAdjacentHTML("beforeend", table);
-            });</script>';
-        }
-
-    }
-
-?>
- 
 <script>
     function handleLogout() {
         window.location.href = '../include/logout.php';
