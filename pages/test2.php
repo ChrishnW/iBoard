@@ -153,7 +153,7 @@
                 } 
             }
 
-            header("Refresh: .3; url = user.php");
+            header("Refresh: .3; url = test2.php");
             exit;
             ob_end_flush();
         }
@@ -274,7 +274,7 @@
 
             }
 
-            header("Refresh: .3; url = user.php");            
+            header("Refresh: .3; url = test2.php");            
             exit;
             ob_end_flush();
 
@@ -298,53 +298,46 @@
         $work_end = $row_line["work_time_to"];
 
         $breaktime_code_get = $row_line["breaktime_code"];
-        $_SESSION["takt_time"] = $row_line["takt_time"];
 
-        echo "asd";
-        // $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
-        // $row_records = mysqli_fetch_assoc($result1);
+        $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc'");
+        $row_records = mysqli_fetch_assoc($result1);
 
-        // if(!empty($row_records["id"])){
-        //     $_SESSION["records_id"] = $row_records["id"];
-        // }
-        // else{
+        if(!empty($row_records["id"])){
+            $_SESSION["records_id"] = $row_records["id"];
+        }
+        else{
 
-        //     $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-        //     $gapInMinutes = $gapInSeconds / 60;
-        //     $quantity = 0;
+            $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+            $gapInMinutes = $gapInSeconds / 60;
+            $quantity = 0;
 
-        //     if($gapInMinutes >= 660){
-        //         // Run if there is OT
+            if($gapInMinutes >= 660){
+                // Run if there is OT
 
-        //         $worked_hours = $gapInMinutes - 105;
-        //         $quantity_round = $worked_hours / $takt_time;
+                $worked_hours = $gapInMinutes - 105;
+                $quantity_round = $worked_hours / $takt_time;
 
-        //         $quantity = round($quantity_round);
+                $quantity = round($quantity_round);
                 
-        //     }
-        //     else{
-        //         // Run if there is no OT
+            }
+            else{
+                // Run if there is no OT
 
-        //         $worked_hours = $gapInMinutes - 90;
-        //         $quantity_round = $worked_hours / $takt_time;
+                $worked_hours = $gapInMinutes - 90;
+                $quantity_round = $worked_hours / $takt_time;
 
-        //         $quantity = round($quantity_round);
+                $quantity = round($quantity_round);
 
-        //     }
+            }
 
-        //     $actual = 0;
-        //     $status = "RUN";
+            $actual = 0;
+            $status = "RUN";
 
-        //     $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-        //             target_day, target_now, actual, balance) VALUES 
-        //             ('$date', '$line_name', '$line_desc', '$status',
-        //             '$daily_target', '$quantity', '$actual', '$quantity')";
+            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status', '$daily_target', '$quantity', '$actual', '$quantity')");
+        }
 
-        //     $result = mysqli_query($conn, $sql_command);
-        // }
-
-        // $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$line_breaktime_code' ");
-        // $row_break = mysqli_fetch_assoc($result2);
+        $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ");
+        $row_break = mysqli_fetch_assoc($result2);
             
     
     }
@@ -469,15 +462,15 @@
                 
                     <tr style="height: 175px;"> <!-- Adjust height here -->
                         <td class="font-weight-bolder" style="font-size: 50px;" id="daily_target_display"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
-                        <td id="target_count" class="font-weight-bolder" style="font-size: 50px;">0</td>
+                        <td id="target_count" class="font-weight-bolder" style="font-size: 50px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>
                         <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
-                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;">0</p>
+                            <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 50px; text-align: center;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></p>
                             <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
-                                <button class="btn btn-primary btn-lg  mt-2" style="display: none;" onclick="minus()" id="minus">-</button>
-                                <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: none;" onclick="add()" id="plus">+</button>
+                                <button class="btn btn-primary btn-lg  mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="minus()" id="minus">-</button>
+                                <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="add()" id="plus">+</button>
                             </div>
                         </td>
-                        <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count">0</td>
+                        <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 50px;" id="balance_count"><?php echo isset($row_records["balance"]) ? $row_records["balance"] : 0 ?></td>
                     </tr>
 
                     </tbody>
@@ -498,11 +491,11 @@
                 <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" style="width: 100%;" id="edit_user_form">
                     <div class="row">
 
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                             <!-- Line Details -->
                             <div class="mb-3">
                                 <label for="edit_line_desc" class="form-label">Line Description <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" required>
+                                <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" value="<?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "" ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
@@ -511,18 +504,18 @@
                             
                             <div class="mb-3">
                                 <label for="edit_daily_target" class="form-label">Daily Target <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" required>
+                                <input type="number" class="form-control" name="edit_daily_target" id="edit_daily_target" value="<?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : "" ?>" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="edit_work_start" class="form-label">Work Start <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" required>
+                                <input type="time" class="form-control" name="edit_work_start" id="edit_work_start" value="<?php echo isset($row_line["work_time_from"]) ? $row_line["work_time_from"] : "" ?>" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
                                 <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
-                                    <option value="" hidden></option>
+                                    <option value="<?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?>" hidden><?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?></option>
                                 </select> 
                             </div>
                            
@@ -532,7 +525,7 @@
                             <!-- Line Person -->
                             <div class="mb-3">
                                 <label for="edit_line_leader" class="form-label">Line Leader <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" required>
+                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" value="<?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "" ?>" required>
                             </div>
 
                             <div class="mb-3">
@@ -542,18 +535,23 @@
                             
                             <div class="mb-3">
                                 <label for="edit_takt_time" class="form-label">Takt Time <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" required>
+                                <input type="number" class="form-control" name="edit_takt_time" id="edit_takt_time" value="<?php echo isset($row_line["takt_time"]) ? $row_line["takt_time"] : "" ?>" required>
                             </div> 
 
                             <div class="mb-3">
                                 <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" required>
+                                <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" value="<?php echo isset($row_line["work_time_to"]) ? $row_line["work_time_to"] : "" ?>" required>
                             </div>
  
                             <div class="mb-3">
-                                <label for="edit_status" class="form-label">Status</label>
+                                <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
                                 <select name="edit_status" id="edit_status" class="form-control" required > 
-                                    <option value="1" hidden>Active</option>
+                                    <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>
+
+                                    
+                                    <?php echo isset($row_line["status"]) ? "<option value=\"1\">Active</option>
+                                    <option value=\"0\">Inactive</option>" : "" ?>
+
                                 </select> 
                             </div>  
                         
@@ -569,7 +567,7 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-left">
-                        <input type="submit" name="edit_line_submit" class="btn btn-primary pr-3" value="Save">
+                        <input type="submit" name="<?php echo isset($row_line["line_desc"]) ? "reedit_line_submit" : "edit_line_submit" ?>" class="btn btn-primary pr-3" value="Save">
                         <input type="reset" name="edit_line_cancel" class="btn btn-secondary ml-2" value="Cancel" id="edit_line_cancel">
                     </div>
                 </form>
@@ -613,230 +611,6 @@
 
 <?php
 
-    
-
-    // Display Registered Data ---------------------------------------------------------------------------
-
-    $date = date("Y-m-d");
-    $username = $_SESSION["username"];
-
-    $sql_command = "SELECT * FROM tbl_line WHERE line_name = '$username' ";
-    $result = mysqli_query($conn, $sql_command);
-
-    if(mysqli_num_rows($result) > 0){
-        $line = mysqli_fetch_assoc($result);
-
-        $date = date("Y-m-d");
-
-
-
-
-
-
-
-
-        $status = $line["status"];
-
-        $_SESSION['img_extra_path'] = $line["extra_view"];
-
-        $status_string = "";
-        if($status == 1){
-            $status_string = "Active";
-        }
-        else{
-            $status_string = "Inactive";
-        }
-        $_SESSION["takt_time"] = $takt_time;
-
-        $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-        $gapInMinutes = $gapInSeconds / 60;
-        $quantity = 0;
-
-        if($gapInMinutes >= 660){
-            // Run if there is OT
-
-            $worked_hours = $gapInMinutes - 105;
-            $quantity_round = $worked_hours / $takt_time;
-
-            $quantity = round($quantity_round);
-            
-        }
-        else{
-            // Run if there is no OT
-
-            $worked_hours = $gapInMinutes - 90;
-            $quantity_round = $worked_hours / $takt_time;
-
-            $quantity = round($quantity_round);
-
-        }
-        
-        $target = $quantity;
-        $actual = 0;
-        $balance = $quantity;
-        $status = "RUN";
-
-        $sql_command = "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$line_name' AND unit = '$line_desc' ";
-        $result = mysqli_query($conn, $sql_command);
-
-        if(mysqli_num_rows($result) > 0){
-            $record = mysqli_fetch_assoc($result);
-
-            $_SESSION["records_id"] = $record["id"];
-
-            $target = $record["target_now"];
-            $actual = $record["actual"];
-            $balance = $record["balance"];
-            
-        }
-        else{
-            $sql_command = "INSERT INTO tbl_records (date, model, unit, status, 
-                            target_day, target_now, actual, balance) VALUES 
-                            ('$date', '$line_name', '$line_desc', '$status',
-                            '$daily_target', '$target', '$actual', '$balance')";
-
-            $result = mysqli_query($conn, $sql_command);
-        }
-
-        $sql_command = "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ";
-        $result = mysqli_query($conn, $sql_command);
-
-        if(mysqli_num_rows($result) > 0){
-            while($break = mysqli_fetch_assoc($result)){
-
-                $_SESSION['tool_start'] = $break["tool_box_meeting_start"];
-                $_SESSION['tool_end'] = $break["tool_box_meeting_end"];
-
-                $_SESSION['am_start'] = $break["am_break_start"];
-                $_SESSION['am_end'] = $break["am_break_end"];
-
-                $_SESSION['lunch_start'] = $break["lunch_break_start"];
-                $_SESSION['lunch_end'] = $break["lunch_break_end"];
-
-                $_SESSION['pm_start'] = $break["pm_break_start"];
-                $_SESSION['pm_end'] = $break["pm_break_end"];
-
-                $_SESSION['ot_start'] = $break["ot_break_start"];
-                $_SESSION['ot_end'] = $break["ot_break_end"];
-
-            }
-        }
-
-        echo "<script>
-            document.addEventListener('DOMContentLoaded', function () {
-
-                document.getElementById('target_count').innerHTML = '$target'; 
-                document.getElementById('actual_count').innerHTML = '$actual';
-                document.getElementById('balance_count').innerHTML = '$balance';
-
-                document.getElementById('minus').style.display = 'block';
-                document.getElementById('plus').style.display = 'block';
-
-            });
-        </script>";
-
-
-        echo "<script> 
-            document.addEventListener('DOMContentLoaded', function () {
-
-                const table = `
-
-                    <div class=\"row\">
-                
-                        <div class=\"col-md-6\">
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_line_desc\" class=\"form-label\">Line Description <span class=\"text-danger\">*</span></label>
-                                <input type=\"text\" class=\"form-control\" name=\"edit_line_desc\" id=\"edit_line_desc\" required value=\"$line_desc\">
-                            </div>
-                            <div class=\"mb-3\">
-                                <label for=\"line_image_upload\" class=\"form-label\">Line Image <span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"line_image_upload\" id=\"line_image_upload\" required value=\"$line_img\">
-                            </div>
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_daily_target\" class=\"form-label\">Daily Target <span class=\"text-danger\">*</span></label>
-                                <input type=\"number\" class=\"form-control\" name=\"edit_daily_target\" id=\"edit_daily_target\" placeholder=\"100\" required value=\"$daily_target\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_work_start\" class=\"form-label\">Work Start <span class=\"text-danger\">*</span></label>
-                                <input type=\"time\" class=\"form-control\" name=\"edit_work_start\" id=\"edit_work_start\" required value=\"$work_start\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_breaktime_code\">Breaktime Code <span style=\"color: red;\">*</span></label>
-                                <select name=\"edit_breaktime_code\" id=\"edit_breaktime_code\" class=\"form-control\" required > 
-                                    <option value=\"$breaktime_code_get\" hidden>$breaktime_code_get</option>
-                                </select> 
-                            </div>
-                        
-                        </div>
-                        
-                        <div class=\"col-md-6\">
-                            <!-- Line Person -->
-                            <div class=\"mb-3\">
-                                <label for=\"edit_line_leader\" class=\"form-label\">Line Leader <span class=\"text-danger\">*</span></label>
-                                <input type=\"text\" class=\"form-control\" name=\"edit_line_leader\" id=\"edit_line_leader\" placeholder=\"Juan Dela Cruz\" required value=\"$incharge_name\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"leader_image_upload\" class=\"form-label\">Line Leader Image <span class=\"text-danger\">*</span></label>
-                                <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"leader_image_upload\" id=\"leader_image_upload\" required value=\"$incharge_img\">
-                            </div>
-                            
-                            <div class=\"mb-3\">
-                                <label for=\"edit_takt_time\" class=\"form-label\">Takt Time <span class=\"text-danger\">*</span></label>
-                                <input type=\"number\" class=\"form-control\" name=\"edit_takt_time\" id=\"edit_takt_time\" placeholder=\"100\" required value=\"$takt_time\">
-                            </div> 
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_work_end\" class=\"form-label\">Work End <span class=\"text-danger\">*</span></label>
-                                <input type=\"time\" class=\"form-control\" name=\"edit_work_end\" id=\"edit_work_end\" placeholder=\"100\" required value=\"$work_end\">
-                            </div>
-
-                            <div class=\"mb-3\">
-                                <label for=\"edit_status\" class=\"form-label\">Status <span style=\"color: red;\">*</span></label>
-                                <select name=\"edit_status\" id=\"edit_status\" class=\"form-control\" required> 
-                                    <option value=\"$status\" hidden>$status_string</option>
-                                    <option value=\"1\">Active</option>
-                                    <option value=\"0\">Inactive</option>
-                                </select> 
-                            </div>  
-                            
-                        </div>
-
-                        <div class=\"col-md-12\">
-                        <div class=\"mb-3\">
-                            <label for=\"extra_view_upload\" class=\"form-label\">Extra View</label>
-                            <input type=\"file\" accept=\".png, .jpg, .jpeg\" class=\"form-control\" name=\"extra_view_upload\" id=\"extra_view_upload\">
-                        </div>
-                    </div>
-                    </div>
-
-                    <br>
-                    <div class=\"d-flex justify-content-left\">
-                        <input type=\"submit\" name=\"reedit_line_submit\" class=\"btn btn-primary pr-3\" value=\"Save\">
-                        <input type=\"reset\" name=\"edit_line_cancel\" class=\"btn btn-secondary ml-2\" value=\"Cancel\" id=\"edit_line_cancel\">
-                    </div>
-                
-                `;
-
-                const targetElement = document.getElementById('edit_user_form');
-
-                if (targetElement) {
-                    document.getElementById('edit_user_form').innerHTML = table;
-
-                } else {
-                    console.error(\"Element with ID 'edit_user_form' not found in the DOM.\");
-                }
-
-            }); 
-        </script>";
-
-    }
-    
-
     // Fetching Breaktime ....................................................
 
     $sql_command = "SELECT * FROM tbl_breaktime WHERE status = '1' ";
@@ -879,23 +653,23 @@
     var i = 0;
     var j = 0;
 
-    var takt_time_string = "<?php echo isset($_SESSION['takt_time']) ? $_SESSION['takt_time'] : ''; ?>";
+    var takt_time_string = "<?php echo isset($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
-    var tool_start = "<?php echo isset($_SESSION['tool_start']) ? $_SESSION['tool_start'] : ''; ?>";
-    var tool_end = "<?php echo isset($_SESSION['tool_end']) ? $_SESSION['tool_end'] : ''; ?>";
+    var tool_start = "<?php echo isset($row_break['tool_box_meeting_start']) ? $row_break['tool_box_meeting_start'] : ''; ?>";
+    var tool_end = "<?php echo isset($row_break['tool_box_meeting_end']) ? $row_break['tool_box_meeting_end'] : ''; ?>";
 
-    var am_start = "<?php echo isset($_SESSION['am_start']) ? $_SESSION['am_start'] : ''; ?>";
-    var am_end = "<?php echo isset($_SESSION['am_end']) ? $_SESSION['am_end'] : ''; ?>";
+    var am_start = "<?php echo isset($row_break['am_break_start']) ? $row_break['am_break_start'] : ''; ?>";
+    var am_end = "<?php echo isset($row_break['am_break_end']) ? $row_break['am_break_end'] : ''; ?>";
 
-    var lunch_start = "<?php echo isset($_SESSION['lunch_start']) ? $_SESSION['lunch_start'] : ''; ?>";
-    var lunch_end = "<?php echo isset($_SESSION['lunch_end']) ? $_SESSION['lunch_end'] : ''; ?>";
+    var lunch_start = "<?php echo isset($row_break['lunch_break_start']) ? $row_break['lunch_break_start'] : ''; ?>";
+    var lunch_end = "<?php echo isset($row_break['lunch_break_end']) ? $row_break['lunch_break_end'] : ''; ?>";
 
-    var pm_start = "<?php echo isset($_SESSION['pm_start']) ? $_SESSION['pm_start'] : ''; ?>";
-    var pm_end = "<?php echo isset($_SESSION['pm_end']) ? $_SESSION['pm_end'] : ''; ?>";
+    var pm_start = "<?php echo isset($row_break['pm_break_start']) ? $row_break['pm_break_start'] : ''; ?>";
+    var pm_end = "<?php echo isset($row_break['pm_break_end']) ? $row_break['pm_break_end'] : ''; ?>";
 
-    var ot_start = "<?php echo isset($_SESSION['ot_start']) ? $_SESSION['ot_start'] : ''; ?>";
-    var ot_end = "<?php echo isset($_SESSION['ot_end']) ? $_SESSION['ot_end'] : ''; ?>";
+    var ot_start = "<?php echo isset($row_break['ot_break_start']) ? $row_break['ot_break_start'] : ''; ?>";
+    var ot_end = "<?php echo isset($row_break['ot_break_end']) ? $row_break['ot_break_end'] : ''; ?>";
 
     function add_target() { 
 
