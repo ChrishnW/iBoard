@@ -125,11 +125,14 @@
       $acc_password = 12345;
       $acc_status = 1;
       $acc_access = 2;
-
       $hashed_password = password_hash($acc_password, PASSWORD_DEFAULT);
 
-      $sql_command = "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_name', '$hashed_password', '$acc_access', '$acc_department_code', '$acc_status')";
-      $result = mysqli_query($conn, $sql_command);
+      $acc_monitor = 4;
+      $acc_monitor_passwod = 123456;
+      $hashed_password_monitor = password_hash($acc_monitor_passwod, PASSWORD_DEFAULT);
+
+      $result = mysqli_query($conn, "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_name', '$hashed_password', '$acc_access', '$acc_department_code', '$acc_status')");
+      $result1 = mysqli_query($conn, "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_name', '$hashed_password_monitor', '$acc_monitor', '$acc_department_code', '$acc_status')");
 
       if($result){
           $_SESSION["message"] = "Account added successfully.";
@@ -159,9 +162,10 @@
     if(isset($_POST["delete_data"])){
 
       $acc_id = $_SESSION["delete_acc"];
+      $acc_monitor_id = $_SESSION["delete_acc"] + 1;
 
-      $sql_command = "DELETE FROM tbl_accounts WHERE id = '$acc_id'";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "DELETE FROM tbl_accounts WHERE id = '$acc_id'");
+      $result = mysqli_query($conn, "DELETE FROM tbl_accounts WHERE id = '$acc_monitor_id'");
 
       if($result){
         $_SESSION["message"] = "Account deleted successfully.";
@@ -216,26 +220,26 @@
 
     // Reset Password --------------------------------------------------------------------------
 
-    if(isset($_POST["reset_password"])){
+    // if(isset($_POST["reset_password"])){
 
-      $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
-      $password = 12345;
+    //   $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
+    //   $password = 12345;
 
-      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    //   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
       
-      $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
-      $result = mysqli_query($conn, $sql_command);
+    //   $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
+    //   $result = mysqli_query($conn, $sql_command);
 
-      if($result){
-        $_SESSION["message"] = "Account password updated successfully.";
-      }
-      else{
-        $_SESSION["message"] = "Failed to update account password.";
-      }
+    //   if($result){
+    //     $_SESSION["message"] = "Account password updated successfully.";
+    //   }
+    //   else{
+    //     $_SESSION["message"] = "Failed to update account password.";
+    //   }
 
-      header("Refresh: .3; url = account.php");
-      exit;
-    }
+    //   header("Refresh: .3; url = account.php");
+    //   exit;
+    // }
 
   }
 
