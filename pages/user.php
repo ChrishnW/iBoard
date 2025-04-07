@@ -483,6 +483,24 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
+                                <select name="edit_status" id="edit_status" class="form-control" required > 
+                                    <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>                                   
+                                    <?php echo isset($row_line["status"]) ? "<option value=\"1\">Active</option>
+                                    <option value=\"0\">Inactive</option>" : "" ?>
+                                </select> 
+                            </div>
+                          
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <!-- Line Person -->
+                            <div class="mb-3">
+                                <label for="edit_line_leader" class="form-label">Line Leader <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" value="<?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "" ?>" required>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
                                 <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
                                     <option value="<?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?>" hidden><?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?></option>
@@ -501,15 +519,6 @@
 
                                 </select> 
                             </div>
-                          
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <!-- Line Person -->
-                            <div class="mb-3">
-                                <label for="edit_line_leader" class="form-label">Line Leader <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="edit_line_leader" id="edit_line_leader" value="<?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "" ?>" required>
-                            </div>
 
                             <div class="mb-3">
                                 <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
@@ -525,22 +534,12 @@
                                 <label for="edit_work_end" class="form-label">Work End <span class="text-danger">*</span></label>
                                 <input type="time" class="form-control" name="edit_work_end" id="edit_work_end" value="<?php echo isset($row_line["work_time_to"]) ? $row_line["work_time_to"] : "" ?>" required>
                             </div>
- 
-                            <div class="mb-3">
-                                <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
-                                <select name="edit_status" id="edit_status" class="form-control" required > 
-                                    <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>                                   
-                                    <?php echo isset($row_line["status"]) ? "<option value=\"1\">Active</option>
-                                    <option value=\"0\">Inactive</option>" : "" ?>
-                                </select> 
-                            </div>                 
-                        </div>
 
-                        <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="extra_view_upload" class="form-label">Extra View</label>
                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="extra_view_upload" id="extra_view_upload">
                             </div>
+                                             
                         </div>
 
                     </div>
