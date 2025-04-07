@@ -460,6 +460,10 @@
                         <div class="col-md-6">
                             <!-- Line Details -->
                             <div class="mb-3">
+                                <label for="edit_line_name" class="form-label">Line Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="edit_line_name" id="edit_line_name" value="<?php echo isset($row_line["line_name"]) ? $row_line["line_name"] : "" ?>" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="edit_line_desc" class="form-label">Line Description <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" value="<?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "" ?>" required>
                             </div>
@@ -497,7 +501,7 @@
 
                                 </select> 
                             </div>
-                           
+                          
                         </div>
                         
                         <div class="col-md-6">
@@ -525,15 +529,11 @@
                             <div class="mb-3">
                                 <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
                                 <select name="edit_status" id="edit_status" class="form-control" required > 
-                                    <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>
-
-                                    
+                                    <option value="<?php echo isset($row_line["status"]) ? $row_line["status"] : 1 ?>" hidden><?php echo isset($row_line["status"]) ? ($row_line["status"] == 1 ? "Active" : "Inactive" ) : "Active" ?></option>                                   
                                     <?php echo isset($row_line["status"]) ? "<option value=\"1\">Active</option>
                                     <option value=\"0\">Inactive</option>" : "" ?>
-
                                 </select> 
-                            </div>  
-                        
+                            </div>                 
                         </div>
 
                         <div class="col-md-12">
