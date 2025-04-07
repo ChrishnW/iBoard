@@ -204,7 +204,13 @@
       $dept_code = filter_input(INPUT_POST, "edit_acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $status = filter_input(INPUT_POST, "edit_acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
+      $monitor_id = $acc_id + 1;
+      $monitor_user = "monitor_" . $username;
+
       $sql_command = "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'";
+      $result = mysqli_query($conn, $sql_command);
+
+      $sql_command = "UPDATE tbl_accounts SET username = '$monitor_user', dept_code = '$dept_code', status = '$status' WHERE id = '$monitor_id'";
       $result = mysqli_query($conn, $sql_command);
 
       if($result){

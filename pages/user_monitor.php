@@ -9,7 +9,7 @@
     }
     else{
 
-        if($access_security != 2){
+        if($access_security != 4){
             header('location: ../index.php');
             exit();
         }
