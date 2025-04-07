@@ -196,9 +196,9 @@
                       </form>
                     </div>
                     
-                    <div class=\"text-center my-2 mx-2 pt-3\">
-                      <div class=\"h5 mb-0 font-weight-bold text-gray-800\">$name</div>
-                      <div class=\"h5 text-muted\">$number</div>
+                    <div class=\"text-center my-2 mx-2 pl-2 pt-3\">
+                      <div class=\"h6 mb-0 font-weight-bold text-gray-800\">$name</div>
+                      <div class=\"h3 text-muted\">$number</div>
                     </div>
                   </div>
                 </div>
