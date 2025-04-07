@@ -22,13 +22,17 @@
 
     if(mysqli_num_rows($result) > 0){
         $user = mysqli_fetch_assoc($result);
-        $_SESSION["username"] = $user['username'];
+        $username = $user['username'];
+        $_SESSION["username"] = str_replace("monitor_", "", $username);
+
+        $_SESSION["model_id"] = $_SESSION["user_id"] - 1;
+        
     }
 
     // PHP Vanilla ----------------------------------------------------------------------
     $date = date("Y-m-d");
     $username = $_SESSION["username"];
-    $model_id = $_SESSION["user_id"];
+    $model_id = $_SESSION["model_id"];
 
     $result = mysqli_query($conn, "SELECT * FROM tbl_line WHERE model_id = '$model_id' ");
     $row_line = mysqli_fetch_assoc($result);

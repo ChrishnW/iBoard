@@ -845,8 +845,8 @@
     }
 
     function update(){
-        var model = document.getElementById('line_name').innerHTML;
-        var unit = document.getElementById('line_desc').innerHTML;
+        var model = "<?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "" ?>";
+        var unit = document.getElementById('line_name').innerHTML;
         var status = document.getElementById('runStopButton').innerHTML;
 
         var targetPerDay = document.getElementById('daily_target_display').innerHTML;
