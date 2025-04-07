@@ -386,10 +386,10 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="">
+                        <div class="pt-1">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <div class="d-flex flex-column fs-1"><br>
+                                    <div class="d-flex flex-column fs-1">
                                         <span class="h2 text-danger"><u>Information</u></span> 
                                         <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
                                         <span class="h2 text-danger"><u>Leader</u></span> 
