@@ -61,7 +61,7 @@ header("Cache-Control: private",false);
                     $formattedDate = $startDate->format('Y-m-d');
 
                     $conn->next_result();
-                    $result = mysqli_query($conn,"SELECT tbl_records.date, tbl_department.dept_name, tbl_records.model,tbl_records.unit, tbl_records.status, tbl_records.target_day, tbl_records.actual, tbl_records.balance, tbl_line.incharge_name FROM tbl_records INNER JOIN tbl_line ON tbl_line.line_name=tbl_records.model INNER JOIN tbl_accounts ON tbl_accounts.username=tbl_records.model INNER JOIN tbl_department ON tbl_department.dept_code=tbl_accounts.dept_code WHERE tbl_records.date='$formattedDate' AND tbl_department.dept_code='$dept_code'");  
+                    $result = mysqli_query($conn,"SELECT tbl_records.date, tbl_department.dept_name, tbl_records.model,tbl_records.unit, tbl_records.status, tbl_records.target_day, tbl_records.actual, tbl_records.balance, tbl_line.incharge_name FROM tbl_records INNER JOIN tbl_line ON tbl_line.line_name=tbl_records.unit INNER JOIN tbl_accounts ON tbl_accounts.username=tbl_records.model INNER JOIN tbl_department ON tbl_department.dept_code=tbl_accounts.dept_code WHERE tbl_records.date='$formattedDate' AND tbl_department.dept_code='$dept_code'");  
                     while($row = mysqli_fetch_array($result))
                     {
                         $j++;
