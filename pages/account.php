@@ -127,12 +127,13 @@
       $acc_access = 2;
       $hashed_password = password_hash($acc_password, PASSWORD_DEFAULT);
 
+      $acc_monitor_name = "monitor_" . $acc_name;
       $acc_monitor = 4;
       $acc_monitor_passwod = 123456;
       $hashed_password_monitor = password_hash($acc_monitor_passwod, PASSWORD_DEFAULT);
 
       $result = mysqli_query($conn, "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_name', '$hashed_password', '$acc_access', '$acc_department_code', '$acc_status')");
-      $result1 = mysqli_query($conn, "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_name', '$hashed_password_monitor', '$acc_monitor', '$acc_department_code', '$acc_status')");
+      $result1 = mysqli_query($conn, "INSERT INTO tbl_accounts (username, password, access, dept_code, status) VALUES ('$acc_monitor_name', '$hashed_password_monitor', '$acc_monitor', '$acc_department_code', '$acc_status')");
 
       if($result){
           $_SESSION["message"] = "Account added successfully.";

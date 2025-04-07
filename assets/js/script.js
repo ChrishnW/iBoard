@@ -16,6 +16,9 @@ function Login() {
       else if(response == 'Monitor'){
         window.location.href = 'pages/monitor.php';
       }
+      else if(response == 'User_monitor'){
+        window.location.href = 'pages/user_monitor.php';
+      }
       else {
         alert(response);
       }

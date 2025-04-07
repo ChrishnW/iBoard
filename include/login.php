@@ -52,6 +52,9 @@ if (isset($_POST['login'])) :
       elseif ($user['access'] == "2"){
         echo "User";
       }
+      elseif ($user['access'] == "4"){
+        echo "User_monitor";
+      }
 
     } 
     else {
