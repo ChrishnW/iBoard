@@ -43,56 +43,51 @@
           <span class="h1 font-weight-bold text-primary" id="line_name"><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "-----" ?></span>
         </div>
         
-        <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0 pr-5">
-          <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: blue; font-size: 3rem">RUN</button> 
-          <br>
-          <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
-        </div>
     </div>
 
-    <!-- Details Section -->
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="">
-              <div class="card-body">
-                <div class="text-center">
-                  <div id="line_image_div">
-                    <img src="../assets/img/img_not_available.png">
-                  </div>
+     <!-- Details Section -->
+     <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div id="line_image_div">
+                                        <img src="<?php echo isset($row_line["line_img"]) ? $row_line["line_img"] : "../assets/img/img_not_available.png" ?>" alt="Photo not available" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="d-flex flex-column fs-1"><br>
+                                        <span class="h2 text-danger"><u>Information</u></span> 
+                                        <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
+                                        <span class="h2 text-danger"><u>Leader</u></span> 
+                                        <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div id="incharge_image_div">
+                                    <img src="<?php echo isset($row_line["incharge_img"]) ? $row_line["incharge_img"] : "../assets/img/img_not_available.png" ?>" alt="Photo not available" class="img-fluid border rounded" style="max-width: auto; height: 210px; object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
-          <div class="col-md-4">
-            <div class="">
-              <div class="card-body">
-                <div class="text-center">
-                  <div class="d-flex flex-column fs-1"><br>
-                    <span class="h2 text-danger"><u>Information</u></span> 
-                    <span class="h2 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "*****" ?></span>
-                    <span class="h2 text-danger"><u>Leader</u></span> 
-                    <span class="h2 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "*****" ?></span> 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="">
-              <div class="card-body">
-                <div class="text-center">
-                  <div id="incharge_image_div">
-                  <img src="../assets/img/img_not_available.png">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     
 
     <!-- Tables Section -->
@@ -108,12 +103,12 @@
             </tr>
           </thead>
 
-          <tbody class="bg-whit text-dark h4">
+          <tbody class="bg-white text-dark h4">
             <tr style="height: 175px;"> <!-- Adjust height here -->
-              <td class="font-weight-bold h1">0</td>
-              <td class="font-weight-bold h1">0</td>  
-              <td class="font-weight-bold h1">0</td>
-              <td class="font-weight-bold h1 text-danger">0</td>
+              <td class="font-weight-bolder" style="font-size: 60px;">50</td>
+              <td class="font-weight-bolder" style="font-size: 60px;">15</td>  
+              <td class="font-weight-bolder" style="font-size: 60px;">0</td>
+              <td class="font-weight-bolder text-danger" style="font-size: 60px;">15</td>
             </tr>
           </tbody>
         </table>
