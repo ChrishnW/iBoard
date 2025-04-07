@@ -778,12 +778,12 @@
 
                 j++;
 
-                if(j == 10){
+                if(j == 30){
                     document.getElementById('user_dashboard').style.display = "block";
                     document.getElementById('body').style.backgroundImage = "none";
 
                 }
-                else if(j == 20){
+                else if(j == 60){
                     document.getElementById('user_dashboard').style.display = "none";
 
                     document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
@@ -792,13 +792,9 @@
                     document.getElementById('body').style.backgroundRepeat = "no-repeat";
 
                     j = 0;
-                    
                 }
-
             }
-
         }
-
     }
 
     let milliseconds = 0;
@@ -842,7 +838,6 @@
 
             document.getElementById('runStopButton').style.background = "blue";
         } 
-
         update();
     }
 
@@ -899,7 +894,6 @@
 
             work_status = "FINISH";
         }
-
         update();
     }
 
@@ -922,7 +916,6 @@
             
             work_status = "WORK";
         }
-
         update();
     }
 
@@ -932,37 +925,29 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-
         const user_dashboard = document.getElementById('user_dashboard');
         const edit_user = document.getElementById('edit_user');
         const edit_line_cancel = document.getElementById('edit_line_cancel');
 
         edit_line_cancel.addEventListener("click", function (){
-
             user_dashboard.style.display = "block";
             edit_user.style.display = "none";
-
         });
 
         document.getElementById("body").addEventListener("click", function(){
-            
             if(document.getElementById('body').style.backgroundImage != "none"){
                 document.getElementById('user_dashboard').style.display = "block";
                 document.getElementById('body').style.backgroundImage = "none";
             }
-
         });
 
         var trigger = document.getElementById('line_desc').innerHTML;
         if (trigger != '-----') {
-
             setInterval(countingInterval, 1000);
         }
 
         document.addEventListener("keypress", function(event){
-
             var status_run = document.getElementById('runStopButton').innerHTML;
-
             if(document.getElementById('user_dashboard').style.display == "block" && trigger != '-----' && (status_run == 'RUN' || status_run == 'FINISH')){
             
                 if(event.key == "+"){
@@ -971,11 +956,8 @@
                 else if(event.key == "-"){
                     minus();
                 }
-            
             }
-            
         });
-
     });
 
 </script>
