@@ -569,8 +569,8 @@
             </button>
         </div>
         
-        <div class="modal-body">
-            <p class="h6">Are you sure you want to log out? Once logged out, you will need to log in again to access your account.</p>
+        <div class="modal-body mt-2 mb-1">
+            <p class="h5">Are you sure you want to log out?</p>
         </div>
 
         <div class="modal-footer">
