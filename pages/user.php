@@ -347,7 +347,7 @@
                         <div class="pt-1">
                             <div class="card-body">
                                 <div class="text-center">
-                                    <div class="d-flex flex-column fs-1">
+                                    <div class="d-flex flex-column">
                                         <span class="h3 text-danger"><u>Information</u></span> 
                                         <span class="h3 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
                                         <span class="h3 text-danger"><u>Leader</u></span> 
