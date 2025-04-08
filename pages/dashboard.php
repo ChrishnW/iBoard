@@ -163,7 +163,6 @@
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
   // Fetching Active Departments ..............................................
-  // $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
   $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
 
   if(mysqli_num_rows($result) > 0){
@@ -175,8 +174,7 @@
       $name = $part[0];
       $number = $part[1];
 
-      // $sql_command1 = "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' && status = '1'";
-      $result1 = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' && status = '1'");
+      $result1 = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' && status = '1' && access = '2'");
 
       $count = 0;
 
@@ -240,7 +238,7 @@
 
   function closePopupReports() {
     const modal = document.getElementById('reportsModal');
-    modal.style.display = 'none'; // Hide the modal
+    modal.style.display = 'none'; 
   }
 
   document.getElementById('close_popup1').addEventListener('click', function () {
