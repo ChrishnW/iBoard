@@ -42,7 +42,6 @@
       $_SESSION['start_from'] = $start;
       $_SESSION['end_to'] = $end;
       $_SESSION['gap'] = $gap + 1;
-      $_SESSION['refresh'] = 1;
   
       header("Location: admin_excel.php");
       exit;
