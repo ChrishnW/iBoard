@@ -59,7 +59,7 @@
         <!-- Page Heading -->
         <h2 class="float-left">Dashboard</h1>
 
-        <a class="btn btn-warning float-right mr-2" href="#" onclick="showReportsModal()">
+        <a class="btn btn-warning float-right mr-2" href="#" onclick="window.location.href='admin_monitor.php';">
           <i class="fa fa-desktop mr-1" aria-hidden="true"></i>
           Monitor
         </a>
