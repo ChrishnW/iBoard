@@ -64,7 +64,7 @@
                     <h2 class="d-inline-block align-middle pt-2 text-primary font-weight-bold "><u id="prod_name">GPI Production Status</u></h2>
                     <a class="btn btn-danger float-right mt-2" href="#" onclick="showExitModal()">
                         <i class="fas fa-sign-out-alt mr-1"></i> 
-                        Exit
+                        Back
                     </a>
 
                     <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="showReportsModal()">
@@ -197,7 +197,7 @@
     }
 
     function handleExit() {
-        window.location.href = '../include/logout.php'; // Redirect upon confirmation
+        window.location.href = '../pages/dasboard.php'; // Redirect upon confirmation
     }
 
     function closePopupExit() {
