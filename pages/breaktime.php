@@ -224,9 +224,9 @@
                   <th class="text-center align-middle" style="width: 2%;">Breaktime Start (OT)</th>
                   <th class="text-center align-middle" style="width: 2%;">Breaktime End (OT)</th>
 
-                  <th class="text-center align-middle" style="width: 1%;">Status</th>
+                  <th class="text-center align-middle" style="width: 2%;">Status</th>
 
-                  <th class="text-center align-middle" style="width: 2%;">Actions</th>
+                  <th class="text-center align-middle" style="width: 1%;">Actions</th>
                 </tr>
 
               </thead>
@@ -287,13 +287,13 @@
                     <td style="font-size: 1rem;"><?php echo $ot_start ?></td>
                     <td style="font-size: 1rem;"><?php echo $ot_end ?></td>
                     <td style="font-size: 1rem;"><?php echo $status_word ?></td>
-                    <td class="text-center align-middle">
-                      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="justify-content-center form_table d-flex">
+                    <td style="table-layout: fixed;">
+                      <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="justify-content-center align-items-center form_table d-flex">
 
                         <input type="hidden" name="id_breaktime" value="<?php echo $breaktime_id ?>">
 
-                        <input type="submit" class="btn btn-primary mr-1 ml-n4" name="edit_breaktime" value="Edit">
-                        <input type="submit" class="btn btn-danger mr-n4" name="delete_breaktime" value="Delete">
+                        <input type="submit" class="btn btn-primary mr-1" name="edit_breaktime" value="Edit">
+                        <input type="submit" class="btn btn-danger" name="delete_breaktime" value="Delete">
 
                       </form>
                     </td>

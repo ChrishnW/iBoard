@@ -203,7 +203,7 @@
                 <td><?php echo $dept_code ?></td>
                 <td><?php echo $status_word ?></td>
                 <td style="table-layout: fixed; width: 15%;">
-                  <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
+                  <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-center align-items-center">
                   <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
                   <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
