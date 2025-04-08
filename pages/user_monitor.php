@@ -61,7 +61,7 @@
 </head>
 
 <!-- Begin Page Content -->
-<body class="container-fluid px-4 pt-3 pb-4 m-0" style="background-color: #add8e6;">
+<body id="body" class="container-fluid px-4 pt-3 pb-4 m-0" style="background-color: #add8e6;">
   <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
     <!-- Header Section -->
     <div class="row align-items-center px-3 py-3">  
@@ -202,11 +202,39 @@
     }
   }
 
-  function refreshPage() {
-    window.location.reload();
+  var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
+  var counter = 0;
+
+  function interval() {
+    if (counter == 10) {
+      if(img_extra_path != "0"){
+        console.log("Image path: " + img_extra_path);
+        document.getElementById('user_dashboard').style.display = "none";
+
+        document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
+        document.getElementById('body').style.backgroundSize = "contain";
+        document.getElementById('body').style.backgroundPosition = "center";
+        document.getElementById('body').style.backgroundRepeat = "no-repeat";
+      }
+    }
+    else if(counter == 20) {
+      window.location.reload();
+    }
+    counter++;
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    setInterval(refreshPage, 10000); 
+
+    var trigger = document.getElementById('line_desc').innerHTML;
+    if (trigger != '-----') {
+      setInterval(interval, 1000);
+    }
+
+    document.getElementById("body").addEventListener("click", function(){
+      document.getElementById('user_dashboard').style.display = "block";
+      document.getElementById('body').style.backgroundImage = "none";
+    });
+
   });
+
 </script>
