@@ -1,7 +1,6 @@
 <?php include '../include/header.php'; 
 
-  function getDepartmentName_string($dept_code){
-    
+  function getDepartmentName_string($dept_code){    
     global $conn;
 
     $sql_command = "SELECT dept_name FROM tbl_department WHERE dept_code = '$dept_code'";
@@ -17,7 +16,6 @@
   }
 
   function getAllDepartment(){
-
     global $conn;
 
     $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
@@ -35,13 +33,11 @@
             
             document.querySelector("#edit_acc_code").insertAdjacentHTML("beforeend", table);
         });</script>';
-
       }
     }
   }
 
   function getAllDepartment_edit(){
-
     global $conn;
 
     $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
@@ -59,13 +55,11 @@
             
             document.querySelector("#edit_acc_department_avail").insertAdjacentHTML("beforeend", table);
         });</script>';
-
       }
     }
   }
 
   // Display Message ----------------------------------------------------------------------------
-
   if(isset($_SESSION["message"])){
 
     $message = $_SESSION["message"];
@@ -88,13 +82,10 @@
     }); </script>";
 
     unset($_SESSION["message"]);
-
   }
 
   // Delete Account Ask Display --------------------------------------------------------------------------
-
   if(isset($_SESSION["delete_id_acc"])){
-
     $acc_id = $_SESSION["delete_id_acc"];
     $_SESSION["delete_acc"] = $acc_id;
 
@@ -111,13 +102,10 @@
     }); </script>";
 
     unset($_SESSION["delete_id_acc"]);
-
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  
     // Add Account ------------------------------------------------------------------------------
-
     if(isset($_POST["add_account"])){
 
       $acc_name = filter_input(INPUT_POST, "acc_name", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -144,24 +132,18 @@
 
       header("Refresh: .3; url = account.php");
       exit;
-
     }
 
     // Delete Account Ask --------------------------------------------------------------------------
-
     if(isset($_POST["delete_account"])){
-
       $_SESSION["delete_id_acc"] = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
 
       header("Refresh: .3; url = account.php");
       exit;
-
     } 
 
     // Delete Account Confirm --------------------------------------------------------------------------
-
     if(isset($_POST["delete_data"])){
-
       $acc_id = $_SESSION["delete_acc"];
       $acc_monitor_id = $_SESSION["delete_acc"] + 1;
 
@@ -179,11 +161,9 @@
       
       header("Refresh: .3; url = account.php");
       exit;
-
     }
 
     // Edit Account --------------------------------------------------------------------------
-
     if(isset($_POST["edit_account"])){
 
       $acc_id = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -192,11 +172,9 @@
 
       header("Refresh: .3; url = account.php");
       exit;
-
     }
 
     // Edit Account Submit --------------------------------------------------------------------------
-
     if(isset($_POST["edit_add_account"])){
 
       $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -222,11 +200,9 @@
 
       header("Refresh: .3; url = account.php");
       exit;
-
     }
 
     // Reset Password --------------------------------------------------------------------------
-
     // if(isset($_POST["reset_password"])){
 
     //   $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -247,16 +223,12 @@
     //   header("Refresh: .3; url = account.php");
     //   exit;
     // }
-
   }
-
 ?>
 
 <!-- Dashboard Account -->
 <div class="container-fluid">
-
   <div id="account_dashboard" class="account_dashboard" style="display: block;">
-
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
           <h2 class="float-left">Account List</h2>
@@ -277,10 +249,9 @@
                 <th style="width: 170px;">Actions</th>
               </tr>
             </thead>
-            <tbody id="insert_here">
-              
-              <?php
 
+            <tbody id="insert_here">             
+              <?php
                 $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2'";
                 $result = mysqli_query($conn, $sql_command);
 
@@ -300,33 +271,29 @@
                     else{
                         $status_word = "Inactive";
                     }
-
               ?>
 
                 <tr>
-                    <td><?php echo $username ?></td>
-                    <td><?php echo $dept_string ?></td>
-                    <td><?php echo $status_word ?></td>
-                    <td style="table-layout: fixed; width: 15%;">
-                        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table  d-flex justify-content-between">
-                            <input type="hidden" name="id_account" value="<?php echo $acc_id ?>">
+                  <td><?php echo $username ?></td>
+                  <td><?php echo $dept_string ?></td>
+                  <td><?php echo $status_word ?></td>
+                  <td style="table-layout: fixed; width: 15%;">
+                    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table  d-flex justify-content-between">
+                      <input type="hidden" name="id_account" value="<?php echo $acc_id ?>">
 
-                            <input type="submit" class="edit btn btn-primary mr-1" value="Edit" name="edit_account">
-                            <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_account">
-
-                        </form>
-                    </td>
+                      <input type="submit" class="edit btn btn-primary mr-1" value="Edit" name="edit_account">
+                      <input type="submit" class="delete btn btn-danger" value="Delete" name="delete_account">
+                    </form>
+                  </td>
                 </tr>
                 
               <?php
                   }
                 }
               ?>
-
             </tbody>
           </table>
-        </div>
-        
+        </div>        
       </div>
     </div>
 </div>
@@ -342,8 +309,7 @@
         </button>
       </div>
       
-      <div class="modal-body">
-        
+      <div class="modal-body">        
         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
           <div class="mb-3">
             <label for="acc_name" class="form-label">Username <span style="color: red;">*</span></label>
@@ -356,16 +322,13 @@
               <option value="" hidden></option>
             </select>
           </div>
-
       </div>
 
           <div class="modal-footer">
             <input type="submit" name="add_account" value="Add Account" class="btn btn-primary pr-3">
             <input type="reset" name="reset" value="Cancel" id="cancel_account"  class="btn btn-secondary ml-2">
           </div>
-        
-        </form>
-
+      </form>
     </div>
   </div>
 </div>
@@ -382,13 +345,9 @@
       </div>
       
       <div class="modal-body">
-        
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
-          
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">         
           <?php
-
             if(isset($_SESSION["acc_id"])){
-
               $acc_id = $_SESSION["acc_id"];
 
               $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id'";
@@ -420,7 +379,6 @@
                   document.body.style.overflow = "hidden";
 
                 }); </script>';
-
           ?>
 
           <input type="hidden" name="edit_acc_id" id="edit_acc_id" value="<?php echo $acc_id ?>">
@@ -452,7 +410,6 @@
               unset($_SESSION["acc_id"]);
             }
           ?>
-
       </div>
 
           <div class="modal-footer">
@@ -460,9 +417,8 @@
             <!-- <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2 mt-3"> -->
             <input type="reset" name="reset" value="Cancel" id="edit_cancel_account" class="btn btn-secondary ml-2">
           </div>
-        
-        </form>
 
+      </form>
     </div>
   </div>
 </div>
@@ -513,9 +469,7 @@
 </div>
 <!-- /.container-fluid -->
 <?php include '../include/footer.php'; 
-
   // Display All Department in Add Account --------------------------------------------------------------------------
-
   $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
 
   if(mysqli_num_rows($result) > 0){
@@ -530,14 +484,11 @@
         
         document.querySelector("#acc_department_avail").insertAdjacentHTML("beforeend", table);
       });</script>';
-
     }
   }
-
 ?>
 
 <script>
-  
   $(document).ready(function(){
     $('#dataTable').DataTable();
   });
@@ -558,9 +509,7 @@
   // }
 
   document.addEventListener('DOMContentLoaded', function () {
-
     //updateTable();
-
     document.getElementById('close_popup').addEventListener('click', function () {
       document.getElementById('popup').style.display = 'none';
     });

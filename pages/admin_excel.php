@@ -49,39 +49,39 @@ header("Cache-Control: private",false);
 
             <tbody>
                 <?php
-                $start = $_SESSION["start_from"];
-                $end = $_SESSION["end_to"];
+                    $start = $_SESSION["start_from"];
+                    $end = $_SESSION["end_to"];
 
-                $startDate = new DateTime($start);
-                $endDate = new DateTime($end);
-                $j = 0;
+                    $startDate = new DateTime($start);
+                    $endDate = new DateTime($end);
+                    $j = 0;
 
-                for($i = 1; $i <= $_SESSION['gap']; $i++){
+                    for($i = 1; $i <= $_SESSION['gap']; $i++){
 
-                    $formattedDate = $startDate->format('Y-m-d');
+                        $formattedDate = $startDate->format('Y-m-d');
 
-                    $conn->next_result();
-                    $result = mysqli_query($conn,"SELECT tbl_records.date, tbl_department.dept_name, tbl_records.model,tbl_records.unit, tbl_records.status, tbl_records.target_day, tbl_records.actual, tbl_records.balance, tbl_line.incharge_name FROM tbl_records INNER JOIN tbl_line ON tbl_line.line_name=tbl_records.unit INNER JOIN tbl_accounts ON tbl_accounts.username=tbl_records.model INNER JOIN tbl_department ON tbl_department.dept_code=tbl_accounts.dept_code WHERE tbl_records.date='$formattedDate'");  
-                    while($row = mysqli_fetch_array($result))
-                    {
-                        $j++;
-                    echo "
-                    <tr style='background-color: ". (($j % 2 == 0) ? "#d1e7dd" : "#f8f9fa") .";'>
-                        <td style='text-align: left;'>". $row['date'] ."</td>
-                        <td style='text-align: left;'>". $row['dept_name'] ."</td>
-                        <td style='text-align: left;'>". $row['model'] ."</td>
-                        <td style='text-align: left;'>". $row['unit'] ."</td>
-                        <td style='text-align: left;'>". $row['status'] ."</td>
-                        <td style='text-align: left;'>". $row['target_day'] ."</td>
-                        <td style='text-align: left;'>". $row['actual'] ."</td>
-                        <td style='text-align: left;'>". $row['balance'] ."</td>
-                        <td style='text-align: left;'>". $row['incharge_name'] ."</td>
-                    </tr>";
-                    } 
+                        $conn->next_result();
+                        $result = mysqli_query($conn,"SELECT tbl_records.date, tbl_department.dept_name, tbl_records.model,tbl_records.unit, tbl_records.status, tbl_records.target_day, tbl_records.actual, tbl_records.balance, tbl_line.incharge_name FROM tbl_records INNER JOIN tbl_line ON tbl_line.line_name=tbl_records.unit INNER JOIN tbl_accounts ON tbl_accounts.username=tbl_records.model INNER JOIN tbl_department ON tbl_department.dept_code=tbl_accounts.dept_code WHERE tbl_records.date='$formattedDate'");  
+                        while($row = mysqli_fetch_array($result))
+                        {
+                            $j++;
+                        echo "
+                        <tr style='background-color: ". (($j % 2 == 0) ? "#d1e7dd" : "#f8f9fa") .";'>
+                            <td style='text-align: left;'>". $row['date'] ."</td>
+                            <td style='text-align: left;'>". $row['dept_name'] ."</td>
+                            <td style='text-align: left;'>". $row['model'] ."</td>
+                            <td style='text-align: left;'>". $row['unit'] ."</td>
+                            <td style='text-align: left;'>". $row['status'] ."</td>
+                            <td style='text-align: left;'>". $row['target_day'] ."</td>
+                            <td style='text-align: left;'>". $row['actual'] ."</td>
+                            <td style='text-align: left;'>". $row['balance'] ."</td>
+                            <td style='text-align: left;'>". $row['incharge_name'] ."</td>
+                        </tr>";
+                        } 
 
-                    $startDate->modify('+1 day');
-                }
-            ?>
+                        $startDate->modify('+1 day');
+                    }
+                ?>
             </tbody>
         </table>
     </div>
