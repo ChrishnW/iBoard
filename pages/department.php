@@ -1,13 +1,11 @@
 <?php include '../include/header.php'; 
 
   // Display Message ----------------------------------------------------------------------------
-
   if(isset($_SESSION["message"])){
-
     $message = $_SESSION["message"];
 
     echo "<script> document.addEventListener('DOMContentLoaded', function () {
-    
+
       document.getElementById('display_message').innerHTML = '$message'; 
 
       const popup = document.getElementById('popup');
@@ -30,7 +28,6 @@
 
   // Delete Department Ask Display --------------------------------------------------------------------------
   if(isset($_SESSION["delete_id_dept"])){
-
     $dept_id = $_SESSION["delete_id_dept"];
     $_SESSION["delete_dept"] = $dept_id;
 
@@ -49,9 +46,7 @@
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  
     // Add Department ---------------------------------------------------------------------------
-
     if(isset($_POST["add_department_submit"])){
 
       $dept_name = filter_input(INPUT_POST, "dept_name", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -72,23 +67,19 @@
 
       header("Refresh: .3; url = department.php");
       exit;
-
     }
 
     // Delete Department Ask --------------------------------------------------------------------------
-
     if(isset($_POST["delete_department"])){
 
       $_SESSION["delete_id_dept"] = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
 
       header("Refresh: .3; url = department.php");
       exit;
-
     }
 
     // Delete Department Confirm --------------------------------------------------------------------------
     if(isset($_POST["delete_data"])){
-
       $dept_id = $_SESSION["delete_dept"];
 
       $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
@@ -105,24 +96,20 @@
       
       header("Refresh: .3; url = department.php");
       exit;
-
     }
 
     // Edit Department --------------------------------------------------------------------------
     if(isset($_POST["edit_department"])){
-
       $dept_id = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
 
       $_SESSION["dept_id"] = $dept_id;
 
       header("Refresh: .3; url = department.php");
       exit;
-
     }
 
     // Edit Department Submit --------------------------------------------------------------------------
     if(isset($_POST["edit_department_submit"])){
-
       $dept_id = filter_input(INPUT_POST, "edit_dept_id", FILTER_SANITIZE_SPECIAL_CHARS);
       $dept_name = filter_input(INPUT_POST, "edit_dept_name", FILTER_SANITIZE_SPECIAL_CHARS);
       $dept_code = filter_input(INPUT_POST, "edit_dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -140,12 +127,10 @@
 
       header("Refresh: .3; url = department.php");
       exit;
-
     }
 
     // Reset Password --------------------------------------------------------------------------
     if(isset($_POST["reset_password"])){
-
       $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
       $password = 12345;
 
@@ -164,48 +149,36 @@
       header("Refresh: .3; url = account.php");
       exit;
     }
-
   }
- 
 ?>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-  <div id="department_dashboard" class="department_dashboard" style="display: block;">
-      
+  <div id="department_dashboard" class="department_dashboard" style="display: block;">      
     <div class="card shadow mb-4">
-
       <div class="card-header py-3.5 pt-4">
-
         <h2 class="float-left">Department List</h2>
         <button id="btn_add_department" type="button" class="btn btn-primary float-right">
             <i class="fa fa-plus pr-1"></i> Add Department
         </button>
-        
-        <div class="clearfix"></div>
 
+        <div class="clearfix"></div>
       </div>
         
       <div class="card-body">
-
         <div class="table-responsive">
-
-          <table class=" table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-            
+          <table class=" table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">     
             <thead class="bg-primary text-white">
-
               <tr>
                 <th>Department Name</th>
                 <th>Code</th>
                 <th>Status</th>
                 <th style="width: 170px;">Actions</th>                
               </tr>
-
             </thead>
 
             <tbody id="insert_here">
-
-            <?php
+              <?php
                 $query = "SELECT * FROM tbl_department";
                 $result = mysqli_query($conn, $query);
 
@@ -223,42 +196,31 @@
                         else{
                             $status_word = "Inactive";
                         } 
-            ?>
+              ?>
 
-                <tr>
-                    <td style="table-layout: fixed; width: 30%;"><?php echo $dept_name ?></td>
-                    <td><?php echo $dept_code ?></td>
-                    <td><?php echo $status_word ?></td>
-                    <td style="table-layout: fixed; width: 15%;">
-                        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
-                          <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
+              <tr>
+                <td style="table-layout: fixed; width: 30%;"><?php echo $dept_name ?></td>
+                <td><?php echo $dept_code ?></td>
+                <td><?php echo $status_word ?></td>
+                <td style="table-layout: fixed; width: 15%;">
+                  <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-between">
+                  <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
-                          <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
-                          <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
+                  <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
+                  <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
+                  </form>
+                </td>
+              </tr>
 
-                        </form>
-
-                    </td>
-                </tr>
-
-
-            <?php
+              <?php
+                    }
                   }
-                }
-            ?>
-
+              ?>
             </tbody>
-
           </table>
-          
-          <!-- <button id="download">Download</button> -->
-          
         </div>
-
       </div>
-
-    </div>
-    
+    </div>   
   </div> 
 
   <!-- ADD DEPARTMENT -->
@@ -283,14 +245,12 @@
               <input type="text" class="form-control" name="dept_name" id="dept_name" required>
             </div>
 
-        </div>
-
             <div class="modal-footer">
               <input type="submit" name="add_department_submit" class="btn btn-primary pr-3" value="Add Department">
               <input type="reset" name="reset" class="btn btn-secondary ml-2" value="Cancel" id="cancel_department">
             </div>
           </form>
-
+        </div>
       </div>
     </div>
   </div> 
@@ -307,13 +267,9 @@
         </div>
 
         <div class="modal-body">
-
-          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">
-            
+          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">           
             <?php
-
               if(isset($_SESSION["dept_id"])){
-
                 $dept_id = $_SESSION["dept_id"];
             
                 $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
@@ -343,7 +299,6 @@
                     
             
                   }); </script>';
-                  
             ?>
 
             <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
@@ -371,24 +326,19 @@
                 }
                 unset($_SESSION["dept_id"]);
               }
-            ?>
-
-            
-        </div>
+            ?>            
 
             <div class="modal-footer">
-
               <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
               <!-- <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2"> -->
-              <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">
-            
+              <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">           
             </div>
-
           </form>
-
+        </div>
       </div>
     </div>
-  </div>                
+  </div>
+</div>
 
 <!-- Pop up Modal -->
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
@@ -429,17 +379,14 @@
           <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
         </form>
       </div>
-
     </div>
   </div>
 </div>
 
 <?php 
-  
   include '../include/footer.php'; 
 
   // Generate Department Code ..............................................
-
   $department_code = 100;
 
   $sql_command = "SELECT * FROM tbl_department";
@@ -450,7 +397,6 @@
 
       $code = (int)$dept['dept_code'];
       $department_code = $department_code > $code ? $department_code : $code;
-
     }
   }
 
@@ -465,17 +411,12 @@
     document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
 
   }); </script>";
-
 ?>
 
 <script>
-
   $(document).ready(function () {
     $('#dataTable').DataTable();
   });
-
-  
-  
 
   // function updateTable() {
   //     $.ajax({
@@ -494,9 +435,7 @@
   // }
 
   document.addEventListener('DOMContentLoaded', function () {
-
     //updateTable();
-
     document.getElementById('close_popup').addEventListener('click', function () {
       document.getElementById('popup').style.display = 'none';
     });
@@ -536,9 +475,6 @@
       document.body.style.overflow = 'auto';
     });   
 
-
-    
-
     // btn_edit_department.addEventListener('click', function () {
     //   edit_department.style.display = 'block';
     //   document.body.style.overflow = 'hidden';
@@ -555,11 +491,11 @@
     });
 
   });
+
   const popup2 = document.getElementById("popupFormDelete");
 
   function closePopup2() {
     popup2.style.display = "none";
     document.body.style.overflow = 'auto';
   }
-
 </script>
