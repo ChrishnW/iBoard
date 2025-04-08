@@ -59,14 +59,16 @@
         <!-- Page Heading -->
         <h2 class="float-left">Dashboard</h1>
 
-        <a class="btn btn-warning float-right mr-2" href="#" onclick="window.location.href='admin_monitor.php';">
-          <i class="fa fa-desktop mr-1" aria-hidden="true"></i>
-          Monitor
-        </a>
+        
 
         <a class="btn btn-success float-right mr-2" href="#" onclick="showReportsModal()">
           <i class="fa fa-download mr-1" aria-hidden="true"></i>
           Reports
+        </a>
+
+        <a class="btn btn-warning float-right mr-2" href="admin_monitor.php" target="_blank">
+          <i class="fa fa-desktop mr-1" aria-hidden="true"></i>
+          Monitor
         </a>
 
         <div class="clearfix"></div>

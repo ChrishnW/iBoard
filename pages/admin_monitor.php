@@ -3,36 +3,25 @@
     include '../include/connect.php';
     include '../include/auth.php';
 
-    if(!$access_security){
-        header('location: ../index.php');
-        exit();
-    }
-    else {
-        if($access_security != 1){
-            header('location: ../index.php');
-            exit();
-        }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if(isset($_POST['submit'])){
-            $start = $_POST["date_from"];
-            $end = $_POST["date_to"];
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //     if(isset($_POST['submit'])){
+    //         $start = $_POST["date_from"];
+    //         $end = $_POST["date_to"];
         
-            $startDate = new DateTime($start);
-            $endDate = new DateTime($end);
-            $gap = $startDate->diff($endDate)->days;
+    //         $startDate = new DateTime($start);
+    //         $endDate = new DateTime($end);
+    //         $gap = $startDate->diff($endDate)->days;
         
-            $_SESSION['start_from'] = $start;
-            $_SESSION['end_to'] = $end;
-            $_SESSION['gap'] = $gap + 1;
-            $_SESSION['refresh'] = 1;
+    //         $_SESSION['start_from'] = $start;
+    //         $_SESSION['end_to'] = $end;
+    //         $_SESSION['gap'] = $gap + 1;
+    //         $_SESSION['refresh'] = 1;
         
-            header("Location: monitor_excel.php");
+    //         header("Location: monitor_excel.php");
         
-            exit; 
-        }
-    }
+    //         exit; 
+    //     }
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -67,10 +56,10 @@
                         Back
                     </a>
 
-                    <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="showReportsModal()">
+                    <!-- <a class="btn btn-success float-right mt-2 mr-2" href="#" onclick="showReportsModal()">
                         <i class="fa fa-download mr-1" aria-hidden="true"></i>
                         Reports
-                    </a>
+                    </a> -->
 
                     <div class="clearfix"></div>
                 </div>
@@ -104,7 +93,7 @@
         </div>    
 
         <!-- Reports Modal -->
-        <div class="modal" tabindex="-1" id="reportsModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+        <!-- <div class="modal" tabindex="-1" id="reportsModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-gradient-primary">
@@ -133,7 +122,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Exit Pop out Modal -->
         <div class="modal" tabindex="-1" id="popoutExit" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
@@ -164,27 +153,27 @@
 
 <script>
 
-    function from_min(){
-        const from = document.getElementById("date_from").value;
-        const to = document.getElementById("date_to");
-        to.min = from;
-    }
+    // function from_min(){
+    //     const from = document.getElementById("date_from").value;
+    //     const to = document.getElementById("date_to");
+    //     to.min = from;
+    // }
 
-    function showReportsModal(){
-        const modal = document.getElementById('reportsModal');
-        modal.style.display = 'block';
-        document.getElementById('date_from').value = '';
-        document.getElementById('date_to').value = '';
-    }
+    // function showReportsModal(){
+    //     const modal = document.getElementById('reportsModal');
+    //     modal.style.display = 'block';
+    //     document.getElementById('date_from').value = '';
+    //     document.getElementById('date_to').value = '';
+    // }
 
-    function closePopupReports() {
-        const modal = document.getElementById('reportsModal');
-        modal.style.display = 'none'; 
-    }
+    // function closePopupReports() {
+    //     const modal = document.getElementById('reportsModal');
+    //     modal.style.display = 'none'; 
+    // }
 
-    document.getElementById('close_popup1').addEventListener('click', function () {
-      document.getElementById('reportsModal').style.display = 'none';
-    });
+    // document.getElementById('close_popup1').addEventListener('click', function () {
+    //   document.getElementById('reportsModal').style.display = 'none';
+    // });
 
 
     document.getElementById('close_popup2').addEventListener('click', function () {
@@ -208,7 +197,7 @@
     function updateTable() {
         $.ajax({
             method: 'POST',
-            url: 'fetch.php',
+            url: 'admin_monitor_fetch.php',
             success: function (data) {
                 $('#dataTable').DataTable().destroy(); 
                 document.getElementById('insert_here').innerHTML = data;
