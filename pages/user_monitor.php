@@ -203,9 +203,20 @@
   }
 
   var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
+  var status = "<?php echo isset($row_records['status']) ? $row_records['status'] : "RUN" ?>";
   var counter = 0;
 
   function interval() {
+    if (status == "RUN") {
+      document.body.style.backgroundColor = '#add8e6';
+    } else if (status == "STOP") {
+      document.body.style.backgroundColor = '#ffcccb';
+    } else if (status == "BREAK") {
+      document.body.style.backgroundColor = 'lightgray';
+    } else if (status == "FINISH") {
+      document.body.style.backgroundColor = '#90EE90';
+    }
+    
     if (counter == 10) {
       if(img_extra_path != "0"){
         console.log("Image path: " + img_extra_path);
