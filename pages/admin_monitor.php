@@ -161,3 +161,68 @@
         </div>
     </body>
 </html>
+
+<script>
+
+    function from_min(){
+        const from = document.getElementById("date_from").value;
+        const to = document.getElementById("date_to");
+        to.min = from;
+    }
+
+    function showReportsModal(){
+        const modal = document.getElementById('reportsModal');
+        modal.style.display = 'block';
+        document.getElementById('date_from').value = '';
+        document.getElementById('date_to').value = '';
+    }
+
+    function closePopupReports() {
+        const modal = document.getElementById('reportsModal');
+        modal.style.display = 'none'; 
+    }
+
+    document.getElementById('close_popup1').addEventListener('click', function () {
+      document.getElementById('reportsModal').style.display = 'none';
+    });
+
+
+    document.getElementById('close_popup2').addEventListener('click', function () {
+      document.getElementById('popoutExit').style.display = 'none';
+    });
+
+    function showExitModal() {
+        const modal = document.getElementById('popoutExit');
+        modal.style.display = 'block'; // Show the modal
+    }
+
+    function handleExit() {
+        window.location.href = '../include/logout.php'; // Redirect upon confirmation
+    }
+
+    function closePopupExit() {
+        const modal = document.getElementById('popoutExit');
+        modal.style.display = 'none'; // Hide the modal
+    }
+
+    function updateTable() {
+        $.ajax({
+            method: 'POST',
+            url: 'fetch.php',
+            success: function (data) {
+                $('#dataTable').DataTable().destroy(); 
+                document.getElementById('insert_here').innerHTML = data;
+                $('#dataTable').DataTable();
+                console.log("Success");
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        setInterval(updateTable, 1000);
+    });
+    
+</script>
