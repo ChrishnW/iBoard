@@ -405,7 +405,7 @@
     </div>
 
     <!-- EDIT USER -->
-    <div id="edit_user" class="edit_user" style="display: none;">
+    <div id="edit_user" class="edit_user pb-1" style="display: none;">
         <div class="card shadow mb-4">
             <div class="card-header py-3.5 pt-4">
                 <h2 class="float-left">Edit Line Details</h2>        
