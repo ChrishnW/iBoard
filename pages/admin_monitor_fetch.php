@@ -75,10 +75,7 @@
                 $blank = "";
                 $model = $username;
                 echo "<tr>
-                        <td class=\"font-weight-bold\" style=\"height: 40px;\">$dept_string</td>
-
-
-                        
+                        <td class=\"font-weight-bold\" style=\"height: 40px;\">$dept_string</td>    
                         <td class=\"font-weight-bold\" style=\"height: 40px;\">$model</td>
                         <td class=\"font-weight-bold\" style=\"height: 40px;\">$blank</td>
                         <td style=\"height: 40px;\">$blank</td>

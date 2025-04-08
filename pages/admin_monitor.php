@@ -33,7 +33,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>i-Board | <?php echo ucfirst(basename($_SERVER['PHP_SELF'], '.php')); ?></title>
+        <title>i-Board | Admin Monitor</title>
         <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logo.png">
         <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link href="../vendor/snapappointments/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
