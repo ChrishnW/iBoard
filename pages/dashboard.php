@@ -77,55 +77,55 @@
       <div class="card-body">   
         <div class="row" id="dashboad_insert">
         <?php 
-              $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
+          $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
 
-              if(mysqli_num_rows($result) > 0){
-                while($department = mysqli_fetch_assoc($result)){
-                  $dept_name = $department['dept_name'];
-                  $dept_code = $department['dept_code'];
-            
-                  $part = explode(" ", $dept_name);
-                  $name = $part[0];
-                  $number = $part[1];
-            
-                  $result1 = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' && status = '1' && access = '2'");
-            
-                  $count = 0;
-            
-                  if(mysqli_num_rows($result1) > 0){
-                    while($account = mysqli_fetch_assoc($result1)){
-                      $count++;
-                    }
-                  }
-            ?>
+          if(mysqli_num_rows($result) > 0){
+            while($department = mysqli_fetch_assoc($result)){
+              $dept_name = $department['dept_name'];
+              $dept_code = $department['dept_code'];
+        
+              $part = explode(" ", $dept_name);
+              $name = $part[0];
+              $number = $part[1];
+        
+              $result1 = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' && status = '1' && access = '2'");
+        
+              $count = 0;
+        
+              if(mysqli_num_rows($result1) > 0){
+                while($account = mysqli_fetch_assoc($result1)){
+                  $count++;
+                }
+              }
+        ?>
 
-            <div class="col-lg-3 col-md-4 col-sm-8 mb-4">
-              <div class="card shadow h-100" style="border-radius: 8px; border-left: 5px solid #4e73df;">
-                <div class="card-body">
-                  <div class="row justify-content-center" >
-                    <div class="text-center">
-                      <form action="dashboard.php" method="post" class="d-flex flex-column align-items-center py-1" style="gap: 5px; line-height: .75;">
-                        <input type="hidden" name="depart_code" value="<?php echo $dept_code; ?>">
-                        <input type="hidden" name="depart_name" value="<?php echo $dept_name; ?>">
-                        <div class="text-secondary mt-2 mb-1\" style="font-size: 12px;">Number of lines</div>
-                        <div class="h1 font-weight-bold text-primary" style="line-height: .75;"><?php echo $count ?></div>
-                        <button type="submit" name="submit" class="btn btn-primary px-2 mt-n1" style="border-radius: 8px; font-size: 12px; padding: 1px 1px;">More Info</button>
-                      </form>
-                    </div>
-                    
-                    <div class="text-center my-2 mx-2 pl-2 pt-3">
-                      <div class="h6 mb-0 font-weight-bold text-gray-800"><?php echo $name ?></div>
-                      <div class="h3 text-muted"><?php echo $number ?></div>
-                    </div>
+          <div class="col-lg-3 col-md-4 col-sm-8 mb-4">
+            <div class="card shadow h-100" style="border-radius: 8px; border-left: 5px solid #4e73df;">
+              <div class="card-body">
+                <div class="row justify-content-center" >
+                  <div class="text-center">
+                    <form action="dashboard.php" method="post" class="d-flex flex-column align-items-center py-1" style="gap: 5px; line-height: .75;">
+                      <input type="hidden" name="depart_code" value="<?php echo $dept_code; ?>">
+                      <input type="hidden" name="depart_name" value="<?php echo $dept_name; ?>">
+                      <div class="text-secondary mt-2 mb-1\" style="font-size: 12px;">Number of lines</div>
+                      <div class="h1 font-weight-bold text-primary" style="line-height: .75;"><?php echo $count ?></div>
+                      <button type="submit" name="submit" class="btn btn-primary px-2 mt-n1" style="border-radius: 8px; font-size: 12px; padding: 1px 1px;">More Info</button>
+                    </form>
+                  </div>
+                  
+                  <div class="text-center my-2 mx-2 pl-2 pt-3">
+                    <div class="h6 mb-0 font-weight-bold text-gray-800"><?php echo $name ?></div>
+                    <div class="h3 text-muted"><?php echo $number ?></div>
                   </div>
                 </div>
               </div>
             </div>
-            
-            <?php 
-                }
-              }
-            ?>
+          </div>
+          
+        <?php 
+            }
+          }
+        ?>
         </div> 
       </div>
     </div>
@@ -204,9 +204,7 @@
 </div>
 
 <!-- /.container-fluid -->
-<?php include '../include/footer.php'; 
-  
-?>
+<?php include '../include/footer.php'; ?>
 
 <script>
 
@@ -248,7 +246,6 @@
       url: 'fetch.php',
       success: function (data) {
 
-        $('#dataTable').DataTable().destroy(); 
         document.getElementById('insert_here').innerHTML = data;
         $('#dataTable').DataTable();
         console.log("Success");
