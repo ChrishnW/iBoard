@@ -560,7 +560,6 @@
     var j = 0;
 
     var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
-
     var takt_time_string = "<?php echo isset($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
@@ -661,6 +660,7 @@
     }
      
     function countingInterval(){
+
         if(work_status == "WORK"){
             i++;
             console.log(i);
@@ -713,6 +713,7 @@
             }
             console.log(i);
             console.log(work_status);
+
         }
 
         // extra view display
@@ -738,6 +739,7 @@
                 }
             }
         }
+    
     }
 
     let milliseconds = 0;
@@ -901,6 +903,32 @@
                 }
             }
         });
+
+        
+        var statusdb = "<?php echo isset($row_records['status']) ? $row_records['status'] : "RUN" ?>";
+
+        if (statusdb == "RUN") {
+            document.body.style.backgroundColor = '#add8e6';
+            document.getElementById('runStopButton').innerHTML = "RUN";
+            document.getElementById('runStopButton').style.backgroundColor = 'blue';
+            work_status = "WORK";
+        } else if (statusdb == "STOP") {
+            document.body.style.backgroundColor = '#ffcccb';
+            document.getElementById('runStopButton').innerHTML = "STOP";
+            document.getElementById('runStopButton').style.backgroundColor = 'red';
+            work_status = "WORK";
+            btn_disabled();
+        } else if (statusdb == "BREAK") {
+            document.body.style.backgroundColor = 'lightgray';
+            document.getElementById('runStopButton').innerHTML = "BREAK";
+            document.getElementById('runStopButton').style.backgroundColor = 'gray';
+            work_status = "BREAK";
+        } else if (statusdb == "FINISH") {
+            document.body.style.backgroundColor = '#90EE90';
+            document.getElementById('runStopButton').innerHTML = "FINISH";
+            document.getElementById('runStopButton').style.backgroundColor = 'green';
+            work_status = "FINISH";
+        }
     });
 
 </script>
