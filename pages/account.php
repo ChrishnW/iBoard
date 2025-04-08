@@ -243,6 +243,7 @@
           <table class=" table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
             <thead class="bg-primary text-white">
               <tr>
+                <th>Id</th>
                 <th>Username</th>
                 <th>Department</th>
                 <th>Status</th>
@@ -252,7 +253,7 @@
 
             <tbody id="insert_here">             
               <?php
-                $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2'";
+                $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2' OR access = '4' order by id asc";
                 $result = mysqli_query($conn, $sql_command);
 
                 if(mysqli_num_rows($result) > 0){
@@ -274,6 +275,7 @@
               ?>
 
                 <tr>
+                  <td><?php echo $acc_id ?></td>
                   <td><?php echo $username ?></td>
                   <td><?php echo $dept_string ?></td>
                   <td><?php echo $status_word ?></td>
