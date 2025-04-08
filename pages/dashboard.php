@@ -59,8 +59,6 @@
         <!-- Page Heading -->
         <h2 class="float-left">Dashboard</h1>
 
-        
-
         <a class="btn btn-success float-right mr-2" href="#" onclick="showReportsModal()">
           <i class="fa fa-download mr-1" aria-hidden="true"></i>
           Reports

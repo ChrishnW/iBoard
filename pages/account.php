@@ -506,7 +506,6 @@
           <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
         </form>
       </div>
-
     </div>
   </div>
 </div>
@@ -517,8 +516,7 @@
 
   // Display All Department in Add Account --------------------------------------------------------------------------
 
-  $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
-  $result = mysqli_query($conn, $sql_command);
+  $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
 
   if(mysqli_num_rows($result) > 0){
     while($department = mysqli_fetch_assoc($result)){
