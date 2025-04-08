@@ -152,7 +152,7 @@
 
                     <div class="modal-footer">
                         <!-- Logout button triggers JavaScript logout logic -->
-                        <button onclick="handleExit()" class="btn btn-danger">Exit</button>
+                        <button onclick="handleExit()" class="btn btn-danger">Back</button>
                         <a href="#" onclick="closePopupExit()" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
                     </div>
 
@@ -197,7 +197,7 @@
     }
 
     function handleExit() {
-        window.location.href = '../pages/dasboard.php'; // Redirect upon confirmation
+        window.location.href = '../pages/dashboard.php'; // Redirect upon confirmation
     }
 
     function closePopupExit() {
