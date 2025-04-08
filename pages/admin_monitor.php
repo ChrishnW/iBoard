@@ -147,7 +147,7 @@
                     </div>
                     
                     <div class="modal-body mt-2 mb-1">
-                        <p class="h5">Are you sure you want to Exit?</p>
+                        <p class="h5">Are you sure you want to go back?</p>
                     </div>
 
                     <div class="modal-footer">
