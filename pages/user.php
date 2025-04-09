@@ -232,9 +232,12 @@
     if(!empty($row_line["id"])){
         $_SESSION["line_id"] = $row_line["id"];
         $line_name = $row_line["line_name"];
+        $line_desc = $row_line["line_desc"];
+        $daily_target = $row_line["daily_target"];
 
         $work_start = $row_line["work_time_from"];
         $work_end = $row_line["work_time_to"];
+        $takt_time = $row_line["takt_time"];
 
         $breaktime_code_get = $row_line["breaktime_code"];
 
@@ -268,7 +271,12 @@
             $actual = 0;
             $status = "RUN";
 
-            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$line_name', '$line_desc', '$status', '$daily_target', '$quantity', '$actual', '$quantity')");
+            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$username', '$line_name', '$status', '$daily_target', '$quantity', '$actual', '$quantity')");
+            
+            $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$username' AND unit = '$line_name'");
+            $row_records = mysqli_fetch_assoc($result1);
+            $_SESSION["records_id"] = $row_records["id"];
+            
         }
         $result2 = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE breaktime_code = '$breaktime_code_get' ");
         $row_break = mysqli_fetch_assoc($result2);                
