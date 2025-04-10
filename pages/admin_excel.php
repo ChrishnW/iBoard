@@ -1,14 +1,12 @@
 <?php
-
-include '../include/connect.php'; 
-session_start();
-$today = date('Y-m-d');
-header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
-header("Content-Disposition: attachment; filename=Output_Records_".$today.".xls");
-header("Expires: 0");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-header("Cache-Control: private",false);
-
+    include '../include/connect.php'; 
+    session_start();
+    $today = date('Y-m-d');
+    header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+    header("Content-Disposition: attachment; filename=Output_Records_".$today.".xls");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Cache-Control: private",false);
 ?>
 
 <html>
