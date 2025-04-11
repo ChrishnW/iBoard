@@ -214,7 +214,7 @@
           <table class=" table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
             <thead class="bg-primary text-white">
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Username</th>
                 <th>Department</th>
                 <th>Status</th>
