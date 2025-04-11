@@ -56,7 +56,7 @@
       
       <li class="nav-item">
         <a class="nav-link" href="../pages/department.php">
-          <i class="far fa-building"></i>
+        <i class="fa fa-sitemap" aria-hidden="true"></i>
           <span>Manage Department</span></a>
       </li>
 
@@ -70,6 +70,12 @@
         <a class="nav-link" href="../pages/breaktime.php">
         <i class="fa fa-coffee" aria-hidden="true"></i>
           <span>Manage Breaktime</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="../pages/building.php">
+        <i class="fa fa-building" aria-hidden="true"></i>
+          <span>Manage Building</span></a>
       </li>
 
       <!-- <hr class="sidebar-divider">
