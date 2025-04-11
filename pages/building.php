@@ -49,9 +49,16 @@
 
         // Edit Building display --------------------------------------------------------------------------
         if(isset($_POST["edit_building"])){
-            $build_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+            $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
-            $_SESSION["building_id"] = $build_id;
+            header("Refresh: .3; url = building.php");
+            exit;
+            ob_end_flush();
+        }
+
+        // Delete Building Ask --------------------------------------------------------------------------
+        if(isset($_POST["delete_building"])){
+            $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
             header("Refresh: .3; url = building.php");
             exit;

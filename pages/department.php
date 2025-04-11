@@ -1,5 +1,6 @@
 <?php include '../include/header.php'; 
 
+  ob_start();
   // Display Message ----------------------------------------------------------------------------
   if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
@@ -64,6 +65,7 @@
       }
 
       header("Refresh: .3; url = department.php");
+      ob_end_flush();
       exit;
     }
 
@@ -73,6 +75,7 @@
       $_SESSION["delete_id_dept"] = filter_input(INPUT_POST, "id_department", FILTER_SANITIZE_SPECIAL_CHARS);
 
       header("Refresh: .3; url = department.php");
+      ob_end_flush();
       exit;
     }
 
@@ -93,6 +96,7 @@
       unset($_SESSION["delete_dept"]);
       
       header("Refresh: .3; url = department.php");
+      ob_end_flush();
       exit;
     }
 
@@ -103,6 +107,7 @@
       $_SESSION["dept_id"] = $dept_id;
 
       header("Refresh: .3; url = department.php");
+      ob_end_flush();
       exit;
     }
 
@@ -124,6 +129,7 @@
       }
 
       header("Refresh: .3; url = department.php");
+      ob_end_flush();
       exit;
     }
 
@@ -145,6 +151,7 @@
       }
 
       header("Refresh: .3; url = account.php");
+      ob_end_flush();
       exit;
     }
   }
@@ -202,10 +209,10 @@
                 <td><?php echo $status_word ?></td>
                 <td style="table-layout: fixed; width: 15%;">
                   <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-center align-items-center">
-                  <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
+                    <input type="hidden" name="id_department" value="<?php echo $dept_id ?>">
 
-                  <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
-                  <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
+                    <input type="submit" id="btn_edit_department" class="btn btn-primary mr-2" value="Edit" name="edit_department">
+                    <input type="submit" id="delete_department" class="btn btn-danger" value="Delete" name="delete_department">
                   </form>
                 </td>
               </tr>
