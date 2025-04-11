@@ -88,8 +88,8 @@
         <div class="modal-body">
           <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">         
             <div class="mb-3 pb-3">
-              <label for="dept_name" class="form-label">Building Name <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" name="dept_name" id="dept_name" required>
+              <label for="building_name" class="form-label">Building Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="building_name" id="building_name" required>
             </div>
 
             <div class="modal-footer">
@@ -116,16 +116,16 @@
         <div class="modal-body">
           <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">           
             <?php
-              if(isset($_SESSION["dept_id"])){
-                $dept_id = $_SESSION["dept_id"];
+              if(isset($_SESSION["building_id"])){
+                $building_id = $_SESSION["building_id"];
             
-                $sql_command = "SELECT * FROM tbl_building WHERE id = '$dept_id'";
+                $sql_command = "SELECT * FROM tbl_building WHERE id = '$building_id'";
                 $result = mysqli_query($conn, $sql_command);
             
                 if(mysqli_num_rows($result) > 0){
                   $building = mysqli_fetch_assoc($result);
             
-                  $dept_name = $building["dept_name"];
+                  $building_name = $building["building_name"];
                   $status = $building["status"];
                   $status_word = "";
             
@@ -147,11 +147,11 @@
                   }); </script>';
             ?>
 
-            <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
+            <input type="hidden" name="edit_building_id" id="edit_building_id" value="<?php echo $building_id ?>" >
 
             <div class="mb-3">
-              <label for="edit_dept_name" class="form-label">Building Name <span style="color: red;">*</span></label>
-              <input type="text" name="edit_dept_name" id="edit_dept_name" required value="<?php echo $dept_name ?>" class="form-control">
+              <label for="edit_building_name" class="form-label">Building Name <span style="color: red;">*</span></label>
+              <input type="text" name="edit_building_name" id="edit_building_name" required value="<?php echo $building_name ?>" class="form-control">
             </div>
 
             <div class="mb-3">
@@ -165,7 +165,7 @@
 
             <?php
                 }
-                unset($_SESSION["dept_id"]);
+                unset($_SESSION["building_id"]);
               }
             ?>            
 
