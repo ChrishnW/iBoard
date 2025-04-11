@@ -145,10 +145,8 @@
     // Delete Account Confirm --------------------------------------------------------------------------
     if(isset($_POST["delete_data"])){
       $acc_id = $_SESSION["delete_acc"];
-      $acc_monitor_id = $_SESSION["delete_acc"] + 1;
 
       $result = mysqli_query($conn, "DELETE FROM tbl_accounts WHERE id = '$acc_id'");
-      $result = mysqli_query($conn, "DELETE FROM tbl_accounts WHERE id = '$acc_monitor_id'");
 
       if($result){
         $_SESSION["message"] = "Account deleted successfully.";
@@ -182,13 +180,7 @@
       $dept_code = filter_input(INPUT_POST, "edit_acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $status = filter_input(INPUT_POST, "edit_acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $monitor_id = $acc_id + 1;
-      $monitor_user = "monitor_" . $username;
-
       $sql_command = "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'";
-      $result = mysqli_query($conn, $sql_command);
-
-      $sql_command = "UPDATE tbl_accounts SET username = '$monitor_user', dept_code = '$dept_code', status = '$status' WHERE id = '$monitor_id'";
       $result = mysqli_query($conn, $sql_command);
 
       if($result){
@@ -202,27 +194,6 @@
       exit;
     }
 
-    // Reset Password --------------------------------------------------------------------------
-    // if(isset($_POST["reset_password"])){
-
-    //   $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
-    //   $password = 12345;
-
-    //   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-      
-    //   $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
-    //   $result = mysqli_query($conn, $sql_command);
-
-    //   if($result){
-    //     $_SESSION["message"] = "Account password updated successfully.";
-    //   }
-    //   else{
-    //     $_SESSION["message"] = "Failed to update account password.";
-    //   }
-
-    //   header("Refresh: .3; url = account.php");
-    //   exit;
-    // }
   }
 ?>
 
