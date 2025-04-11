@@ -43,18 +43,20 @@
 
             header("Refresh: .3; url = building.php");
             exit;
+            ob_end_flush();
             
         }
 
-        // Edit Building --------------------------------------------------------------------------
-        // if(isset($_POST["edit_building_submit"])){
-        //     $build_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+        // Edit Building display --------------------------------------------------------------------------
+        if(isset($_POST["edit_building"])){
+            $build_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
-        //     $_SESSION["building_id"] = $build_id;
+            $_SESSION["building_id"] = $build_id;
 
-        //     header("Refresh: .3; url = building.php");
-        //     exit;
-        // }
+            header("Refresh: .3; url = building.php");
+            exit;
+            ob_end_flush();
+        }
     }
 ?>
 
@@ -109,7 +111,7 @@
                     <td>
                         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-center align-items-center">
                             <input type="hidden" name="id_building" value="<?php echo $building_id ?>">
-                            <input type="submit" id="btn_edit_building" class="btn btn-primary mr-2" value="Edit" name="edit_building">
+                            <input type="submit" class="btn btn-primary mr-2" value="Edit" name="edit_building">
                             <input type="submit" id="delete_building" class="btn btn-danger" value="Delete" name="delete_building">
                         </form>
                     </td>
@@ -275,7 +277,6 @@
 </div>
 <?php 
     include '../include/footer.php'; 
-    ob_end_flush();
 ?>
 
 <script>
@@ -302,10 +303,7 @@
         const close_addBuilding = document.getElementById('close_addBuilding');
 
         const cancel_edit_building = document.getElementById('cancel_edit_building');
-        const btn_edit_building = document.getElementById('btn_edit_building');
         const edit_building = document.getElementById('edit_building');
-
-        edit_building
 
         btn_add_building.addEventListener('click', function () {
             add_building.style.display = 'block'; 
