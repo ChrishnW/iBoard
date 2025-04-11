@@ -84,13 +84,13 @@
     </div>   
 </div> 
 
-  <!-- ADD BUILDING -->
-  <div class="modal" tabindex="-1" id="add_building" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+<!-- ADD BUILDING -->
+<div class="modal" tabindex="-1" id="add_building" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-gradient-primary">
           <h5 class="modal-title text-white">Add Building</h5>
-          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_addDepartment">
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_addBuilding">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -110,128 +110,126 @@
         </div>
       </div>
     </div>
-  </div> 
+</div> 
 
-  <!-- Edit Building -->
-  <div class="modal" tabindex="-1" id="edit_building" class="edit_building" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
+<!-- Edit Building -->
+<div class="modal" tabindex="-1" id="edit_building" class="edit_building" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-gradient-primary">
-          <h5 class="modal-title text-white">Edit Building</h5>
-          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_EditDepartment">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-primary">
+                <h5 class="modal-title text-white">Edit Building</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_EditBuilding">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-        <div class="modal-body">
-          <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">           
-            <?php
-              if(isset($_SESSION["building_id"])){
-                $building_id = $_SESSION["building_id"];
-            
-                $sql_command = "SELECT * FROM tbl_building WHERE id = '$building_id'";
-                $result = mysqli_query($conn, $sql_command);
-            
-                if(mysqli_num_rows($result) > 0){
-                  $building = mysqli_fetch_assoc($result);
-            
-                  $building_name = $building["building_name"];
-                  $status = $building["status"];
-                  $status_word = "";
-            
-                  if($status == "1"){
-                      $status_word = "Active";
-                  }
-                  else{
-                      $status_word = "Inactive";
-                  }
-            
-                  echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            
-                    var edit_building = document.getElementById("edit_building");
-                    edit_building.style.display = "block";
-
-                    document.body.style.overflow = "hidden";
+            <div class="modal-body">
+                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">           
+                    <?php
+                    if(isset($_SESSION["building_id"])){
+                        $building_id = $_SESSION["building_id"];
                     
-            
-                  }); </script>';
-            ?>
+                        $sql_command = "SELECT * FROM tbl_building WHERE id = '$building_id'";
+                        $result = mysqli_query($conn, $sql_command);
+                    
+                        if(mysqli_num_rows($result) > 0){
+                            $building = mysqli_fetch_assoc($result);
+                        
+                            $building_name = $building["building_name"];
+                            $status = $building["status"];
+                            $status_word = "";
+                        
+                            if($status == "1"){
+                                $status_word = "Active";
+                            }
+                            else{
+                                $status_word = "Inactive";
+                            }
+                        
+                            echo '<script> 
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var edit_building = document.getElementById("edit_building");
+                                            edit_building.style.display = "block";
 
-            <input type="hidden" name="edit_building_id" id="edit_building_id" value="<?php echo $building_id ?>" >
+                                            document.body.style.overflow = "hidden";
+                                        }); 
+                                    </script>';
+                    ?>
 
-            <div class="mb-3">
-              <label for="edit_building_name" class="form-label">Building Name <span style="color: red;">*</span></label>
-              <input type="text" name="edit_building_name" id="edit_building_name" required value="<?php echo $building_name ?>" class="form-control">
+                    <input type="hidden" name="edit_building_id" id="edit_building_id" value="<?php echo $building_id ?>" >
+
+                    <div class="mb-3">
+                        <label for="edit_building_name" class="form-label">Building Name <span style="color: red;">*</span></label>
+                        <input type="text" name="edit_building_name" id="edit_building_name" required value="<?php echo $building_name ?>" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="edit_status">Status <span style="color: red;">*</span></label>
+                        <select name="edit_status" id="edit_status" class="form-control" required >
+                            <option value="<?php echo $status ?>"hidden><?php echo $status_word ?></option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select> 
+                    </div>
+
+                    <?php
+                        }
+                        unset($_SESSION["building_id"]);
+                    }
+                    ?>            
+
+                    <div class="modal-footer">
+                        <input type="submit" name="edit_building_submit" value="Save" class="submit btn btn-primary pr-3"> 
+                        <input type="reset" name="reset" value="Cancel" id="cancel_edit_building" class="btn btn-secondary ml-2">           
+                    </div>
+                </form>
             </div>
-
-            <div class="mb-3">
-              <label for="edit_status">Status <span style="color: red;">*</span></label>
-              <select name="edit_status" id="edit_status" class="form-control" required >
-                  <option value="<?php echo $status ?>"hidden><?php echo $status_word ?></option>
-                  <option value="1">Active</option>
-                  <option value="0">Inactive</option>
-              </select> 
-            </div>
-
-            <?php
-                }
-                unset($_SESSION["building_id"]);
-              }
-            ?>            
-
-            <div class="modal-footer">
-              <input type="submit" name="edit_building_submit" value="Save" class="submit btn btn-primary pr-3"> 
-              <!-- <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2"> -->
-              <input type="reset" name="reset" value="Cancel" id="cancel_edit_building" class="btn btn-secondary ml-2">           
-            </div>
-          </form>
         </div>
-      </div>
     </div>
   </div>
 </div>
 
 <!-- Pop up Modal -->
 <div class="modal" tabindex="-1" id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title text-white">Notification</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white">Notification</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-      <div class="modal-body my-2">
-        <p class="h5" id="display_message"></p>
-      </div>
+            <div class="modal-body my-2">
+                <p class="h5" id="display_message"></p>
+            </div>
+        </div>
     </div>
-  </div>
 </div> 
 
 <!-- Pop up for Delete -->
 <div class="modal" tabindex="-1" id="popupFormDelete" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title text-white">Delete Confirmation</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup2">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <div class="modal-body">
-        <p class="h5">Are you sure you want to delete this building permanently?</p> 
-      </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white">Delete Confirmation</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="close_popup2">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <p class="h5">Are you sure you want to delete this building permanently?</p> 
+            </div>
 
-      <div class="modal-footer">
-        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-          <input type="submit" name="delete_data" value="Confirm" class="submit btn btn-danger pr-3"> 
-          <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
-        </form>
-      </div>
+            <div class="modal-footer">
+                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+                    <input type="submit" name="delete_data" value="Confirm" class="submit btn btn-danger pr-3"> 
+                    <a href="#" onclick="closePopup2()" class="close_popup btn btn-secondary" style="text-decoration: none;">Cancel</a>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <?php 
@@ -239,67 +237,66 @@
 ?>
 
 <script>
-  $(document).ready(function () {
-    $('#dataTable').DataTable();
-  });
-
-  document.addEventListener('DOMContentLoaded', function () {
-    //updateTable();
-    document.getElementById('close_popup').addEventListener('click', function () {
-      document.getElementById('popup').style.display = 'none';
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
     });
 
-    document.getElementById('close_popup2').addEventListener('click', function () {
-      document.getElementById('popupFormDelete').style.display = 'none';
-      document.body.style.overflow = 'auto';
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.getElementById('close_popup').addEventListener('click', function () {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        document.getElementById('close_popup2').addEventListener('click', function () {
+            document.getElementById('popupFormDelete').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        const btn_add_building = document.getElementById('btn_add_building');
+        const building_dashboard = document.getElementById('building_dashboard');
+        
+        const add_building = document.getElementById('add_building');
+        const cancel_building = document.getElementById('cancel_building');
+        const close_addBuilding = document.getElementById('close_addBuilding');
+
+        const cancel_edit_building = document.getElementById('cancel_edit_building');
+        const btn_edit_building = document.getElementById('btn_edit_building');
+        const edit_building = document.getElementById('edit_building');
+
+        edit_building
+
+        btn_add_building.addEventListener('click', function () {
+            add_building.style.display = 'block'; 
+            document.body.style.overflow = 'hidden'; 
+        });
+
+        close_addBuilding.addEventListener("click", function(){
+            building_dashboard.style.display = 'block';
+            add_building.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        cancel_building.addEventListener('click', function () {
+            building_dashboard.style.display = 'block';
+            add_building.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });   
+
+        close_EditBuilding.addEventListener("click", function(){
+            edit_building.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        cancel_edit_building.addEventListener('click', function () {
+            edit_building.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
     });
 
-    const btn_add_building = document.getElementById('btn_add_building');
-    const building_dashboard = document.getElementById('building_dashboard');
-    
-    const add_building = document.getElementById('add_building');
-    const cancel_building = document.getElementById('cancel_building');
-    const close_addDepartment = document.getElementById('close_addDepartment');
+    const popup2 = document.getElementById("popupFormDelete");
 
-    const cancel_edit_building = document.getElementById('cancel_edit_building');
-    const btn_edit_building = document.getElementById('btn_edit_building');
-    const edit_building = document.getElementById('edit_building');
-
-    edit_building
-
-    btn_add_building.addEventListener('click', function () {
-      add_building.style.display = 'block'; 
-      document.body.style.overflow = 'hidden'; 
-    });
-
-    close_addDepartment.addEventListener("click", function(){
-      building_dashboard.style.display = 'block';
-      add_building.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    });
-
-    cancel_building.addEventListener('click', function () {
-      building_dashboard.style.display = 'block';
-      add_building.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    });   
-
-    close_EditDepartment.addEventListener("click", function(){
-      edit_building.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    });
-
-    cancel_edit_building.addEventListener('click', function () {
-      edit_building.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    });
-
-  });
-
-  const popup2 = document.getElementById("popupFormDelete");
-
-  function closePopup2() {
-    popup2.style.display = "none";
-    document.body.style.overflow = 'auto';
-  }
+    function closePopup2() {
+        popup2.style.display = "none";
+        document.body.style.overflow = 'auto';
+    }
 </script>
