@@ -27,12 +27,14 @@
         $dept_name = $department["dept_name"];
         $dept_code = $department["dept_code"];
 
-        echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            const table = `
-            <option value="' . $dept_code . '">' . $dept_name . '</option>`;
+        echo '<script> 
+                document.addEventListener("DOMContentLoaded", function () {
+                  const table = `
+                                <option value="' . $dept_code . '">' . $dept_name . '</option>`;
             
-            document.querySelector("#edit_acc_code").insertAdjacentHTML("beforeend", table);
-        });</script>';
+                  document.querySelector("#edit_acc_code").insertAdjacentHTML("beforeend", table);
+                });
+              </script>';
       }
     }
   }
@@ -49,37 +51,37 @@
         $dept_name = $department["dept_name"];
         $dept_code = $department["dept_code"];
 
-        echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            const table = `
-            <option value="' . $dept_code . '">' . $dept_name . '</option>`;
-            
-            document.querySelector("#edit_acc_department_avail").insertAdjacentHTML("beforeend", table);
-        });</script>';
+        echo '<script> 
+                document.addEventListener("DOMContentLoaded", function () {
+                  const table = `
+                                <option value="' . $dept_code . '">' . $dept_name . '</option>`;
+                  
+                  document.querySelector("#edit_acc_department_avail").insertAdjacentHTML("beforeend", table);
+                });
+              </script>';
       }
     }
   }
 
   // Display Message ----------------------------------------------------------------------------
   if(isset($_SESSION["message"])){
-
     $message = $_SESSION["message"];
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-  
-      document.getElementById('display_message').innerHTML = '$message'; 
-
-      const popup = document.getElementById('popup');
-      popup.style.display = 'block';
-        
-    }); </script>";
+    echo "<script> 
+            document.addEventListener('DOMContentLoaded', function () {
+              document.getElementById('display_message').innerHTML = '$message'; 
+              const popup = document.getElementById('popup');
+              popup.style.display = 'block';     
+            }); 
+          </script>";
 
     
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-      var account_dashboard = document.getElementById('account_dashboard');
-      account_dashboard.style.display = 'block';
-
-    }); </script>";
+    echo "<script> 
+            document.addEventListener('DOMContentLoaded', function () {
+              var account_dashboard = document.getElementById('account_dashboard');
+              account_dashboard.style.display = 'block';
+            }); 
+          </script>";
 
     unset($_SESSION["message"]);
   }
@@ -89,17 +91,17 @@
     $acc_id = $_SESSION["delete_id_acc"];
     $_SESSION["delete_acc"] = $acc_id;
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+    echo "<script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var popup = document.getElementById('popupFormDelete');
+                popup.style.display = 'block';
 
-        var popup = document.getElementById('popupFormDelete');
-        popup.style.display = 'block';
+                var account_dashboard = document.getElementById('account_dashboard');
+                account_dashboard.style.display = 'block';
 
-        var account_dashboard = document.getElementById('account_dashboard');
-        account_dashboard.style.display = 'block';
-
-        document.body.style.overflow = 'hidden';
-
-    }); </script>";
+                document.body.style.overflow = 'hidden';
+            }); 
+          </script>";
 
     unset($_SESSION["delete_id_acc"]);
   }
@@ -343,14 +345,13 @@
 
                 $dept_name = getDepartmentName_string($dept_code);
 
-                echo '<script> document.addEventListener("DOMContentLoaded", function () {
-
-                  var edit_account = document.getElementById("edit_account");
-                  edit_account.style.display = "block";
-
-                  document.body.style.overflow = "hidden";
-
-                }); </script>';
+                echo '<script> 
+                        document.addEventListener("DOMContentLoaded", function () {
+                          var edit_account = document.getElementById("edit_account");
+                          edit_account.style.display = "block";
+                          document.body.style.overflow = "hidden";
+                        });
+                      </script>';
           ?>
 
           <input type="hidden" name="edit_acc_id" id="edit_acc_id" value="<?php echo $acc_id ?>">
