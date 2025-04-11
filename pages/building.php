@@ -1,9 +1,150 @@
 <?php 
     include '../include/header.php'; 
 
+    // Display Message ----------------------------------------------------------------------------
+    if(isset($_SESSION["message"])){
+        $message = $_SESSION["message"];
 
+        echo "<script> 
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById('display_message').innerHTML = '$message'; 
+                    const popup = document.getElementById('popup');
+                    popup.style.display = 'block';
+                }); 
+            </script>";
 
+        echo "<script> 
+                document.addEventListener('DOMContentLoaded', function () {
+                    var building_dashboard = document.getElementById('building_dashboard');
+                    building_dashboard.style.display = 'block';
 
+                    var add_building = document.getElementById('add_building');
+                    add_building.style.display = 'none';
+                }); 
+            </script>";
+
+        unset($_SESSION["message"]);
+    }
+
+    // Delete Building Ask Display --------------------------------------------------------------------------
+    if(isset($_SESSION["delete_id_building"])){
+        $building_id = $_SESSION["delete_id_building"];
+        $_SESSION["delete_building"] = $building_id;
+
+        global $db_conn;
+
+        echo "<script> 
+                document.addEventListener('DOMContentLoaded', function () {
+                    var popup = document.getElementById('popupFormDelete');
+                    popup.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }); 
+            </script>";
+
+        unset($_SESSION["delete_id_building"]);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Add Building ---------------------------------------------------------------------------
+        if(isset($_POST["add_building_submit"])){
+            $building_name = filter_input(INPUT_POST, "building_name", FILTER_SANITIZE_SPECIAL_CHARS);
+            $status = 1;
+
+            $hashed_password = password_hash("12345", PASSWORD_DEFAULT);
+
+            $sql_command = "INSERT INTO tbl_building (building_name, password, status) VALUES ('$building_name', '$hashed_password', '$status')";
+            $result = mysqli_query($conn, $sql_command);
+
+            if($result){
+                $_SESSION["message"] = "Building added successfully.";
+            }
+            else{
+                $_SESSION["message"] = "Failed to add building.";
+            }
+
+            header("Refresh: .3; url = building.php");
+            exit;
+        }
+
+        // Delete Building Ask --------------------------------------------------------------------------
+        if(isset($_POST["delete_building"])){
+            $_SESSION["delete_id_building"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            header("Refresh: .3; url = building.php");
+            exit;
+        }
+
+        // Delete Building Confirm --------------------------------------------------------------------------
+        if(isset($_POST["delete_data"])){
+            $building_id = $_SESSION["delete_building"];
+
+            $sql_command = "DELETE FROM tbl_building WHERE id = '$building_id'";
+            $result = mysqli_query($conn, $sql_command);
+
+            if($result){
+                $_SESSION["message"] = "Building deleted successfully.";
+            }
+            else{
+                $_SESSION["message"] = "Failed to delete Building.";
+            }
+            
+            unset($_SESSION["delete_building"]);
+            
+            header("Refresh: .3; url = building.php");
+            exit;
+        }
+
+        // Edit Building --------------------------------------------------------------------------
+        if(isset($_POST["edit_building"])){
+            $building_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $_SESSION["building_id"] = $building_id;
+
+            header("Refresh: .3; url = building.php");
+            exit;
+        }
+
+        // Edit Building Submit --------------------------------------------------------------------------
+        if(isset($_POST["edit_building_submit"])){
+            $building_id = filter_input(INPUT_POST, "edit_building_id", FILTER_SANITIZE_SPECIAL_CHARS);
+            $building_name = filter_input(INPUT_POST, "edit_building_name", FILTER_SANITIZE_SPECIAL_CHARS);
+            $building_status = filter_input(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $sql_command = "UPDATE tbl_building SET building_name = '$building_name', status = '$building_status' WHERE id = '$building_id'";
+            $result = mysqli_query($conn, $sql_command);
+
+            if($result){
+                $_SESSION["message"] = "Building updated successfully.";
+            }
+            else{
+                $_SESSION["message"] = "Failed to update building.";
+            }
+
+            header("Refresh: .3; url = building.php");
+            exit;
+        }
+
+        // Reset Password --------------------------------------------------------------------------
+        if(isset($_POST["reset_password"])){
+            $acc_id = filter_input(INPUT_POST, "edit_acc_id", FILTER_SANITIZE_SPECIAL_CHARS);
+            $password = 12345;
+
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            
+            $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
+            $result = mysqli_query($conn, $sql_command);
+
+            if($result){
+                $_SESSION["message"] = "Building password updated successfully.";
+            }
+            else{
+                $_SESSION["message"] = "Failed to update building password.";
+            }
+
+            header("Refresh: .3; url = account.php");
+            exit;
+        }
+    }
 ?>
 
 <!-- Begin Page Content -->
