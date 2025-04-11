@@ -121,7 +121,9 @@
             success: function (data) {
                 $('#dataTable').DataTable().destroy(); 
                 document.getElementById('insert_here').innerHTML = data;
-                $('#dataTable').DataTable();
+                $('#dataTable').DataTable({
+                    "pageLength": 25
+                });
                 console.log("Success");
             },
             error: function () {
