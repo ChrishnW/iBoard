@@ -1,6 +1,29 @@
 <?php 
+    ob_start();
     include '../include/header.php'; 
 
+    // Display Message ----------------------------------------------------------------------------
+    if(isset($_SESSION["message"])){
+        $message = $_SESSION["message"];
+
+        echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        document.getElementById('display_message').innerHTML = '$message'; 
+
+        const popup = document.getElementById('popup');
+        popup.style.display = 'block';
+        
+        }); </script>";
+
+        echo "<script> document.addEventListener('DOMContentLoaded', function () {
+
+        var building_dashboard = document.getElementById('building_dashboard');
+        building_dashboard.style.display = 'block';
+
+        }); </script>";
+
+        unset($_SESSION["message"]);
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
@@ -12,10 +35,10 @@
             $result = mysqli_query($conn, "INSERT INTO tbl_building (building_name, status) VALUES ('$building_name', '$status')");
 
             if($result){
-                $_SESSION["message"] = "Department added successfully.";
+                $_SESSION["message"] = "Building added successfully.";
             }
             else{
-                $_SESSION["message"] = "Failed to add department.";
+                $_SESSION["message"] = "Failed to add building.";
             }
 
             header("Refresh: .3; url = building.php");
@@ -24,20 +47,20 @@
         }
 
         // Edit Building --------------------------------------------------------------------------
-        if(isset($_POST["edit_building_submit"])){
-            $build_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+        // if(isset($_POST["edit_building_submit"])){
+        //     $build_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
-            $_SESSION["building_id"] = $build_id;
+        //     $_SESSION["building_id"] = $build_id;
 
-            header("Refresh: .3; url = building.php");
-            exit;
-        }
+        //     header("Refresh: .3; url = building.php");
+        //     exit;
+        // }
     }
 ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-  <div id="building_dashboard" class="uilding_dashboard" style="display: block;">      
+  <div id="building_dashboard" class="building_dashboard" style="display: block;">      
     <div class="card shadow mb-4">
       <div class="card-header py-3.5 pt-4">
         <h2 class="float-left">Building List</h2>
@@ -250,9 +273,9 @@
         </div>
     </div>
 </div>
-
 <?php 
     include '../include/footer.php'; 
+    ob_end_flush();
 ?>
 
 <script>
