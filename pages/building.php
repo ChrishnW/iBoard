@@ -5,18 +5,31 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
         // Add Building --------------------------------------------------------------------------
-        if(isset($_POST["edit_building_submit"])){
-            $building_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+        if(isset($_POST["add_building_submit"])){
+            $building_name = filter_input(INPUT_POST, "building_name", FILTER_SANITIZE_SPECIAL_CHARS);
+            $status = 1;
 
+            $result = mysqli_query($conn, "INSERT INTO tbl_building (building_name, status) VALUES ('$building_name', '$status')");
+
+            if($result){
+                $_SESSION["message"] = "Department added successfully.";
+            }
+            else{
+                $_SESSION["message"] = "Failed to add department.";
+            }
+
+            header("Refresh: .3; url = building.php");
+            exit;
+            
         }
 
         // Edit Building --------------------------------------------------------------------------
-        if(isset($_POST["edit_building"])){
+        if(isset($_POST["edit_building_submit"])){
             $build_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
             $_SESSION["building_id"] = $build_id;
 
-            header("Refresh: .3; url = department.php");
+            header("Refresh: .3; url = building.php");
             exit;
         }
     }
