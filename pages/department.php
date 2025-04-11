@@ -4,24 +4,23 @@
   if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
+    echo "<script> 
+            document.addEventListener('DOMContentLoaded', function () {
+              document.getElementById('display_message').innerHTML = '$message'; 
+              const popup = document.getElementById('popup');
+              popup.style.display = 'block';     
+            }); 
+          </script>";
 
-      document.getElementById('display_message').innerHTML = '$message'; 
+    echo "<script> 
+            document.addEventListener('DOMContentLoaded', function () {
+              var department_dashboard = document.getElementById('department_dashboard');
+              department_dashboard.style.display = 'block';
 
-      const popup = document.getElementById('popup');
-      popup.style.display = 'block';
-      
-    }); </script>";
-
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-      var department_dashboard = document.getElementById('department_dashboard');
-      department_dashboard.style.display = 'block';
-
-      var add_department = document.getElementById('add_department');
-      add_department.style.display = 'none';
-
-    }); </script>";
+              var add_department = document.getElementById('add_department');
+              add_department.style.display = 'none';
+            }); 
+          </script>";
 
     unset($_SESSION["message"]);
   }
@@ -33,14 +32,13 @@
 
     global $db_conn;
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-        var popup = document.getElementById('popupFormDelete');
-        popup.style.display = 'block';
-
-        document.body.style.overflow = 'hidden';
-
-    }); </script>";
+    echo "<script> 
+            document.addEventListener('DOMContentLoaded', function () {
+              var popup = document.getElementById('popupFormDelete');
+              popup.style.display = 'block';
+              document.body.style.overflow = 'hidden';
+            }); 
+          </script>";
 
     unset($_SESSION["delete_id_dept"]);
   }
@@ -290,15 +288,13 @@
                       $status_word = "Inactive";
                   }
             
-                  echo '<script> document.addEventListener("DOMContentLoaded", function () {
-            
-                    var edit_department = document.getElementById("edit_department");
-                    edit_department.style.display = "block";
-
-                    document.body.style.overflow = "hidden";
-                    
-            
-                  }); </script>';
+                  echo '<script> 
+                          document.addEventListener("DOMContentLoaded", function () {
+                            var edit_department = document.getElementById("edit_department");
+                            edit_department.style.display = "block";
+                            document.body.style.overflow = "hidden";                           
+                            }); 
+                          </script>';
             ?>
 
             <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
@@ -330,7 +326,6 @@
 
             <div class="modal-footer">
               <input type="submit" name="edit_department_submit" value="Save" class="submit btn btn-primary pr-3"> 
-              <!-- <input type="submit" name="reset_password" value="Reset Password" class="btn btn-danger pr-3 ml-2"> -->
               <input type="reset" name="reset" value="Cancel" id="cancel_edit_department" class="btn btn-secondary ml-2">           
             </div>
           </form>
@@ -385,7 +380,6 @@
 
 <?php 
   include '../include/footer.php'; 
-
   // Generate Department Code ..............................................
   $department_code = 100;
 
@@ -402,37 +396,21 @@
 
   $department_code++;
 
-  echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-    const table = `
-      <input type=\"text\" class=\"form-control\" name=\"dept_code\" id=\"dept_code\" value=\"$department_code\" readonly>
-    `;
-    
-    document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
-
-  }); </script>";
+  echo "<script> 
+          document.addEventListener('DOMContentLoaded', function () {
+            const table = `
+                            <input type=\"text\" class=\"form-control\" name=\"dept_code\" id=\"dept_code\" value=\"$department_code\" readonly>
+                          `;
+            
+            document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
+          }); 
+        </script>";
 ?>
 
 <script>
   $(document).ready(function () {
     $('#dataTable').DataTable();
   });
-
-  // function updateTable() {
-  //     $.ajax({
-  //         method: 'POST',
-  //         url: 'fetch_department.php',
-  //         success: function (data) {
-  //             $('#dataTable').DataTable().destroy(); // Destroy existing DataTable instance
-  //             document.getElementById('insert_here').innerHTML = data;
-  //             $('#dataTable').DataTable(); // Reinitialize DataTable
-  //             console.log("Success");
-  //         },
-  //         error: function () {
-  //             console.log("Error");
-  //         }
-  //     });
-  // }
 
   document.addEventListener('DOMContentLoaded', function () {
     //updateTable();
@@ -475,11 +453,6 @@
       document.body.style.overflow = 'auto';
     });   
 
-    // btn_edit_department.addEventListener('click', function () {
-    //   edit_department.style.display = 'block';
-    //   document.body.style.overflow = 'hidden';
-    // });   
-
     close_EditDepartment.addEventListener("click", function(){
       edit_department.style.display = 'none';
       document.body.style.overflow = 'auto';
@@ -489,7 +462,6 @@
       edit_department.style.display = 'none';
       document.body.style.overflow = 'auto';
     });
-
   });
 
   const popup2 = document.getElementById("popupFormDelete");
