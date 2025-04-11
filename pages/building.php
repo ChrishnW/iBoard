@@ -2,7 +2,12 @@
     include '../include/header.php'; 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+        // Add Building --------------------------------------------------------------------------
+        if(isset($_POST["edit_building_submit"])){
+            $building_id = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
+        }
 
         // Edit Building --------------------------------------------------------------------------
         if(isset($_POST["edit_building"])){
