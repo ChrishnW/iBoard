@@ -1,5 +1,9 @@
 <?php 
     include '../include/header.php'; 
+
+
+
+
 ?>
 
 <!-- Begin Page Content -->
@@ -35,7 +39,6 @@
                     if(mysqli_num_rows($result) > 0){
                         while($building = mysqli_fetch_assoc($result)){
                             $building_id = $building["id"];
-                            $building_name = $building["building_name"];
                             $status = $building["status"];
                             $status_word = "";
 
@@ -48,8 +51,8 @@
                 ?>
 
                 <tr>
-                    <td><?php echo $building_id?></td>
-                    <td><?php echo $building_name ?></td>
+                    <td><?php echo $building["id"]?></td>
+                    <td><?php echo $building["building_name"]?></td>
                     <td><?php echo $status_word ?></td>
                     <td>
                         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-center align-items-center">
