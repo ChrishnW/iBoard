@@ -1,4 +1,7 @@
-<?php include '../include/header.php'; 
+<?php 
+
+  ob_start();
+  include '../include/header.php'; 
 
   if(isset($_SESSION["message"])){
 
@@ -86,6 +89,7 @@
       }
 
       header("Refresh: .3; url = breaktime.php");
+      ob_end_flush();
       exit;
 
     }
@@ -97,6 +101,7 @@
       $_SESSION["delete_id_breaktime"] = filter_input(INPUT_POST, "id_breaktime", FILTER_SANITIZE_SPECIAL_CHARS);
 
       header("Refresh: .3; url = breaktime.php");
+      ob_end_flush();
       exit;
 
     } 
@@ -120,6 +125,7 @@
       unset($_SESSION["delete_break"]);
       
       header("Refresh: .3; url = breaktime.php");
+      ob_end_flush();
       exit;
 
     }
@@ -133,6 +139,7 @@
       $_SESSION["edit_id_breaktime"] = $break_id;
 
       header("Refresh: .3; url = breaktime.php");
+      ob_end_flush();
       exit;
 
     }
@@ -178,6 +185,7 @@
       }
 
       header("Refresh: .3; url = breaktime.php");
+      ob_end_flush();
       exit;
 
     }
