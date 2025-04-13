@@ -17,6 +17,22 @@
         unset($_SESSION["message"]);
     }
 
+    // Delete Department Ask Display --------------------------------------------------------------------------
+    if(isset($_SESSION["building_id_delete"])){
+        $building_id = $_SESSION["building_id_delete"];
+        $_SESSION["delete_building_submit"] = $building_id;
+
+        echo "<script> 
+                document.addEventListener('DOMContentLoaded', function () {
+                var popup = document.getElementById('popupFormDelete');
+                popup.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                }); 
+            </script>";
+
+        unset($_SESSION["building_id_delete"]);
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
         // Add Building --------------------------------------------------------------------------
@@ -67,14 +83,38 @@
             exit;
         }
 
-        // // Delete Building Ask --------------------------------------------------------------------------
-        // if(isset($_POST["delete_building"])){
-        //     $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+        // Delete Building Ask --------------------------------------------------------------------------
+        if(isset($_POST["delete_building"])){
+            $_SESSION["building_id_delete"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
-        //     header("Refresh: .3; url = building.php");
-        //     ob_end_flush();
-        //     exit;
-        // }
+            header("Refresh: .3; url = building.php");
+            ob_end_flush();
+            exit;
+        }
+
+        // Delete Building Submit --------------------------------------------------------------------------
+        if(isset($_POST["delete_data"])){
+            $building_id = $_SESSION["delete_building_submit"];
+
+            $result = mysqli_query($conn, "DELETE FROM tbl_building WHERE id = '$building_id'");
+
+            if($result){
+            $_SESSION["message"] = "Building deleted successfully.";
+            }
+            else{
+            $_SESSION["message"] = "Failed to delete Building.";
+            }
+            
+            unset($_SESSION["delete_building_submit"]);
+            
+            header("Refresh: .3; url = building.php");
+            ob_end_flush();
+            exit;
+        }
+
+
+
+
     }
 ?>
 
@@ -130,7 +170,7 @@
                         <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" class="form_table d-flex justify-content-center align-items-center">
                             <input type="hidden" name="id_building" value="<?php echo $building_id ?>">
                             <input type="submit" class="btn btn-primary mr-2" value="Edit" name="edit_building">
-                            <input type="submit" id="delete_building" class="btn btn-danger" value="Delete" name="delete_building">
+                            <input type="submit" class="btn btn-danger" value="Delete" name="delete_building">
                         </form>
                     </td>
                 </tr>
