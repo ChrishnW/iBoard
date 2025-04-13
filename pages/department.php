@@ -1,6 +1,6 @@
-<?php include '../include/header.php'; 
-
+<?php 
   ob_start();
+  include '../include/header.php'; 
   // Display Message ----------------------------------------------------------------------------
   if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
@@ -438,7 +438,6 @@
     const close_addDepartment = document.getElementById('close_addDepartment');
 
     const cancel_edit_department = document.getElementById('cancel_edit_department');
-    const btn_edit_department = document.getElementById('btn_edit_department');
     const edit_department = document.getElementById('edit_department');
 
     edit_department
