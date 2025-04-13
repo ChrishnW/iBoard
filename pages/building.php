@@ -42,9 +42,8 @@
             }
 
             header("Refresh: .3; url = building.php");
-            exit;
             ob_end_flush();
-            
+            exit;
         }
 
         // Edit Building display --------------------------------------------------------------------------
@@ -52,8 +51,8 @@
             $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
             header("Refresh: .3; url = building.php");
-            exit;
             ob_end_flush();
+            exit;
         }
 
         // Delete Building Ask --------------------------------------------------------------------------
@@ -61,8 +60,8 @@
             $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
 
             header("Refresh: .3; url = building.php");
-            exit;
             ob_end_flush();
+            exit;
         }
     }
 ?>
