@@ -16,16 +16,6 @@
       
     }); </script>";
 
-    echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-      var breaktime_dashboard = document.getElementById('breaktime_dashboard');
-      breaktime_dashboard.style.display = 'block';
-
-      var add_breaktime = document.getElementById('add_breaktime');
-      add_breaktime.style.display = 'none';
-
-    }); </script>";
-
     unset($_SESSION["message"]);
   }
 

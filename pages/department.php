@@ -1,6 +1,7 @@
 <?php 
   ob_start();
   include '../include/header.php'; 
+  
   // Display Message ----------------------------------------------------------------------------
   if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
@@ -13,16 +14,6 @@
             }); 
           </script>";
 
-    echo "<script> 
-            document.addEventListener('DOMContentLoaded', function () {
-              var department_dashboard = document.getElementById('department_dashboard');
-              department_dashboard.style.display = 'block';
-
-              var add_department = document.getElementById('add_department');
-              add_department.style.display = 'none';
-            }); 
-          </script>";
-
     unset($_SESSION["message"]);
   }
 
@@ -30,8 +21,6 @@
   if(isset($_SESSION["delete_id_dept"])){
     $dept_id = $_SESSION["delete_id_dept"];
     $_SESSION["delete_dept"] = $dept_id;
-
-    global $db_conn;
 
     echo "<script> 
             document.addEventListener('DOMContentLoaded', function () {

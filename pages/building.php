@@ -9,17 +9,9 @@
         echo "<script> document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById('display_message').innerHTML = '$message'; 
-
         const popup = document.getElementById('popup');
         popup.style.display = 'block';
         
-        }); </script>";
-
-        echo "<script> document.addEventListener('DOMContentLoaded', function () {
-
-        var building_dashboard = document.getElementById('building_dashboard');
-        building_dashboard.style.display = 'block';
-
         }); </script>";
 
         unset($_SESSION["message"]);
@@ -55,14 +47,34 @@
             exit;
         }
 
-        // Delete Building Ask --------------------------------------------------------------------------
-        if(isset($_POST["delete_building"])){
-            $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+        // Edit Building Submit --------------------------------------------------------------------------
+        if(isset($_POST["edit_building_submit"])){
+            $edit_building_id = filter_input(INPUT_POST, "edit_building_id", FILTER_SANITIZE_SPECIAL_CHARS);
+            $edit_building_name = filter_input(INPUT_POST, "edit_building_name", FILTER_SANITIZE_SPECIAL_CHARS);
+            $edit_status = filter_input(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
+            $result = mysqli_query($conn, "UPDATE tbl_building SET building_name = '$edit_building_name', status = '$edit_status' WHERE id = '$edit_building_id'");
+    
+            if($result){
+                $_SESSION["message"] = "Building updated successfully.";
+            }
+            else{
+                $_SESSION["message"] = "Failed to update building.";
+            }
+    
             header("Refresh: .3; url = building.php");
             ob_end_flush();
             exit;
         }
+
+        // // Delete Building Ask --------------------------------------------------------------------------
+        // if(isset($_POST["delete_building"])){
+        //     $_SESSION["building_id"] = filter_input(INPUT_POST, "id_building", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        //     header("Refresh: .3; url = building.php");
+        //     ob_end_flush();
+        //     exit;
+        // }
     }
 ?>
 

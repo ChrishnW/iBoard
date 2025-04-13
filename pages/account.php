@@ -78,14 +78,6 @@
             }); 
           </script>";
 
-    
-    echo "<script> 
-            document.addEventListener('DOMContentLoaded', function () {
-              var account_dashboard = document.getElementById('account_dashboard');
-              account_dashboard.style.display = 'block';
-            }); 
-          </script>";
-
     unset($_SESSION["message"]);
   }
 
@@ -98,9 +90,6 @@
             document.addEventListener('DOMContentLoaded', function () {
                 var popup = document.getElementById('popupFormDelete');
                 popup.style.display = 'block';
-
-                var account_dashboard = document.getElementById('account_dashboard');
-                account_dashboard.style.display = 'block';
 
                 document.body.style.overflow = 'hidden';
             }); 
