@@ -1,4 +1,7 @@
-<?php include '../include/header.php'; 
+<?php 
+
+  ob_start();
+  include '../include/header.php'; 
 
   function getDepartmentName_string($dept_code){    
     global $conn;
@@ -133,6 +136,7 @@
       }
 
       header("Refresh: .3; url = account.php");
+      ob_end_flush();
       exit;
     }
 
@@ -141,6 +145,7 @@
       $_SESSION["delete_id_acc"] = filter_input(INPUT_POST, "id_account", FILTER_SANITIZE_SPECIAL_CHARS);
 
       header("Refresh: .3; url = account.php");
+      ob_end_flush();
       exit;
     } 
 
@@ -160,6 +165,7 @@
       unset($_SESSION["delete_acc"]);
       
       header("Refresh: .3; url = account.php");
+      ob_end_flush();
       exit;
     }
 
@@ -171,6 +177,7 @@
       $_SESSION["acc_id"] = $acc_id;
 
       header("Refresh: .3; url = account.php");
+      ob_end_flush();
       exit;
     }
 
@@ -193,6 +200,7 @@
       }
 
       header("Refresh: .3; url = account.php");
+      ob_end_flush();
       exit;
     }
 
