@@ -104,8 +104,8 @@
                                 <th rowspan="2" class="text-center align-middle">Balance</th>
                             </tr>
                             <tr>
-                                <th class="text-center align-middle">(Day)</th>
-                                <th class="text-center align-middle">(Now)</th>
+                                <th class="text-center align-middle border-top-0">(Day)</th>
+                                <th class="text-center align-middle border-top-0">(Now)</th>
                             </tr>
                         </thead>
 
