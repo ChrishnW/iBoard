@@ -149,6 +149,7 @@
         <table class="table table-bordered table-sm table-striped" id="dataTable" width="100%" cellspacing="0">
           <thead class="bg-primary text-white text-center">
           <tr>
+              <th rowspan="2" class="text-center align-middle">Building</th>
               <th rowspan="2" class="text-center align-middle">Model</th>
               <th rowspan="2" class="text-center align-middle">Unit</th>
               <th rowspan="2" class="text-center align-middle">Status</th>
