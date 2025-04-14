@@ -6,8 +6,7 @@
   function getDepartmentName_string($dept_code){    
     global $conn;
 
-    $sql_command = "SELECT dept_name FROM tbl_department WHERE dept_code = '$dept_code'";
-    $result = mysqli_query($conn, $sql_command);
+    $result = mysqli_query($conn, "SELECT dept_name FROM tbl_department WHERE dept_code = '$dept_code'");
 
     if(mysqli_num_rows($result) > 0){
       $department = mysqli_fetch_assoc($result);
@@ -21,8 +20,7 @@
   function getAllDepartment(){
     global $conn;
 
-    $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
-    $result = mysqli_query($conn, $sql_command);
+    $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
 
     if(mysqli_num_rows($result) > 0){
       while($department = mysqli_fetch_assoc($result)){
@@ -45,8 +43,7 @@
   function getAllDepartment_edit(){
     global $conn;
 
-    $sql_command = "SELECT * FROM tbl_department WHERE status = '1'";
-    $result = mysqli_query($conn, $sql_command);
+    $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE status = '1'");
 
     if(mysqli_num_rows($result) > 0){
       while($department = mysqli_fetch_assoc($result)){
@@ -178,8 +175,7 @@
       $dept_code = filter_input(INPUT_POST, "edit_acc_department_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $status = filter_input(INPUT_POST, "edit_acc_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $sql_command = "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "UPDATE tbl_accounts SET username = '$username', dept_code = '$dept_code', status = '$status' WHERE id = '$acc_id'");
 
       if($result){
         $_SESSION["message"] = "Account updated successfully.";
@@ -223,8 +219,7 @@
 
             <tbody id="insert_here">             
               <?php
-                $sql_command = "SELECT * FROM tbl_accounts WHERE access = '2' OR access = '4' order by id asc";
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE access = '2' OR access = '4' order by id asc");
 
                 if(mysqli_num_rows($result) > 0){
                   while($account = mysqli_fetch_assoc($result)){
@@ -321,8 +316,7 @@
             if(isset($_SESSION["acc_id"])){
               $acc_id = $_SESSION["acc_id"];
 
-              $sql_command = "SELECT * FROM tbl_accounts WHERE id = '$acc_id'";
-              $result = mysqli_query($conn, $sql_command);
+              $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE id = '$acc_id'");
 
               if(mysqli_num_rows($result) > 0){
                 $account = mysqli_fetch_assoc($result);

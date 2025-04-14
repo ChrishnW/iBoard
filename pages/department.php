@@ -1,7 +1,7 @@
 <?php 
   ob_start();
   include '../include/header.php'; 
-  
+
   // Display Message ----------------------------------------------------------------------------
   if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
@@ -43,8 +43,7 @@
 
       $hashed_password = password_hash("12345", PASSWORD_DEFAULT);
 
-      $sql_command = "INSERT INTO tbl_department (dept_name, password, dept_code, status) VALUES ('$dept_name', '$hashed_password', '$dept_code', '$status')";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "INSERT INTO tbl_department (dept_name, password, dept_code, status) VALUES ('$dept_name', '$hashed_password', '$dept_code', '$status')");
 
       if($result){
         $_SESSION["message"] = "Department added successfully.";
@@ -72,8 +71,7 @@
     if(isset($_POST["delete_data"])){
       $dept_id = $_SESSION["delete_dept"];
 
-      $sql_command = "DELETE FROM tbl_department WHERE id = '$dept_id'";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "DELETE FROM tbl_department WHERE id = '$dept_id'");
 
       if($result){
         $_SESSION["message"] = "Department deleted successfully.";
@@ -107,8 +105,7 @@
       $dept_code = filter_input(INPUT_POST, "edit_dept_code", FILTER_SANITIZE_SPECIAL_CHARS);
       $dept_status = filter_input(INPUT_POST, "edit_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $sql_command = "UPDATE tbl_department SET dept_name = '$dept_name', dept_code = '$dept_code', status = '$dept_status' WHERE id = '$dept_id'";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "UPDATE tbl_department SET dept_name = '$dept_name', dept_code = '$dept_code', status = '$dept_status' WHERE id = '$dept_id'");
 
       if($result){
           $_SESSION["message"] = "Department updated successfully.";
@@ -129,8 +126,7 @@
 
       $hashed_password = password_hash($password, PASSWORD_DEFAULT);
       
-      $sql_command = "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "UPDATE tbl_accounts SET password = '$hashed_password' WHERE id = '$acc_id'");
 
       if($result){
         $_SESSION["message"] = "Department password updated successfully.";
@@ -232,6 +228,24 @@
           <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" style="width: 100%; max-width: 600px;">         
             <div class="mb-3" id="insert_dept_code">
               <label for="dept_code" class="form-label">Department Code</label>
+
+              <?php
+                $department_code = 100;
+                $result = mysqli_query($conn, "SELECT * FROM tbl_department");
+              
+                if(mysqli_num_rows($result) > 0){
+                  while($dept = mysqli_fetch_assoc($result)) {
+                    $code = (int)$dept['dept_code'];
+                    $department_code = $department_code > $code ? $department_code : $code;
+
+                  }
+                }
+                $department_code++;
+
+              ?>
+
+              <input type="text" class="form-control" name="dept_code" id="dept_code" value="<?php echo $department_code ?>" readonly>
+
             </div>
           
             <div class="mb-3 pb-3">
@@ -266,8 +280,7 @@
               if(isset($_SESSION["dept_id"])){
                 $dept_id = $_SESSION["dept_id"];
             
-                $sql_command = "SELECT * FROM tbl_department WHERE id = '$dept_id'";
-                $result = mysqli_query($conn, $sql_command);
+                $result = mysqli_query($conn, "SELECT * FROM tbl_department WHERE id = '$dept_id'");
             
                 if(mysqli_num_rows($result) > 0){
                   $department = mysqli_fetch_assoc($result);
@@ -374,34 +387,7 @@
   </div>
 </div>
 
-<?php 
-  include '../include/footer.php'; 
-  // Generate Department Code ..............................................
-  $department_code = 100;
-
-  $sql_command = "SELECT * FROM tbl_department";
-  $result = mysqli_query($conn, $sql_command);
-
-  if(mysqli_num_rows($result) > 0){
-    while($dept = mysqli_fetch_assoc($result)) {
-
-      $code = (int)$dept['dept_code'];
-      $department_code = $department_code > $code ? $department_code : $code;
-    }
-  }
-
-  $department_code++;
-
-  echo "<script> 
-          document.addEventListener('DOMContentLoaded', function () {
-            const table = `
-                            <input type=\"text\" class=\"form-control\" name=\"dept_code\" id=\"dept_code\" value=\"$department_code\" readonly>
-                          `;
-            
-            document.querySelector(\"#insert_dept_code\").insertAdjacentHTML(\"beforeend\", table);
-          }); 
-        </script>";
-?>
+<?php include '../include/footer.php'; ?>
 
 <script>
   $(document).ready(function () {

@@ -63,13 +63,7 @@
 
       $status = "1";
 
-      $sql_command = "INSERT INTO tbl_breaktime (breaktime_code, tool_box_meeting_start, tool_box_meeting_end,
-                      am_break_start, am_break_end, lunch_break_start, lunch_break_end, pm_break_start, 
-                      pm_break_end, ot_break_start, ot_break_end, status)
-                      VALUES ('$code', '$tool_start', '$tool_end', '$start_am', '$end_am', '$start_lunch', '$end_lunch', 
-                      '$start_pm', '$end_pm', '$start_ot', '$end_ot', '$status')";
-
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "INSERT INTO tbl_breaktime (breaktime_code, tool_box_meeting_start, tool_box_meeting_end, am_break_start, am_break_end, lunch_break_start, lunch_break_end, pm_break_start, pm_break_end, ot_break_start, ot_break_end, status)VALUES ('$code', '$tool_start', '$tool_end', '$start_am', '$end_am', '$start_lunch', '$end_lunch', '$start_pm', '$end_pm', '$start_ot', '$end_ot', '$status')");
 
       if($result){
         $_SESSION["message"] = "Breaktime added successfully.";
@@ -101,9 +95,7 @@
     if(isset($_POST["delete_data"])){
 
       $break_id = $_SESSION["delete_break"];
-
-      $sql_command = "DELETE FROM tbl_breaktime WHERE id = '$break_id'";
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "DELETE FROM tbl_breaktime WHERE id = '$break_id'");
 
       if($result){
         $_SESSION["message"] = "Breaktime deleted successfully.";
@@ -159,13 +151,7 @@
 
       $status = filter_input(INPUT_POST, "edit_break_status", FILTER_SANITIZE_SPECIAL_CHARS);
 
-      $sql_command = "UPDATE tbl_breaktime SET breaktime_code = '$code', tool_box_meeting_start = '$tool_start',
-                      tool_box_meeting_end = '$tool_end', am_break_start = '$start_am', am_break_end = '$end_am',
-                      lunch_break_start = '$start_lunch', lunch_break_end = '$end_lunch', pm_break_start = '$start_pm', 
-                      pm_break_end = '$end_pm', ot_break_start = '$start_ot', ot_break_end = '$end_ot', status = '$status' 
-                      WHERE id = '$id' ";
-
-      $result = mysqli_query($conn, $sql_command);
+      $result = mysqli_query($conn, "UPDATE tbl_breaktime SET breaktime_code = '$code', tool_box_meeting_start = '$tool_start', tool_box_meeting_end = '$tool_end', am_break_start = '$start_am', am_break_end = '$end_am', lunch_break_start = '$start_lunch', lunch_break_end = '$end_lunch', pm_break_start = '$start_pm', pm_break_end = '$end_pm', ot_break_start = '$start_ot', ot_break_end = '$end_ot', status = '$status' WHERE id = '$id' ");
 
       if($result){
         $_SESSION["message"] = "Breaktime updated successfully.";
@@ -232,8 +218,7 @@
               <tbody id="insert_here">
                 
                 <?php
-                  $sql_command = "SELECT * FROM tbl_breaktime ";
-                  $result = mysqli_query($conn, $sql_command);
+                  $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime ");
               
                   if(mysqli_num_rows($result) > 0){
                     while($breaktime = mysqli_fetch_assoc($result)){
@@ -434,8 +419,7 @@
 
               $break_id = $_SESSION["edit_id_breaktime"];
           
-              $sql_command = "SELECT * FROM tbl_breaktime WHERE id = '$break_id'";
-              $result = mysqli_query($conn, $sql_command);
+              $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE id = '$break_id'");
           
               if(mysqli_num_rows($result) > 0){
                 $break = mysqli_fetch_assoc($result);

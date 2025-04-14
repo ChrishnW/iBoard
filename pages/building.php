@@ -227,8 +227,7 @@
                     if(isset($_SESSION["building_id"])){
                         $building_id = $_SESSION["building_id"];
                     
-                        $sql_command = "SELECT * FROM tbl_building WHERE id = '$building_id'";
-                        $result = mysqli_query($conn, $sql_command);
+                        $result = mysqli_query($conn, "SELECT * FROM tbl_building WHERE id = '$building_id'");
                     
                         if(mysqli_num_rows($result) > 0){
                             $building = mysqli_fetch_assoc($result);

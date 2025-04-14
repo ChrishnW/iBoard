@@ -15,8 +15,7 @@
         return null;
     }
     
-    $sql_command = "SELECT * FROM tbl_accounts WHERE status = '1' AND access = '2' ";
-    $result = mysqli_query($conn, $sql_command);
+    $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE status = '1' AND access = '2' ");
 
     if(mysqli_num_rows($result) > 0){
         while($account = mysqli_fetch_assoc($result)){

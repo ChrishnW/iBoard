@@ -5,9 +5,8 @@
 
     $dept_code = $_SESSION['department_code'];
     $date = date("Y-m-d");
-    
-    $sql_command = "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' AND status = '1' AND access = '2' ";
-    $result = mysqli_query($conn, $sql_command);
+
+    $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE dept_code = '$dept_code' AND status = '1' AND access = '2' ");
 
     if(mysqli_num_rows($result) > 0){
         while($account = mysqli_fetch_assoc($result)){
