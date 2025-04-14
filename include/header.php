@@ -42,10 +42,10 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <!-- LOGO HERE -->
+        <div class="sidebar-brand-icon">
+          <img src="../assets/img/logo.png" alt="" class="img-fluid" style="width: 45px;">
         </div>
-        <div class="sidebar-brand-text mx-3">i-Board</div>
+        <div class="sidebar-brand-text mx-2">i-Board</div>
       </a>
 
       <hr class="sidebar-divider my-0">
