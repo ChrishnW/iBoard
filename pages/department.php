@@ -302,8 +302,8 @@
                             var edit_department = document.getElementById("edit_department");
                             edit_department.style.display = "block";
                             document.body.style.overflow = "hidden";                           
-                            }); 
-                          </script>';
+                          }); 
+                        </script>';
             ?>
 
             <input type="hidden" name="edit_dept_id" id="edit_dept_id" value="<?php echo $dept_id ?>" >
