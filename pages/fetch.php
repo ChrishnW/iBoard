@@ -12,6 +12,11 @@
     if(mysqli_num_rows($result) > 0){
         while($account = mysqli_fetch_assoc($result)){
             $username = $account['username'];
+            $acc_id = $account['id'];
+
+            $result2 = mysqli_query($conn, "SELECT * FROM tbl_line WHERE model_id = '$acc_id' ");   
+            $line = mysqli_fetch_assoc($result2);
+            $building = $line['building'];
 
             $query = "SELECT * FROM tbl_records WHERE date = '$date' && model = '$username' ";
             $result1 = mysqli_query($conn, $query);
@@ -48,6 +53,7 @@
                     }
 
                     echo "<tr>
+                            <td class=\"font-weight-bold\" style=\"height: 40px;\">$building</td>
                             <td class=\"font-weight-bold\" style=\"height: 40px;\">$model</td>
                             <td class=\"font-weight-bold\" style=\"height: 40px;\">$unit</td>
                             <td style=\"height: 40px; color: $color; background: $background;\">$status</td>
@@ -62,6 +68,7 @@
                 $blank = "";
                 $model = $username;
                 echo "<tr>
+                        <td class=\"font-weight-bold\" style=\"height: 40px;\">$building</td>
                         <td class=\"font-weight-bold\" style=\"height: 40px;\">$model</td>
                         <td class=\"font-weight-bold\" style=\"height: 40px;\">$blank</td>
                         <td style=\"height: 40px;\">$blank</td>
