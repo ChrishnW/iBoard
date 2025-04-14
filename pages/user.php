@@ -325,7 +325,7 @@
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
                 <div id="settings" class="dropdown">
                     <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#" onclick="showEdituser()">
                             <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>    
                             Settings
