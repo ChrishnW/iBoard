@@ -34,6 +34,8 @@
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
 
+            $building = FILTER_INPUT(INPUT_POST, "edit_building", FILTER_SANITIZE_SPECIAL_CHARS);
+
             $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
@@ -53,7 +55,7 @@
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$unit', '$line_desc', '$date', '$line_leader', '$date', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
+                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, building, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$unit', '$line_desc', '$date', '$line_leader', '$date', '$building', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
 
                 // This is for the records table
                 $date_records = date("Y-m-d");
@@ -136,6 +138,8 @@
             $line_desc = FILTER_INPUT(INPUT_POST, "edit_line_desc", FILTER_SANITIZE_SPECIAL_CHARS);
             $line_leader = FILTER_INPUT(INPUT_POST, "edit_line_leader", FILTER_SANITIZE_SPECIAL_CHARS);
 
+            $building = FILTER_INPUT(INPUT_POST, "edit_building", FILTER_SANITIZE_SPECIAL_CHARS);
+
             $daily_target = FILTER_INPUT(INPUT_POST, "edit_daily_target", FILTER_SANITIZE_NUMBER_INT);
             $target_now = FILTER_INPUT(INPUT_POST, "edit_target_now", FILTER_SANITIZE_NUMBER_INT);
 
@@ -155,7 +159,7 @@
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
+                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', building = '$building', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
 
                 // This is for the records table
                 $date_records = date("Y-m-d");
@@ -466,17 +470,17 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
-                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
-                                    <option value="<?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?>" hidden><?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?></option>
+                                <label for="edit_building">Building <span style="color: red;">*</span></label>
+                                <select name="edit_building" id="edit_building" class="form-control" required> 
+                                    <option value="<?php echo isset($row_line["building"]) ? $row_line["building"] : "" ?>" hidden><?php echo isset($row_line["building"]) ? $row_line["building"] : "" ?></option>
 
                                     <?php 
-                                        $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE status = '1' ");
+                                        $result = mysqli_query($conn, "SELECT * FROM tbl_building WHERE status = '1' ");
 
                                         if(mysqli_num_rows($result) > 0){
-                                            while($break = mysqli_fetch_assoc($result)){
+                                            while($build = mysqli_fetch_assoc($result)){
                                     ?>
-                                                <option value="<?php echo $break['breaktime_code'] ?>"><?php echo $break['breaktime_code'] ?></option>
+                                                <option value="<?php echo $build['building_name'] ?>"><?php echo $build['building_name'] ?></option>
                                     <?php 
                                             }
                                         }
@@ -500,10 +504,30 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="extra_view_upload" class="form-label">Extra View</label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="extra_view_upload" id="extra_view_upload">
-                            </div>                                            
+                                <label for="edit_breaktime_code">Breaktime Code <span style="color: red;">*</span></label>
+                                <select name="edit_breaktime_code" id="edit_breaktime_code" class="form-control" required> 
+                                    <option value="<?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?>" hidden><?php echo isset($row_line["breaktime_code"]) ? $row_line["breaktime_code"] : "" ?></option>
+
+                                    <?php 
+                                        $result = mysqli_query($conn, "SELECT * FROM tbl_breaktime WHERE status = '1' ");
+
+                                        if(mysqli_num_rows($result) > 0){
+                                            while($break = mysqli_fetch_assoc($result)){
+                                    ?>
+                                                <option value="<?php echo $break['breaktime_code'] ?>"><?php echo $break['breaktime_code'] ?></option>
+                                    <?php 
+                                            }
+                                        }
+                                    ?>
+                                </select> 
+                            </div>                                          
                         </div>
+                        <div class="col-md-12">
+                            <div class="mb-6">
+                                <label for="extra_view_upload" class="form-label">Extra View</label>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control w-100" name="extra_view_upload" id="extra_view_upload">
+                            </div> 
+                        </div> 
                     </div>
                     <br>
 
