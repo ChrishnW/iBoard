@@ -45,6 +45,7 @@
                             <thead class="bg-primary text-white text-center">
                                 <tr>
                                     <th rowspan="2" class="text-center align-middle">Departments</th>
+                                    <th rowspan="2" class="text-center align-middle">Building</th>
                                     <th rowspan="2" class="text-center align-middle">Model</th>
                                     <th rowspan="2" class="text-center align-middle">Unit</th>
                                     <th rowspan="2" class="text-center align-middle">Status</th>
