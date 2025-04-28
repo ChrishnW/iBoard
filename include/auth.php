@@ -1,5 +1,6 @@
 <?php
 require 'connect.php';
+session_set_cookie_params(365 * 24 * 60 * 60); 
 session_start();
 date_default_timezone_set('Asia/Manila');
 
