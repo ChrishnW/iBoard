@@ -243,28 +243,36 @@
         $work_end = $row_line["work_time_to"];
         $takt_time = $row_line["takt_time"];
 
-        // $gapInSec = strtotime(date('Y-m-d H:i:s')) - strtotime($work_start);
-        // $gapInMinutes = $gapInSec / 60;
-        // $quantity_round 
-
-
-
         $gapInMinutes = (strtotime($work_end) - strtotime($work_start)) / 60;
-        $quantity = 0;
+        $target_quantity = 0;
 
-        if($gapInMinutes >= 660){
-            // Run if there is OT
+        if($gapInMinutes >= 660){   // Run if there is OT
+            
             $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
-            // echo $newGapInMinutes;
+            $hours = round($newGapInMinutes / 60);
 
-            $newQuantity_round = ($newGapInMinutes - 105) / $takt_time;
-            echo $newQuantity_round;
-
-
-            $quantity = round($newQuantity_round);                   
+            if($hours <= 2){
+                $newQuantity_round = ($newGapInMinutes - 10) / $takt_time;
+            }
+            elseif($hours <= 4){
+                $newQuantity_round = ($newGapInMinutes - 20) / $takt_time;
+            }
+            elseif($hours <= 7){
+                $newQuantity_round = ($newGapInMinutes - 80) / $takt_time;
+            }
+            elseif($hours <= 9){
+                $newQuantity_round = ($newGapInMinutes - 90) / $takt_time;
+            }
+            elseif($hours <= 11){
+                $newQuantity_round = ($newGapInMinutes - 105) / $takt_time;
+            }
+            else{
+                $newQuantity_round = 0;
+            }
+            $target_quantity = round($newQuantity_round);                   
         }
-        elseif($gapInMinutes < 660){
-            // Run if there is no OT
+        elseif($gapInMinutes < 660){   // Run if there is no OT
+            
             $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
             $hours = round($newGapInMinutes / 60);
 
@@ -283,24 +291,8 @@
             else{
                 $newQuantity_round = 0;
             }
-
-            // $newQuantity_round = $newGapInMinutes / $takt_time;
-
-
-
-            // $newQuantity_round = ($newGapInMinutes - 105) / $takt_time;
-            echo $newQuantity_round;
-
-            $quantity = round($newQuantity_round);
+            $target_quantity = round($newQuantity_round);
         }
-
-
-
-        // echo $quantity;
-
-
-
-
 
         $breaktime_code_get = $row_line["breaktime_code"];
 
@@ -419,10 +411,10 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <div class="d-flex flex-column">
-                                        <span class="h3 text-danger"><u>Information</u></span> 
-                                        <span class="h3 text-dark" id="line_desc"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
-                                        <span class="h3 text-danger"><u>Leader</u></span> 
-                                        <span class="h3 text-dark" id="incharge_name"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
+                                        <span class="h3 text-danger" style="font-size: 36px;"><u>Information</u></span> 
+                                        <span class="h3 text-dark" id="line_desc" style="font-size: 36px;"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
+                                        <span class="h3 text-danger" style="font-size: 36px;"><u>Leader</u></span> 
+                                        <span class="h3 text-dark" id="incharge_name" style="font-size: 36px;"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span> 
                                     </div>
                                 </div>
                             </div>
@@ -460,22 +452,7 @@
                         <tr style="height: 180px;"> 
                             <td class="font-weight-bolder" style="font-size: 120px;" id="daily_target_display"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
 
-
-
-
-
-
-
-                            <td id="target_count" class="font-weight-bolder" style="font-size: 120px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>
-
-
-
-
-
-
-
-
-
+                            <td id="target_count" class="font-weight-bolder" style="font-size: 120px;"><?php echo $target_quantity ?? 0 ?></td>
 
                             <td class="position-relative" style="height: 160px;"> 
                                 <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 120px; text-align: center;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></p>
