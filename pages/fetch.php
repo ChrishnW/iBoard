@@ -14,8 +14,14 @@
             $acc_id = $account['id'];
 
             $result2 = mysqli_query($conn, "SELECT * FROM tbl_line WHERE model_id = '$acc_id' ");   
-            $line = mysqli_fetch_assoc($result2);
-            $building = $line['building'];
+
+            if(mysqli_num_rows($result2) > 0){
+                $line = mysqli_fetch_assoc($result2);
+                $building = $line['building'];
+            }
+            else{
+                $building = "";
+            }
 
             $query = "SELECT * FROM tbl_records WHERE date = '$date' && model = '$username' ";
             $result1 = mysqli_query($conn, $query);
