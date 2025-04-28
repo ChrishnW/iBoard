@@ -55,31 +55,13 @@
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, building, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status) VALUES ('$unit', '$line_desc', '$date', '$line_leader', '$date', '$building', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status')");
+                $result = mysqli_query($conn, "INSERT INTO tbl_line (line_name, line_desc, line_img, incharge_name, incharge_img, building, daily_target, takt_time, work_time_from, work_time_to, breaktime_code, model_id, status, last_update) VALUES ('$unit', '$line_desc', '$date', '$line_leader', '$date', '$building', '$daily_target', '$takt_time', '$work_start', '$work_end', '$breaktime_code', '$model_id', '$status', '$date')");
 
                 // This is for the records table
                 $date_records = date("Y-m-d");
                 $status_records = "RUN";
                 $value_records = 0;
-
-                // $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-                // $gapInMinutes = $gapInSeconds / 60;
                 $quantity = 0;
-
-                // if($gapInMinutes >= 660){
-                //     // Run if there is OT
-                //     $worked_hours = $gapInMinutes - 105;
-                //     $quantity_round = $worked_hours / $takt_time;
-
-                //     $quantity = round($quantity_round);                   
-                // }
-                // else{
-                //     // Run if there is no OT
-                //     $worked_hours = $gapInMinutes - 90;
-                //     $quantity_round = $worked_hours / $takt_time;
-
-                //     $quantity = round($quantity_round);
-                // }
 
                 $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
@@ -159,30 +141,12 @@
             if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
 
                 $date = date("Y-m-d H:i:s");
-                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', building = '$building', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status' WHERE id = '$line_id' ");
+                $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', building = '$building', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status', last_update = '$date' WHERE id = '$line_id' ");
 
                 // This is for the records table
                 $date_records = date("Y-m-d");
                 $status_records = "RUN";
-
-                // $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-                // $gapInMinutes = $gapInSeconds / 60;
                 $quantity = 0;
-
-                // if($gapInMinutes >= 660){
-                //     // Run if there is OT
-                //     $worked_hours = $gapInMinutes - 105;
-                //     $quantity_round = $worked_hours / $takt_time;
-
-                //     $quantity = round($quantity_round);                   
-                // }
-                // else{
-                //     // Run if there is no OT
-                //     $worked_hours = $gapInMinutes - 90;
-                //     $quantity_round = $worked_hours / $takt_time;
-
-                //     $quantity = round($quantity_round);
-                // }
 
                 $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
