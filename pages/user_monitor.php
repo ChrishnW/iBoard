@@ -146,10 +146,10 @@
 
           <tbody class="bg-white text-dark h4">
             <tr style="height: 175px;"> <!-- Adjust height here -->
-              <td class="font-weight-bolder" style="font-size: 60px;"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
-              <td class="font-weight-bolder" style="font-size: 60px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>  
-              <td class="font-weight-bolder" style="font-size: 60px;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></td>
-              <td class="font-weight-bolder text-danger" style="font-size: 60px;"><?php echo isset($row_records["balance"]) ? $row_records["balance"] : 0 ?></td>
+              <td class="font-weight-bolder" style="font-size: 100px;"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
+              <td class="font-weight-bolder" style="font-size: 100px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>  
+              <td class="font-weight-bolder" style="font-size: 100px;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></td>
+              <td class="font-weight-bolder text-danger" style="font-size: 100px;"><?php echo isset($row_records["balance"]) ? $row_records["balance"] : 0 ?></td>
             </tr>
           </tbody>
         </table>
