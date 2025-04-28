@@ -385,8 +385,8 @@
         </div>        
 
         <!-- Tables Section -->
-        <div class="card-body">
-            <div class="table-responsive bg-white rounded shadow">
+        <div class="pt-3">
+            <div class="table-responsive rounded">
                 <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-primary text-white">
                         <tr>
@@ -397,13 +397,13 @@
                         </tr>
                     </thead>
 
-                    <tbody class="bg-whit text-dark h4">                
-                        <tr style="height: 175px;"> <!-- Adjust height here -->
+                    <tbody class="bg-white text-dark h4">                
+                        <tr style="height: 180px;"> <!-- Adjust height here -->
                             <td class="font-weight-bolder" style="font-size: 100px;" id="daily_target_display"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
                             <td id="target_count" class="font-weight-bolder" style="font-size: 100px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>
                             <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
                                 <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 100px; text-align: center;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></p>
-                                <div class="position-absolute w-100 d-flex justify-content-between" style="top: 95%; transform: translateY(-70%);"> <!-- Adjusted top -->
+                                <div class="position-absolute w-100 d-flex justify-content-between" style="top: 85%; transform: translateY(-70%);"> <!-- Adjusted top -->
                                     <button class="btn btn-primary btn-lg  mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="minus()" id="minus">-</button>
                                     <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="add()" id="plus">+</button>
                                 </div>
