@@ -62,24 +62,24 @@
                 $status_records = "RUN";
                 $value_records = 0;
 
-                $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-                $gapInMinutes = $gapInSeconds / 60;
+                // $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+                // $gapInMinutes = $gapInSeconds / 60;
                 $quantity = 0;
 
-                if($gapInMinutes >= 660){
-                    // Run if there is OT
-                    $worked_hours = $gapInMinutes - 105;
-                    $quantity_round = $worked_hours / $takt_time;
+                // if($gapInMinutes >= 660){
+                //     // Run if there is OT
+                //     $worked_hours = $gapInMinutes - 105;
+                //     $quantity_round = $worked_hours / $takt_time;
 
-                    $quantity = round($quantity_round);                   
-                }
-                else{
-                    // Run if there is no OT
-                    $worked_hours = $gapInMinutes - 90;
-                    $quantity_round = $worked_hours / $takt_time;
+                //     $quantity = round($quantity_round);                   
+                // }
+                // else{
+                //     // Run if there is no OT
+                //     $worked_hours = $gapInMinutes - 90;
+                //     $quantity_round = $worked_hours / $takt_time;
 
-                    $quantity = round($quantity_round);
-                }
+                //     $quantity = round($quantity_round);
+                // }
 
                 $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
@@ -165,24 +165,24 @@
                 $date_records = date("Y-m-d");
                 $status_records = "RUN";
 
-                $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-                $gapInMinutes = $gapInSeconds / 60;
+                // $gapInSeconds = strtotime($work_end) - strtotime($work_start);
+                // $gapInMinutes = $gapInSeconds / 60;
                 $quantity = 0;
 
-                if($gapInMinutes >= 660){
-                    // Run if there is OT
-                    $worked_hours = $gapInMinutes - 105;
-                    $quantity_round = $worked_hours / $takt_time;
+                // if($gapInMinutes >= 660){
+                //     // Run if there is OT
+                //     $worked_hours = $gapInMinutes - 105;
+                //     $quantity_round = $worked_hours / $takt_time;
 
-                    $quantity = round($quantity_round);                   
-                }
-                else{
-                    // Run if there is no OT
-                    $worked_hours = $gapInMinutes - 90;
-                    $quantity_round = $worked_hours / $takt_time;
+                //     $quantity = round($quantity_round);                   
+                // }
+                // else{
+                //     // Run if there is no OT
+                //     $worked_hours = $gapInMinutes - 90;
+                //     $quantity_round = $worked_hours / $takt_time;
 
-                    $quantity = round($quantity_round);
-                }
+                //     $quantity = round($quantity_round);
+                // }
 
                 $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
@@ -242,6 +242,40 @@
         $work_start = $row_line["work_time_from"];
         $work_end = $row_line["work_time_to"];
         $takt_time = $row_line["takt_time"];
+
+        // $gapInSec = strtotime(date('Y-m-d H:i:s')) - strtotime($work_start);
+        // $gapInMinutes = $gapInSec / 60;
+        // $quantity_round = 
+
+
+
+
+
+        $gapInMinutes = (strtotime($work_end) - strtotime($work_start)) / 60;
+        $quantity = 0;
+
+        if($gapInMinutes >= 660){
+            // Run if there is OT
+            $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
+            $quantity_round = ($newGapInMinutes - 105) / $takt_time;
+
+            $quantity = round($quantity_round);                   
+        }
+        elseif($gapInMinutes < 660){
+            // Run if there is no OT
+            $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
+            $quantity_round = ($newGapInMinutes - 105) / $takt_time;
+
+            $quantity = round($quantity_round);
+        }
+
+
+
+        echo $gapInMinutes;
+
+
+
+
 
         $breaktime_code_get = $row_line["breaktime_code"];
 
@@ -400,7 +434,24 @@
                     <tbody class="bg-whit text-dark h4">                
                         <tr style="height: 175px;"> <!-- Adjust height here -->
                             <td class="font-weight-bolder" style="font-size: 100px;" id="daily_target_display"><?php echo isset($row_line["daily_target"]) ? $row_line["daily_target"] : 0 ?></td>
+
+
+
+
+
+
+
                             <td id="target_count" class="font-weight-bolder" style="font-size: 100px;"><?php echo isset($row_records["target_now"]) ? $row_records["target_now"] : 0  ?></td>
+
+
+
+
+
+
+
+
+
+
                             <td class="position-relative" style="height: 160px;"> <!-- Set height for td -->
                                 <p id="actual_count" class="font-weight-bolder mt-1 mb-n3 pb-3" style="font-size: 100px; text-align: center;"><?php echo isset($row_records["actual"]) ? $row_records["actual"] : 0  ?></p>
                                 <div class="position-absolute w-100 d-flex justify-content-between" style="top: 95%; transform: translateY(-70%);"> <!-- Adjusted top -->
