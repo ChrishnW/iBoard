@@ -132,8 +132,8 @@
     
 
     <!-- Tables Section -->
-    <div class="card-body">
-      <div class="table-responsive bg-white rounded shadow">
+    <div class="pt-3">
+      <div class="table-responsive rounded">
         <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
           <thead class="bg-primary text-white">
             <tr>
