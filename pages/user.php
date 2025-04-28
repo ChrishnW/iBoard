@@ -266,10 +266,30 @@
         elseif($gapInMinutes < 660){
             // Run if there is no OT
             $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
-            echo $newGapInMinutes;
+            $hours = round($newGapInMinutes / 60);
 
-            $newQuantity_round = $newGapInMinutes / $takt_time;
-            // echo $newQuantity_round;
+            if($hours <= 2){
+                $newQuantity_round = ($newGapInMinutes - 10) / $takt_time;
+            }
+            elseif($hours <= 4){
+                $newQuantity_round = ($newGapInMinutes - 20) / $takt_time;
+            }
+            elseif($hours <= 7){
+                $newQuantity_round = ($newGapInMinutes - 80) / $takt_time;
+            }
+            elseif($hours <= 9){
+                $newQuantity_round = ($newGapInMinutes - 90) / $takt_time;
+            }
+            else{
+                $newQuantity_round = 0;
+            }
+
+            // $newQuantity_round = $newGapInMinutes / $takt_time;
+
+
+
+            // $newQuantity_round = ($newGapInMinutes - 105) / $takt_time;
+            echo $newQuantity_round;
 
             $quantity = round($newQuantity_round);
         }
