@@ -14,6 +14,19 @@
         }
     }
 
+    // Convert Time string to time..............................................
+    function convertToMilliseconds($timeString) {
+        list($hours, $minutes, $seconds, $milliseconds) = explode(":", $timeString);
+    
+        $totalMilliseconds = 
+            ($hours * 60 * 60 * 1000) + 
+            ($minutes * 60 * 1000) + 
+            ($seconds * 1000) + 
+            $milliseconds;
+    
+        return $totalMilliseconds;
+    }
+
     // Fetching username ....................................................
     $user_id = $_SESSION['user_id'];
     $result = mysqli_query($conn, "SELECT * FROM tbl_accounts WHERE id = '$user_id' ");
@@ -791,7 +804,15 @@
     
     }
 
+    let time = <?php echo isset($row_records["timer_stop"]) ? convertToMilliseconds($row_records["timer_stop"]) : 0 ?>;
     let milliseconds = 0;
+    var isStartLogin = 1;
+
+    if(isStartLogin == 1){
+        milliseconds = time;
+        isStartLogin = 0;
+    }
+
     let interval = null;
 
     function updateTimer(){
