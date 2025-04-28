@@ -11,7 +11,8 @@
     $target = isset($_POST['target']) ? $_POST['target'] : null;
     $actual = isset($_POST['actual']) ? $_POST['actual'] : null;
     $balance = isset($_POST['balance']) ? $_POST['balance'] : null;
+    $timer_stop = isset($_POST['timer_stop']) ? $_POST['timer_stop'] : null;
 
-    mysqli_query($conn, "UPDATE tbl_records SET status = '$status', target_day = '$targetPeDay',target_now = '$target', actual = '$actual', balance = '$balance' WHERE date = '$date' AND model = '$model' AND unit = '$unit' ");
+    mysqli_query($conn, "UPDATE tbl_records SET status = '$status', target_day = '$targetPeDay',target_now = '$target', actual = '$actual', balance = '$balance', timer_stop = '$timer_stop' WHERE date = '$date' AND model = '$model' AND unit = '$unit' ");
 
 ?>

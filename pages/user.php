@@ -334,7 +334,7 @@
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
                 <button id="runStopButton" onclick="handleRunStop()" class="display-4 font-weight-bold mb-2 text-white btn border-none" style="background-color: blue; font-size: 3rem">RUN</button> 
                 <br>
-                <span class="h3 font-weight-bold mb-0 text-danger" id="timer">00:00:00:000</span>
+                <span class="h3 font-weight-bold mb-0 text-danger" id="timer"><?php echo isset($row_records["timer_stop"]) ? $row_records["timer_stop"] : "00:00:00:000" ?></span>
             </div>
 
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
@@ -845,6 +845,8 @@
         var actual = document.getElementById('actual_count').innerHTML;
         var balance = document.getElementById('balance_count').innerHTML;
 
+        var timer_stop = document.getElementById('timer').innerHTML;
+
         var updateDetails = {
             model: model,
             unit: unit,
@@ -852,7 +854,8 @@
             targetPerDay: targetPerDay,
             target: target,
             actual: actual,
-            balance: balance
+            balance: balance,
+            timer_stop: timer_stop
         };
 
         $.ajax({
