@@ -396,9 +396,9 @@ if (!empty($row_line["id"])) {
                             <div class="card-body">
                                 <div class="text-center">
                                     <div class="d-flex flex-column">
-                                        <span class="h3 text-danger" style="font-size: 36px;"><u>Information</u></span>
+                                        <span class="h3 text-danger" style="font-size: 36px;">Information</span>
                                         <span class="h3 text-dark" id="line_desc" style="font-size: 36px;"><?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "-----" ?></span>
-                                        <span class="h3 text-danger" style="font-size: 36px;"><u>Leader</u></span>
+                                        <span class="h3 text-danger" style="font-size: 36px;">Leader</span>
                                         <span class="h3 text-dark" id="incharge_name" style="font-size: 36px;"><?php echo isset($row_line["incharge_name"]) ? $row_line["incharge_name"] : "-----" ?></span>
                                     </div>
                                 </div>
