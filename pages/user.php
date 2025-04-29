@@ -268,29 +268,50 @@ if (!empty($row_line["id"])) {
     if (!empty($row_records["id"])) {
         $_SESSION["records_id"] = $row_records["id"];
     } else {
-        $gapInSeconds = strtotime($work_end) - strtotime($work_start);
-        $gapInMinutes = $gapInSeconds / 60;
-        $quantity = 0;
+        $gapInMinutes = (strtotime($work_end) - strtotime($work_start)) / 60;
+        $target_quantity = 0;
 
-        if ($gapInMinutes >= 660) {
-            // Run if there is OT
+        if ($gapInMinutes >= 660) {   // Run if there is OT
 
-            $worked_hours = $gapInMinutes - 105;
-            $quantity_round = $worked_hours / $takt_time;
+            $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
+            $hours = round($newGapInMinutes / 60);
 
-            $quantity = round($quantity_round);
-        } else {
-            // Run if there is no OT
+            if ($hours <= 2) {
+                $newQuantity_round = ($newGapInMinutes - 10) / $takt_time;
+            } elseif ($hours <= 4) {
+                $newQuantity_round = ($newGapInMinutes - 20) / $takt_time;
+            } elseif ($hours <= 7) {
+                $newQuantity_round = ($newGapInMinutes - 80) / $takt_time;
+            } elseif ($hours <= 9) {
+                $newQuantity_round = ($newGapInMinutes - 90) / $takt_time;
+            } elseif ($hours <= 11) {
+                $newQuantity_round = ($newGapInMinutes - 105) / $takt_time;
+            } else {
+                $newQuantity_round = 0;
+            }
+            $target_quantity = round($newQuantity_round);
+        } elseif ($gapInMinutes < 660) {   // Run if there is no OT
 
-            $worked_hours = $gapInMinutes - 90;
-            $quantity_round = $worked_hours / $takt_time;
+            $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
+            $hours = round($newGapInMinutes / 60);
 
-            $quantity = round($quantity_round);
+            if ($hours <= 2) {
+                $newQuantity_round = ($newGapInMinutes - 10) / $takt_time;
+            } elseif ($hours <= 4) {
+                $newQuantity_round = ($newGapInMinutes - 20) / $takt_time;
+            } elseif ($hours <= 7) {
+                $newQuantity_round = ($newGapInMinutes - 80) / $takt_time;
+            } elseif ($hours <= 9) {
+                $newQuantity_round = ($newGapInMinutes - 90) / $takt_time;
+            } else {
+                $newQuantity_round = 0;
+            }
+            $target_quantity = round($newQuantity_round);
         }
         $actual = 0;
         $status = "RUN";
 
-        $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$username', '$line_name', '$status', '$daily_target', '$quantity', '$actual', '$quantity')");
+        $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$username', '$line_name', '$status', '$daily_target', '$target_quantity', '$actual', '$daily_target')");
 
         $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$username' AND unit = '$line_name'");
         $row_records = mysqli_fetch_assoc($result1);
@@ -629,13 +650,8 @@ if (!empty($row_line["id"])) {
     var ot_end = "<?php echo isset($row_break['ot_break_end']) ? $row_break['ot_break_end'] : ''; ?>";
 
     function add_target() {
-        var actual = document.getElementById('actual_count').innerHTML;
         var target = document.getElementById('target_count').innerHTML;
-
         var new_target = parseInt(target) + 1;
-        var new_balance = new_target - actual;
-
-        document.getElementById('balance_count').innerHTML = new_balance;
         document.getElementById('target_count').innerHTML = new_target;
 
         update();
@@ -880,11 +896,10 @@ if (!empty($row_line["id"])) {
 
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
-        var target = document.getElementById('target_count').innerHTML;
         var daily_target = document.getElementById('daily_target_display').innerHTML;
 
         var new_actual = parseInt(actual) + 1;
-        var new_balance = parseInt(target) - new_actual;
+        var new_balance = parseInt(daily_target) - new_actual;
         var new_daily_target = parseInt(daily_target);
 
         document.getElementById('actual_count').innerHTML = new_actual;
@@ -903,11 +918,10 @@ if (!empty($row_line["id"])) {
 
     function minus() {
         var actual = document.getElementById('actual_count').innerHTML;
-        var target = document.getElementById('target_count').innerHTML;
         var daily_target = document.getElementById('daily_target_display').innerHTML;
 
         var new_actual = parseInt(actual) - 1;
-        var new_balance = parseInt(target) - new_actual;
+        var new_balance = parseInt(daily_target) - new_actual;
         var new_daily_target = parseInt(daily_target);
 
         document.getElementById('actual_count').innerHTML = new_actual;
