@@ -37,7 +37,7 @@
 <body id="page-top">
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.php">
                 <div class="sidebar-brand-icon">
                     <img src="../assets/img/logo.png" alt="" class="img-fluid" style="width: 45px;">
                 </div>
