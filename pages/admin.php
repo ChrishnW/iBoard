@@ -163,9 +163,7 @@
                         </tr>
                     </thead>
 
-                    <tbody class="text-black text-center" id="insert_here">
-
-                    </tbody>
+                    <tbody class="text-black text-center" id="insert_here"></tbody>
                 </table>
             </div>         
         </div>
@@ -228,7 +226,7 @@
     }
 
     document.getElementById('close_popup1').addEventListener('click', function () {
-      document.getElementById('reportsModal').style.display = 'none';
+        document.getElementById('reportsModal').style.display = 'none';
     });
 
     var depart_code =  "<?php echo isset($_SESSION['department_code']) ? TRUE : FALSE; ?>";
