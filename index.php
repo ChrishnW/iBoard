@@ -16,6 +16,14 @@
       header('location: pages/monitor.php');
       exit();
     }
+    elseif($access_security == 4){
+      header('location: pages/user_monitor.php');
+      exit();
+    }
+    elseif($access_security == 5){
+      header('location: pages/admin.php');
+      exit();
+    }
   }
 
 ?>
