@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
-ini_set('session.cookie_lifetime', 2592000); // 1 month expiration when inactive
-ini_set('session.gc_maxlifetime', 2592000);
+ini_set('session.cookie_lifetime', 592000); // 1 month expiration when inactive 592000
+ini_set('session.gc_maxlifetime', 592000);
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 100);
 session_start();
