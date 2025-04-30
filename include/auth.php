@@ -1,6 +1,9 @@
 <?php
 require 'connect.php';
-session_set_cookie_params(365 * 24 * 60 * 60, "/");
+ini_set('session.cookie_lifetime', 2592000);
+ini_set('session.gc_maxlifetime', 2592000);
+ini_set('session.gc_probability', 1);
+ini_set('session.gc_divisor', 100);
 session_start();
 date_default_timezone_set('Asia/Manila');
 
