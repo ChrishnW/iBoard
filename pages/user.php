@@ -343,6 +343,7 @@ if (!empty($row_line["id"])) {
     <!-- User Dashboard-->
     <div id="user_dashboard" class="user_dashboard container-fluid rounded py-1">
         <!-- Header Section -->
+        <h5 class="font-weight-bold position-absolute" id="conn_status"></h5>
         <div class="row align-items-center px-3 py-3">
             <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 text-md-left text-lg-left text-center">
                 <img src="../assets/img/logo.png" alt="logo.png" class="img-fluid rounded logo" style="width: 100%; max-width: 88px; height: auto;">
@@ -689,7 +690,7 @@ if (!empty($row_line["id"])) {
         var time_now = (time_hour < 10 ? "0" : "") + time_hour + ":" +
             (time_minute < 10 ? "0" : "") + time_minute;
 
-        console.log(time_now);
+        // console.log(time_now);
 
         switch (time_now) {
             case tool_start:
@@ -725,11 +726,13 @@ if (!empty($row_line["id"])) {
         }
     }
 
+    // Intrval run ======================================================================================
+
     function countingInterval() {
 
         if (work_status == "WORK") {
             i++;
-            console.log(i);
+            // console.log(i);
 
             if (takt_time == i) {
                 i = 0;
@@ -738,7 +741,7 @@ if (!empty($row_line["id"])) {
 
             check_breaktime_start();
 
-            console.log(work_status);
+            // console.log(work_status);
         } else if (work_status == "BREAK") {
             var full_time_now = new Date();
             var time_hour = full_time_now.getHours();
@@ -747,7 +750,7 @@ if (!empty($row_line["id"])) {
             var time_now = (time_hour < 10 ? "0" : "") + time_hour + ":" +
                 (time_minute < 10 ? "0" : "") + time_minute;
 
-            console.log(time_now);
+            // console.log(time_now);
 
             switch (time_now) {
                 case tool_end:
@@ -776,8 +779,8 @@ if (!empty($row_line["id"])) {
                     btn_abled();
                     break;
             }
-            console.log(i);
-            console.log(work_status);
+            // console.log(i);
+            // console.log(work_status);
 
         }
 
@@ -803,6 +806,25 @@ if (!empty($row_line["id"])) {
                 }
             }
         }
+
+        // Check connection status
+
+        $.ajax({
+            methos: 'post',
+            url: 'conn_status.php',
+            success: function(response){
+                console.log(response);
+                if(response == 'Connected'){
+                    document.getElementById('conn_status').innerHTML = 'Connected';
+                    document.getElementById('conn_status').classList.add('text-success');
+
+                } 
+                else if (response == 'Disconnected'){
+                    document.getElementById('conn_status').innerHTML = 'Disconnected';
+                    document.getElementById('conn_status').classList.add('text-danger');
+                }
+            }
+        });
 
     }
 
@@ -886,10 +908,10 @@ if (!empty($row_line["id"])) {
             url: 'update.php',
             data: updateDetails,
             success: function(response) {
-                console.log("Success");
+                // console.log("Success");
             },
             error: function() {
-                console.log("Error");
+                // console.log("Error");
             }
         });
     }
