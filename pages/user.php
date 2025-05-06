@@ -668,6 +668,7 @@ if (!empty($row_line["id"])) {
     var work_status = "WORK";
     var i = 0;
     var j = 0;
+    var extra_index = 0;
 
     var img_extra_path = "<?php echo !empty($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
     var takt_time_string = "<?php echo !empty($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
@@ -828,12 +829,15 @@ if (!empty($row_line["id"])) {
             if (document.getElementById('edit_user').style.display == "none") {
                 j++;
 
-                // var extra_view_list = "<?php echo $_SESSION['extra_view_list'] ?? '' ?>";
-                // var extra_view_count = "<?php echo $_SESSION['extra_view_count'] ?? '' ?>";
+                var extra_view_list = <?php echo json_encode($_SESSION['extra_view_list'] ?? []); ?>;
+                var extra_view_count = "<?php echo $_SESSION['extra_view_count'] ?? '' ?>";
 
-                // foreach(extra_view_list )
+                // console.log(extra_view_list[0]);
+                // console.log(extra_view_count);
+                console.log(extra_index);
 
-                console.log();
+                extra_index = extra_index < extra_view_count ? extra_index + 1 : 0;
+
 
                 if (j == 30) {
                     document.getElementById('user_dashboard').style.display = "block";
