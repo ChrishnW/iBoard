@@ -99,20 +99,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
-                if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
-                // print_r($_FILES);
+                // if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
+                // // print_r($_FILES);
 
-                    $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
-                    $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
-                    $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
-                    $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
+                //     $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
+                //     $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
+                //     $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                //     $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
 
-                    move_uploaded_file($img_temp_path_extra, $img_extra_path);
+                //     move_uploaded_file($img_temp_path_extra, $img_extra_path);
 
-                    mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
-                                            WHERE id = '$line_id' ");
-                } else {
+                //     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
+                //                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
+                //                             WHERE id = '$line_id' ");
+                // } 
+                
+                if (isset($_FILES['extra_view_upload'])) {
+                    $uploaded_paths = [];
+
+                    foreach ($_FILES['extra_view_upload']['tmp_name'] as $key => $tmp_name) {
+                        if ($_FILES['extra_view_upload']['error'][$key] == 0) {
+                            $img_extension = pathinfo($_FILES["extra_view_upload"]["name"][$key], PATHINFO_EXTENSION);
+
+                            $img_name_extra = $line_id . "_" . $key . "." . $img_extension;
+                            $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                            $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"][$key];
+
+                            if (move_uploaded_file($img_temp_path_extra, $img_extra_path)) {
+                                $uploaded_paths[] = $img_extra_path; 
+                            }
+                        }
+                    }
+
+                    $img_extra_paths_string = implode(',', $uploaded_paths);
+
+                    mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_paths_string' WHERE id = '$line_id'");
+                }
+                else {
                     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
                                             incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                 }
@@ -830,28 +853,24 @@ if (!empty($row_line["id"])) {
                 j++;
 
                 var extra_view_list = <?php echo json_encode($_SESSION['extra_view_list'] ?? []); ?>;
-                var extra_view_count = "<?php echo $_SESSION['extra_view_count'] ?? '' ?>";
+                var extra_view_count = <?php echo $_SESSION['extra_view_count'] ?? '' ?>;
 
-                // console.log(extra_view_list[0]);
-                // console.log(extra_view_count);
-                console.log(extra_index);
-
-                extra_index = extra_index < extra_view_count ? extra_index + 1 : 0;
-
-
-                if (j == 30) {
+                if (j == 2) { 
                     document.getElementById('user_dashboard').style.display = "block";
                     document.getElementById('body').style.backgroundImage = "none";
 
-                } else if (j == 60) {
+                } else if (j == 4) { 
+                    extra_index = (extra_index != extra_view_count) ? extra_index : 0;
                     document.getElementById('user_dashboard').style.display = "none";
 
-                    document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
+                    document.getElementById('body').style.backgroundImage = `url(${extra_view_list[extra_index]})`;
                     document.getElementById('body').style.backgroundSize = "contain";
                     document.getElementById('body').style.backgroundPosition = "center";
                     document.getElementById('body').style.backgroundRepeat = "no-repeat";
 
                     j = 0;
+                    extra_index++;
+
                 }
             }
         }
