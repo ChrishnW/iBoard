@@ -246,6 +246,16 @@ if (!empty($row_line["id"])) {
     $work_end = $row_line["work_time_to"];
     $takt_time = $row_line["takt_time"];
 
+
+    if(!empty($row_line["extra_view"])){
+        $_SESSION['extra_view_list'] = explode(",", $row_line["extra_view"]);
+        $_SESSION['extra_view_count'] = count($_SESSION['extra_view_list']);
+    
+        // foreach ($_SESSION['extra_view_list'] as $index => $value) {
+        //     echo "<script>console.log('$value');</script>";
+        // }
+    }
+
     $gapInMinutes = (strtotime($work_end) - strtotime($work_start)) / 60;
     $target_quantity = 0;
 
@@ -659,24 +669,24 @@ if (!empty($row_line["id"])) {
     var i = 0;
     var j = 0;
 
-    var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
-    var takt_time_string = "<?php echo isset($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
+    var img_extra_path = "<?php echo !empty($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
+    var takt_time_string = "<?php echo !empty($row_line['takt_time']) ? $row_line['takt_time'] : ''; ?>";
     var takt_time = parseInt(takt_time_string) * 60;
 
-    var tool_start = "<?php echo isset($row_break['tool_box_meeting_start']) ? $row_break['tool_box_meeting_start'] : ''; ?>";
-    var tool_end = "<?php echo isset($row_break['tool_box_meeting_end']) ? $row_break['tool_box_meeting_end'] : ''; ?>";
+    var tool_start = "<?php echo !empty($row_break['tool_box_meeting_start']) ? $row_break['tool_box_meeting_start'] : ''; ?>";
+    var tool_end = "<?php echo !empty($row_break['tool_box_meeting_end']) ? $row_break['tool_box_meeting_end'] : ''; ?>";
 
-    var am_start = "<?php echo isset($row_break['am_break_start']) ? $row_break['am_break_start'] : ''; ?>";
-    var am_end = "<?php echo isset($row_break['am_break_end']) ? $row_break['am_break_end'] : ''; ?>";
+    var am_start = "<?php echo !empty($row_break['am_break_start']) ? $row_break['am_break_start'] : ''; ?>";
+    var am_end = "<?php echo !empty($row_break['am_break_end']) ? $row_break['am_break_end'] : ''; ?>";
 
-    var lunch_start = "<?php echo isset($row_break['lunch_break_start']) ? $row_break['lunch_break_start'] : ''; ?>";
-    var lunch_end = "<?php echo isset($row_break['lunch_break_end']) ? $row_break['lunch_break_end'] : ''; ?>";
+    var lunch_start = "<?php echo !empty($row_break['lunch_break_start']) ? $row_break['lunch_break_start'] : ''; ?>";
+    var lunch_end = "<?php echo !empty($row_break['lunch_break_end']) ? $row_break['lunch_break_end'] : ''; ?>";
 
-    var pm_start = "<?php echo isset($row_break['pm_break_start']) ? $row_break['pm_break_start'] : ''; ?>";
-    var pm_end = "<?php echo isset($row_break['pm_break_end']) ? $row_break['pm_break_end'] : ''; ?>";
+    var pm_start = "<?php echo !empty($row_break['pm_break_start']) ? $row_break['pm_break_start'] : ''; ?>";
+    var pm_end = "<?php echo !empty($row_break['pm_break_end']) ? $row_break['pm_break_end'] : ''; ?>";
 
-    var ot_start = "<?php echo isset($row_break['ot_break_start']) ? $row_break['ot_break_start'] : ''; ?>";
-    var ot_end = "<?php echo isset($row_break['ot_break_end']) ? $row_break['ot_break_end'] : ''; ?>";
+    var ot_start = "<?php echo !empty($row_break['ot_break_start']) ? $row_break['ot_break_start'] : ''; ?>";
+    var ot_end = "<?php echo !empty($row_break['ot_break_end']) ? $row_break['ot_break_end'] : ''; ?>";
 
     function add_target() {
         var target = document.getElementById('target_count').innerHTML;
@@ -817,6 +827,13 @@ if (!empty($row_line["id"])) {
         if (img_extra_path != "0") {
             if (document.getElementById('edit_user').style.display == "none") {
                 j++;
+
+                // var extra_view_list = "<?php echo $_SESSION['extra_view_list'] ?? '' ?>";
+                // var extra_view_count = "<?php echo $_SESSION['extra_view_count'] ?? '' ?>";
+
+                // foreach(extra_view_list )
+
+                console.log();
 
                 if (j == 30) {
                     document.getElementById('user_dashboard').style.display = "block";
