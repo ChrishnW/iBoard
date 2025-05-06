@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $line_name = $_SESSION["username"];
         $model_id = $_SESSION["user_id"];
 
-        //print_r($_FILES);
+        // print_r($_FILES);
         if (isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0) {
 
             $date = date("Y-m-d H:i:s");
@@ -100,6 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
                 if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
+                // print_r($_FILES);
+
                     $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
                     $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
                     $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
@@ -114,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
                                             incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                 }
-            }
+            } 
         }
 
         header("Refresh: .3; url = user.php");
@@ -177,19 +179,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
 
                 move_uploaded_file($img_temp_path_leader, $img_leader_path);
+                // print_r($_FILES);
 
-                if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
-                    $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
-                    $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
-                    $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
-                    $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
+                // if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
 
-                    move_uploaded_file($img_temp_path_extra, $img_extra_path);
+                //     $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
+                //     $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
+                //     $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                //     $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
 
-                    mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
-                                            WHERE id = '$line_id' ");
-                } else {
+                //     move_uploaded_file($img_temp_path_extra, $img_extra_path);
+
+                //     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
+                //                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
+                //                             WHERE id = '$line_id' ");
+                // } 
+
+                if (isset($_FILES['extra_view_upload'])) {
+                    $uploaded_paths = [];
+
+                    foreach ($_FILES['extra_view_upload']['tmp_name'] as $key => $tmp_name) {
+                        if ($_FILES['extra_view_upload']['error'][$key] == 0) {
+                            $img_extension = pathinfo($_FILES["extra_view_upload"]["name"][$key], PATHINFO_EXTENSION);
+
+                            $img_name_extra = $line_id . "_" . $key . "." . $img_extension;
+                            $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                            $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"][$key];
+
+                            if (move_uploaded_file($img_temp_path_extra, $img_extra_path)) {
+                                $uploaded_paths[] = $img_extra_path; 
+                            }
+                        }
+                    }
+
+                    $img_extra_paths_string = implode(',', $uploaded_paths);
+
+                    mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_paths_string' WHERE id = '$line_id'");
+                }
+                else {
                     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
                                             incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                 }
@@ -564,7 +591,8 @@ if (!empty($row_line["id"])) {
                         <div class="col-md-12">
                             <div class="mb-6">
                                 <label for="extra_view_upload" class="form-label">Extra View</label>
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control w-100" name="extra_view_upload" id="extra_view_upload">
+                                <!-- <input type="file" accept=".png, .jpg, .jpeg" class="form-control w-100" name="extra_view_upload" id="extra_view_upload"> -->
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control w-100" name="extra_view_upload[]" id="extra_view_upload" multiple>
                             </div>
                         </div>
                     </div>

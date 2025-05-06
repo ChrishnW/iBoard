@@ -100,4 +100,6 @@
         }
     }
 
+    // <td style=\"height: 40px; color: black; background: lightgray;\">OFFLINE</td>
+
 ?>
