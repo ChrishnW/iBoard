@@ -857,13 +857,13 @@ if (!empty($row_line["id"])) {
                 j++;
 
                 var extra_view_list = <?php echo json_encode($_SESSION['extra_view_list'] ?? []); ?>;
-                var extra_view_count = <?php echo $_SESSION['extra_view_count'] ?? '' ?>;
+                var extra_view_count = <?php echo $_SESSION['extra_view_count'] ?? 0; ?>;
 
-                if (j == 2) { 
+                if (j == 30) { 
                     document.getElementById('user_dashboard').style.display = "block";
                     document.getElementById('body').style.backgroundImage = "none";
 
-                } else if (j == 4) { 
+                } else if (j == 60) { 
                     extra_index = (extra_index != extra_view_count) ? extra_index : 0;
                     document.getElementById('user_dashboard').style.display = "none";
 
