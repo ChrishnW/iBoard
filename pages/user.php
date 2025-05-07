@@ -98,21 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
 
                 move_uploaded_file($img_temp_path_leader, $img_leader_path);
-
-                // if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
-                // // print_r($_FILES);
-
-                //     $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
-                //     $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
-                //     $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
-                //     $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
-
-                //     move_uploaded_file($img_temp_path_extra, $img_extra_path);
-
-                //     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                //                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
-                //                             WHERE id = '$line_id' ");
-                // } 
                 
                 if (isset($_FILES['extra_view_upload'])) {
                     $uploaded_paths = [];
@@ -202,21 +187,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
 
                 move_uploaded_file($img_temp_path_leader, $img_leader_path);
-                // print_r($_FILES);
-
-                // if (isset($_FILES['extra_view_upload']) && $_FILES['extra_view_upload']['error'] == 0) {
-
-                //     $img_name_raw_extra = $_FILES["extra_view_upload"]["name"];
-                //     $img_name_extra = str_replace(" ", "_", $img_name_raw_extra);
-                //     $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
-                //     $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"];
-
-                //     move_uploaded_file($img_temp_path_extra, $img_extra_path);
-
-                //     mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                //                             incharge_img = '$img_leader_path', extra_view = '$img_extra_path' 
-                //                             WHERE id = '$line_id' ");
-                // } 
 
                 if (isset($_FILES['extra_view_upload'])) {
                     $uploaded_paths = [];
@@ -1055,6 +1025,8 @@ if (!empty($row_line["id"])) {
 
         var trigger = document.getElementById('line_desc').innerHTML;
         if (trigger != '-----') {
+            document.getElementById('line_image_upload').required = false;
+            document.getElementById('leader_image_upload').required = false;
             setInterval(countingInterval, 1000);
         }
 
