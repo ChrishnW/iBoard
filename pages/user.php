@@ -121,11 +121,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($_FILES['extra_view_upload']['error'][$key] == 0) {
                             $img_extension = pathinfo($_FILES["extra_view_upload"]["name"][$key], PATHINFO_EXTENSION);
 
-                            $img_name_extra = $line_id . "_" . $key . "." . $img_extension;
-                            $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                            $img_extra_path = $line_id . "_" . $key . "." . $img_extension;
+                            $img_extra_root = "IMG/EXTRA_VIEW/" . $img_extra_path;
                             $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"][$key];
 
-                            if (move_uploaded_file($img_temp_path_extra, $img_extra_path)) {
+                            if (move_uploaded_file($img_temp_path_extra, $img_extra_root)) {
                                 $uploaded_paths[] = $img_extra_path; 
                             }
                         }
@@ -225,11 +225,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($_FILES['extra_view_upload']['error'][$key] == 0) {
                             $img_extension = pathinfo($_FILES["extra_view_upload"]["name"][$key], PATHINFO_EXTENSION);
 
-                            $img_name_extra = $line_id . "_" . $key . "." . $img_extension;
-                            $img_extra_path = "IMG/EXTRA_VIEW/" . $img_name_extra;
+                            $img_extra_path = $line_id . "_" . $key . "." . $img_extension;
+                            $img_extra_root = "IMG/EXTRA_VIEW/" . $img_extra_path;
                             $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"][$key];
 
-                            if (move_uploaded_file($img_temp_path_extra, $img_extra_path)) {
+                            if (move_uploaded_file($img_temp_path_extra, $img_extra_root)) {
                                 $uploaded_paths[] = $img_extra_path; 
                             }
                         }
@@ -269,14 +269,18 @@ if (!empty($row_line["id"])) {
     $work_end = $row_line["work_time_to"];
     $takt_time = $row_line["takt_time"];
 
+    // ==================================== FORMATTING EXTRA VIEW ====================================
 
     if(!empty($row_line["extra_view"])){
         $_SESSION['extra_view_list'] = explode(",", $row_line["extra_view"]);
         $_SESSION['extra_view_count'] = count($_SESSION['extra_view_list']);
-    
-        // foreach ($_SESSION['extra_view_list'] as $index => $value) {
-        //     echo "<script>console.log('$value');</script>";
-        // }
+        
+        $extraView_folders = "IMG/EXTRA_VIEW/";
+
+        foreach($_SESSION['extra_view_list'] as $index => $value){
+            $_SESSION['extra_view_list'][$index] = $extraView_folders . $value;
+        }
+        
     }
 
     $gapInMinutes = (strtotime($work_end) - strtotime($work_start)) / 60;
@@ -846,7 +850,7 @@ if (!empty($row_line["id"])) {
 
         }
 
-        // extra view display
+        // ============================================== EXTRA VIEW DISPLAY ==============================================
 
         if (img_extra_path != "0") {
             if (document.getElementById('edit_user').style.display == "none") {
