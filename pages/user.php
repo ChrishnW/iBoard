@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $value_records = 0;
             $quantity = 0;
 
-            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
+            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$daily_target')");
 
             if ($result) {
                 $result = mysqli_query($conn, "SELECT id FROM tbl_line WHERE line_img = '$date' ");
@@ -159,62 +159,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $line_name = $_SESSION["username"];
         $model_id = $_SESSION["user_id"];
+        
+        $date = date("Y-m-d H:i:s");
+        $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', building = '$building', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status', last_update = '$date' WHERE id = '$line_id' ");
 
-        //print_r($_FILES);
-        if (isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0 && isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0) {
+        $date_records = date("Y-m-d");
+        $status_records = "RUN";
+        $quantity = 0;
 
-            $date = date("Y-m-d H:i:s");
-            $result = mysqli_query($conn, "UPDATE tbl_line SET line_name = '$unit', line_desc = '$line_desc',incharge_name = '$line_leader', building = '$building', daily_target = '$daily_target', takt_time = '$takt_time',work_time_from = '$work_start', work_time_to = '$work_end', breaktime_code = '$breaktime_code', model_id = '$model_id', status = '$status', last_update = '$date' WHERE id = '$line_id' ");
+        mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$daily_target' WHERE id = '$records_id' ");
 
-            // This is for the records table
-            $date_records = date("Y-m-d");
-            $status_records = "RUN";
-            $quantity = 0;
+        if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0){
+            $img_name_raw_line = $_FILES["line_image_upload"]["name"];
+            $img_name_line = str_replace(" ", "_", $img_name_raw_line);
+            $img_line_path = "IMG/LINE/" . $img_name_line;
+            $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
 
-            $result = mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
+            move_uploaded_file($img_temp_path_line, $img_line_path);
 
-            if ($result) {
-                $img_name_raw_line = $_FILES["line_image_upload"]["name"];
-                $img_name_line = str_replace(" ", "_", $img_name_raw_line);
-                $img_line_path = "IMG/LINE/" . $img_name_line;
-                $img_temp_path_line = $_FILES["line_image_upload"]["tmp_name"];
+            mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path' WHERE id = '$line_id' ");
+        }
 
-                move_uploaded_file($img_temp_path_line, $img_line_path);
+        if (isset($_FILES['leader_image_upload']) && $_FILES['leader_image_upload']['error'] == 0){
+            $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
+            $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
+            $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
+            $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
 
-                $img_name_raw_leader = $_FILES["leader_image_upload"]["name"];
-                $img_name_leader = str_replace(" ", "_", $img_name_raw_leader);
-                $img_leader_path = "IMG/INCHARGE/" . $img_name_leader;
-                $img_temp_path_leader = $_FILES["leader_image_upload"]["tmp_name"];
+            move_uploaded_file($img_temp_path_leader, $img_leader_path);
 
-                move_uploaded_file($img_temp_path_leader, $img_leader_path);
+            mysqli_query($conn, "UPDATE tbl_line SET incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
+        }
 
-                if (isset($_FILES['extra_view_upload'])) {
-                    $uploaded_paths = [];
+        if (isset($_FILES['extra_view_upload'])) {
+            $uploaded_paths = [];
 
-                    foreach ($_FILES['extra_view_upload']['tmp_name'] as $key => $tmp_name) {
-                        if ($_FILES['extra_view_upload']['error'][$key] == 0) {
-                            $img_extension = pathinfo($_FILES["extra_view_upload"]["name"][$key], PATHINFO_EXTENSION);
+            foreach ($_FILES['extra_view_upload']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['extra_view_upload']['error'][$key] == 0) {
+                    $img_extension = pathinfo($_FILES["extra_view_upload"]["name"][$key], PATHINFO_EXTENSION);
 
-                            $img_extra_path = $line_id . "_" . $key . "." . $img_extension;
-                            $img_extra_root = "IMG/EXTRA_VIEW/" . $img_extra_path;
-                            $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"][$key];
+                    $img_extra_path = $line_id . "_" . $key . "." . $img_extension;
+                    $img_extra_root = "IMG/EXTRA_VIEW/" . $img_extra_path;
+                    $img_temp_path_extra = $_FILES["extra_view_upload"]["tmp_name"][$key];
 
-                            if (move_uploaded_file($img_temp_path_extra, $img_extra_root)) {
-                                $uploaded_paths[] = $img_extra_path; 
-                            }
-                        }
+                    if (move_uploaded_file($img_temp_path_extra, $img_extra_root)) {
+                        $uploaded_paths[] = $img_extra_path; 
                     }
-
-                    $img_extra_paths_string = implode(',', $uploaded_paths);
-
-                    mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path', incharge_img = '$img_leader_path', extra_view = '$img_extra_paths_string' WHERE id = '$line_id'");
-                }
-                else {
-                    mysqli_query($conn, "UPDATE tbl_line SET line_img = '$img_line_path',
-                                            incharge_img = '$img_leader_path' WHERE id = '$line_id' ");
                 }
             }
+
+            $img_extra_paths_string = implode(',', $uploaded_paths);
+
+            mysqli_query($conn, "UPDATE tbl_line SET extra_view = '$img_extra_paths_string' WHERE id = '$line_id'");
         }
+            
         header("Refresh: .3; url = user.php");
         exit;
         ob_end_flush();
@@ -253,6 +251,8 @@ if (!empty($row_line["id"])) {
         
     }
 
+    // ==================================== END FORMATTING EXTRA VIEW ====================================
+
     $gapInMinutes = (strtotime($work_end) - strtotime($work_start)) / 60;
     $target_quantity = 0;
 
@@ -274,7 +274,8 @@ if (!empty($row_line["id"])) {
         } else {
             $newQuantity_round = 0;
         }
-        $target_quantity = round($newQuantity_round);
+        $target_rounded = round($newQuantity_round);
+        $target_quantity = $target_rounded == -0 ? 0 : $target_rounded;
     } elseif ($gapInMinutes < 660) {   // Run if there is no OT
 
         $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
@@ -291,7 +292,8 @@ if (!empty($row_line["id"])) {
         } else {
             $newQuantity_round = 0;
         }
-        $target_quantity = round($newQuantity_round);
+        $target_rounded = round($newQuantity_round);
+        $target_quantity = $target_rounded == -0 ? 0 : $target_rounded;
     }
 
     $breaktime_code_get = $row_line["breaktime_code"];
@@ -323,7 +325,8 @@ if (!empty($row_line["id"])) {
             } else {
                 $newQuantity_round = 0;
             }
-            $target_quantity = round($newQuantity_round);
+            $target_rounded = round($newQuantity_round);
+            $target_quantity = $target_rounded == -0 ? 0 : $target_rounded;
         } elseif ($gapInMinutes < 660) {   // Run if there is no OT
 
             $newGapInMinutes = (strtotime(date('Y-m-d H:i:s')) - strtotime($work_start)) / 60;
@@ -340,7 +343,8 @@ if (!empty($row_line["id"])) {
             } else {
                 $newQuantity_round = 0;
             }
-            $target_quantity = round($newQuantity_round);
+            $target_rounded = round($newQuantity_round);
+            $target_quantity = $target_rounded == -0 ? 0 : $target_rounded;
         }
         $actual = 0;
         $status = "RUN";
@@ -395,7 +399,7 @@ if (!empty($row_line["id"])) {
 
             <div class="col-12 col-sm-auto text-center mt-3 mt-sm-0">
                 <div id="settings" class="dropdown">
-                    <button class="fa fa-cog fa-2x" aria-hidden="true" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
+                    <button class="fa fa-cog fa-2x" style="background-color: transparent; border: none;" data-toggle="dropdown"></button>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#" onclick="showEdituser()">
                             <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
@@ -481,7 +485,7 @@ if (!empty($row_line["id"])) {
                                     <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="add()" id="plus">+</button>
                                 </div>
                             </td>
-                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 120px;" id="balance_count"><?php echo isset($row_records["balance"]) ? $row_records["balance"] : 0 ?></td>
+                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 120px;" id="balance_count"><?php echo isset($row_records["balance"]) ? $row_line["daily_target"] - $row_records["actual"] : 0 ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -510,7 +514,7 @@ if (!empty($row_line["id"])) {
                                 <input type="text" class="form-control" name="edit_line_desc" id="edit_line_desc" value="<?php echo isset($row_line["line_desc"]) ? $row_line["line_desc"] : "" ?>" required>
                             </div>
                             <div class="mb-3">
-                                <label for="line_image_upload" class="form-label">Line Image <span class="text-danger">*</span></label>
+                                <label for="line_image_upload" class="form-label">Line Image <span class="text-danger" id="asterisk1">*</span></label>
                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="line_image_upload" id="line_image_upload" required>
                             </div>
 
@@ -562,7 +566,7 @@ if (!empty($row_line["id"])) {
                             </div>
 
                             <div class="mb-3">
-                                <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger">*</span></label>
+                                <label for="leader_image_upload" class="form-label">Line Leader Image <span class="text-danger" id="asterisk2">*</span></label>
                                 <input type="file" accept=".png, .jpg, .jpeg" class="form-control" name="leader_image_upload" id="leader_image_upload" required>
                             </div>
 
@@ -762,7 +766,7 @@ if (!empty($row_line["id"])) {
         }
     }
 
-    // Intrval run ======================================================================================
+    // ============================================== START INTERVAL ========================================
 
     function countingInterval() {
 
@@ -1025,6 +1029,8 @@ if (!empty($row_line["id"])) {
 
         var trigger = document.getElementById('line_desc').innerHTML;
         if (trigger != '-----') {
+            document.getElementById('asterisk1').innerHTML = "";
+            document.getElementById('asterisk2').innerHTML = "";
             document.getElementById('line_image_upload').required = false;
             document.getElementById('leader_image_upload').required = false;
             setInterval(countingInterval, 1000);
