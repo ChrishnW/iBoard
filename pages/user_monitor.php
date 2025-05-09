@@ -42,9 +42,35 @@
 
         $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$username' AND unit = '$line_name'");
         $row_records = mysqli_fetch_assoc($result1);
+
+        // ==================================== FORMATTING EXTRA VIEW ====================================
+
+      if(!empty($row_line["extra_view"])){
+        $_SESSION['extra_view_list'] = explode(",", $row_line["extra_view"]);
+        $_SESSION['extra_view_count'] = count($_SESSION['extra_view_list']);
+        
+        $extraView_folders = "IMG/EXTRA_VIEW/";
+
+        foreach($_SESSION['extra_view_list'] as $index => $value){
+          $_SESSION['extra_view_list'][$index] = $extraView_folders . $value;
+        }
+
+        if(isset($_SESSION['index'])){
+          $count = $_SESSION['extra_view_count'] - 1;
+          if($count != $_SESSION['index']){
+            $_SESSION['index'] += 1;
+          }
+          else{
+            $_SESSION['index'] = 0;
+          }
+        }
+        else{
+          $_SESSION['index'] = 0;
+        }
+      }
+
     }
 
-  
 ?>
 
 <head>
@@ -202,8 +228,8 @@
     }
   }
 
-  var img_extra_path = "<?php echo isset($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
-  var status = "<?php echo isset($row_records['status']) ? $row_records['status'] : "RUN" ?>";
+  var img_extra_path = "<?php echo !empty($row_line['extra_view']) ? $row_line['extra_view'] : '0'; ?>";
+  var status = "<?php echo !empty($row_records['status']) ? $row_records['status'] : "RUN" ?>";
   var counter = 0;
 
   function interval() {
@@ -217,18 +243,22 @@
       document.body.style.backgroundColor = '#90EE90';
     }
     
-    if (counter == 10) {
+    if (counter == 30) {
       if(img_extra_path != "0"){
+
+        var extra_view_list = <?php echo json_encode($_SESSION['extra_view_list'] ?? []); ?>;
+        var index = <?php echo !empty($_SESSION['index']) ? $_SESSION['index'] : 0; ?>;
+
         console.log("Image path: " + img_extra_path);
         document.getElementById('user_dashboard').style.display = "none";
 
-        document.getElementById('body').style.backgroundImage = `url(${img_extra_path})`;
+        document.getElementById('body').style.backgroundImage = `url(${extra_view_list[index]})`;
         document.getElementById('body').style.backgroundSize = "contain";
         document.getElementById('body').style.backgroundPosition = "center";
         document.getElementById('body').style.backgroundRepeat = "no-repeat";
       }
     }
-    else if(counter == 20) {
+    else if(counter == 60) {
       window.location.reload();
     }
     counter++;
