@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $value_records = 0;
             $quantity = 0;
 
-            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$daily_target')");
+            $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date_records', '$line_name', '$unit', '$status_records','$daily_target', '$quantity', '$value_records', '$quantity')");
 
             if ($result) {
                 $result = mysqli_query($conn, "SELECT id FROM tbl_line WHERE line_img = '$date' ");
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $status_records = "RUN";
         $quantity = 0;
 
-        mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$daily_target' WHERE id = '$records_id' ");
+        mysqli_query($conn, "UPDATE tbl_records SET date = '$date_records', model = '$line_name', unit = '$unit', status = '$status_records', target_day = '$daily_target', target_now = '$quantity', balance = '$quantity' WHERE id = '$records_id' ");
 
         if(isset($_FILES['line_image_upload']) && $_FILES['line_image_upload']['error'] == 0){
             $img_name_raw_line = $_FILES["line_image_upload"]["name"];
@@ -349,7 +349,7 @@ if (!empty($row_line["id"])) {
         $actual = 0;
         $status = "RUN";
 
-        $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$username', '$line_name', '$status', '$daily_target', '$target_quantity', '$actual', '$daily_target')");
+        $result = mysqli_query($conn, "INSERT INTO tbl_records (date, model, unit, status, target_day, target_now, actual, balance) VALUES ('$date', '$username', '$line_name', '$status', '$daily_target', '$target_quantity', '$actual', '$target_quantity')");
 
         $result1 = mysqli_query($conn, "SELECT * FROM tbl_records WHERE date = '$date' AND model = '$username' AND unit = '$line_name'");
         $row_records = mysqli_fetch_assoc($result1);
@@ -485,7 +485,7 @@ if (!empty($row_line["id"])) {
                                     <button class="btn btn-primary btn-lg mr-4 mt-2" style="display: <?php echo isset($row_records["actual"]) ? "block" : "none"  ?>;" onclick="add()" id="plus">+</button>
                                 </div>
                             </td>
-                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 120px;" id="balance_count"><?php echo isset($row_records["balance"]) ? $row_line["daily_target"] - $row_records["actual"] : 0 ?></td>
+                            <td class="font-weight-bold mb-2 text-danger font-weight-bolder" style="font-size: 120px;" id="balance_count"><?php echo isset($row_records["balance"]) ? $target_quantity - $row_records["actual"] : 0 ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -591,7 +591,7 @@ if (!empty($row_line["id"])) {
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($break = mysqli_fetch_assoc($result)) {
                                     ?>
-                                            <option value="<?php echo $break['breaktime_code'] ?>"><?php echo $break['breaktime_code'] ?></option>
+                                            <option value="<?php echo $break['breaktime_code'] ?>"><?php echo $break['breaktime_code'] . " " .$break['lunch_break_start'] . " (Lunch Break start)" ?></option>
                                     <?php
                                         }
                                     }
@@ -694,6 +694,10 @@ if (!empty($row_line["id"])) {
         var target = document.getElementById('target_count').innerHTML;
         var new_target = parseInt(target) + 1;
         document.getElementById('target_count').innerHTML = new_target;
+        
+        var balance = document.getElementById('balance_count').innerHTML;
+        var new_balance = parseInt(balance) + 1;
+        document.getElementById('balance_count').innerHTML = new_balance;
 
         update();
     }
@@ -964,14 +968,16 @@ if (!empty($row_line["id"])) {
 
     function add() {
         var actual = document.getElementById('actual_count').innerHTML;
-        var daily_target = document.getElementById('daily_target_display').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
 
         var new_actual = parseInt(actual) + 1;
-        var new_balance = parseInt(daily_target) - new_actual;
-        var new_daily_target = parseInt(daily_target);
-
+        var new_balance = parseInt(target) - new_actual;
+        
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
+
+        var daily_target = document.getElementById('daily_target_display').innerHTML;
+        var new_daily_target = parseInt(daily_target);
 
         if (new_actual >= new_daily_target) {
             document.getElementById('runStopButton').innerHTML = 'FINISH';
@@ -986,14 +992,16 @@ if (!empty($row_line["id"])) {
 
     function minus() {
         var actual = document.getElementById('actual_count').innerHTML;
-        var daily_target = document.getElementById('daily_target_display').innerHTML;
+        var target = document.getElementById('target_count').innerHTML;
 
         var new_actual = parseInt(actual) - 1;
-        var new_balance = parseInt(daily_target) - new_actual;
-        var new_daily_target = parseInt(daily_target);
-
+        var new_balance = parseInt(target) - new_actual;
+        
         document.getElementById('actual_count').innerHTML = new_actual;
         document.getElementById('balance_count').innerHTML = new_balance;
+
+        var daily_target = document.getElementById('daily_target_display').innerHTML;
+        var new_daily_target = parseInt(daily_target);
 
         if (new_actual < new_daily_target) {
             document.getElementById('runStopButton').innerHTML = 'RUN';
